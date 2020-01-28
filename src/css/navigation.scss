@@ -1,0 +1,66 @@
+@import './theme.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    
+    .navbar-brand {
+        img {
+            width: 130px;
+            padding-bottom: 7.5px;
+        }
+    }
+    
+    .form-inline {
+        padding-left: 20px;
+        .fa-search {
+            width: 15px;
+            height: 15px;
+        }
+        input {
+            outline: none;
+            border: 0;
+            box-shadow: none;
+            font-size: $nav-link-font-size;
+            width: 13em;
+        }
+    }
+
+    .navbar-collapse {
+        .navbar-nav {
+            .nav-item {
+                padding: 0 8px;
+                .nav-link {
+                    color: #000;
+                    font-weight: 600;
+                    font-size: $nav-link-font-size;
+                }
+                .nav-link:hover {
+                    color: $primary-color;
+                } 
+            }
+        }
+    }
+}
+
+
+/*
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+*/
