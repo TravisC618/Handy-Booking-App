@@ -52,5 +52,18 @@
   font-weight: 400;
   font-size: 16px;
 }
+.carousel .carousel-inner .carousel-item .carousel-caption .btn-outline-primary {
+  font-weight: 600;
+  margin-top: 20px;
+  border: 0;
+  outline: none;
+  color: #fff;
+  background-color: #ffa640;
+  border-radius: 15px;
+}
+.carousel .carousel-inner .carousel-item .carousel-caption .btn-outline-primary:hover {
+  color: #ffa640;
+  background-color: #fff;
+}
 
 /*# sourceMappingURL=carousel.css.map */

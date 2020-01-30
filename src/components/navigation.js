@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../css/navigation.css';
 import logo from '../img/logo.png'
 
 const Navigation = props => {
     return (
-        <nav className="navbar navbar-expand-md navbar-light fixed-top">
+        <nav className="navbar navbar-expand-md navbar-light sticky-top">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="/">
                     <img src={logo} alt="logo" />
                 </a>
                 <form className="form-inline">
@@ -19,10 +20,10 @@ const Navigation = props => {
                 <div className="collapse navbar-collapse" id="navbarToggler">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Browse Handy</a>
+                            <Link className="nav-link" to="/details">Browse Handy</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Login/ Register</a>
+                            <Link className="nav-link" to="/">Login/ Register</Link>
                         </li>
                     </ul>
                 </div>

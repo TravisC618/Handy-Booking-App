@@ -5,7 +5,8 @@ import joinUs from '../img/join-us.jpeg';
 import washing from '../img/washing.jpg'
 import cleaner from '../img/cleaner-horizontal.jpeg';
 import cleaningVideo from '../videos/cleaner.mp4'
-import '../css/carousel.css';
+import '../css/home/carousel.css';
+import { Link } from 'react-router-dom';
 
 const Carousel = props => {
     const { autoPlay } = props;
@@ -27,6 +28,9 @@ const Carousel = props => {
                             <h4>Find the best cleaner in Brisbane</h4>
                             <p>Choose from 518 cleaners in Brisbane, Gold Coast</p>
                             <p>Average rate: $15.50/hr</p>
+                            <Link to="/find-cleaners">
+                                <button type="button" className="btn btn-outline-primary">Quick Start</button>
+                            </Link>
                         </div>
                 </div>
                 <div className="carousel-item">
