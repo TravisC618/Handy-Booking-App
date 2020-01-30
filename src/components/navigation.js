@@ -1,9 +1,10 @@
 import React from 'react';
+import '../css/navigation.css';
 import logo from '../img/logo.png'
 
 const Navigation = props => {
     return (
-        <nav className="navbar navbar-expand-md navbar-light sticky-top">
+        <nav className="navbar navbar-expand-md navbar-light fixed-top">
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">
                     <img src={logo} alt="logo" />
