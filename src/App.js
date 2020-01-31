@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import Main from './components/Main';
+import Main from './components/home/Main';
 import FindCleaners from './FindCleaners';
 import Details from './Details';
 
