@@ -1,9 +1,10 @@
 import React from 'react';
+import Info from './components/info';
 
 const Details = props => {
     return (
         <div className="details">
-            <h1>Details page</h1>
+            <Info />
         </div>
     )
 };
