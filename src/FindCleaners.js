@@ -1,10 +1,13 @@
 import React from 'react';
 
+
+
 const FindCleaners = props => {
     return (
-        <div className="findCleaners">
-            <h1>Find cleaners page</h1>
+        <div className="details">
+            <h1>FindCleaners page</h1>
         </div>
+
     )
 };
 
