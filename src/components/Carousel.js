@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { handleVideoPlay as handleVideoPlayAction } from '../redux/actions/carouselAction';
-import joinUs from '../img/join-us.jpeg';
+import joinUs from '../img/join_us.jpg';
 import washing from '../img/washing.jpg'
 import cleaner from '../img/cleaner-horizontal.jpeg';
 import cleaningVideo from '../videos/cleaner.mp4'

@@ -1,0 +1,63 @@
+.estimated-block {
+    text-align: center;
+
+    .card {
+        border-radius: 10px;
+        max-width: 400px;
+        margin: 0 3em auto;
+        // box-shadow: ;
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .price {
+            font-size: 45px;
+        }
+
+        .list-group {
+            // align-items: center;
+            margin: 20px 0 20px 0;
+            font-size: 18px;
+            
+            .list-group-item {
+                border: 0;
+                padding: 5px 0 5px 0;
+                text-align: initial;
+                margin-left: 13%;
+            
+                .fa-check {
+                    color: rgb(54, 208, 54);
+                }
+            }
+        }
+
+        .btn {
+            font-size: 20px;
+            font-weight: 500;
+            border-radius: 20px;
+            margin-bottom: 5px;
+        }
+
+        .text-muted {
+            font-size: 14px;
+        }
+    }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// // Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) { ... }
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) { ... }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { ... }
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { ... }

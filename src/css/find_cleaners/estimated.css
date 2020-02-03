@@ -1,0 +1,40 @@
+.estimated-block {
+  text-align: center;
+}
+.estimated-block .card {
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 0 3em auto;
+}
+.estimated-block .card .card-title {
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.estimated-block .card .price {
+  font-size: 45px;
+}
+.estimated-block .card .list-group {
+  margin: 20px 0 20px 0;
+  font-size: 18px;
+}
+.estimated-block .card .list-group .list-group-item {
+  border: 0;
+  padding: 5px 0 5px 0;
+  text-align: initial;
+  margin-left: 13%;
+}
+.estimated-block .card .list-group .list-group-item .fa-check {
+  color: #36d036;
+}
+.estimated-block .card .btn {
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+.estimated-block .card .text-muted {
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=estimated.css.map */

@@ -40,6 +40,7 @@
                     color: #000;
                     font-weight: 600;
                     font-size: $nav-link-font-size;
+                    transition: $link-transition;
                 }
                 .nav-link:hover {
                     color: $primary-color;
