@@ -1,0 +1,35 @@
+@import "https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800";
+.container {
+	.jumbotron {
+		padding: 0 0 20px;
+		width: 60%;
+		font-family: 'Open Sans', sans-serif;
+		.container {
+			h4 {
+				padding: 10px 0px 10px;
+			}
+			h5 {
+				line-height: 20pt;
+			}
+		}
+	}
+}
+th {
+	padding: 5px 5px;
+}
+.btn-succes {
+	background-color: grey;
+	color: yellow;
+	margin: 5px;
+	margin: 5px;
+}
+.btn-error {
+	background-color: grey;
+	color: white;
+}
+.btn {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-ms-user-select: none;
+}
