@@ -1,0 +1,66 @@
+@import '../theme.scss';
+
+.page-header {
+    padding: 20px 0;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+
+    .container {
+        position: relative;
+        padding: 0;
+
+        .mask {
+            @include mask;
+        }
+
+        img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        .page-header__caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+
+            .caption-title {
+                font-weight: 700;
+                font-size: 50px;;
+            }
+
+            .caption-subtitle {
+                font-weight: 500;
+                font-size: 25px;
+                margin-bottom: 5px;
+            }
+
+            p:last-child {
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+    }
+
+    
+}
+
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {  }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {  }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {  }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {  }
