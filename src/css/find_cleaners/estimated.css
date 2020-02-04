@@ -4,7 +4,7 @@
 .estimated-block .card {
   border-radius: 10px;
   max-width: 400px;
-  margin: 0 3em auto;
+  margin: 1em 3em auto;
 }
 .estimated-block .card .card-title {
   font-size: 20px;
@@ -26,12 +26,14 @@
 }
 .estimated-block .card .list-group .list-group-item .fa-check {
   color: #36d036;
+  margin-right: 5px;
 }
 .estimated-block .card .btn {
   font-size: 20px;
   font-weight: 500;
   border-radius: 20px;
   margin-bottom: 5px;
+  background-color: #3498db;
 }
 .estimated-block .card .text-muted {
   font-size: 14px;

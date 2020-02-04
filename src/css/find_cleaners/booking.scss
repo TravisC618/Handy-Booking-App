@@ -10,7 +10,6 @@
 
     .booking-tabs__title {
         font-size: 25px;
-
     }
 
     label {
@@ -40,7 +39,7 @@
             transition: .5s;
             position: relative;
             overflow: hidden;
-    
+
             &:hover {
                 color: #fff;
             }
@@ -59,7 +58,7 @@
             &:hover::before {
                 height: 180%;
             }
-            &:focus {
+            &.selected {
                 background: #3498db;
                 color: #fff;
             }
@@ -138,3 +137,62 @@
         }
     }
 }
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// // Small devices (landscape phones, 576px and up)
+// @media (max-width: 576px) { ... }
+
+// // Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .booking-tabs {
+        margin: 0 auto;
+
+        .booking-tabs__title {
+            font-size: 40px;
+        }
+
+        .form-group {
+            .postcode-input {
+                max-width: 400px;
+            }
+        }
+
+        .btn-group {
+            .btn {
+                width: 100px;
+                height: 50px;
+            }
+        }
+
+        .info-block {
+            .info-block__question {
+                label {
+                    font-size: 25px;
+                }
+            }
+
+        }
+
+        .end-of-lease-form {
+            .form-check {
+                display: flex;
+                justify-content: center;
+                
+                .form-check-input {
+                    position: relative;
+                    margin: 0;
+                    zoom: 140%;
+                }
+            }
+        }
+        
+    }
+}
+
+// // Large devices (desktops, 992px and up)
+// @media (max-width: 992px) { ... }
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (max-width: 1200px) { ... }

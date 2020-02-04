@@ -51,7 +51,7 @@
 .booking-tabs .btn-group .btn:hover::before {
   height: 180%;
 }
-.booking-tabs .btn-group .btn:focus {
+.booking-tabs .btn-group .btn.selected {
   background: #3498db;
   color: #fff;
 }
@@ -109,6 +109,34 @@
 }
 .booking-tabs .optional-cleaned .form-check label {
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .booking-tabs {
+    margin: 0 auto;
+  }
+  .booking-tabs .booking-tabs__title {
+    font-size: 40px;
+  }
+  .booking-tabs .form-group .postcode-input {
+    max-width: 400px;
+  }
+  .booking-tabs .btn-group .btn {
+    width: 100px;
+    height: 50px;
+  }
+  .booking-tabs .info-block .info-block__question label {
+    font-size: 25px;
+  }
+  .booking-tabs .end-of-lease-form .form-check {
+    display: flex;
+    justify-content: center;
+  }
+  .booking-tabs .end-of-lease-form .form-check .form-check-input {
+    position: relative;
+    margin: 0;
+    zoom: 140%;
+  }
 }
 
 /*# sourceMappingURL=booking.css.map */

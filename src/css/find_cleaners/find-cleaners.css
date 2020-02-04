@@ -1,3 +1,10 @@
+body {
+    background-color: #f2f7f9;
+}
+
 .find-cleaners {
     background-color: #f2f7f9;
+    /* position: absolute; */
+    width: 100%;
+    /* height: calc(100%); */
 }
