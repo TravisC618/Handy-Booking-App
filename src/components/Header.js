@@ -49,7 +49,11 @@ const Header = props => {
                 </div>
 
                 <div classNames="header__body-reviews">
-
+                    <div>As a Tasker     As a Poster
+                        <p>409 star from 96 reviews</p>
+                        <p>95% Completion rate</p>
+                        <p>106 Completed tasks</p>
+                    </div>
                 </div>
 
             </div>
