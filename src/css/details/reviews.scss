@@ -1,0 +1,181 @@
+@import "https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800";
+
+.card {
+  position: relative;
+  width: 50%;
+  font-family: 'Open Sans', sans-serif; 
+  border:0px;
+
+  
+
+  
+  .card-header{
+    background-color: #f2f7f9;
+    padding: 0px 0px 0px 0px;
+    
+      h4 {
+        text-align: left;
+        font-size: 18px;
+      }
+      .star-header {
+        color: gold;
+        font-size: 7px;
+        text-align: right;
+        padding: 10px 0px 10px;
+        
+      }
+      .content-header{
+
+        h5 {
+          text-align: right;
+          font-size: 14px;
+        }
+
+
+      }
+      .star-rank {
+        width: 95%;
+        font-size: 1px;
+        text-align: right;
+        padding: 10px 0px 10px 0px;
+
+        .total-star {
+          padding: 0px 0px 0px 5px;
+          color: #000;
+        }
+
+        .five-star {
+          color: gold;   
+  
+        }
+
+        .four-star {
+          color: gold;
+
+
+        }
+
+        .three-star {
+          color: gold;
+
+
+        }
+
+        .two-star{
+          color: grey;
+
+
+
+        }
+        .one-star{
+          color: grey;
+
+        }
+      }
+  }
+  nav {
+    
+    #nav-tab {
+      font-size:  14px;
+      background-color: #f2f7f9;
+      border:0px;
+
+    }  
+  }
+#nav-tabContent {
+  background-color: #f2f7f9;
+  }
+
+}
+
+
+// Utilities 
+
+.fa-star:hover {
+  transform: scale(1.1);
+}
+
+// Modules
+
+.review-container {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  
+
+ 
+
+  .review {
+    flex: 0 1 50%;
+    padding: 30px;
+   
+    .review-stars,
+    .review-title,
+    .review-reviewer {
+      display: flex;
+    }
+
+    .review-stars,
+    .review-title,
+    .review-text,
+    .review-reviewer {
+      font-size: 13px;
+      padding: 0 0 20px;
+    }
+
+    .review-stars {
+      color: gold;
+      svg {
+        margin: 0 5px;
+      }
+    }
+
+    .review-text,
+    .review-reviewer {
+      color: #666666;
+      line-height: 20px;
+      letter-spacing: 1px;
+      text-align: justify;
+    }
+
+    .review-reviewer {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      align-items: center;
+
+      .avatar,
+      .reviewer {
+        margin: 0 5px;
+      }
+      .avatar {
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 1100px) {
+  .review-container {
+    .review {
+      flex: 0 1 95%;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .review-container {
+    .review {
+      flex: 0 1 95%;
+      margin: auto;
+    }
+  }
+
+}
+

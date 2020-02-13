@@ -1,12 +1,24 @@
 import React from 'react';
-import Info from './components/Info';
-import Sidebar from './components/Sidebar'
+import Info from './components/details/Info';
+import Reviews from './components/details/Reviews';
+import Sidebar from './components/details/Siderbar';
 
 const Details = props => {
     return (
-        <div className="details">
-            <Info />
-            <Sidebar />
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class='text-center'>Header</h1>
+                <div class="row">
+                    <div class="col-4">
+                        <Sidebar />
+                    </div>
+                    <div class="col-8">
+                        <Info />
+                        <Reviews />
+                    </div>
+
+                </div>
+            </div>
         </div>
     )
 };
