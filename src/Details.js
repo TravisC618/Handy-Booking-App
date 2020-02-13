@@ -2,7 +2,6 @@ import React from 'react';
 import Info from './components/details/Info';
 import Reviews from './components/details/Reviews';
 import Sidebar from './components/details/Siderbar';
-import './css/details/details.css'
 
 const Details = props => {
     return (
