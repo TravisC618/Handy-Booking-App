@@ -1,0 +1,120 @@
+@import "https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800";
+
+#sidebar{
+  margin: 0 0 0 60%;
+  width: 40%;
+}
+
+#sidebar-font h4{
+  padding: 10px 0px 10px;
+  font-size: 18px;
+}
+
+#sidebar-font h5{
+  font-size: 14px;
+}
+
+#sidebar-font em{
+  font-size: 14px;
+}
+
+.sidebar-img {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-bottom {
+  padding: 20px 0px 20px;
+
+}
+
+#sidebar-bottom-texts h5{
+  line-height: 10pt;
+  font-size: 14px;
+}
+
+.sidebar-img img{
+  padding: 15px 10px 15px;
+  width: 30%;
+}
+
+.sidebar-button {
+  padding: 15px 0px 15px;
+}
+
+.sidebar-button button {
+  outline: none;
+  height: 40px;
+  text-align: center;
+  width: 130px;
+  border-radius: 40px;
+  background: #f2f7f9;
+  border: 1px solid gray;
+  color: rgb(13, 87, 156);
+  letter-spacing: 1px;
+  text-shadow: 0;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+button:hover {
+  color: white;
+  background: gray;
+}
+button:active {
+  letter-spacing: 2px;
+}
+button:after {
+  content: "Learn more";
+}
+
+.onclic {
+  width: 40px;
+  border-color: #bbbbbb;
+  border-width: 3px;
+  font-size: 0;
+  border-left-color: #1ECD97;
+  -webkit-animation: rotating 2s 0.25s linear infinite;
+          animation: rotating 2s 0.25s linear infinite;
+}
+.onclic:after {
+  content: "";
+}
+.onclic:hover {
+  color: #1ECD97;
+  background: white;
+}
+
+.validate {
+  font-size: 13px;
+  color: white;
+  background: #1ECD97;
+}
+.validate:after {
+  font-family: 'FontAwesome';
+  content: "\f00c";
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
