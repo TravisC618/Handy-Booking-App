@@ -3,6 +3,7 @@ import Info from './components/details/Info';
 import Reviews from './components/details/Reviews';
 import Sidebar from './components/details/Siderbar';
 
+
 const Details = props => {
     return (
         <div class="row">
@@ -16,7 +17,6 @@ const Details = props => {
                         <Info />
                         <Reviews />
                     </div>
-
                 </div>
             </div>
         </div>
