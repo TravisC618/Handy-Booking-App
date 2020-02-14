@@ -5,6 +5,7 @@ import Main from './components/home/Main';
 import FindCleaners from './FindCleaners';
 import Details from './Details';
 
+
 function App() {
   return (
     <Router>
@@ -17,6 +18,7 @@ function App() {
         </Switch>
       </div>
     </Router>
+    
 
   );
 }
