@@ -37,6 +37,11 @@ class Navigation extends Component {
                                 <input type="password" class="login-user-input-password login-user-input" name="password" placeholder="Enter Password" />
                             </div>
                         </fieldset>
+                        
+                        <div class="remember-password-container">
+                            <input type="checkbox" /><label><span class="login-info-text">Remember password?</span></label>
+                        </div>
+                        
                         <fieldset class="login-login-button-container">
                             <button class="login-login-button">Log in</button>
                         </fieldset>
