@@ -8,7 +8,7 @@ class Login extends Component {
     return (
       <Modal
         visible={showModal}
-        closemodal={() => handleShowModal}
+        closemodal={() => handleShowModal()}
         type="zoomInDown"
       >
         <div class="login-box">
