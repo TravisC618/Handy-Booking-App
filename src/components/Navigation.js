@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../css/navigation.css";
 import logo from "../img/logo.png";
-import Modal from "react-animated-modal";
 import Login from "./Login";
 import "../css/login.css";
 
@@ -49,6 +48,11 @@ class Navigation extends Component {
                 <li className="nav-item">
                   <Link className="nav-link" to="/details">
                     Browse Handy
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/tasks">
+                    Browse Tasks
                   </Link>
                 </li>
                 <li className="nav-item">
