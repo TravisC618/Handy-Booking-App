@@ -11,7 +11,6 @@ import oven from "../../img/icons/oven.png";
 import cabinets from "../../img/icons/kitchen.png";
 import windows from "../../img/icons/window.png";
 import vacuum from "../../img/icons/vacuum.png";
-import { SliderBasicExample } from "./Slider";
 
 initializeIcons(/* optional base url */);
 
@@ -33,7 +32,6 @@ const Booking = props => {
             <i className="fas fa-bed" />
             <label>How many bedrooms do you have?</label>
           </div>
-          <SliderBasicExample />
           <div className="btn-group" role="group" aria-label="Bedroom Number">
             <button
               type="button"

@@ -58,7 +58,6 @@ class Navigation extends Component {
                 <li className="nav-item">
                   <Link
                     className="nav-link"
-                    to="/"
                     onClick={() => this.setState({ showModal: true })}
                   >
                     Login/ Register
