@@ -9,10 +9,7 @@ const Details = props => {
     return (
         <div class="row">
             <div class="col-sm-12">
-                <div class='text-center'>
-                    <Header />
-                </div>
-
+                <Header />
                 <div class="row">
                     <div class="col-4">
                         <Sidebar />
