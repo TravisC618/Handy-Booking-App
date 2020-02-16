@@ -2,13 +2,14 @@ import React from 'react';
 import Info from './components/details/Info';
 import Reviews from './components/details/Reviews';
 import Sidebar from './components/details/Siderbar';
+import Header from './components/details/Header';
 
 
 const Details = props => {
     return (
         <div class="row">
             <div class="col-sm-12">
-                <h1 class='text-center'>Header</h1>
+                <Header />
                 <div class="row">
                     <div class="col-4">
                         <Sidebar />
