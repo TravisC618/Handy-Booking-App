@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../css/details/header.css';
-import cleaner from '../img/cleaner.jpg'
+import cleaner from '../../img/cleaner.jpg'
 import '../../css/details/reviews.css';
 
 const Header = props => {
