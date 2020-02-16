@@ -1,5 +1,6 @@
 import React from 'react';
-import TasksList from './components/browse_tasks/Tasks'
+import InfiniteScroll from './components/browse_tasks/Tasks'
+import Header from './components/browse_tasks/Header'
 
 
 
@@ -7,11 +8,13 @@ import TasksList from './components/browse_tasks/Tasks'
 const BrowseTasks = props => {
     return (
         <div class="row">
-            <div class="col-sm-12">
-                <h1 class='text-center'>Header</h1>
+            <div class="col-12">
+                <div class="col">
+                    <Header />
+                </div>
                 <div class="row">
                     <div class="col-4">
-                        <TasksList />
+                        <InfiniteScroll />
 
                     </div>
                     <div class="col-8">
