@@ -1,0 +1,40 @@
+@import "https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800";
+
+// Colors
+$black: #000000;
+$white: #FFFFFF;
+
+
+
+/* Body */
+
+.nav-tabs {
+  background: #edeef6;
+  border-radius: .375rem;
+  padding: .34375rem;
+  display: flex;
+}
+
+.TaskNav {
+  
+  display: flex;
+  align-items: center;
+  
+  li.nav-item {
+    margin: 0 40px 0 40px;
+  }
+
+}
+
+
+.nav-tabs .nav-link:not(.active) {
+  color: inherit;
+}
+
+.navbar {
+    position: relative;
+    background: #fff;
+    height: 64px;
+  }
+
+

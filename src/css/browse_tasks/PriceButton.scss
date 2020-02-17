@@ -1,0 +1,41 @@
+@import "https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800";
+
+$black: #000000;
+$white: #FFFFFF;
+$primary: #3f51b5;
+
+
+
+.dropdown-menu-content-price {
+  height: 215px;
+    
+  .container-fluid {
+    background: $white;
+    width: 400px;
+    border-radius: 4px;
+
+
+    h4 {
+        font-weight: bold;
+        color: $primary;
+        font-family: "Open Sans", sans-serif;
+        padding: 25px 0px 5px;
+        font-size: 14px;
+    }
+
+    h4.DisabledFontColor{
+      color:gray;
+      font-family: "Open Sans", sans-serif;
+      padding: 25px 0px 5px;
+      font-size: 14px;
+    }
+
+    .RangeSlider{
+      text-align: center;
+
+    }
+    
+  }
+}
+
+

@@ -1,17 +1,22 @@
 .infinite-scroll-list {
-    position: relative;
-    margin: 0;
-    border: 1px solid lightgrey;
-    box-sizing: border-box;
-    float:right;
+  position: relative;
+  margin: 0;
+  border: 1px solid lightgrey;
+  box-sizing: border-box;
+  float: right;
 }
-
 .infinite-scroll-row {
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px solid lightgrey;
-    display: flex;
-    align-items: center;
-    padding: 0 0.5rem;
-    box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid lightgrey;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+.browseContent .col-4 {
+  padding: 0 0;
+}
+.browseContent .col-8 {
+  padding: 0 0 0 0;
 }
