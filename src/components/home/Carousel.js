@@ -4,7 +4,7 @@ import { handleVideoPlay as handleVideoPlayAction } from "../../redux/actions/ca
 import joinUs from "../../img/join-us.jpeg";
 import washing from "../../img/washing.jpg";
 import cleaner from "../../img/cleaner-horizontal.jpeg";
-import cleaningVideo from "../../videos/cleaner.mp4";
+import cleaningVideo from "../../assets/videos/cleaner.mp4";
 import "../../css/home/carousel.css";
 import { Link } from "react-router-dom";
 
