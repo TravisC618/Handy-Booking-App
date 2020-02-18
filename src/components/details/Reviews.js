@@ -3,64 +3,64 @@ import '../../css/details/reviews.css';
 
 const Reviews = props => {
     return (
-      <div class="card text-center">
-          <div class="card-header">
-              <div class="row">
-                  <div class="col">
+      <div className="card text-center">
+          <div className="card-header">
+              <div className="row">
+                  <div className="col">
                       <h4><strong>Reviews</strong></h4>
 
                   </div>
 
-                  <div class="col-auto">
-                      <div class="star-header">
-                          <i class="fas fa-star fa-2x"></i>
-                          <i class="fas fa-star fa-2x"></i>
-                          <i class="fas fa-star fa-2x"></i>
-                          <i class="fas fa-star fa-2x"></i>
-                          <i class="fas fa-star fa-2x"></i>
+                  <div className="col-auto">
+                      <div className="star-header">
+                          <i className="fas fa-star fa-2x"></i>
+                          <i className="fas fa-star fa-2x"></i>
+                          <i className="fas fa-star fa-2x"></i>
+                          <i className="fas fa-star fa-2x"></i>
+                          <i className="fas fa-star fa-2x"></i>
                       </div>
-                      <div class="content-header">
+                      <div className="content-header">
                           <h5>4.9 stars from 96 reviews</h5>
                           <h5>98% Completion rate</h5>
                           <h5>106 Completion tasks</h5>
                       </div>
                   </div>
-                  <div class="col col-3">
-                      <div class="star-rank">
-                          <div class="five-star">
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="total-star">88</i>
+                  <div className="col col-3">
+                      <div className="star-rank">
+                          <div className="five-star">
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="total-star">88</i>
 
                           </div>
 
-                          <div class="four-star">
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="total-star">6</i>
+                          <div className="four-star">
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="total-star">6</i>
 
                           </div>
-                          <div class="three-star">
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="total-star">2</i>
+                          <div className="three-star">
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="total-star">2</i>
 
                           </div>
-                          <div class="two-star">
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="total-star">0</i>
+                          <div className="two-star">
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="total-star">0</i>
 
                           </div>
-                          <div class="one-star">
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="total-star">0</i>
+                          <div className="one-star">
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="total-star">0</i>
 
                           </div>
 
@@ -71,97 +71,97 @@ const Reviews = props => {
 
           </div>
           <nav>
-              <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">As a Tasker</a>
-                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">As a Poster</a>
+              <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">As a Tasker</a>
+                  <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">As a Poster</a>
               </div>
           </nav>
-          <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          <div className="tab-content" id="nav-tabContent">
+              <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                  <div class="review-container">
-                      <div class="review">
-                          <div class="review-stars">
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
+                  <div className="review-container">
+                      <div className="review">
+                          <div className="review-stars">
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
                           </div>
 
-                          <div class="review-text">
+                          <div className="review-text">
                               <p>
                                   Turned up on time were helpful and professional. The guys clear about what was possible and what was not. I was impressed with their work.
                               </p>
                           </div>
-                          <div class="review-reviewer">
-                              <div class="avatar"><img src="https://picsum.photos/50/50" alt="" /></div>
-                              <div class="reviewer">Kelly McNamara</div>
+                          <div className="review-reviewer">
+                              <div className="avatar"><img src="https://picsum.photos/50/50" alt="" /></div>
+                              <div className="reviewer">Kelly McNamara</div>
                           </div>
                       </div>
 
-                      <div class="review">
-                          <div class="review-stars">
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
+                      <div className="review">
+                          <div className="review-stars">
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
                           </div>
 
-                          <div class="review-text">
+                          <div className="review-text">
                               <p>
                                   On time. Great job. Very kind and considerate. House looks great. She was efficient and detailed. I would definitely recommend her to others.
                               </p>
                           </div>
-                          <div class="review-reviewer">
-                              <div class="avatar"><img src="https://picsum.photos/50/50" alt="" /></div>
-                              <div class="reviewer">Aisling McCool</div>
+                          <div className="review-reviewer">
+                              <div className="avatar"><img src="https://picsum.photos/50/50" alt="" /></div>
+                              <div className="reviewer">Aisling McCool</div>
                           </div>
                       </div>
                   </div>
 
               </div>
-              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                  <div class="review-container">
-                      <div class="review">
-                          <div class="review-stars">
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
+                  <div className="review-container">
+                      <div className="review">
+                          <div className="review-stars">
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
                           </div>
 
-                          <div class="review-text">
+                          <div className="review-text">
                               <p>
                                   Turned up on time were helpful and professional. The guys clear about what was possible and what was not. I was impressed with their work.
                               </p>
                           </div>
-                          <div class="review-reviewer">
-                              <div class="avatar"><img src="https://picsum.photos/50/50" alt="" /></div>
-                              <div class="reviewer">Kelly McNamara</div>
+                          <div className="review-reviewer">
+                              <div className="avatar"><img src="https://picsum.photos/50/50" alt="" /></div>
+                              <div className="reviewer">Kelly McNamara</div>
                           </div>
                       </div>
 
-                      <div class="review">
-                          <div class="review-stars">
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
-                              <i class="fas fa-star fa-2x"></i>
+                      <div className="review">
+                          <div className="review-stars">
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-2x"></i>
                           </div>
 
-                          <div class="review-text">
+                          <div className="review-text">
                               <p>
                                   On time. Great job. Very kind and considerate. House looks great. She was efficient and detailed. I would definitely recommend her to others.
                               </p>
                           </div>
-                          <div class="review-reviewer">
-                              <div class="avatar"><img src="https://picsum.photos/50/50" alt="" /></div>
-                              <div class="reviewer">Aisling McCool</div>
+                          <div className="review-reviewer">
+                              <div className="avatar"><img src="https://picsum.photos/50/50" alt="" /></div>
+                              <div className="reviewer">Aisling McCool</div>
                           </div>
 
                       </div>
