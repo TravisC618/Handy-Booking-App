@@ -1,42 +1,59 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { FixedSizeList } from 'react-window';
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+} from 'react'
+import { Virtuoso } from 'react-virtuoso'
+import ImgMediaCard from '../components/browse_tasks/TaskCards'
+import LoadingSpinner from '../img/icons/LoadingSpinner.svg'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    height: 800,
-    maxWidth: 300,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
-function renderRow(props) {
-  const { index, style } = props;
-
-  return (
-    <ListItem button style={style} key={index}>
-      <ListItemText primary={`Item ${index + 1}`} />
-    </ListItem>
-  );
+const GenerateItem = index => {
+  return <ImgMediaCard user={(index)} index={index} />
 }
 
-renderRow.propTypes = {
-  index: PropTypes.number.isRequired,
-  style: PropTypes.object.isRequired,
-};
+export default () => {
+  const [total, setTotal] = useState(0)
+  const items = useRef([])
+  const loading = useRef(false)
 
-export default function VirtualizedList() {
-  const classes = useStyles();
+  // the setTimeout below simulates a network request.
+  // In the real world, you can fetch data from a service.
+  // the setTotal call will trigger a refresh for the list,
+  // so make sure you call it last
+  const loadMore = useCallback(() => {
+    if (loading.current) {
+      return
+    }
+    loading.current = true
+
+    setTimeout(() => {
+      for (let index = total; index < total + total + 20; index++) {
+        items.current = [...items.current, index]
+      }
+      loading.current = false
+      setTotal(items.current.length)
+    }, 2000)
+  }, [])
+
+  useEffect(() => {
+    loadMore()
+  }, [])
 
   return (
-    <div className={classes.root}>
-      <FixedSizeList height={800} width={300} itemSize={130} itemCount={200}>
-        {renderRow}
-      </FixedSizeList>
-    </div>
-  );
+    <Virtuoso
+      style={{ width: '350px', height: '780px' }}
+      overscan={10}
+      totalCount={total}
+      item={GenerateItem}
+      endReached={() => loadMore()}
+      footer={() => {
+        return (
+          <div style={{ textAlign: 'center' }}>
+            <img src={LoadingSpinner} alt='LoadingSpinner'/>
+          </div>
+        )
+      }}
+    />
+  )
 }
