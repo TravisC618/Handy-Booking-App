@@ -71,7 +71,7 @@
   left: 50px;
 }
 .header__body-photo {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   color: #67868a;
   border: 0;
   width: 120px;
