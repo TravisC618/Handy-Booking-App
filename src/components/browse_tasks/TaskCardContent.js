@@ -32,7 +32,7 @@ const TaskCardContent = props => {
                 <div class="row">
                 <span class="new-task-list-item__status col-6">Open</span>
             <span
-                class="new-task-list-item__bids col-6">1 offer</span></div>
+                class="new-task-list-item__bids col-6">offer</span></div>
                 </div>
             </a>
     )

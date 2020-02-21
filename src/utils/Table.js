@@ -5,11 +5,11 @@ import React, {
   useEffect,
 } from 'react'
 import { Virtuoso } from 'react-virtuoso'
-import ImgMediaCard from '../components/browse_tasks/TaskCards'
+import { TaskCard } from '../components/browse_tasks/TaskCards'
 import LoadingSpinner from '../img/icons/LoadingSpinner.svg'
 
 const GenerateItem = index => {
-  return <ImgMediaCard user={(index)} index={index} />
+  return <TaskCard user={(index)} index={index} />
 }
 
 export default () => {
@@ -33,7 +33,7 @@ export default () => {
       }
       loading.current = false
       setTotal(items.current.length)
-    }, 2000)
+    }, 1000)
   }, [])
 
   useEffect(() => {

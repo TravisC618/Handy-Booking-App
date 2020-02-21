@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import RangeButton from "./RangeButton";
 import PriceButton from "./PriceButton";
 import TypeButton from "./TypeButton";
-import SearchButton from "./SearchButton"
+import SearchButton from "./SearchButton";
 import "../../css/browse_tasks/task-nav.css";
-import "../../css/browse_tasks/searchbar.css"
+import "../../css/browse_tasks/searchbar.css";
 
 class TaskNav extends Component {
   render() {
