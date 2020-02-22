@@ -80,7 +80,7 @@ export default function PriceButton() {
                     <Button onClick={handleClose}>Cancel</Button>
                   </div>
                 </Grid>
-                <Grid item xs={4}></Grid>
+                <Grid item xs={4}><div></div></Grid>
                 <Grid xs>
                   <div className={classes.root}>
                     <Button

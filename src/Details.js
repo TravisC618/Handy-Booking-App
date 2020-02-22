@@ -7,14 +7,18 @@ import Header from './components/details/Header';
 
 const Details = props => {
     return (
-        <div class="row">
-            <div class="col-sm-12">
-                <Header />
-                <div class="row">
-                    <div class="col-4">
+        <div className="row">
+            <div className="col-sm-12">
+                <div className="row justify-content-center">
+                    <div className="col-7">
+                        <Header />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-4">
                         <Sidebar />
                     </div>
-                    <div class="col-8">
+                    <div className="col-8">
                         <Info />
                         <Reviews />
                     </div>

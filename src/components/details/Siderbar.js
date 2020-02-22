@@ -10,44 +10,44 @@ import PowerImg from "../../img/icons/power.png";
 
 const Sidebar = props => {
     return (
-        <div class="container" id="sidebar">
-            <div class="sidebar-style">
-                <div class="container" id="sidebar-font">
+        <div className="container" id="sidebar">
+            <div className="sidebar-style">
+                <div className="container" id="sidebar-font">
                     <h4><strong>BADGES</strong></h4>
                     <em>ID BADGES</em>
-                    <div class="sidebar-img">
+                    <div className="sidebar-img">
                         <img src={IdImg} alt="id" />
                         <h5>Digital iD</h5>
                     </div>
-                    <div class="sidebar-img">
+                    <div className="sidebar-img">
                         <img src={PaymentImg} alt="id" />
                         <h5>Payment Method</h5>
                     </div>
-                    <div class="sidebar-img">
+                    <div className="sidebar-img">
                         <img src={MobileImg} alt="id" />
                         <h5>Mobile</h5>
                     </div>
-                    <div class="sidebar-img">
+                    <div className="sidebar-img">
                         <img src={FacebookImg} alt="id" />
                         <h5>Facebook</h5>
                     </div>
-                    <div class="sidebar-img">
+                    <div className="sidebar-img">
                         <img src={LinkedInImg} alt="id" />
                         <h5>LinkedIn</h5>
                     </div>
-                    <div class="sidebar-button">
+                    <div className="sidebar-button">
                         <button id="button"></button>
                     </div>
-                    <div class="sidebar-bottom">
+                    <div className="sidebar-bottom">
                         <em>LICENCE BADGES</em>
-                        <div class="sidebar-img">
+                        <div className="sidebar-img">
                             <img src={PowerImg} alt="id" />
                             <div id="sidebar-bottom-texts">
                                 <h5>WA Electrical</h5>
                                 <h5>Licence No.EC12680</h5>
                             </div>
                         </div>
-                        <div class="sidebar-button">
+                        <div className="sidebar-button">
                             <button id="button"></button>
                         </div>
                     </div>
