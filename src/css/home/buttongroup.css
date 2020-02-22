@@ -1,0 +1,80 @@
+.BG-container {
+    margin: 0;
+    padding:0;
+}
+
+.middle {
+    margin-top: 100px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+}
+
+.bg-btn {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    background-color: #f1f1f1;
+    margin: 10px;
+    border-radius: 90%;
+    box-shadow: 0 5px 15px -5px #00000070;
+    color: #3498db;
+    overflow: hidden;
+    position: relative;
+}
+
+.bg-btn-container p {
+    font-size: small;
+    width: 120px;
+    padding:10px;
+}
+
+.icon{
+    margin-top: 37%;
+    font-size: 26px;
+    transition: 0.2 linear;
+}
+.bg-btn:hover {
+    transform:scale(1.2);
+}
+
+.bg-btn:hover .icon{
+    transform:scale(1.3);
+    color: #f1f1f1;
+}
+
+
+.bg-btn::before{
+    content:"";
+    position: absolute;
+    width:120%;
+    height:120%;
+    background: #3498db;
+    transform: rotate(45deg);
+    left: -110%;
+    top: 90%;
+}
+
+.bg-btn:hover::before {
+    animation: anime 0.7s 1;
+    top: -20%;
+    left: -10%;
+}
+
+@keyframes anime {
+    0%{
+        left: -110%;
+        top: 90%;
+    }50% {
+        left: 10%;
+        top: -30%;
+    }100%{
+        top: -10%;
+        left: -10%;
+    }
+}
