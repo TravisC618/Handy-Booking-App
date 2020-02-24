@@ -8,13 +8,15 @@ class TaskCardContent extends React.Component {
     const toUpperCaseFilter = d => {
       return d.toUpperCase();
     };
-    // const { title, budget, location, dueDate, status, offerNum } = this.props;
-    const title = "title";
-    const budget = "budget";
-    const location = "location";
-    const dueDate = "dueDate";
-    const status = "status";
-    const offerNum = "offerNum";
+    const {
+      title,
+      budget,
+      location,
+      dueDate,
+      status,
+      offerNum
+    } = this.props.tasks;
+
     return (
       <a href="#" class="new-task-list-item new-task-list-item--open">
         <div class="new-task-list-item__header">

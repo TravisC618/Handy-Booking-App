@@ -1,13 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import TaskCardContent from "./TaskCardContent";
 
 const useStyles = makeStyles(theme => ({
@@ -26,39 +21,17 @@ const useStyles = makeStyles(theme => ({
 
 const ImgMediaCard = props => {
   const classes = useStyles();
-  const { tasks, index } = props;
-  // const { title, budget, location, dueDate, status, offer } = tasks[index];
+  const { tasks } = props;
   return (
     <Card className={classes.root}>
       <div className={classes.bgcolor} />
       <CardActionArea>
         <CardContent>
-          <TaskCardContent />
+          <TaskCardContent tasks={tasks} />
         </CardContent>
       </CardActionArea>
     </Card>
   );
-  // return (
-  //   <Card className={classes.root}>
-  //     <div className={classes.bgcolor} />
-  //     <CardActionArea>
-  //       <CardContent>
-  //         <TaskCardContent
-  //           title={title}
-  //           budget={budget}
-  //           location={location}
-  //           dueDate={dueDate}
-  //           status={status}
-  //           offerNum={offer.length}
-  //         />
-  //       </CardContent>
-  //     </CardActionArea>
-  //   </Card>
-  // );
 };
 
-const mapStateToProps = state => ({
-  tasks: state.task.tasks
-});
-
-export default connect(mapStateToProps)(ImgMediaCard);
+export default ImgMediaCard;

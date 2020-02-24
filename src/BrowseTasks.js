@@ -1,21 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useReducer } from "react";
 import TaskNav from "./components/browse_tasks/TaskNav";
-import VirtualizedList from "./utils/Table-origin";
+import VirtualizedList from "./utils/Table";
 import TaskMap from "./components/browse_tasks/TaskMap";
-import { handleGetAllTasks as handleGetAllTasksAction } from "./redux/actions/taskAction";
 import "./css/browse_tasks/task-list.css";
+import { TaskContext, taskReducer, initialState } from "./hooks/taskReducer";
 
-class BrowseTasks extends React.Component {
-  //   getAllTasks = () => this.props.handleGetAllTasks();
+const BrowseTasks = () => {
+  const [task, dispatch] = useReducer(taskReducer, initialState);
 
-  //   async componentDidMount() {
-  //     const tasks = await this.props.handleGetAllTasks();
-  //     console.log(tasks);
-  //   }
-
-  render() {
-    return (
+  return (
+    <TaskContext.Provider value={{ taskState: task, taskDispatch: dispatch }}>
       <div className="browseContent">
         <div class="row">
           <div class="col-12">
@@ -35,14 +29,8 @@ class BrowseTasks extends React.Component {
           </div>
         </div>
       </div>
-    );
-  }
-}
-
-// const mapStateToProps = state => null;
-
-// const mapDispatchToProps = dispatch => ({
-//   handleGetAllTasks: () => dispatch(handleGetAllTasksAction())
-// });
+    </TaskContext.Provider>
+  );
+};
 
 export default BrowseTasks;
