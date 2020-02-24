@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-brands-svg-icons": "^5.12.1",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/react-fontawesome": "^0.1.8",
     "@material-ui/core": "^4.9.3",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.43",
@@ -15,6 +19,7 @@
     "faker": "^4.1.0",
     "google-map-react": "^1.1.6",
     "install": "^0.13.0",
+    "jquery": "^3.4.1",
     "lodash.range": "^3.2.0",
     "material-ui-search-bar": "^1.0.0-beta.14",
     "moment": "^2.24.0",
