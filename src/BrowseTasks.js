@@ -4,6 +4,7 @@ import VirtualizedList from "./utils/Table";
 import TaskMap from "./components/browse_tasks/TaskMap";
 import "./css/browse_tasks/task-list.css";
 import { TaskContext, taskReducer, initialState } from "./hooks/taskReducer";
+import TaskCardContentDetails from "./components/browse_tasks/TaskCardContentDetails";
 
 const BrowseTasks = () => {
   const [task, dispatch] = useReducer(taskReducer, initialState);
@@ -24,6 +25,7 @@ const BrowseTasks = () => {
               </div>
               <div class="col-8">
                 <TaskMap />
+                <TaskCardContentDetails />
               </div>
             </div>
           </div>
