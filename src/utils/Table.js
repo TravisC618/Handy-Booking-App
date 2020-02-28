@@ -67,6 +67,7 @@ const Table = () => {
       );
     } catch (err) {
       dispatch({ type: ERROR_MSG, errMsg: err.message });
+      return;
     }
     const { tasks, pagination } = response.data.data;
     const totalPages = pagination.pages;
