@@ -46,6 +46,11 @@ class Navigation extends Component {
             <div className="collapse navbar-collapse" id="navbarToggler">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
+                  <Link className="nav-link" to="/account/dashboard">
+                    Account
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="/details">
                     Browse Handy
                   </Link>
