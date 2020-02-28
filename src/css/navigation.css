@@ -7,6 +7,7 @@
 .navbar {
   background: #fff;
   height: 64px;
+  z-index: 0;
 }
 .navbar .navbar-brand img {
   width: 130px;

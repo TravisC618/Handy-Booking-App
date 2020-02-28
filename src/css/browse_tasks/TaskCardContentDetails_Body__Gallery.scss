@@ -1,0 +1,23 @@
+.imageGallery {
+    .attachment-item {
+        display: inline-block;
+        margin: 10px;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid #bbc2dc;
+        background-color: #f6f8fd;
+        background-size: cover;
+        border-radius: 4px;
+        img {
+            width: 150px;
+            height: 100px;
+        }
+    }
+
+    .attachment-item:hover {
+        border: 1px solid #545a77;
+        background-color: #fff;
+    }
+
+
+}

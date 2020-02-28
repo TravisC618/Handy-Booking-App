@@ -1,0 +1,10 @@
+.TaskDetailsScroll {
+  background-color: #fff;
+  height: 800px;
+  width: 774px;
+  overflow-x: hidden;
+  overflow-x: auto;
+}
+.TaskDetailsScroll .container-fluid {
+  padding: 20px;
+}

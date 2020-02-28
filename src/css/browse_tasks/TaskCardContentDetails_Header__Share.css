@@ -1,0 +1,90 @@
+.cgpQIf {
+  margin-top: 20px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e7ebfb;
+  border-image: initial;
+  text-align: center;
+}
+.ibJUPp {
+  background-color: #fff;
+  width: 30%;
+  display: inline-block;
+  position: relative;
+  top: -10px;
+  margin: 0px auto;
+}
+p {
+  margin: 8px 0;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+p:first-child {
+  margin-top: 0;
+}
+.zzIlN {
+  color: #545a77;
+  font-family: museo-regular, "Helvetica Neue", Helvetica, Arial,
+    "Lucida Grande", sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.25px;
+  text-align: center;
+  vertical-align: initial;
+  text-transform: uppercase;
+  font-style: initial;
+  white-space: initial;
+  text-decoration: initial;
+  margin: 0px;
+  padding: 0px;
+}
+.kSwWdo {
+  position: relative;
+  top: -5px;
+  margin-bottom: 4px;
+}
+.hhMpBw {
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  margin: 0px 12px 0px 8px;
+  padding: 0px;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  margin: 0px 12px 0px 8px;
+  padding: 0px;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  margin: 0px 12px 0px 8px;
+  padding: 0px;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  margin: 0px 12px 0px 8px;
+  padding: 0px;
+}
+.hhMpBw:first-child {
+  margin-left: 20px;
+}
+.hsnKYM {
+  fill: #bbc2dc;
+  transition: fill 0.25s ease-out 0s;
+}
+.eqUboa {
+  fill: #bbc2dc;
+  transition: fill 0.25s ease-out 0s;
+}
+.hetOMS {
+  fill: #bbc2dc;
+  transition: fill 0.25s ease-out 0s;
+}
+.XtSch {
+  fill: #bbc2dc;
+  transition: fill 0.25s ease-out 0s;
+}
