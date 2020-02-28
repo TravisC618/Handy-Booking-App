@@ -6,7 +6,11 @@ import '../../css/browse_tasks/TaskCardContentDetails.css'
 
 
 
-const TaskCardContentDetails = props => {
+
+const TaskCardContentDetails = () => {
+
+  
+
   return (
     <div className='TaskDetailsScroll'>
       <div className="container-fluid">
