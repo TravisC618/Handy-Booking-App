@@ -1,34 +1,24 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import Main from "../components/home/Main";
+import Dashboard from "../components/account/Dashboard";
+import PaymentHistory from "../components/account/PaymentHistory";
 import FindCleaners from "../FindCleaners";
 import Details from "../Details";
 import BrowseTasks from "../BrowseTasks";
-import {
-  HOMPAGE_URL,
-  FIND_CLEANERS_URL,
-  CLEANER_DETAILS_URL,
-  TASK_URL
-} from "./URLMAP";
+import Account from "../Account";
+import Menu from "../components/account/Menu";
 
 const Routes = () => {
   return (
-    <Router>
-      <Navigation />
-      <Switch>
-        <Route exact path="/" component={Main} />
-        <Route exact path={FIND_CLEANERS_URL} component={FindCleaners} />
-        <Route exact path={CLEANER_DETAILS_URL} component={Details} />
-        <Route exact path={TASK_URL} component={BrowseTasks} />
-        <Route component={Main} />
-      </Switch>
-    </Router>
+    <Switch>
+      <Route path="/" exact component={Main} />
+      <Route path="/find-cleaners" exact component={FindCleaners} />
+      <Route path="/details" exact component={Details} />
+      <Route path="/tasks" exact component={BrowseTasks} />
+      <Route path="/account/" component={Account} />
+    </Switch>
   );
 };
 
