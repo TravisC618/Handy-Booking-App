@@ -1,26 +1,47 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navigation from '../components/Navigation';
-import Main from '../components/home/Main';
-import FindCleaners from '../FindCleaners';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Menu from './components/account/Menu';
+import Dashboard from './components/account/Dashboard';
+import './css/account/account.css';
+
+// import PaymentHistory from '../components/account/PaymentHistory';
+// import Notifications from '../components/account/Notifications';
+// import Profile from '../components/account/Profile';
+// import Skills from '../components/account/Skills';
+// import Badges from '../components/account/Badges';
+// import Alerts from '../components/account/Alerts';
+// import NotificationSettings from '../components/account/NotificationSettings';
+// import Mobile from '../components/account/Mobile';
+// import Portfolio from '../components/account/Portfolio';
+// import Password from '../components/account/Password';
 
 const Account = props => {
     return (
-        <div className="row">
-            <div className="col-sm-12">
-                <div className="row justify-content-center">
-                    <div className="col-7">
-                        <Header />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-4">
-                        <Sidebar />
-                    </div>
-                    <div className="col-8">
-                        <Info />
-                        <Reviews />
-                    </div>
+        <div className="account">
+            <div className="account__page">
+                
+                <div className="account__content">
+                    {/* <div className="col-4"> */}
+                        <Menu />
+                    {/* </div> */}
+                    {/* <div className="col-8"> */}
+                        <Dashboard />
+                        {/* <Router>
+                            <Switch>
+                            <Route path="/account/dashboard" exact component={Dashboard} />
+                            <Route path="/account/payment-history" component={PaymentHistory} />
+                            <Route path="/account/notifications" component={Notifications} />
+                            <Route path="/account/profile" component={Profile} />
+                            <Route path="/account/skills" component={Skills} />
+                            <Route path="/account/badges" component={Badges} />
+                            <Route path="/account/alerts" component={Alerts} />
+                            <Route path="/account/notification-settings" component={NotificationSettings} />
+                            <Route path="/account/mobile" component={Mobile} />
+                            <Route path="/account/portfolio" component={Portfolio} />
+                            <Route path="/account/password" component={Password} />
+                            </Switch>
+                        </Router> */}
+                     {/* </div> */}
                 </div>
             </div>
         </div>
@@ -29,21 +50,3 @@ const Account = props => {
 
 export default Account;
 
-
-
-const Routes = () => {
-    return (
-        <Router>
-            <Navigation />
-                <Switch>
-                <Route path="/" exact component={Main} />
-                <Route path="/find-cleaners" component={FindCleaners} />
-                <Route path="/details" component={Details} />
-                <Route path="/tasks" component={BrowseTasks} />
-                <Route path="/account/dashboard" component={Account} />
-                </Switch>
-        </Router>
-    )
-}
-
-export default Routes;
