@@ -1,0 +1,18 @@
+.account {
+    margin-top: 64px;
+    display: block;
+}
+
+.account__page {
+    max-width: 1024px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.account__content {
+    width: 1024px;
+    height: 919px;
+    background-color: inherit;
+    display: block;
+}
