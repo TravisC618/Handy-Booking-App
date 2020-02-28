@@ -5,6 +5,7 @@ import Main from '../components/home/Main';
 import FindCleaners from '../FindCleaners';
 import Details from '../Details';
 import BrowseTasks from '../BrowseTasks';
+import Account from '../Account';
 
 const Routes = () => {
     return (
@@ -15,6 +16,7 @@ const Routes = () => {
                 <Route path="/find-cleaners" component={FindCleaners} />
                 <Route path="/details" component={Details} />
                 <Route path="/tasks" component={BrowseTasks} />
+                <Route path="/account" component={Account} />
                 </Switch>
         </Router>
     )
