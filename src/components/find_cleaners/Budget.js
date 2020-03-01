@@ -6,11 +6,11 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import CloseIcon from "@material-ui/icons/Close";
 import Box from "@material-ui/core/Box";
-import { display } from "@material-ui/system";
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -35,6 +35,11 @@ const useStyles = makeStyles(theme => ({
   box: {
     display: "flex"
   },
+  grid: {
+    margin: theme.spacing(3),
+    backgroundColor: "blue",
+    color: "#000"
+  },
   icon: {
     alignSelf: "center",
     marginLeft: theme.spacing(1),
@@ -42,20 +47,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Budget() {
+export default function Budget(props) {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    radio: "Total",
-    amount: "",
-    hour: ""
-  });
-
-  const handleChange = prop => event => {
-    if (prop === "amount" || prop === "hour") {
-      // 限制只能输入positive number
-    }
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const { handleChange, values } = props;
 
   return (
     <React.Fragment>
@@ -70,9 +64,9 @@ export default function Budget() {
         <RadioGroup
           row
           aria-label="budget"
-          name="budget"
+          name="radio"
           value={values.radio}
-          onChange={handleChange("radio")}
+          onChange={handleChange}
         >
           <FormControlLabel
             value="Total"
@@ -95,8 +89,9 @@ export default function Budget() {
           <OutlinedInput
             id="outlined-adornment-amount"
             type="tel"
+            name="amount"
             value={values.amount}
-            onChange={handleChange("amount")}
+            onChange={handleChange}
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             endAdornment={
               <Box display={values.radio === "Hourly rate" ? "block" : "none"}>
@@ -115,8 +110,9 @@ export default function Budget() {
             id="outlined-adornment-hour"
             className={classes.hour}
             type="tel"
+            name="hour"
             value={values.hour}
-            onChange={handleChange("hour")}
+            onChange={handleChange}
             endAdornment={<InputAdornment position="end">hrs</InputAdornment>}
             aria-describedby="outlined-hour-helper-text"
             inputProps={{
@@ -126,6 +122,18 @@ export default function Budget() {
           />
         </Box>
       </div>
+      <Grid className={classes.grid} container alignItems="center">
+        <Grid item xs>
+          <Typography gutterBottom variant="h6">
+            ESTIMATED BUDGET
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography gutterBottom variant="h8">
+            $4.50
+          </Typography>
+        </Grid>
+      </Grid>
     </React.Fragment>
   );
 }

@@ -30,7 +30,7 @@ export default function LocationNTime(props) {
       </Typography>
       <Grid className={classes.grid} container spacing={3}>
         <Grid item xs={12} md={6}>
-          <DatePicker values={values} handleChange={handleChange} />
+          <DatePicker disablePast values={values} handleChange={handleChange} />
         </Grid>
       </Grid>
     </React.Fragment>

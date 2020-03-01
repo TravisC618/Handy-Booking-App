@@ -14,6 +14,7 @@ import TaskDescription from "./TaskDescription";
 import LocationNTime from "./LocationNTime";
 import StepConnector from "@material-ui/core/StepConnector";
 import Budget from "./Budget";
+import { lengthCheck } from "../../utils/helper";
 import "../../css/theme.scss";
 
 function Copyright() {
@@ -162,8 +163,24 @@ export default function Checkout() {
     title: "",
     details: "",
     location: "",
-    date: new Date()
+    date: new Date(),
+    radio: "Total",
+    amount: "",
+    hour: "",
+    err: {
+      name: "",
+      msg: ""
+    }
   });
+
+  const isPositiveNum = (key, value) => {
+    if (key === "amount" || key === "hour") {
+      if (isNaN(value)) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   const handleChange = event => {
     if (event.name) {
@@ -172,11 +189,63 @@ export default function Checkout() {
     }
     const key = event.target.name;
     const value = event.target.value;
+    // validates amount & hour input
+    if (!isPositiveNum(key, value)) {
+      return;
+    }
     setValues({ ...values, [key]: value });
   };
 
   const handleNext = () => {
+    switch (activeStep) {
+      case 0:
+        if (!lengthCheck(values.title.length, 10, 50)) {
+          setValues({
+            ...values,
+            err: {
+              name: "title",
+              msg: "title must be more than 10 and less than 50 characters"
+            }
+          });
+          return;
+        }
+        if (!lengthCheck(values.details.length, 25, 1000)) {
+          setValues({
+            ...values,
+            err: {
+              name: "details",
+              msg: "details must be more than 25 and less than 1000 characters"
+            }
+          });
+          return;
+        }
+        break;
+      case 1:
+        if (!values.location) {
+          setValues({
+            ...values,
+            err: {
+              name: "location",
+              msg: "Invalid location"
+            }
+          });
+          return;
+        }
+        break;
+      // case 2:
+      //   if() {
+
+      //     return;
+      //   }
+      //   break;
+      default:
+        return;
+    }
+    // Once pass validation, set err empty
+    setValues({ ...values, err: { name: "", msg: "" } });
+    console.log(`activeStep: ${activeStep}`);
     setActiveStep(activeStep + 1);
+    console.log(`activeStep: ${activeStep}`);
   };
 
   const handleBack = () => {
@@ -206,12 +275,12 @@ export default function Checkout() {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  You've successfully posted!
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
+                  Your task id is #2001539. We have emailed your task
+                  confirmation, and will send you an update when your task has
+                  any offer or comment.
                 </Typography>
               </React.Fragment>
             ) : (
@@ -229,7 +298,7 @@ export default function Checkout() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? "Place now" : "Next"}
+                    {activeStep === steps.length - 1 ? "Post now" : "Next"}
                   </Button>
                 </div>
               </React.Fragment>

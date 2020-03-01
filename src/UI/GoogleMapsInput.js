@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 export default function GoogleMapsInput(props) {
   const classes = useStyles();
   const { handleChange: handleLocationChange, values } = props;
-  const [inputValue, setInputValue] = React.useState(values.location);
+  const [inputValue, setInputValue] = React.useState("");
   const [options, setOptions] = React.useState([]);
   const loaded = React.useRef(false);
 
@@ -53,6 +53,7 @@ export default function GoogleMapsInput(props) {
   };
 
   const fetchSelectedOption = (event, value) => {
+    if (!value) return;
     const data = { name: "location", value: value.description };
     handleLocationChange(data);
   };
@@ -108,10 +109,11 @@ export default function GoogleMapsInput(props) {
       renderInput={params => (
         <TextField
           {...params}
-          label="Add a location"
-          variant="outlined"
+          variant="standard"
           fullWidth
-          // onClick={() => console.log(params)}
+          error={values.err.name === "location" ? true : false}
+          helperText={values.err.name === "location" ? values.err.msg : null}
+          placeholder={values.location ? values.location : "Add a location"}
           onChange={handleChange}
         />
       )}
