@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "./components/account/Menu";
 import "./css/account/account.css";
-import Dashboard from "./components/account/Dashboard";
+// import Dashboard from "./components/account/Dashboard";
 // import Notifications from '../components/account/Notifications';
 // import Profile from '../components/account/Profile';
 // import Skills from '../components/account/Skills';

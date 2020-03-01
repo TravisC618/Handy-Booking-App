@@ -3,10 +3,12 @@ import { Route, Link, withRouter } from "react-router-dom";
 import {
   ACCOUNT_BASE_URL,
   ACCOUNT_DASHBOARD_URL,
-  ACCOUT_PAYMENT_HISTORY_URL
+  ACCOUT_PAYMENT_HISTORY_URL,
+  ACCOUT_NOTIFICATIONS_URL
 } from "../../routes/URLMAP";
 import Dashboard from "./Dashboard";
 import PaymentHistory from "./PaymentHistory";
+import Notifications from "./Notifications";
 import "../../css/account/menu.css";
 
 const Menu = props => {
@@ -27,10 +29,10 @@ const Menu = props => {
             <Link className="button" to={`${ACCOUNT_BASE_URL}/payment-history`}>
               PaymentHistory
             </Link>
-            <a className="button">
+            <Link className="button" to={`${ACCOUNT_BASE_URL}/notifications`}>
               Notifications
               <span className="number notifications-count off">0</span>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="menu-folder">
@@ -66,11 +68,19 @@ const Menu = props => {
         </div>
       </div>
 
-      <Route path={`${match.path}/dashboard`} component={Dashboard} />
+      <Route 
+        path={`${match.path}/dashboard`} 
+        component={Dashboard}
+      />
       <Route
         path={`${match.path}/payment-history`}
         component={PaymentHistory}
       />
+      <Route
+        path={`${match.path}/notifications`}
+        component={Notifications}
+      />
+
     </div>
   );
 };
