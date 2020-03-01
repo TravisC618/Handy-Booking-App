@@ -1,5 +1,5 @@
 import querystring from "querystring";
-import axiosHandler from "./axiosHandler";
+import { get } from "./axios";
 
 const API_TASK_URL = "/api/tasks";
 
@@ -24,5 +24,5 @@ export const reqGetAllTasks = (
   });
   const url = `${API_TASK_URL}?${stringField}`;
 
-  return axiosHandler(url, "GET");
+  return get(url);
 };

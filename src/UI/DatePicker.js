@@ -4,15 +4,14 @@ import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker
 } from "@material-ui/pickers";
 
 export default function DatePicker(props) {
   // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const { handleChange, values } = props;
 
-  const { handleChange } = props;
+  const [selectedDate, setSelectedDate] = React.useState(values.date);
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -24,6 +23,7 @@ export default function DatePicker(props) {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container>
         <KeyboardDatePicker
+          disablePast
           margin="normal"
           id="date-picker-dialog"
           label="Date picker dialog"

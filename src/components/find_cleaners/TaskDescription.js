@@ -18,10 +18,13 @@ export default function TaskDescription(props) {
             required // => error: validation
             name="title"
             value={values.title}
-            label="What do you need done?"
             placeholder="This'll be the title of your task - e.g. Help move my sofa"
+            label={
+              values.err.name === "title" ? "Error" : "What do you need done?"
+            }
+            error={values.err.name === "title" ? true : false}
+            helperText={values.err.name === "title" ? values.err.msg : null}
             variant="outlined"
-            // helperText="Incorrect entry." [error: validation]
             fullWidth
           />
         </Grid>
@@ -31,7 +34,11 @@ export default function TaskDescription(props) {
             required
             name="details"
             value={values.details}
-            label="What are the details?"
+            label={
+              values.err.name === "details" ? "Error" : "What are the details?"
+            }
+            error={values.err.name === "details" ? true : false}
+            helperText={values.err.name === "details" ? values.err.msg : null}
             placeholder="Be as specific as you can about what needs doing"
             fullWidth
             rows="4"

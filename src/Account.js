@@ -1,10 +1,7 @@
 import React from "react";
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Menu from "./components/account/Menu";
-import Dashboard from "./components/account/Dashboard";
-
-import PaymentHistory from "./components/account/PaymentHistory";
 import "./css/account/account.css";
+import Dashboard from "./components/account/Dashboard";
 // import Notifications from '../components/account/Notifications';
 // import Profile from '../components/account/Profile';
 // import Skills from '../components/account/Skills';
@@ -16,18 +13,19 @@ import "./css/account/account.css";
 // import Password from '../components/account/Password';
 
 const Account = props => {
-  const {
-    location: { pathname: currentPath }
-  } = props;
   return (
     <div className="account">
       <div className="account__page">
         <div className="account__content">
 
           <Menu />
+          {/* </div> */}
+          {/* <div className="col-8"> */}
 
-          {currentPath === "/account/dashboard" ? <Dashboard /> : null}
-          {currentPath === "/account/payment-history" ? <PaymentHistory /> : null}
+          {/* {currentPath === "/account/dashboard" ? <Dashboard /> : null}
+          {currentPath === "/account/payment-history" ? (
+            <PaymentHistory />
+          ) : null} */}
 
         </div>
       </div>
