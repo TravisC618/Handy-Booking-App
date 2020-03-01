@@ -1,14 +1,18 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
 import Modal from "react-animated-modal";
 import logo from "../img/logo.png";
 
 class Login extends Component {
   render() {
-    const { showModal, handleShowModal } = this.props;
+    const { visible, handleVisible } = this.props;
     return (
       <Modal
-        visible={showModal}
-        closemodal={() => handleShowModal()}
+        visible={visible}
+        closemodal={() => {
+          handleVisible();
+        }}
         type="zoomInDown"
       >
         <div class="login-box">
@@ -86,4 +90,12 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  visible: state.login.visible
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleVisible: () => dispatch(handleVisibleAction())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

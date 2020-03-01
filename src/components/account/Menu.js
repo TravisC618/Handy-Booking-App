@@ -1,8 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Route, Link, withRouter } from "react-router-dom";
+import {
+  ACCOUNT_BASE_URL,
+  ACCOUNT_DASHBOARD_URL,
+  ACCOUT_PAYMENT_HISTORY_URL
+} from "../../routes/URLMAP";
+import Dashboard from "./Dashboard";
+import PaymentHistory from "./PaymentHistory";
 import "../../css/account/menu.css";
 
 const Menu = props => {
+  const { match } = props;
   return (
     <div className="menu">
       <div className="menu__user">
@@ -13,15 +21,12 @@ const Menu = props => {
       <div className="menu__list">
         <div className="menu-folder expanded">
           <div className="menu-folder-items showing">
-            <Link className="button" to="/account/dashboard">
+            <Link className="button" to={`${ACCOUNT_BASE_URL}/dashboard`}>
               Dashboard
             </Link>
-            {/* <a className="button" href="/account/dashboard/">
-              Dashboard
-            </a> */}
-            <a className="button" href="/account/payment-history">
-              Payments history
-            </a>
+            <Link className="button" to={`${ACCOUNT_BASE_URL}/payment-history`}>
+              PaymentHistory
+            </Link>
             <a className="button">
               Notifications
               <span className="number notifications-count off">0</span>
@@ -60,8 +65,14 @@ const Menu = props => {
           </div>
         </div>
       </div>
+
+      <Route path={`${match.path}/dashboard`} component={Dashboard} />
+      <Route
+        path={`${match.path}/payment-history`}
+        component={PaymentHistory}
+      />
     </div>
   );
 };
 
-export default Menu;
+export default withRouter(Menu);
