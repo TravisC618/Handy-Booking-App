@@ -1,12 +1,13 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import TaskNav from "./components/browse_tasks/TaskNav";
 import { BrowseTasksContent } from "./components/browse_tasks/BrowseTasks_Content";
 import "./css/browse_tasks/task-list.css";
-import { TaskContext, taskReducer, initialState } from "./hooks/taskReducer";
-
+import { TaskContext, taskReducer, initialState} from "./hooks/taskReducer";
 
 const BrowseTasks = () => {
+
   const [task, dispatch] = useReducer(taskReducer, initialState);
+
 
   return (
     <TaskContext.Provider value={{ taskState: task, taskDispatch: dispatch }}>

@@ -2,19 +2,19 @@ import React, { Component, useContext }from "react";
 import Slide from '@material-ui/core/Slide';
 import TaskCardContentDetails from './TaskCardContentDetails';
 import {
-  DetailContext
-} from "../../hooks/detailReducer";
+  TaskContext
+} from "../../hooks/taskReducer";
 
 
 const ContentDisplay = () => {
 
-    const detailContext = useContext(DetailContext);
+    const taskContext = useContext(TaskContext);
 
     const {
 
       isDetailOn,
 
-    } = detailContext.detailState;
+    } = taskContext.taskState;
 
     return(
 

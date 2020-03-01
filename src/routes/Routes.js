@@ -22,7 +22,7 @@ const Routes = () => {
       <Route path="/" exact component={Main} />
       <Route path={FIND_CLEANERS_URL} exact component={FindCleaners} />
       <Route path={CLEANER_DETAILS_URL} exact component={Details} />
-      <Route path={TASK_URL} exact component={BrowseTasks} />
+      <Route path={TASK_URL} component={BrowseTasks} />
       <Route path={ACCOUNT_URL} component={Account} />
       <Redirect to="/" /> {/* ALWAYS PUT THIS AT THE BOTTOM */}
     </Switch>

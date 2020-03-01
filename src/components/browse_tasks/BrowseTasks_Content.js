@@ -3,27 +3,39 @@ import VirtualizedList from "../../utils/Table";
 import TaskMapDisplay from "./TaskMap";
 import ContentDisplay from "./TaskCardContentDetails_Display";
 import { DetailContext, detailReducer, initialState } from "../../hooks/detailReducer";
+import { withRouter } from "react-router";
+import { Route } from "react-router-dom";
+import { TASK_URL } from "../../routes/URLMAP";
 
 
-export const BrowseTasksContent = () => {
-    const [detail, dispatch] = useReducer(detailReducer, initialState);
-  
-    return (
-      <DetailContext.Provider value={{ detailState: detail, detailDispatch: dispatch }}>
-            <div class="row">
-                <div class="col-4">
-                <div className="infinite-scroll-list">
-                    <VirtualizedList />
-                </div>
-                </div>
-                <div class="col-8">
-                    <TaskMapDisplay />
-                    <ContentDisplay />
-                </div>
-            </div>
-      </DetailContext.Provider>
-    );
-  };
+const Content = (props) => {
+
+  const {
+    location: { pathname: currentPath }
+  } = props;
+
+  const [detail, dispatch] = useReducer(detailReducer, initialState);
+
+  return (
+    <DetailContext.Provider value={{ detailState: detail, detailDispatch: dispatch }}>
+      <div class="row">
+        <div class="col-4">
+          <div className="infinite-scroll-list">
+            <VirtualizedList />
+          </div>
+        </div>
+        <div class="col-8">
+          {currentPath === `${TASK_URL}` ? <TaskMapDisplay /> : null}
+          <Route path={`${TASK_URL}/:titleId`} component={ContentDisplay } />
+        </div>
+      </div>
+    </DetailContext.Provider>
+  );
+};
+
+export const BrowseTasksContent = withRouter(Content);
+
+
 
 
 // export class BrowseTasksContent extends Component {
@@ -41,7 +53,7 @@ export const BrowseTasksContent = () => {
 //           display: prevState.isToggleOn,
 //         }));
 //       }
-    
+
 //     render() {
 //       return (
 

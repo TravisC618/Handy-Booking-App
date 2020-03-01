@@ -13,6 +13,10 @@ import {
   ERROR_MSG
 } from "../hooks/taskReducer";
 
+
+
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -33,17 +37,18 @@ const Table = () => {
     pageSize,
     priceRange,
     hasMoreItem,
-    errMsg
+    errMsg,
   } = taskContext.taskState;
   const dispatch = taskContext.taskDispatch;
 
   const classes = useStyles();
 
   const GenerateItem = index => {
+  
     return loading.current ? (
       <div />
     ) : (
-      <TaskCard tasks={items.current[index]} />
+      <TaskCard tasks={items.current[index]}/>
     );
   };
 

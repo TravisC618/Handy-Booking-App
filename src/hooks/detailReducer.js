@@ -6,8 +6,8 @@ export const UPDATE_Detail_State = "UPDATE_Detail_State";
 export const DetailContext = createContext();
 
 export const initialState = {
-    isToggleOn: true,
-    isDetailOn: false,
+    isToggleOn: false,
+    isDetailOn: true,
   };
   
 export const detailReducer = (state, action) => {
@@ -15,12 +15,12 @@ export const detailReducer = (state, action) => {
         case UPDATE_Map_State:
             return {
               ...state,
-              isToggleOn: !state.isToggleOn,
+              isToggleOn: state.isToggleOn,
             };
             case UPDATE_Detail_State:
                 return {
                   ...state,
-                  isDetailOn: !state.isDetailOn,
+                  isDetailOn: state.isDetailOn,
                 };
         default:
         return state;

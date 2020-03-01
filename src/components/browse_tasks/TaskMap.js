@@ -2,8 +2,8 @@ import React, { Component, useContext } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Fade from '@material-ui/core/Fade';
 import {
-  DetailContext
-} from "../../hooks/detailReducer";
+  TaskContext
+} from "../../hooks/taskReducer";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -39,12 +39,12 @@ class TaskMap extends Component {
 
 const TaskMapDisplay = () => {
 
-  const detailContext = useContext(DetailContext);
+  const taskContext = useContext(TaskContext);
   const {
 
     isToggleOn,
 
-  } = detailContext.detailState;
+  } = taskContext.taskState;
 
 
   return(

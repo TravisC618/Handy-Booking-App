@@ -4,6 +4,9 @@ import '../../css/browse_tasks/TaskCardContentDetails_Header__SidePanel.css'
 
 
 const SidePanel = props => {
+
+
+
   return (
 
     <div class="payment_panel__Wrapper-ots126-0 hpWFks">
