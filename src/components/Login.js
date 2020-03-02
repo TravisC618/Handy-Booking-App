@@ -1,17 +1,42 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
 import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
+import { login } from "../api/auth";
 import Modal from "react-animated-modal";
 import logo from "../img/logo.png";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: ""
+    };
+  }
+
+  handleChange = event => {
+    const key = event.target.name;
+    const value = event.target.value;
+    this.setState({ [key]: value });
+  };
+
+  handleLogin = () => {
+    const { email, password } = this.state;
+    login(email, password).then(data => {
+      console.log(data);
+    });
+  };
+
   render() {
-    const { visible, handleVisible } = this.props;
+    const { visible, handleVisible, history } = this.props;
+
     return (
       <Modal
         visible={visible}
         closemodal={() => {
           handleVisible();
+          history.goBack();
         }}
         type="zoomInDown"
       >
@@ -50,6 +75,7 @@ class Login extends Component {
                   class="login-user-input-email login-user-input"
                   name="email"
                   placeholder="Your Email Address"
+                  onChange={this.handleChange}
                 />
               </div>
               <div class="login-input-item">
@@ -58,6 +84,7 @@ class Login extends Component {
                   class="login-user-input-password login-user-input"
                   name="password"
                   placeholder="Enter Password"
+                  onChange={this.handleChange}
                 />
               </div>
             </fieldset>
@@ -70,7 +97,17 @@ class Login extends Component {
             </div>
 
             <fieldset class="login-login-button-container">
-              <button class="login-login-button">Log in</button>
+              <Link className="login-login-button">Log in</Link>
+              {/* <button
+                class="login-login-button"
+                onClick={null}
+                // onClick={event => {
+                //   debugger;
+                //   this.handleLogin(event);
+                // }}
+              >
+                Log in
+              </button> */}
             </fieldset>
           </form>
           <div class="login-link-container">

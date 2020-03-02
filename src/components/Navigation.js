@@ -4,12 +4,20 @@ import { connect } from "react-redux";
 import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
 import logo from "../img/logo.png";
 import Login from "./Login";
+import {
+  FIND_CLEANERS_URL,
+  CLEANER_DETAILS_URL,
+  TASK_URL,
+  ACCOUNT_BASE_URL,
+  ACCOUNT_DASHBOARD_URL,
+  LOGIN_URL
+} from "../routes/URLMAP";
 import "../css/navigation.css";
 import "../css/login.scss";
 
 class Navigation extends Component {
   render() {
-    const { location, handleVisible } = this.props;
+    const { location, handleVisible, match } = this.props;
     const currentPath = location.pathname;
     return (
       <div>
@@ -43,29 +51,33 @@ class Navigation extends Component {
             <div className="collapse navbar-collapse" id="navbarToggler">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/account/dashboard">
+                  <Link className="nav-link" to={ACCOUNT_DASHBOARD_URL}>
                     Account
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/details">
+                  <Link className="nav-link" to={CLEANER_DETAILS_URL}>
                     Browse Handy
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/tasks">
+                  <Link className="nav-link" to={TASK_URL}>
                     Browse Tasks
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
                     className="nav-link"
+                    // to={LOGIN_URL}
                     to={
                       currentPath === "/"
                         ? `${currentPath}login`
                         : `${currentPath}/login`
                     }
-                    onClick={() => handleVisible()}
+                    onClick={() => {
+                      console.log(match);
+                      handleVisible();
+                    }}
                   >
                     Login/ Register
                   </Link>
