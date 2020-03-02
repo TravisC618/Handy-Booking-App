@@ -25,7 +25,7 @@ const Routes = () => {
       <Route path={CLEANER_DETAILS_URL} component={Details} />
       <Route path={TASK_URL} component={BrowseTasks} />
       {/* <Route path={LOGIN_URL} component={Login} /> */}
-      <Route path={ACCOUNT_BASE_URL} component={Account} />
+      <ProtectedRoute path={ACCOUNT_BASE_URL} component={Account} />
       {/* <Redirect to="/" /> ALWAYS PUT THIS AT THE BOTTOM */}
     </Switch>
   );

@@ -7,5 +7,5 @@ export const login = (email, password) => {
     email,
     password
   };
-  return post(LOGIN_URL, data).then(res => res.data);
+  return post(LOGIN_URL, data);
 };

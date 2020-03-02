@@ -4,6 +4,10 @@
   width: 500px;
 }
 
+.input-item-textfield {
+  width: 100%;
+}
+
 .login-container {
   box-sizing: border-box;
   background: #feedf6;
@@ -68,6 +72,10 @@
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 #facebook-connect {
@@ -264,12 +272,8 @@
 }
 .login-input-container {
   margin: 20px;
-  border: 1px solid #bfc0c6;
   border-radius: 5px;
   padding: 0;
-  &:hover {
-    box-shadow: 0 2px 5px #eaeaec;
-  }
 }
 .login-input-container-pink {
   border: 1px solid $primary-color;

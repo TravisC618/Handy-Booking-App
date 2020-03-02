@@ -75,7 +75,7 @@ class Navigation extends Component {
                         : `${currentPath}/login`
                     }
                     onClick={() => {
-                      console.log(match);
+                      console.log(location.pathname);
                       handleVisible();
                     }}
                   >
@@ -86,7 +86,7 @@ class Navigation extends Component {
             </div>
           </div>
         </nav>
-        <Route to={`${location.pathname}/login`} component={Login} />
+        <Route exact to={`${location.pathname}/login`} component={Login} />
       </div>
     );
   }
