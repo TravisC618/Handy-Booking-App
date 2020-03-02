@@ -6,9 +6,10 @@ import { Location, Calendar } from "../../utils/Icons";
 import { DetailContext } from "../../hooks/detailReducer";
 import { TASK_URL } from "../../routes/URLMAP";
 import { reqGetTask } from "../../api/tasks";
-import { UPDATE_DETAIL_STATE } from "../../hooks/detailReducer";
+import { UPDATE_DETAIL_STATE, UPDATE_LOADDED_STATE, UPDATE_LOADING_STATE } from "../../hooks/detailReducer";
 
 const TaskCardContent = props => {
+  
   const detailContext = useContext(DetailContext);
   const dispatch = detailContext.detailDispatch;
 
@@ -28,6 +29,7 @@ const TaskCardContent = props => {
 
   // console.log(_id)
 
+
   // {`${TASK_URL}/${title}`}
   return (
     <Link
@@ -35,8 +37,11 @@ const TaskCardContent = props => {
       class="new-task-list-item new-task-list-item--open"
       onClick={async () => {
         try {
+          
           // console.log(_id);
+          dispatch({ type: UPDATE_LOADING_STATE});
           const response = await reqGetTask(_id);
+          dispatch({ type: UPDATE_LOADDED_STATE});
           const taskDetails = response.data.data;
           console.log(taskDetails);
           dispatch({ type: UPDATE_DETAIL_STATE, taskDetails });

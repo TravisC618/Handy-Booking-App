@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from "react";
+import { DetailContext } from "../../hooks/detailReducer";
 import '../../css/browse_tasks/TaskCardContentDetails_Header__SidePanel.css'
 
 
 
 const SidePanel = props => {
 
-
+  const detailContext = useContext(DetailContext);
+  const { taskDetails } = detailContext.detailState;
+  const budget = taskDetails.budget;
 
   return (
 
@@ -15,7 +18,7 @@ const SidePanel = props => {
       <div class="payment_panel__TaskPriceWrapper-ots126-5 ceFDqT">
         <div class="task-price">
           <div class="currency-symbol">
-            <div class="price text-h2"><span data-ui-test="task-price">$65</span></div>
+            <div class="price text-h2"><span data-ui-test="task-price">${budget}</span></div>
           </div>
         </div>
       </div>
