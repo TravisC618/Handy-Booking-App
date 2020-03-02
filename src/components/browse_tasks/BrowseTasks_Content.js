@@ -2,14 +2,16 @@ import React, { Component, useReducer } from "react";
 import VirtualizedList from "../../utils/Table";
 import TaskMapDisplay from "./TaskMap";
 import ContentDisplay from "./TaskCardContentDetails_Display";
-import { DetailContext, detailReducer, initialState } from "../../hooks/detailReducer";
+import {
+  DetailContext,
+  detailReducer,
+  initialState
+} from "../../hooks/detailReducer";
 import { withRouter } from "react-router";
 import { Route } from "react-router-dom";
 import { TASK_URL } from "../../routes/URLMAP";
 
-
-const Content = (props) => {
-
+const Content = props => {
   const {
     location: { pathname: currentPath }
   } = props;
@@ -17,7 +19,9 @@ const Content = (props) => {
   const [detail, dispatch] = useReducer(detailReducer, initialState);
 
   return (
-    <DetailContext.Provider value={{ detailReducer: detail, detailDispatch: dispatch }}>
+    <DetailContext.Provider
+      value={{ detailState: detail, detailDispatch: dispatch }}
+    >
       <div class="row">
         <div class="col-4">
           <div className="infinite-scroll-list">
@@ -26,7 +30,7 @@ const Content = (props) => {
         </div>
         <div class="col-8">
           {currentPath === `${TASK_URL}` ? <TaskMapDisplay /> : null}
-          <Route path={`${TASK_URL}/:titleId`} component={ContentDisplay } />
+          <Route path={`${TASK_URL}/:titleId`} component={ContentDisplay} />
         </div>
       </div>
     </DetailContext.Provider>
@@ -34,9 +38,6 @@ const Content = (props) => {
 };
 
 export const BrowseTasksContent = withRouter(Content);
-
-
-
 
 // export class BrowseTasksContent extends Component {
 //     constructor(props) {
@@ -56,7 +57,6 @@ export const BrowseTasksContent = withRouter(Content);
 
 //     render() {
 //       return (
-
 
 //         <div class="row">
 //         <div class="col-4">

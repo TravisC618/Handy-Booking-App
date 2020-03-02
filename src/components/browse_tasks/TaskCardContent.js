@@ -1,13 +1,14 @@
-import React, {useContext} from "react";
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Moment from "react-moment";
 import "../../css/browse_tasks/TaskCardContent.css";
 import { Location, Calendar } from "../../utils/Icons";
-import {DetailContext} from "../../hooks/detailReducer";
+import { DetailContext } from "../../hooks/detailReducer";
 import { TASK_URL } from "../../routes/URLMAP";
+import { reqGetTask } from "../../api/tasks";
+import { UPDATE_DETAIL_STATE } from "../../hooks/detailReducer";
 
-const TaskCardContent = (props) => {
-
+const TaskCardContent = props => {
   const detailContext = useContext(DetailContext);
   const dispatch = detailContext.detailDispatch;
 
@@ -25,11 +26,25 @@ const TaskCardContent = (props) => {
     offerNum
   } = props.tasks;
 
-  console.log(_id)
-  
+  // console.log(_id)
+
   // {`${TASK_URL}/${title}`}
   return (
-    <Link to={`${TASK_URL}/${_id}`} class="new-task-list-item new-task-list-item--open">
+    <Link
+      to={`${TASK_URL}/${_id}`}
+      class="new-task-list-item new-task-list-item--open"
+      onClick={async () => {
+        try {
+          // console.log(_id);
+          const response = await reqGetTask(_id);
+          const taskDetails = response.data.data;
+          console.log(taskDetails);
+          dispatch({ type: UPDATE_DETAIL_STATE, taskDetails });
+        } catch (error) {
+          console.log(error); //TODO error handling
+        }
+      }}
+    >
       <div class="new-task-list-item__header">
         <span class="new-task-list-item__title">{title}</span>
         <div class="new-task-list-item__price">
@@ -66,9 +81,6 @@ const TaskCardContent = (props) => {
       </div>
     </Link>
   );
-}
-
-
-
+};
 
 export default TaskCardContent;
