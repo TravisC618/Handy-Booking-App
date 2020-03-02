@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 import "../../css/browse_tasks/TypeButton.css";
 import {TASK_URL} from '../../routes/URLMAP';
@@ -19,12 +20,11 @@ export default function ShowMapButton() {
     <div>
       <Button
         color="primary"
-        href={`${TASK_URL}`}
         // onClick={() => {
         //     handleClick();
         //   }}
       >
-        Show Map
+        <Link to={`${TASK_URL}`} className="showMapLink">Show Map</Link>
       </Button>
     </div>
   );

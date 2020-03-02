@@ -17,7 +17,7 @@ const Content = (props) => {
   const [detail, dispatch] = useReducer(detailReducer, initialState);
 
   return (
-    <DetailContext.Provider value={{ detailState: detail, detailDispatch: dispatch }}>
+    <DetailContext.Provider value={{ detailReducer: detail, detailDispatch: dispatch }}>
       <div class="row">
         <div class="col-4">
           <div className="infinite-scroll-list">

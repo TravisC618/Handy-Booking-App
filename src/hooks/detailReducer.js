@@ -8,6 +8,7 @@ export const DetailContext = createContext();
 export const initialState = {
     isToggleOn: false,
     isDetailOn: true,
+    _id:"",
   };
   
 export const detailReducer = (state, action) => {
@@ -17,11 +18,6 @@ export const detailReducer = (state, action) => {
               ...state,
               isToggleOn: state.isToggleOn,
             };
-            case UPDATE_Detail_State:
-                return {
-                  ...state,
-                  isDetailOn: state.isDetailOn,
-                };
         default:
         return state;
     }
