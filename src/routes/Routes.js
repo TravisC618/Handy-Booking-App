@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Main from '../components/home/Main';
+import Index from '../homepage/Home';
 import FindCleaners from '../FindCleaners';
 import Details from '../Details';
 import BrowseTasks from '../BrowseTasks';
@@ -11,7 +12,7 @@ const Routes = () => {
         <Router>
             <Navigation />
                 <Switch>
-                <Route path="/" exact component={Main} />
+                <Route path="/" exact component={Index} />
                 <Route path="/find-cleaners" component={FindCleaners} />
                 <Route path="/details" component={Details} />
                 <Route path="/tasks" component={BrowseTasks} />
