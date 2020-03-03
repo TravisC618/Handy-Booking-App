@@ -9,7 +9,7 @@ import Modal from "react-animated-modal";
 import TextField from "@material-ui/core/TextField";
 import logo from "../img/logo.png";
 
-class Login extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,31 +25,8 @@ class Login extends Component {
     this.setState({ [key]: value });
   };
 
-  handleLogin = async () => {
+  handleSignup = async () => {
     const { email, password } = this.state;
-    login(email, password)
-      .then(response => {
-        const { token } = response.data.data;
-        storeToken(token);
-        this.setState({ errMsg: "" });
-        //TODO 可以设计成登陆后redirect到account
-        const currentPath = this.props.location.pathname;
-        const previousPath = getPreviousPath(currentPath);
-
-        const locationState = this.props.location.state;
-        const redirectTo =
-          (locationState && locationState.from) || previousPath;
-
-        this.props.handleVisible(false);
-
-        this.props.history.replace(redirectTo);
-      })
-      .catch(error => {
-        if (error.response) {
-          const { message } = error.response.data;
-          this.setState({ errMsg: message });
-        }
-      });
   };
 
   render() {
@@ -71,30 +48,10 @@ class Login extends Component {
         <div class="login-box">
           <div>
             <p class="login-title text-center">
-              Login to <img src={logo} alt="logo" />
+              Sign up <img src={logo} alt="logo" />
             </p>
           </div>
-          <div class="login-third-party-login">
-            <p class="login-button-info-text login-info-text text-center">
-              EASILY USING
-            </p>
-
-            <div class="social-login-button">
-              <a href="#" class="social-button" id="facebook-connect">
-                {" "}
-                <span>Connect with Facebook</span>
-              </a>
-              <a href="#" class="social-button" id="google-connect">
-                {" "}
-                <span>Connect with Google</span>
-              </a>
-              <a href="#" class="social-button" id="twitter-connect">
-                {" "}
-                <span>Connect with Twitter</span>
-              </a>
-            </div>
-          </div>
-          <p class="login-info-text text-center">- OR USING EMAIL -</p>
+          <p class="login-info-text text-center">- SIGN UP USING EMAIL -</p>
           <form class="login-login-form">
             <fieldset class="login-input-container">
               <div class="login-input-item">
@@ -121,22 +78,20 @@ class Login extends Component {
                 />
               </div>
             </fieldset>
-            <div class="remember-password-container">
-              <input type="checkbox" />
-              <label>
-                <span class="login-info-text">Remember password?</span>
-              </label>
-            </div>
             <fieldset class="login-login-button-container">
-              <Link className="login-login-button" onClick={this.handleLogin}>
-                Log in
+              <Link className="login-login-button" onClick={this.handleSignup}>
+                Sign up
               </Link>
             </fieldset>
           </form>
           <div class="login-link-container">
-            <a class="login-link" href="#">
-              Recover password
-            </a>
+            <div class="login-right-links">
+              <span class="login-info-text">Already have an account?</span>
+              <Link class="login-create-account-link login-link">Log in</Link>
+              {/*  <a class="login-create-account-link login-link" href="#">
+                 Create Account
+               </a> */}
+            </div>
           </div>
         </div>
       </Modal>
@@ -152,4 +107,4 @@ const mapDispatchToProps = dispatch => ({
   handleVisible: isVisible => dispatch(handleVisibleAction(isVisible))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

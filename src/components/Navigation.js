@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { Route, Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
+import { isIncluded } from "../utils/helper";
 import logo from "../img/logo.png";
 import Login from "./Login";
+import Signup from "./Signup";
 import { isLoggedIn } from "../utils/auth";
 import { removeToken } from "../utils/auth";
 import {
@@ -22,16 +24,24 @@ class Navigation extends Component {
     history.push(HOME_URL);
   };
 
+  componentDidMount() {
+    // if it doesn't contain "/login", return -1
+    if (isIncluded(this.props.location.pathname, "/login")) {
+      this.props.handleVisible(true);
+    }
+  }
+  componentDidUpdate() {
+    // if it doesn't contain "/login", return -1
+    if (isIncluded(this.props.location.pathname, "/login")) {
+      this.props.handleVisible(true);
+    }
+  }
+
   render() {
     const { history, location, handleVisible } = this.props;
     const currentPath = location.pathname;
     return (
-      <div>
-        {/* <Login
-        // showModal={this.state.showModal}
-        // handleShowModal={this.handleShowModal}
-        /> */}
-
+      <>
         <nav className="navbar navbar-expand-md navbar-light fixed-top">
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
@@ -56,13 +66,6 @@ class Navigation extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarToggler">
               <ul className="navbar-nav ml-auto">
-                {isLoggedIn() ? (
-                  <li className="nav-item">
-                    <Link className="nav-link" to={ACCOUNT_DASHBOARD_URL}>
-                      Account
-                    </Link>
-                  </li>
-                ) : null}
                 <li className="nav-item">
                   <Link className="nav-link" to={CLEANER_DETAILS_URL}>
                     Browse Handy
@@ -74,46 +77,63 @@ class Navigation extends Component {
                   </Link>
                 </li>
                 {!isLoggedIn() ? (
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      // to={LOGIN_URL}
-                      to={
-                        currentPath === "/"
-                          ? `${currentPath}login`
-                          : `${currentPath}/login`
-                      }
-                      onClick={() => {
-                        console.log(location.pathname);
-                        handleVisible();
-                      }}
-                    >
-                      Login/ Register
-                    </Link>
-                  </li>
+                  <>
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link"
+                        to={
+                          currentPath === "/"
+                            ? `${currentPath}login`
+                            : `${currentPath}/login`
+                        }
+                      >
+                        Log in
+                      </Link>
+                    </li>
+                    {/* <li className="nav-item">
+                      <Link
+                        className="nav-link"
+                        to={
+                          currentPath === "/"
+                            ? `${currentPath}sign-up`
+                            : `${currentPath}/sign-up`
+                        }
+                      >
+                        Sign up
+                      </Link>
+                    </li> */}
+                  </>
                 ) : null}
                 {isLoggedIn() ? (
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      onClick={() => this.logout(history)}
-                    >
-                      Log out
-                    </Link>
-                  </li>
+                  <>
+                    <li className="nav-item">
+                      <Link className="nav-link" to={ACCOUNT_DASHBOARD_URL}>
+                        Account
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link"
+                        onClick={() => this.logout(history)}
+                      >
+                        Log out
+                      </Link>
+                    </li>
+                  </>
                 ) : null}
               </ul>
             </div>
           </div>
         </nav>
         <Route exact to={`${location.pathname}/login`} component={Login} />
-      </div>
+        {/* <Route exact to={`${location.pathname}/sign-up`} component={Signup} /> */}
+      </>
     );
   }
 }
 
 const mapDistachToProps = dispatch => ({
-  handleVisible: () => dispatch(handleVisibleAction())
+  handleVisible: isVisible => dispatch(handleVisibleAction(isVisible))
 });
 
 export default connect(null, mapDistachToProps)(withRouter(Navigation));
