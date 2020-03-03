@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import { FIND_CLEANERS_URL } from "../../../../routes/URLMAP";
 import Button from "../components/Button";
 import Typography from "../components/Typography";
 import ClImg from "../../../../img/homepage/productCurvyLines.png";
@@ -104,7 +105,7 @@ function ProductHowItWorks(props) {
             </Grid>
           </Grid>
         </div>
-        <Link to="/find-cleaners">
+        <Link to={FIND_CLEANERS_URL}>
           <Button
             color="secondary"
             size="large"
