@@ -1,6 +1,7 @@
 .BG-container {
     margin: 0;
     padding:0;
+    text-align: center;
 }
 
 .middle {
@@ -54,7 +55,7 @@
     position: absolute;
     width:120%;
     height:120%;
-    background: #3498db;
+    background: #ffa640;
     transform: rotate(45deg);
     left: -110%;
     top: 90%;
