@@ -20,11 +20,6 @@
               transform: translateX(calc(-250px * 7));
     }
   }
-
-  .client-slide {
-    padding: 10px;
-    border-radius: 10px;
-  }
   
   .slider-right {
       margin: auto;
