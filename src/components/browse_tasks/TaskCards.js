@@ -1,9 +1,12 @@
-import React from "react";
+import React, { Component, useContext  } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import TaskCardContent from "./TaskCardContent";
+import {
+  TaskContext,
+} from "../../hooks/taskReducer";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,8 +25,23 @@ const useStyles = makeStyles(theme => ({
 const ImgMediaCard = props => {
   const classes = useStyles();
   const { tasks } = props;
+
+  const taskContext = useContext(TaskContext);
+  // const dispatch = taskContext.taskDispatch;
+
+
+  // const handleClick = () => {
+  //   dispatch({ type: HIDE_Map_State  })
+  // };
+
   return (
-    <Card className={classes.root}>
+    <div>
+    <Card 
+    className={classes.root} 
+    // onClick={() => {
+    //   handleClick();
+    // }}
+    >
       <div className={classes.bgcolor} />
       <CardActionArea>
         <CardContent>
@@ -31,7 +49,11 @@ const ImgMediaCard = props => {
         </CardContent>
       </CardActionArea>
     </Card>
+    </div>
   );
 };
+
+
+
 
 export default ImgMediaCard;

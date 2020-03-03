@@ -1,13 +1,13 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import TaskNav from "./components/browse_tasks/TaskNav";
-import VirtualizedList from "./utils/Table";
-import TaskMap from "./components/browse_tasks/TaskMap";
+import { BrowseTasksContent } from "./components/browse_tasks/BrowseTasks_Content";
 import "./css/browse_tasks/task-list.css";
-import { TaskContext, taskReducer, initialState } from "./hooks/taskReducer";
-import TaskCardContentDetails from "./components/browse_tasks/TaskCardContentDetails";
+import { TaskContext, taskReducer, initialState} from "./hooks/taskReducer";
 
 const BrowseTasks = () => {
+
   const [task, dispatch] = useReducer(taskReducer, initialState);
+
 
   return (
     <TaskContext.Provider value={{ taskState: task, taskDispatch: dispatch }}>
@@ -17,17 +17,7 @@ const BrowseTasks = () => {
             <div class="col">
               <TaskNav />
             </div>
-            <div class="row">
-              <div class="col-4">
-                <div className="infinite-scroll-list">
-                  <VirtualizedList />
-                </div>
-              </div>
-              <div class="col-8">
-                <TaskMap />
-                <TaskCardContentDetails />
-              </div>
-            </div>
+            <BrowseTasksContent />
           </div>
         </div>
       </div>
