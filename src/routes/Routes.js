@@ -19,10 +19,9 @@ const Routes = () => {
   return (
     <Switch>
       <Route path="/" exact component={Index} />
-      <Route path={FIND_CLEANERS_URL} component={FindCleaners} />
+      <Route path={LOGIN_URL} exact component={Index} />
       <Route path={CLEANER_DETAILS_URL} component={Details} />
       <Route path={TASK_URL} component={BrowseTasks} />
-      {/* <Route path={LOGIN_URL} component={Login} /> */}
       <ProtectedRoute path={FIND_CLEANERS_URL} component={FindCleaners} />
       <ProtectedRoute path={ACCOUNT_BASE_URL} component={Account} />
       <Redirect to="/" /> {/* NOT MATCH => REDIRECT TO HOMEPAGE */}

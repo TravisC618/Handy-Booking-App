@@ -8,7 +8,6 @@ import {
 import Dashboard from "./Dashboard";
 import PaymentHistory from "./PaymentHistory";
 import "../../css/account/menu.css";
-import { Switch } from "@material-ui/core";
 
 const Menu = props => {
   const { match } = props;
@@ -72,7 +71,6 @@ const Menu = props => {
         path={`${match.path}/payment-history`}
         component={PaymentHistory}
       />
-      <Route path={`${match.path}/dashboard`} component={Dashboard} />
     </div>
   );
 };
