@@ -20,41 +20,37 @@
               transform: translateX(calc(250px * 7));
     }
   }
+
+  .client-slide {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
   .slider {
-    float: right;
-    background: pr;
-    height: 100px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
   }
-  .slider::before, .slider::after {
-    background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
-    content: "";
-    height: 100px;
-    position: absolute;
-    width: 200px;
-    z-index: 2;
+
+  .fa-2x{
+    color: rgb(238, 202, 0);
+    font-size: 15px;
+    margin-right: 10px;
   }
-  .slider::after {
-    right: 0;
-    top: 0;
-    -webkit-transform: rotateZ(180deg);
-            transform: rotateZ(180deg);
-  }
+
   .slider::before {
     left: 0;
     top: 0;
   }
   .slider .slide-track {
-    -webkit-animation: scroll 40s linear infinite;
-            animation: scroll 40s linear infinite;
+    -webkit-animation: scroll 60s linear infinite;
+            animation: scroll 60s linear infinite;
     display: flex;
-    width: calc(250px * 14);
+    width: calc(345px * 50);
+    float: right;
   }
   
   .slider .slide-track:hover {
       animation-play-state: paused;
   }
   
-  .slider .slide {
-    height: 100px;
-    width: 250px;
-  }
