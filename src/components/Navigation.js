@@ -4,20 +4,26 @@ import { connect } from "react-redux";
 import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
 import logo from "../img/logo.png";
 import Login from "./Login";
+import { isLoggedIn } from "../utils/auth";
+import { removeToken } from "../utils/auth";
 import {
+  HOME_URL,
   FIND_CLEANERS_URL,
   CLEANER_DETAILS_URL,
   TASK_URL,
-  ACCOUNT_BASE_URL,
-  ACCOUNT_DASHBOARD_URL,
-  LOGIN_URL
+  ACCOUNT_DASHBOARD_URL
 } from "../routes/URLMAP";
 import "../css/navigation.css";
 import "../css/login.scss";
 
 class Navigation extends Component {
+  logout = history => {
+    removeToken();
+    history.push(HOME_URL);
+  };
+
   render() {
-    const { location, handleVisible, match } = this.props;
+    const { history, location, handleVisible } = this.props;
     const currentPath = location.pathname;
     return (
       <div>
@@ -50,11 +56,13 @@ class Navigation extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarToggler">
               <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to={ACCOUNT_DASHBOARD_URL}>
-                    Account
-                  </Link>
-                </li>
+                {isLoggedIn() ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to={ACCOUNT_DASHBOARD_URL}>
+                      Account
+                    </Link>
+                  </li>
+                ) : null}
                 <li className="nav-item">
                   <Link className="nav-link" to={CLEANER_DETAILS_URL}>
                     Browse Handy
@@ -65,23 +73,35 @@ class Navigation extends Component {
                     Browse Tasks
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link
-                    className="nav-link"
-                    // to={LOGIN_URL}
-                    to={
-                      currentPath === "/"
-                        ? `${currentPath}login`
-                        : `${currentPath}/login`
-                    }
-                    onClick={() => {
-                      console.log(location.pathname);
-                      handleVisible();
-                    }}
-                  >
-                    Login/ Register
-                  </Link>
-                </li>
+                {!isLoggedIn() ? (
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link"
+                      // to={LOGIN_URL}
+                      to={
+                        currentPath === "/"
+                          ? `${currentPath}login`
+                          : `${currentPath}/login`
+                      }
+                      onClick={() => {
+                        console.log(location.pathname);
+                        handleVisible();
+                      }}
+                    >
+                      Login/ Register
+                    </Link>
+                  </li>
+                ) : null}
+                {isLoggedIn() ? (
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link"
+                      onClick={() => this.logout(history)}
+                    >
+                      Log out
+                    </Link>
+                  </li>
+                ) : null}
               </ul>
             </div>
           </div>

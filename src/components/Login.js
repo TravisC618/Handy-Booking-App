@@ -6,6 +6,7 @@ import { login } from "../api/auth";
 import { storeToken } from "../utils/auth";
 import Modal from "react-animated-modal";
 import TextField from "@material-ui/core/TextField";
+import { setAuthHeader } from "../api/axios";
 import logo from "../img/logo.png";
 
 class Login extends Component {
