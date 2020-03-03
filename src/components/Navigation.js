@@ -1,25 +1,22 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "../css/navigation.css";
+import { Route, Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
 import logo from "../img/logo.png";
 import Login from "./Login";
-import "../css/login.css";
+import "../css/navigation.css";
+import "../css/login.scss";
 
 class Navigation extends Component {
-  state = {
-    showModal: false
-  };
-  handleShowModal = () => {
-    this.setState({ showModal: false });
-  };
-
   render() {
+    const { location, handleVisible } = this.props;
+    const currentPath = location.pathname;
     return (
       <div>
-        <Login
-          showModal={this.state.showModal}
-          handleShowModal={this.handleShowModal}
-        />
+        {/* <Login
+        // showModal={this.state.showModal}
+        // handleShowModal={this.handleShowModal}
+        /> */}
 
         <nav className="navbar navbar-expand-md navbar-light fixed-top">
           <div className="container-fluid">
@@ -46,6 +43,11 @@ class Navigation extends Component {
             <div className="collapse navbar-collapse" id="navbarToggler">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
+                  <Link className="nav-link" to="/account/dashboard">
+                    Account
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="/details">
                     Browse Handy
                   </Link>
@@ -58,7 +60,12 @@ class Navigation extends Component {
                 <li className="nav-item">
                   <Link
                     className="nav-link"
-                    onClick={() => this.setState({ showModal: true })}
+                    to={
+                      currentPath === "/"
+                        ? `${currentPath}login`
+                        : `${currentPath}/login`
+                    }
+                    onClick={() => handleVisible()}
                   >
                     Login/ Register
                   </Link>
@@ -67,9 +74,14 @@ class Navigation extends Component {
             </div>
           </div>
         </nav>
+        <Route to={`${location.pathname}/login`} component={Login} />
       </div>
     );
   }
 }
 
-export default Navigation;
+const mapDistachToProps = dispatch => ({
+  handleVisible: () => dispatch(handleVisibleAction())
+});
+
+export default connect(null, mapDistachToProps)(withRouter(Navigation));

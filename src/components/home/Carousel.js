@@ -5,7 +5,7 @@ import joinUs from "../../img/join-us.jpeg";
 import washing from "../../img/washing.jpg";
 import cleaner from "../../img/cleaner-horizontal.jpeg";
 import cleaningVideo from "../../assets/videos/cleaner.mp4";
-import "../../css/home/carousel.css";
+import "../../css/home/carousel.scss";
 import { Link } from "react-router-dom";
 
 const Carousel = props => {

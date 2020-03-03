@@ -1,0 +1,12 @@
+.dashboard {
+  position: absolute;
+  top: 0;
+  left: 210px;
+  border-left: 1px solid #bbc2dc;
+  box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.vertical-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
