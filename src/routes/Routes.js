@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "../components/Login";
 import Main from "../components/home/Main";
+import Index from "../components/homepage/Home";
 import FindCleaners from "../FindCleaners";
 import Details from "../Details";
 import BrowseTasks from "../BrowseTasks";
@@ -19,7 +20,7 @@ import {
 const Routes = () => {
   return (
     <Switch>
-      <Route path="/" exact component={Main} />
+      <Route path="/" exact component={Index} />
       <Route path={FIND_CLEANERS_URL} component={FindCleaners} />
       <Route path={CLEANER_DETAILS_URL} component={Details} />
       <Route path={TASK_URL} component={BrowseTasks} />
