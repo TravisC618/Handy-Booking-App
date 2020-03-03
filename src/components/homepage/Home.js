@@ -8,12 +8,18 @@ import ProductHero from './modules/views/ProductHero';
 import ProductValues from './modules/views/ProductValues';
 import ProductHowItWorks from './modules/views/ProductHowItWorks';
 import ProductCTA from './modules/views/ProductCTA';
+// --- New update -----
+import PlayingCarouselRight from './PlayingCarouselRight';
+import PlayingCarouselLeft from './PlayingCarouselLeft';
 
 function Index() {
   return (
     <React.Fragment>
-      
       <ProductHero />
+
+      <PlayingCarouselRight />
+      <PlayingCarouselLeft />
+
       <ProductValues />
       <ProductCategories />
       <ProductHowItWorks />
