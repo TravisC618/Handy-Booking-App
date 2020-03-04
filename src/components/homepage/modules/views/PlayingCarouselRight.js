@@ -1,12 +1,12 @@
 import React from 'react';
-import '../../css/home/PlayingCarousel-left.css';
+import '../../../../css/home/PlayingCarousel-right.css';
 import Faker from 'faker'
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
-import { Location} from "../../utils/Icons";
+import { Location} from "../../../../utils/Icons";
 
-class PlayingCarouselLeft extends React.Component {
+class PlayingCarouselRight extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -80,7 +80,7 @@ class PlayingCarouselLeft extends React.Component {
     render() {
         return (
             <div>
-                <div class="slider">
+                <div class="slider-right">
                     <div class="slide-track">
                         {this.state.users.map(user => this.renderUsers(user))}
                     </div>
@@ -90,4 +90,4 @@ class PlayingCarouselLeft extends React.Component {
     }
 }
 
-export default PlayingCarouselLeft;
+export default PlayingCarouselRight;
