@@ -11,7 +11,7 @@ export default function TaskDescription(props) {
       <Typography variant="h6" gutterBottom>
         Tell us what you need done
       </Typography>
-      <Grid container spacing={10}>
+      <Grid container spacing={6}>
         <Grid item xs={12}>
           <TextField
             onChange={event => handleChange(event)}

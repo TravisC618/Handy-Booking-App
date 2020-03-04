@@ -39,7 +39,6 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
       marginLeft: "auto",
       marginRight: "auto"
     }
@@ -49,8 +48,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6),
+      marginTop: theme.spacing(10),
+      marginBottom: theme.spacing(10),
       padding: theme.spacing(3)
     }
   },
@@ -108,7 +107,8 @@ const useQontoStepIconStyles = makeStyles({
     width: 8,
     height: 8,
     borderRadius: "50%",
-    backgroundColor: "#ffa640"
+    // backgroundColor: "#ffa640"
+    backgroundColor: "#ff3366"
   },
   completed: {
     color: "#ffa640",
@@ -256,7 +256,7 @@ export default function Checkout() {
     <React.Fragment>
       {/* <CssBaseline /> */}
       <main className={classes.layout}>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={0}>
           <Typography component="h1" variant="h4" align="center">
             Post a task
           </Typography>
