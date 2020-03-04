@@ -8,6 +8,26 @@ import "../css/navigation.css";
 import "../css/login.scss";
 
 class Navigation extends Component {
+  componentDidMount() {
+    window.addEventListener("scroll", this.resizeHeaderOnScroll);
+  }
+  resizeHeaderOnScroll() {
+    const distanceY = window.pageYOffset || document.documentElement.scrollTop,
+      shrinkOn = 200,
+      headerEl = document.getElementById("header");
+
+    if (distanceY > 200) {
+      headerEl.classList.add("smaller");
+    } else {
+      headerEl.classList.remove("smaller");
+    }
+
+    if (distanceY > 15) {
+      headerEl.classList.add("colored");
+    } else {
+      headerEl.classList.remove("colored");
+    }
+  }
   render() {
     const { location, handleVisible } = this.props;
     const currentPath = location.pathname;
@@ -18,7 +38,7 @@ class Navigation extends Component {
         // handleShowModal={this.handleShowModal}
         /> */}
 
-        <nav className="navbar navbar-expand-md navbar-light fixed-top">
+        <nav id="header" className="navbar navbar-expand-md navbar-light fixed-top">
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
               <img src={logo} alt="logo" />
