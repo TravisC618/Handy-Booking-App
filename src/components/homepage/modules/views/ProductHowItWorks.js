@@ -42,7 +42,7 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightMedium
   },
   image: {
-    height: 55,
+    width: "70%",
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4)
   },
@@ -77,29 +77,36 @@ function ProductHowItWorks(props) {
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
-                <img src={Hiw1Img} alt="suitcase" className={classes.image} />
+                <img src="https://www.airtasker.com/images/homepage/home-how-it-works-step-image-1.png" alt="suitcase" className={classes.image} />
+                <Typography variant="h5" align="center" style={{fontWeight: 'bold', paddingBottom:10}}>
+                Post your Task
+                </Typography>
                 <Typography variant="h5" align="center">
-                  Appointment every Wednesday 9am.
+                Tell us what you need. It's FREE to post.
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
-                <img src={Hiw2Img} alt="graph" className={classes.image} />
+                <img src='https://www.airtasker.com/images/homepage/home-how-it-works-step-image-2.png' alt="graph" className={classes.image} />
+                <Typography variant="h5" align="center" style={{fontWeight: 'bold', paddingBottom:10}}>
+                Review offers
+                </Typography>
                 <Typography variant="h5" align="center">
-                  First come, first served. Our offers are in limited
-                  quantities, so be quick.
+                Get offers from trusted Taskers and view profiles.
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
-                <img src={Hiw3Img} alt="clock" className={classes.image} />
+                <img src='https://www.airtasker.com/images/homepage/home-how-it-works-step-image-3.png' alt="clock" className={classes.image} />
+                <Typography variant="h5" align="center" style={{fontWeight: 'bold', paddingBottom:10}}>
+                Get it done
+                </Typography>
                 <Typography variant="h5" align="center">
-                  {"New offers every week. New experiences, new surprises. "}
-                  {"Your Sundays will no longer be alike."}
+                Choose the right person for your task and get it done.
                 </Typography>
               </div>
             </Grid>
