@@ -1,3 +1,4 @@
+export const HOME_URL = "/";
 export const LOGIN_URL = "/login";
 export const FIND_CLEANERS_URL = "/find-cleaners";
 export const CLEANER_DETAILS_URL = "/details";

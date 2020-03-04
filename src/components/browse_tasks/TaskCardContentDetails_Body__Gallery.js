@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DetailContext } from "../../hooks/detailReducer";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { SRLWrapper } from "simple-react-lightbox";
@@ -30,15 +31,16 @@ const galleryOptions = {
 
 export default function ImageGallery() {
     const classes = useStyles();
+    const detailContext = useContext(DetailContext);
+    const { taskDetails } = detailContext.detailState;
+    const details = taskDetails.details;
 
   return (
     <div className={classes.root}>
     <Grid container spacing={3}>
       <Grid item xs={12}>    
         <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+          {details}
         </Typography>     
       </Grid>
 

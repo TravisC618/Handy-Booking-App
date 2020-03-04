@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useContext } from "react";
 import { Virtuoso } from "react-virtuoso";
 import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
-import ImgMediaCard from "../components/browse_tasks/TaskCards";
+import TaskCard from "../components/browse_tasks/TaskCards";
 import LoadingSpinner from "../img/icons/LoadingSpinner.svg";
 import { reqGetAllTasks } from "../api/tasks";
 import {
@@ -43,7 +43,7 @@ const Table = () => {
     return loading.current ? (
       <div />
     ) : (
-      <ImgMediaCard tasks={items.current[index]} />
+      <TaskCard tasks={items.current[index]} />
     );
   };
 
@@ -69,6 +69,7 @@ const Table = () => {
       dispatch({ type: ERROR_MSG, errMsg: err.message });
       return;
     }
+
     const { tasks, pagination } = response.data.data;
     const totalPages = pagination.pages;
 

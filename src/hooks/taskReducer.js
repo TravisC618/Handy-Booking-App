@@ -7,6 +7,7 @@ export const UPDATE_PRICE_RANGE = "UPDATE_PRICE_RANGE";
 export const UPDATE_ITEM_STATE = "UPDATE_ITEM_STATE";
 export const ERROR_MSG = "ERROR_MSG";
 export const RESET_ITEM = "RESET_ITEM";
+export const SHOW_Map_State = "SHOW_Map_State";
 
 export const TaskContext = createContext();
 
@@ -16,7 +17,9 @@ export const initialState = {
   pageSize: 10,
   priceRange: [5, 9999],
   hasMoreItem: false,
-  errMsg: ""
+  errMsg: "",
+  isToggleOn: true,
+  isDetailOn: true,
 };
 
 export const taskReducer = (state, action) => {
@@ -47,7 +50,7 @@ export const taskReducer = (state, action) => {
         errMsg: action.errMsg
       };
     case RESET_ITEM:
-      return initialState;
+      return initialState;      
     default:
       return state;
   }

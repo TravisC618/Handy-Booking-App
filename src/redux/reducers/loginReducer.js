@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
     case HANDLE_VISIBLE:
       return {
         ...state,
-        visible: !state.visible
+        visible: action.isVisible
       };
     default:
       return state;
