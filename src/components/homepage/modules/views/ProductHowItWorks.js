@@ -8,9 +8,9 @@ import { FIND_CLEANERS_URL } from "../../../../routes/URLMAP";
 import Button from "../components/Button";
 import Typography from "../components/Typography";
 import ClImg from "../../../../img/homepage/productCurvyLines.png";
-import Hiw1Img from "../../../../img/homepage/productHowItWorks1.svg";
-import Hiw2Img from "../../../../img/homepage/productHowItWorks2.svg";
-import Hiw3Img from "../../../../img/homepage/productHowItWorks3.svg";
+import "../../../../css/home/player.css";
+import { Player, BigPlayButton, ControlBar, PlayToggle } from 'video-react';
+
 
 const styles = theme => ({
   root: {
@@ -33,7 +33,7 @@ const styles = theme => ({
     padding: theme.spacing(0, 5)
   },
   title: {
-    marginBottom: theme.spacing(14)
+    marginBottom: theme.spacing(4)
   },
   number: {
     fontSize: 24,
@@ -70,10 +70,28 @@ function ProductHowItWorks(props) {
           className={classes.title}
           component="h2"
         >
-          How it works
+          How does BYEDUST work?
         </Typography>
         <div>
           <Grid container spacing={5}>
+          <Grid item xs={12} md={12}>
+              <div className={classes.item}>
+                <Typography variant="h5" align="center" style={{paddingBottom:40}}>
+                Check out the video below to see exactly how Airtasker can help you get those to-dos done once and for all.
+                </Typography>
+                <Player 
+                fluid={true}
+                poster="https://www.airtasker.com/images/homepage/home-video-player.jpg"
+                src="https://s3-ap-southeast-2.amazonaws.com/assets-airtasker-com/uploads/home/how-it-works.mp4"
+                >
+              <BigPlayButton position="center" />
+              <ControlBar autoHide={true} disableDefaultControls={true}>
+                <PlayToggle />
+              </ControlBar>
+            </Player>
+
+              </div>
+            </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>

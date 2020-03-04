@@ -5,7 +5,6 @@
 }
 
 .navbar {
-  position: fixed;
   background: transparent;
   height: 90px;
   z-index: 2;
@@ -20,6 +19,14 @@
 
 .colored {
   background: white;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.stickied {
+  position: sticky;
 }
 
 .navbar .navbar-brand img {

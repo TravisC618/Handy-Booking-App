@@ -25,6 +25,14 @@ class Navigation extends Component {
     if (isIncluded(this.props.location.pathname, "/login")) {
       this.props.handleVisible(true);
     }
+
+    const headerEl = document.getElementById("header");
+    if (isIncluded(this.props.location.pathname, `${HOME_URL}`)) {
+      headerEl.classList.add("fixed"); 
+    }else{
+      headerEl.classList.remove("stickied"); 
+    }
+
   }
 
   componentDidUpdate() {
@@ -35,6 +43,7 @@ class Navigation extends Component {
   }
 
   resizeHeaderOnScroll() {
+
     const distanceY = window.pageYOffset || document.documentElement.scrollTop,
       shrinkOn = 200,
       headerEl = document.getElementById("header");
@@ -50,6 +59,7 @@ class Navigation extends Component {
     } else {
       headerEl.classList.remove("colored");
     }
+
   }
 
   logout = history => {
@@ -64,7 +74,7 @@ class Navigation extends Component {
       <>
         <nav
           id="header"
-          className={`navbar navbar-expand-md navbar-light fixed-top`}
+          className={`navbar fixed-top navbar-expand-md navbar-light `}
         >
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
