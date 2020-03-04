@@ -1,4 +1,8 @@
 @import "https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800";
+.showMapLink {
+  color: #3f51b5;
+  text-decoration: none !important;
+}
 .dropdown-menu-content-type {
   height: 215px;
 }

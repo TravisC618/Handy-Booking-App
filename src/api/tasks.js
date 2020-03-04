@@ -26,3 +26,10 @@ export const reqGetAllTasks = (
 
   return get(url);
 };
+
+export const reqGetTask = id => {
+  // const stringField = querystring.stringify({id});
+  const url = `${API_TASK_URL}/${id}`;
+
+  return get(url);
+};

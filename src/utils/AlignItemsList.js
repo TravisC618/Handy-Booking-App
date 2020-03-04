@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {DetailContext} from '../hooks/detailReducer';
+import Moment from "react-moment";
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,19 +17,26 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     backgroundColor: theme.palette.background.paper,    
-    
-    
   },
   inline: {
     display: 'inline',
     fontSize: '1px',
-    
   },
 }));
 
 export default function AlignItemsList() {
   const classes = useStyles();
   const preventDefault = event => event.preventDefault();
+  const toUpperCaseFilter = d => {
+    return d.toUpperCase();
+  };
+  const detailContext = useContext(DetailContext);
+  const { taskDetails } = detailContext.detailState;
+  const location = taskDetails.location;
+  const postDate = taskDetails.postDate;
+  const dueDate = taskDetails.dueDate;
+  const name = taskDetails.name;
+
 
   return (
 
@@ -47,10 +56,12 @@ export default function AlignItemsList() {
                 color="textPrimary"
                 fontSize= "1px"
               >
-                UserName
+                {name}
               </Typography>
               <Typography className={classes.inline} style={{ float:'right' }}>
-              3 hours ago
+              <Moment format="ddd, D MMM" filter={toUpperCaseFilter}>
+                {postDate}
+              </Moment>
               </Typography>
             </React.Fragment>
           }
@@ -71,7 +82,7 @@ export default function AlignItemsList() {
                 className={classes.inline}
                 color="textPrimary"
               >
-                West End QLD, Australia
+                {location}
               </Typography>
               <Typography className={classes.inline} style={{ float:'right' }}>
                 <Link href="#" onClick={preventDefault}>
@@ -97,7 +108,9 @@ export default function AlignItemsList() {
                 className={classes.inline}
                 color="textPrimary"
               >
-                Friday, 21st Feb 2020
+              <Moment format="ddd, D MMM" filter={toUpperCaseFilter}>
+                {dueDate}
+              </Moment>
               </Typography>
             </React.Fragment>
           }
