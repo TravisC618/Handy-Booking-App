@@ -32,13 +32,15 @@ const useStyles = makeStyles(theme => ({
   budgetScreen: {
     display: "flex"
   },
+  estimateScreen: {
+    backgroundColor: "#ff3366",
+    color: "#fff",
+    padding: theme.spacing(2),
+    borderRadius: "30px",
+    marginTop: theme.spacing(3)
+  },
   box: {
     display: "flex"
-  },
-  grid: {
-    margin: theme.spacing(3),
-    backgroundColor: "blue",
-    color: "#000"
   },
   icon: {
     alignSelf: "center",
@@ -122,13 +124,11 @@ export default function Budget(props) {
           />
         </Box>
       </div>
-      <Grid className={classes.grid} container alignItems="center">
+      <Grid className={classes.estimateScreen} container alignItems="center">
         <Grid item xs>
           <Typography gutterBottom variant="h6">
             ESTIMATED BUDGET
           </Typography>
-        </Grid>
-        <Grid item>
           <Typography gutterBottom variant="h8">
             $4.50
           </Typography>

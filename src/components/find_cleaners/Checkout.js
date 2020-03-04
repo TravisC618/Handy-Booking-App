@@ -78,12 +78,12 @@ const QontoConnector = withStyles({
   },
   active: {
     "& $line": {
-      borderColor: "#ffa640"
+      borderColor: "#ff3366"
     }
   },
   completed: {
     "& $line": {
-      borderColor: "#ffa640"
+      borderColor: "#ff3366"
     }
   },
   line: {
@@ -107,11 +107,10 @@ const useQontoStepIconStyles = makeStyles({
     width: 8,
     height: 8,
     borderRadius: "50%",
-    // backgroundColor: "#ffa640"
     backgroundColor: "#ff3366"
   },
   completed: {
-    color: "#ffa640",
+    color: "#ff3366",
     zIndex: 1,
     fontSize: 18
   }
