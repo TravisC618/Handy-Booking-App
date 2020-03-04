@@ -62,7 +62,10 @@ class Navigation extends Component {
     const currentPath = location.pathname;
     return (
       <>
-        <nav id="header" className="navbar navbar-expand-md navbar-light fixed-top">
+        <nav
+          id="header"
+          className={`navbar navbar-expand-md navbar-light fixed-top`}
+        >
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
               <img src={logo} alt="logo" />
