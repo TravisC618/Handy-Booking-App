@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
+import { Link, withRouter } from "react-router-dom";
+import {
+  handleVisible as handleVisibleAction,
+  handleRedirect as handleRedirectAction
+} from "../redux/actions/loginAction";
 import { login } from "../api/auth";
 import { storeToken } from "../utils/auth";
-import { getPreviousPath } from "../utils/helper";
 import Modal from "react-animated-modal";
 import TextField from "@material-ui/core/TextField";
 import logo from "../img/logo.png";
+import { connect } from "react-redux";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 class Login extends Component {
   constructor(props) {
@@ -15,7 +18,8 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      errMsg: ""
+      errMsg: "",
+      isLoading: false
     };
   }
 
@@ -27,77 +31,70 @@ class Login extends Component {
 
   handleLogin = async () => {
     const { email, password } = this.state;
-    login(email, password)
-      .then(response => {
-        const { token } = response.data.data;
-        storeToken(token);
-        this.setState({ errMsg: "" });
-        //TODO 可以设计成登陆后redirect到account
-        const currentPath = this.props.location.pathname;
-        const previousPath = getPreviousPath(currentPath);
+    const { redirectTo, handleVisible, handleRedirect, location } = this.props;
+    const currentPath = location.pathname;
 
-        const locationState = this.props.location.state;
-        const redirectTo =
-          (locationState && locationState.from) || previousPath;
-
-        this.props.handleVisible(false);
-
-        this.props.history.replace(redirectTo);
-      })
-      .catch(error => {
-        if (error.response) {
-          const { message } = error.response.data;
-          this.setState({ errMsg: message });
-        }
-      });
+    this.setState({ errMsg: "", isLoading: true }, () => {
+      login(email, password)
+        .then(response => {
+          this.setState({ isLoading: false }, () => {
+            const { token } = response.data.data;
+            storeToken(token);
+            this.props.history.replace(redirectTo ? redirectTo : currentPath);
+            redirectTo && handleRedirect(""); // reset redirectTo
+            handleVisible(false);
+          });
+        })
+        .catch(error => {
+          if (error.response) {
+            const { message } = error.response.data;
+            this.setState({ errMsg: message });
+          }
+          this.setState({ isLoading: false });
+        });
+    });
   };
 
   render() {
-    const { visible, handleVisible, history } = this.props;
-    const { errMsg } = this.state;
+    const { visible, handleVisible } = this.props;
+    const { errMsg, isLoading } = this.state;
 
     return (
       <Modal
         visible={visible}
-        closemodal={() => {
-          handleVisible(false);
-          const currentPath = this.props.location.pathname;
-          const previousPath = getPreviousPath(currentPath);
-          history.push(previousPath);
-          // history.goBack(); //TODO 改成从location.pathname入手
-        }}
+        closemodal={() => handleVisible(false)}
         type="zoomInDown"
       >
-        <div class="login-box">
+        <div className="login-box">
           <div>
-            <p class="login-title text-center">
+            <p className="login-title text-center">
               Login to <img src={logo} alt="logo" />
             </p>
           </div>
-          <div class="login-third-party-login">
-            <p class="login-button-info-text login-info-text text-center">
+          <div className="login-third-party-login">
+            <p className="login-button-info-text login-info-text text-center">
               EASILY USING
             </p>
 
-            <div class="social-login-button">
-              <a href="#" class="social-button" id="facebook-connect">
+            <div className="social-login-button">
+              <Link className="social-button" id="facebook-connect">
                 {" "}
                 <span>Connect with Facebook</span>
-              </a>
-              <a href="#" class="social-button" id="google-connect">
+              </Link>
+              <Link className="social-button" id="google-connect">
                 {" "}
                 <span>Connect with Google</span>
-              </a>
-              <a href="#" class="social-button" id="twitter-connect">
+              </Link>
+              <Link className="social-button" id="twitter-connect">
                 {" "}
                 <span>Connect with Twitter</span>
-              </a>
+              </Link>
             </div>
           </div>
-          <p class="login-info-text text-center">- OR USING EMAIL -</p>
-          <form class="login-login-form">
-            <fieldset class="login-input-container">
-              <div class="login-input-item">
+          <p className="login-info-text text-center">- OR USING EMAIL -</p>
+          <form className="login-login-form">
+            <fieldset className="login-input-container">
+              <div className="login-input-item">
                 <TextField
                   type="email"
                   name="email"
@@ -108,7 +105,7 @@ class Login extends Component {
                   variant="outlined"
                 />
               </div>
-              <div class="login-input-item">
+              <div className="login-input-item">
                 <TextField
                   type="password"
                   name="password"
@@ -121,35 +118,34 @@ class Login extends Component {
                 />
               </div>
             </fieldset>
-            <div class="remember-password-container">
+            <div className="remember-password-container">
               <input type="checkbox" />
               <label>
-                <span class="login-info-text">Remember password?</span>
+                <span className="login-info-text">Remember password?</span>
               </label>
             </div>
-            <fieldset class="login-login-button-container">
+            <fieldset className="login-login-button-container">
               <Link className="login-login-button" onClick={this.handleLogin}>
-                Log in
+                {isLoading ? <LoadingSpinner /> : "Log in"}
               </Link>
             </fieldset>
           </form>
-          <div class="login-link-container">
-            <a class="login-link" href="#">
-              Recover password
-            </a>
+          <div className="login-link-container">
+            <Link className="login-link">Recover password</Link>
           </div>
         </div>
       </Modal>
     );
   }
 }
-
 const mapStateToProps = state => ({
-  visible: state.login.visible
+  visible: state.login.visible,
+  redirectTo: state.login.redirectTo
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleVisible: isVisible => dispatch(handleVisibleAction(isVisible))
+  handleVisible: isVisible => dispatch(handleVisibleAction(isVisible)),
+  handleRedirect: redirectTo => dispatch(handleRedirectAction(redirectTo))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
