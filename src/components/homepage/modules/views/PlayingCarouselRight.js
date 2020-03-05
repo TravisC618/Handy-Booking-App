@@ -31,8 +31,8 @@ class PlayingCarouselRight extends React.Component {
 
     renderUsers(user) {
         return (
-            <Zoom in={true} style={{ transitionDelay: '500ms' }}>
-                <div class="client-slide">
+            <div class="client-slide">
+                <Zoom in={true} style={{ transitionDelay: '500ms' }}>
                     <Card >
                         <div />
                         <CardActionArea>
@@ -74,21 +74,19 @@ class PlayingCarouselRight extends React.Component {
                             </CardContent>
                         </CardActionArea>
                     </Card>
-                </div>
-            </Zoom>
+                </Zoom>
+            </div>
 
         )
     }
 
     render() {
         return (
-            <div>
                 <div class="slider-right">
                     <div class="slide-track">
                         {this.state.users.map(user => this.renderUsers(user))}
                     </div>
                 </div>
-            </div>
         )
     }
 }
