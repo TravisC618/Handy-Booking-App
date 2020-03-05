@@ -77,7 +77,7 @@ function ProductHowItWorks(props) {
           <Grid item xs={12} md={12}>
               <div className={classes.item}>
                 <Typography variant="h5" align="center" style={{paddingBottom:40}}>
-                Check out the video below to see exactly how Airtasker can help you get those to-dos done once and for all.
+                Check out the video below to see exactly how BYEDUST can help you get those to-dos done once and for all.
                 </Typography>
                 <Player 
                 fluid={true}

@@ -12,6 +12,7 @@ import ProductTasks from './modules/views/ProductTasks';
 
 function Index() {
   return (
+
     <React.Fragment>
       <ProductHero />
       <ProductTasks />
@@ -22,6 +23,7 @@ function Index() {
       <ProductSmokingHero />
       <AppFooter />
     </React.Fragment>
+    
   );
 }
 
