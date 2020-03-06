@@ -70,7 +70,7 @@ class Navigation extends Component {
                       className="nav-link"
                       onClick={() => handleVisible(true)}
                     >
-                      Log in
+                      Log in/Register
                     </Link>
                   </li>
                 ) : (
