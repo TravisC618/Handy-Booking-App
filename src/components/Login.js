@@ -41,7 +41,6 @@ class Login extends Component {
   handleToggle = () => {
     //TODO clear form
     this.setState(state => ({
-      switchToRegister: !state.switchToRegister,
       email: "",
       password: "",
       repeatPwd: "",
@@ -51,7 +50,8 @@ class Login extends Component {
       err: {
         type: "",
         msg: ""
-      }
+      },
+      switchToRegister: !state.switchToRegister
     }));
   };
 

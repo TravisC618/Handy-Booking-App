@@ -34,8 +34,7 @@ class Things extends React.Component {
                 <div className="things-card">
                 <div className="content">
                 <h2 className="title">Here if you need us</h2>
-                <p className="copy">Our comprehensive Help Centre and dedicated Airtasker Support are on hand 24/7 to help with any questions, queries or issues you might have.</p>
-                
+                <p className="copy">Our comprehensive Help Centre and dedicated Airtasker Support are on hand 24/7 to help with any questions, queries or issues you might have.</p>                
                 </div>
                 </div>
                 </main> 
