@@ -18,7 +18,7 @@ padding: 0;
 display: flex;
 justify-content: center;
 align-items: center;
-
+transform: scale(0.75);
 line-height: 0.6em;
 font-family: 'Poppins', sans-serif;
 transition: 0.3s all ease;
@@ -65,7 +65,7 @@ h1 span:nth-child(2):before {
 h1:hover span:nth-child(2):before {
   transform: scaleX(1);
 }
-hi span hide {
+h1 span hide {
   transition: all ease 0.5s;
   transition-delay: 1s;
 }
