@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* .navbar {
+    background: #fff;
+    height: 64px;
+    z-index: 0;
+  }
+  .navbar .navbar-brand img {
+    width: 130px;
+    padding-bottom: 7.5px;
+  }
+  .navbar .form-inline {
+    padding-left: 20px;
+  }
+  .navbar .form-inline .fa-search {
+    width: 15px;
+    height: 15px;
+  }
+  .navbar .form-inline input {
+    outline: none;
+    border: 0;
+    box-shadow: none;
+    font-size: 16px;
+    width: 13em;
+  }
+  .navbar .navbar-collapse .navbar-nav .nav-item {
+    padding: 0 8px;
+  }
+  
+  .navbar .navbar-collapse .navbar-nav .nav-item .nav-link {
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.2s ease-in-out;
+  }
+  .navbar .navbar-collapse .navbar-nav .nav-item .nav-link:hover {
+    color: #ffa640;
+  } */
+
+/* =======navbar-home======== */
+.navbar-home {
+  position: fixed;
+  background: transparent;
+  height: 90px;
+  z-index: 2;
+  transition: 0.3s all ease;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.smaller {
+  height: 60px;
+}
+.colored {
+  background: #fff;
+}
+.navbar-home .navbar-brand img {
+  width: 130px;
+  padding-bottom: 7.5px;
+}
+.navbar-home .form-inline {
+  padding-left: 20px;
+}
+.navbar-home .form-inline .fa-search {
+  width: 15px;
+  height: 15px;
+}
+.navbar-home .form-inline input {
+  outline: none;
+  border: 0;
+  box-shadow: none;
+  font-size: 16px;
+  width: 13em;
+  background: transparent;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.navbar-home .navbar-collapse .navbar-nav .nav-item {
+  padding: 0 8px;
+}
+
+.navbar-home .navbar-collapse .navbar-nav .nav-item .nav-link {
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 0.2s ease-in-out;
+}
+.navbar-home .navbar-collapse .navbar-nav .nav-item .nav-link:hover {
+  color: #ffa640;
+}
+
+.colored .navbar-collapse .navbar-nav .nav-item .nav-link {
+  color: black;
+}
+
+/*
+  Extra small (xs) devices (portrait phones, less than 576px)
+  No media query since this is the default in Bootstrap
+  
+  Small (sm) devices (landscape phones, 576px and up)
+  @media (min-width: 576px) { ... }
+  
+  Medium (md) devices (tablets, 768px and up)
+  @media (min-width: 768px) { ... }
+  
+  Large (lg) devices (desktops, 992px and up)
+  @media (min-width: 992px) { ... }
+  
+  Extra (xl) large devices (large desktops, 1200px and up)
+  @media (min-width: 1200px) { ... }
+  */
+
+/*# sourceMappingURL=navigation.css.map */

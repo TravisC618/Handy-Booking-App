@@ -3,7 +3,6 @@ import { Route, Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
 import { isIncluded } from "../utils/helper";
-import logo from "../img/logo.png";
 import Login from "./Login";
 import Signup from "./Signup";
 import { isLoggedIn } from "../utils/auth";
@@ -19,17 +18,22 @@ import "../css/navigation.css";
 import "../css/login.scss";
 
 class Navigation extends Component {
-  logout = history => {
-    removeToken();
-    history.push(HOME_URL);
-  };
-
   componentDidMount() {
+    window.addEventListener("scroll", this.resizeHeaderOnScroll);
     // if it doesn't contain "/login", return -1
     if (isIncluded(this.props.location.pathname, "/login")) {
       this.props.handleVisible(true);
     }
+
+    const headerEl = document.getElementById("header");
+    if (isIncluded(this.props.location.pathname, `${HOME_URL}`)) {
+      headerEl.classList.add("fixed"); 
+    }else{
+      headerEl.classList.remove("stickied"); 
+    }
+
   }
+
   componentDidUpdate() {
     // if it doesn't contain "/login", return -1
     if (isIncluded(this.props.location.pathname, "/login")) {
@@ -37,25 +41,44 @@ class Navigation extends Component {
     }
   }
 
+  resizeHeaderOnScroll() {
+
+    const distanceY = window.pageYOffset || document.documentElement.scrollTop,
+      shrinkOn = 200,
+      headerEl = document.getElementById("header");
+
+    if (distanceY > 200) {
+      headerEl.classList.add("smaller");
+    } else {
+      headerEl.classList.remove("smaller");
+    }
+
+    if (distanceY > 15) {
+      headerEl.classList.add("colored");
+    } else {
+      headerEl.classList.remove("colored");
+    }
+
+  }
+
+  logout = history => {
+    removeToken();
+    history.push(HOME_URL);
+  };
+
   render() {
     const { history, location, handleVisible } = this.props;
     const currentPath = location.pathname;
     return (
       <>
-        <nav className="navbar navbar-expand-md navbar-light fixed-top">
+        <nav
+          id="header"
+          className={`navbar fixed-top navbar-expand-md navbar-light `}
+        >
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
-              <img src={logo} alt="logo" />
+              <h1 className="logo">BYEDUST</h1>
             </a>
-            <form className="form-inline">
-              <i className="fas fa-search" />
-              <input
-                className="form-control mr-sm-2"
-                type="search"
-                placeholder="SEARCH BY POSTCODE"
-                aria-label="Search"
-              />
-            </form>
             <button
               className="navbar-toggler"
               type="button"

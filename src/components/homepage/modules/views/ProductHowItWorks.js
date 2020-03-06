@@ -8,9 +8,9 @@ import { FIND_CLEANERS_URL } from "../../../../routes/URLMAP";
 import Button from "../components/Button";
 import Typography from "../components/Typography";
 import ClImg from "../../../../img/homepage/productCurvyLines.png";
-import Hiw1Img from "../../../../img/homepage/productHowItWorks1.svg";
-import Hiw2Img from "../../../../img/homepage/productHowItWorks2.svg";
-import Hiw3Img from "../../../../img/homepage/productHowItWorks3.svg";
+import "../../../../css/home/player.css";
+import { Player, BigPlayButton, ControlBar, PlayToggle } from 'video-react';
+
 
 const styles = theme => ({
   root: {
@@ -33,7 +33,7 @@ const styles = theme => ({
     padding: theme.spacing(0, 5)
   },
   title: {
-    marginBottom: theme.spacing(14)
+    marginBottom: theme.spacing(4)
   },
   number: {
     fontSize: 24,
@@ -42,7 +42,7 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightMedium
   },
   image: {
-    height: 55,
+    width: "70%",
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4)
   },
@@ -70,36 +70,61 @@ function ProductHowItWorks(props) {
           className={classes.title}
           component="h2"
         >
-          How it works
+          How does BYEDUST work?
         </Typography>
         <div>
           <Grid container spacing={5}>
+          <Grid item xs={12} md={12}>
+              <div className={classes.item}>
+                <Typography variant="h5" align="center" style={{paddingBottom:40}}>
+                Check out the video below to see exactly how BYEDUST can help you get those to-dos done once and for all.
+                </Typography>
+                <Player 
+                fluid={true}
+                poster="https://www.airtasker.com/images/homepage/home-video-player.jpg"
+                src="https://s3-ap-southeast-2.amazonaws.com/assets-airtasker-com/uploads/home/how-it-works.mp4"
+                >
+              <BigPlayButton position="center" />
+              <ControlBar autoHide={true} disableDefaultControls={true}>
+                <PlayToggle />
+              </ControlBar>
+            </Player>
+
+              </div>
+            </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
-                <img src={Hiw1Img} alt="suitcase" className={classes.image} />
+                <img src="https://www.airtasker.com/images/homepage/home-how-it-works-step-image-1.png" alt="suitcase" className={classes.image} />
+                <Typography variant="h5" align="center" style={{fontWeight: 'bold', paddingBottom:10}}>
+                Post your Task
+                </Typography>
                 <Typography variant="h5" align="center">
-                  Appointment every Wednesday 9am.
+                Tell us what you need. It's FREE to post.
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
-                <img src={Hiw2Img} alt="graph" className={classes.image} />
+                <img src='https://www.airtasker.com/images/homepage/home-how-it-works-step-image-2.png' alt="graph" className={classes.image} />
+                <Typography variant="h5" align="center" style={{fontWeight: 'bold', paddingBottom:10}}>
+                Review offers
+                </Typography>
                 <Typography variant="h5" align="center">
-                  First come, first served. Our offers are in limited
-                  quantities, so be quick.
+                Get offers from trusted Taskers and view profiles.
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
-                <img src={Hiw3Img} alt="clock" className={classes.image} />
+                <img src='https://www.airtasker.com/images/homepage/home-how-it-works-step-image-3.png' alt="clock" className={classes.image} />
+                <Typography variant="h5" align="center" style={{fontWeight: 'bold', paddingBottom:10}}>
+                Get it done
+                </Typography>
                 <Typography variant="h5" align="center">
-                  {"New offers every week. New experiences, new surprises. "}
-                  {"Your Sundays will no longer be alike."}
+                Choose the right person for your task and get it done.
                 </Typography>
               </div>
             </Grid>
