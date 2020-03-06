@@ -53,14 +53,14 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img className={classes.image} src={Pv1Img} alt="suitcase" />
               <Typography variant="h6" className={classes.title}>
-                The best luxury hotels
+              Top rated insurance
               </Typography>
               <Typography variant="h5">
                 {
-                  "From the latest trendy boutique hotel to the iconic palace with XXL pool"
+                  "Insurance is there to ease any worries "
                 }
                 {
-                  ", go for a mini-vacation just a few subway stops away from your home."
+                  "- making sure the Tasker has liability insurance from CGU while performing most task activities. T&C's apply."
                 }
               </Typography>
             </div>
@@ -69,25 +69,25 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img className={classes.image} src={Pv2Img} alt="graph" />
               <Typography variant="h6" className={classes.title}>
-                New experiences
+              Verified badges
               </Typography>
               <Typography variant="h5">
-                {
-                  "Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… "
-                }
-                {"your Sundays will not be alike."}
+                {"Badges give members a bit more verified info when deciding who to work with on a task. Each badge has certain requirements that must be met and verified before they’re shown on the member's profile. "}
               </Typography>
             </div>
           </Grid>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
               <img className={classes.image} src={Pv3Img} alt="clock" />
+              
               <Typography variant="h6" className={classes.title}>
-                Exclusive rates
+              Secure Payments
               </Typography>
               <Typography variant="h5">
-                {"By registering, you will access specially negotiated rates "}
-                {"that you will not find anywhere else."}
+                {
+                  "We hold task payments secure with our PCI-DSS compliant Airtasker Pay "
+                }
+                {"– so tasks can be completed knowing payment is there when you're done."}
               </Typography>
             </div>
           </Grid>
