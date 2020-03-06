@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Checkout from "../../components/find_cleaners/Checkout";
 import cleanerVideo from "../../assets/videos/cleaner.mp4";
+import "../../css/find_cleaners/postside.scss";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +16,6 @@ const useStyles = makeStyles(theme => ({
     left: 0
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "dark"
@@ -49,9 +49,18 @@ export default function PostSide() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      {/* <ReactPlayer url={cleanerVideo} loop={true} muted /> */}
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={false} sm={12} md={7} className={classes.image}>
+        <ReactPlayer
+          url={cleanerVideo}
+          className="video-player"
+          playing
+          loop
+          muted
+          width="100%"
+          height="100%"
+        />
+      </Grid>
+      <Grid item sm={12} md={5} component={Paper} elevation={6} square>
         <Checkout />
       </Grid>
     </Grid>
