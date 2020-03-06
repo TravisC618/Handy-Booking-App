@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
 import { login } from "../api/auth";
-import { storeToken } from "../utils/auth";
+import { storeToken, storeUserId } from "../utils/auth";
 import { getPreviousPath } from "../utils/helper";
 import Modal from "react-animated-modal";
 import TextField from "@material-ui/core/TextField";
@@ -29,8 +29,9 @@ class Login extends Component {
     const { email, password } = this.state;
     login(email, password)
       .then(response => {
-        const { token } = response.data.data;
+        const { token, userId } = response.data.data;
         storeToken(token);
+        storeUserId(userId);
         this.setState({ errMsg: "" });
         //TODO 可以设计成登陆后redirect到account
         const currentPath = this.props.location.pathname;

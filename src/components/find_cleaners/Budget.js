@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex"
   },
   estimateScreen: {
-    backgroundColor: "#ff3366",
+    backgroundColor: "#3f51b5",
     color: "#fff",
     padding: theme.spacing(2),
     borderRadius: "30px",
@@ -46,6 +46,10 @@ const useStyles = makeStyles(theme => ({
     alignSelf: "center",
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1)
+  },
+  errMsg: {
+    color: "#f44336",
+    marginTop: theme.spacing(2)
   }
 }));
 
@@ -124,13 +128,21 @@ export default function Budget(props) {
           />
         </Box>
       </div>
+      {values.err.name === "budget" ? (
+        <Grid className={classes.errMsg} item>
+          {values.err.msg}
+        </Grid>
+      ) : null}
       <Grid className={classes.estimateScreen} container alignItems="center">
-        <Grid item xs>
-          <Typography gutterBottom variant="h6">
+        <Grid direction="row" justify="space-around" container xs>
+          <Typography gutterBottom variant="h8">
             ESTIMATED BUDGET
           </Typography>
           <Typography gutterBottom variant="h8">
-            $4.50
+            ${" "}
+            {values.radio === "Total"
+              ? values.amount
+              : values.amount * values.hour}
           </Typography>
         </Grid>
       </Grid>

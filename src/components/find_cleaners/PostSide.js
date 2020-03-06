@@ -40,6 +40,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  task: {
+    position: "relative"
   }
 }));
 
@@ -60,7 +63,15 @@ export default function PostSide() {
           height="100%"
         />
       </Grid>
-      <Grid item sm={12} md={5} component={Paper} elevation={6} square>
+      <Grid
+        item
+        sm={12}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
+        className={classes.task}
+      >
         <Checkout />
       </Grid>
     </Grid>

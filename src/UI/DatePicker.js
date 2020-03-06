@@ -11,11 +11,11 @@ export default function DatePicker(props) {
   // The first commit of Material-UI
   const { handleChange, values } = props;
 
-  const [selectedDate, setSelectedDate] = React.useState(values.date);
+  const [selectedDate, setSelectedDate] = React.useState(values.dueDate);
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
-    const data = { name: "date", value: date };
+  const handleDateChange = dueDate => {
+    setSelectedDate(dueDate);
+    const data = { name: "dueDate", value: dueDate };
     handleChange(data);
   };
 

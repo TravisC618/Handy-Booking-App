@@ -5,9 +5,8 @@ import { handleVisible as handleVisibleAction } from "../redux/actions/loginActi
 import { isIncluded } from "../utils/helper";
 import logo from "../img/logo.png";
 import Login from "./Login";
-import Signup from "./Signup";
 import { isLoggedIn } from "../utils/auth";
-import { removeToken } from "../utils/auth";
+import { removeToken, removeUserId } from "../utils/auth";
 import {
   HOME_URL,
   FIND_CLEANERS_URL,
@@ -21,6 +20,7 @@ import "../css/login.scss";
 class Navigation extends Component {
   logout = history => {
     removeToken();
+    removeUserId();
     history.push(HOME_URL);
   };
 

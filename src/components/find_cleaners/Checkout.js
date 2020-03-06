@@ -8,6 +8,7 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import TaskDescription from "./TaskDescription";
@@ -15,6 +16,9 @@ import LocationNTime from "./LocationNTime";
 import StepConnector from "@material-ui/core/StepConnector";
 import Budget from "./Budget";
 import { lengthCheck } from "../../utils/helper";
+import TaskBreadcrumbs from "./BreadCrumbs";
+import { getUserId } from "../../utils/auth";
+import { reqPostTask } from "../../api/tasks";
 import "../../css/theme.scss";
 
 function Copyright() {
@@ -44,11 +48,11 @@ const useStyles = makeStyles(theme => ({
     }
   },
   paper: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(10),
+      marginTop: theme.spacing(1),
       marginBottom: theme.spacing(10),
       padding: theme.spacing(3)
     }
@@ -62,11 +66,19 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
+    color: "#fff",
+    background: "#f50057",
+    "&:hover, &:focus": {
+      background: "#f50057"
+    }
   },
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1)
+  },
+  breadcrumbs: {
+    marginBottom: theme.spacing(4)
   }
 }));
 
@@ -162,14 +174,15 @@ export default function Checkout() {
     title: "",
     details: "",
     location: "",
-    date: new Date(),
+    dueDate: new Date(),
     radio: "Total",
     amount: "",
-    hour: "",
+    hour: "1",
     err: {
       name: "",
       msg: ""
-    }
+    },
+    taskId: ""
   });
 
   const isPositiveNum = (key, value) => {
@@ -193,6 +206,24 @@ export default function Checkout() {
       return;
     }
     setValues({ ...values, [key]: value });
+  };
+
+  const handleSubmit = () => {
+    const { title, details, location, dueDate, amount, hour, radio } = values;
+
+    // total budget
+    const budget = radio === "Total" ? amount : amount * hour;
+    const taskDetails = { title, details, location, dueDate, budget };
+    console.log(taskDetails);
+    reqPostTask(taskDetails, getUserId())
+      .then(response => console.log(response))
+      .catch(err => {
+        if (err.response) {
+          console.log(err.response);
+          const { message } = err.response.data;
+          setValues({ ...values, err: { name: "post", msg: message } });
+        }
+      });
   };
 
   const handleNext = () => {
@@ -231,20 +262,25 @@ export default function Checkout() {
           return;
         }
         break;
-      // case 2:
-      //   if() {
-
-      //     return;
-      //   }
-      //   break;
+      case 2:
+        if (!values.amount) {
+          setValues({
+            ...values,
+            err: {
+              name: "budget",
+              msg: "* You should give a budget before posting"
+            }
+          });
+          return;
+        }
+        handleSubmit();
+        break;
       default:
         return;
     }
     // Once pass validation, set err empty
     setValues({ ...values, err: { name: "", msg: "" } });
-    console.log(`activeStep: ${activeStep}`);
     setActiveStep(activeStep + 1);
-    console.log(`activeStep: ${activeStep}`);
   };
 
   const handleBack = () => {
@@ -256,6 +292,9 @@ export default function Checkout() {
       {/* <CssBaseline /> */}
       <main className={classes.layout}>
         <Paper className={classes.paper} elevation={0}>
+          <Grid className={classes.breadcrumbs}>
+            <TaskBreadcrumbs />
+          </Grid>
           <Typography component="h1" variant="h4" align="center">
             Post a task
           </Typography>
@@ -277,9 +316,11 @@ export default function Checkout() {
                   You've successfully posted!
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your task id is #2001539. We have emailed your task
+                  {values.err.name === "post"
+                    ? values.err.msg
+                    : `Your task id is ${values.taskId}. We have emailed your task
                   confirmation, and will send you an update when your task has
-                  any offer or comment.
+                  any offer or comment.`}
                 </Typography>
               </React.Fragment>
             ) : (
