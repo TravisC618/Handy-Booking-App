@@ -3,7 +3,6 @@ import { Route, Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
 import { isIncluded } from "../utils/helper";
-import logo from "../img/logo.png";
 import Login from "./Login";
 import Signup from "./Signup";
 import { isLoggedIn } from "../utils/auth";
@@ -78,17 +77,8 @@ class Navigation extends Component {
         >
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
-              <img src={logo} alt="logo" />
+              <h1 className="logo">BYEDUST</h1>
             </a>
-            <form className="form-inline">
-              <i className="fas fa-search" />
-              <input
-                className="form-control mr-sm-2"
-                type="search"
-                placeholder="SEARCH BY POSTCODE"
-                aria-label="Search"
-              />
-            </form>
             <button
               className="navbar-toggler"
               type="button"

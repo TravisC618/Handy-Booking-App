@@ -1,3 +1,5 @@
+@import "https://fonts.googleapis.com/css?family=Pacifico&display=swap";
+
 * {
   margin: 0;
   padding: 0;
@@ -13,6 +15,11 @@
   /* border-bottom: 1px solid rgba(255,255,255,0.2); */
 }
 
+.navbar .logo {
+  color:#ffa640;
+  font-family: 'Pacifico', cursive;
+  font-size: 28px;
+}
 .smaller {
   height: 60px;
 }
