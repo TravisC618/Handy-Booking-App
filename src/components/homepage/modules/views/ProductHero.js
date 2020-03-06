@@ -23,6 +23,7 @@ line-height: 0.6em;
 font-family: 'Poppins', sans-serif;
 transition: 0.3s all ease;
 
+
 h1 {
   margin:0;
   padding:0;
@@ -65,7 +66,7 @@ h1 span:nth-child(2):before {
 h1:hover span:nth-child(2):before {
   transform: scaleX(1);
 }
-hi span hide {
+h1 span hide {
   transition: all ease 0.5s;
   transition-delay: 1s;
 }

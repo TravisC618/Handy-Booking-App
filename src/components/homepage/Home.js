@@ -27,15 +27,14 @@ function Index() {
         value={{ homeState: home, homeDispatch: dispatch }}
       >
         <ProductHero />
-        <ProductTasks />
-        <ProductValues />
         <ProductCategories />
+        <ProductValues />
+        <ProductTasks />
         <ProductHowItWorks />
         <MeetTasker />
         <ProductCTA />
         <ProductSmokingHero />
         <AppFooter />
-
       </HomeContext.Provider>
     </React.Fragment>
 
