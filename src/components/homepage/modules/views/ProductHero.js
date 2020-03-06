@@ -23,6 +23,7 @@ line-height: 0.6em;
 font-family: 'Poppins', sans-serif;
 transition: 0.3s all ease;
 
+
 h1 {
   margin:0;
   padding:0;

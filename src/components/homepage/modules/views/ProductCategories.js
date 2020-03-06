@@ -8,12 +8,13 @@ import Typography from '../components/Typography';
 const styles = theme => ({
   root: {
     marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(8),
   },
   images: {
     marginTop: theme.spacing(8),
     display: 'flex',
     flexWrap: 'wrap',
+
   },
   imageWrapper: {
     position: 'relative',
@@ -21,6 +22,8 @@ const styles = theme => ({
     padding: 0,
     borderRadius: 0,
     height: '40vh',
+    maxHeight: 200,
+
     [theme.breakpoints.down('sm')]: {
       width: '100% !important',
       height: 100,
@@ -132,7 +135,7 @@ function ProductCategories(props) {
     {
       url:
         'https://images.unsplash.com/photo-1533727937480-da3a97967e95?auto=format&fit=crop&w=400&q=80',
-      title: 'Anything',
+      title: 'Others',
       width: '20%',
     },
     {
@@ -144,6 +147,7 @@ function ProductCategories(props) {
   ];
 
   return (
+    
     <Container className={classes.root} component="section">
       <Typography variant="h4" marked="center" align="center" component="h2">
         What do you need done?
