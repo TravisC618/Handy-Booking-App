@@ -168,8 +168,8 @@ function ProductTasks(props) {
                                 Got a few boxes to shift, an apartment or entire house? Get your home moved just the way you want, by whom you want, when you want. Let Airtasker shoulder the load.
                         </Typography>
                         </div>
-                        <PlayingCarouselLeft></PlayingCarouselLeft>
-                        <PlayingCarouselRight></PlayingCarouselRight>
+                        <PlayingCarouselLeft />
+                        <PlayingCarouselRight />
                     </div>
                     <div className="task_container tab-pane fade" id="sab-id" role="tabpanel" aria-labelledby="sab-label">
                         <div className="tab-content-text">
@@ -177,32 +177,36 @@ function ProductTasks(props) {
                                 Taking a big leap and need some expert advice or assistance? Airtasker can help you get some cracking marketing collateral, admin muscle or a few extra hands to help ease the burden.
                         </Typography>
                         </div>
-                        <PlayingCarouselLeft></PlayingCarouselLeft>
-                        <PlayingCarouselRight></PlayingCarouselRight></div>
+                        <PlayingCarouselLeft />
+                        <PlayingCarouselRight />
+                        </div>
                     <div className="task_container tab-pane fade" id="fs-id" role="tabpanel" aria-labelledby="fs-label">
                         <div className="tab-content-text">
                             <Typography variant="h5" align="left" style={{ paddingBottom: 30, fontSize: 'small', fontFamily: 'museo_sans,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif' }}>
                                 Do you have a hole in the wall that needs plugging? Perhaps a TV that needs mounting? Or maybe you have that perfect shade of green, but no time to paint? Get a Tasker to help.
                         </Typography>
                         </div>
-                        <PlayingCarouselLeft></PlayingCarouselLeft>
-                        <PlayingCarouselRight></PlayingCarouselRight></div>
+                        <PlayingCarouselLeft />
+                        <PlayingCarouselRight />
+                        </div>
                     <div className="task_container tab-pane fade" id="hap-id" role="tabpanel" aria-labelledby="hap-label">
                         <div className="tab-content-text">
                             <Typography variant="h5" align="left" style={{ paddingBottom: 30, fontSize: 'small', fontFamily: 'museo_sans,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif' }}>
                                 Got something to celebrate and the guest list all ready, but need everything else? Let Airtasker help you find the best bartenders, party planners, photographers and entertainment in the land.
                         </Typography>
                         </div>
-                        <PlayingCarouselLeft></PlayingCarouselLeft>
-                        <PlayingCarouselRight></PlayingCarouselRight></div>
+                        <PlayingCarouselLeft  />
+                        <PlayingCarouselRight />
+                        </div>
                     <div className="task_container tab-pane fade" id="sd-id" role="tabpanel" aria-labelledby="sd-label">
                         <div className="tab-content-text">
                             <Typography variant="h5" align="left" style={{ paddingBottom: 30, fontSize: 'small', fontFamily: 'museo_sans,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif' }}>
                                 Want something done but feel like it’s too random? Whether it’s getting rescued from a spider or help building a bobsled - you can get nearly anything done through Airtasker.
                         </Typography>
                         </div>
-                        <PlayingCarouselLeft></PlayingCarouselLeft>
-                        <PlayingCarouselRight></PlayingCarouselRight></div>
+                        <PlayingCarouselLeft />
+                        <PlayingCarouselRight />
+                        </div>
                 </div>
             </nav>
         </TaskContainer>

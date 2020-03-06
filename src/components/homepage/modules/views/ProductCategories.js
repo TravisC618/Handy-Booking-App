@@ -14,6 +14,7 @@ const styles = theme => ({
     marginTop: theme.spacing(8),
     display: 'flex',
     flexWrap: 'wrap',
+
   },
   imageWrapper: {
     position: 'relative',
@@ -21,6 +22,8 @@ const styles = theme => ({
     padding: 0,
     borderRadius: 0,
     height: '40vh',
+    maxHeight: 200,
+
     [theme.breakpoints.down('sm')]: {
       width: '100% !important',
       height: 100,
@@ -144,6 +147,7 @@ function ProductCategories(props) {
   ];
 
   return (
+    
     <Container className={classes.root} component="section">
       <Typography variant="h4" marked="center" align="center" component="h2">
         What do you need done?
