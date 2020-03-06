@@ -1,13 +1,18 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
-import { login } from "../api/auth";
+import { Link, withRouter } from "react-router-dom";
+import {
+  handleVisible as handleVisibleAction,
+  handleRedirect as handleRedirectAction
+} from "../redux/actions/loginAction";
+import { login, register } from "../api/auth";
 import { storeToken } from "../utils/auth";
-import { getPreviousPath } from "../utils/helper";
 import Modal from "react-animated-modal";
 import TextField from "@material-ui/core/TextField";
-import logo from "../img/logo.png";
+import { connect } from "react-redux";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import { errHandler } from "../utils/helper";
+import "../css/login.scss";
+import SocialLogin from "./SocialLogin";
 
 class Login extends Component {
   constructor(props) {
@@ -15,7 +20,12 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      errMsg: ""
+      repeatPwd: "",
+      username: "",
+      checkbox: false,
+      err: { type: "", msg: "" },
+      isLoading: false,
+      switchToRegister: false
     };
   }
 
@@ -25,131 +35,226 @@ class Login extends Component {
     this.setState({ [key]: value });
   };
 
-  handleLogin = async () => {
-    const { email, password } = this.state;
-    login(email, password)
-      .then(response => {
-        const { token } = response.data.data;
-        storeToken(token);
-        this.setState({ errMsg: "" });
-        //TODO 可以设计成登陆后redirect到account
-        const currentPath = this.props.location.pathname;
-        const previousPath = getPreviousPath(currentPath);
+  /**
+   * switch between login and register
+   */
+  handleToggle = () => {
+    //TODO clear form
+    this.setState(state => ({
+      email: "",
+      password: "",
+      repeatPwd: "",
+      username: "",
+      checkbox: false,
+      isLoading: false,
+      err: {
+        type: "",
+        msg: ""
+      },
+      switchToRegister: !state.switchToRegister
+    }));
+  };
 
-        const locationState = this.props.location.state;
-        const redirectTo =
-          (locationState && locationState.from) || previousPath;
+  /**
+   * userBehavior - login/register
+   */
+  handleUserBehavior = async () => {
+    const {
+      email,
+      password,
+      repeatPwd,
+      username,
+      checkbox,
+      switchToRegister
+    } = this.state;
+    const { redirectTo, handleVisible, handleRedirect, location } = this.props;
+    const currentPath = location.pathname;
+    const userBehavior = () =>
+      switchToRegister
+        ? register(email, password, username)
+        : login(email, password);
 
-        this.props.handleVisible(false);
+    if (switchToRegister && password !== repeatPwd) {
+      this.setState({
+        err: { type: "password", msg: '"Passwords" do not match' }
+      });
+      return;
+    }
 
-        this.props.history.replace(redirectTo);
-      })
-      .catch(error => {
-        if (error.response) {
-          const { message } = error.response.data;
-          this.setState({ errMsg: message });
+    if (switchToRegister && !checkbox) {
+      this.setState({
+        err: {
+          type: "checkbox",
+          msg: "You should accept the terms above"
         }
       });
+      return;
+    }
+
+    this.setState({ err: {}, isLoading: true }, () => {
+      userBehavior()
+        .then(response => {
+          this.setState({ isLoading: false }, () => {
+            const { token } = response.data.data;
+            storeToken(token);
+            this.props.history.replace(redirectTo ? redirectTo : currentPath);
+            redirectTo && handleRedirect(""); // reset redirectTo
+            handleVisible(false);
+          });
+        })
+        .catch(error => {
+          if (error.response) {
+            const { message } = error.response.data;
+            this.setState({ err: errHandler(message) });
+          }
+          this.setState({ isLoading: false });
+        });
+    });
   };
 
   render() {
-    const { visible, handleVisible, history } = this.props;
-    const { errMsg } = this.state;
+    const { visible, handleVisible } = this.props;
+    const { err, isLoading, switchToRegister } = this.state;
 
     return (
       <Modal
         visible={visible}
-        closemodal={() => {
-          handleVisible(false);
-          const currentPath = this.props.location.pathname;
-          const previousPath = getPreviousPath(currentPath);
-          history.push(previousPath);
-          // history.goBack(); //TODO 改成从location.pathname入手
-        }}
+        closemodal={() => handleVisible(false)}
         type="zoomInDown"
       >
-        <div class="login-box">
-          <div>
-            <p class="login-title text-center">
-              Login to <img src={logo} alt="logo" />
-            </p>
-          </div>
-          <div class="login-third-party-login">
-            <p class="login-button-info-text login-info-text text-center">
-              EASILY USING
-            </p>
-
-            <div class="social-login-button">
-              <a href="#" class="social-button" id="facebook-connect">
-                {" "}
-                <span>Connect with Facebook</span>
-              </a>
-              <a href="#" class="social-button" id="google-connect">
-                {" "}
-                <span>Connect with Google</span>
-              </a>
-              <a href="#" class="social-button" id="twitter-connect">
-                {" "}
-                <span>Connect with Twitter</span>
-              </a>
+        <div className="login-box">
+          <div className="login-box-header">
+            <div className="login-box-header__left">
+              <p className="login-info-text text-center">
+                {switchToRegister ? "Register with" : "USING EMAIL"}
+              </p>
+            </div>
+            <div className="login-box-header__right">
+              <p className="login-info-text text-center">
+                {switchToRegister ? "Are you a member?" : "Not a member yet?"}
+              </p>
+              <Link className="login-link" onClick={this.handleToggle}>
+                {switchToRegister ? "Login now" : "Register now"}
+              </Link>
             </div>
           </div>
-          <p class="login-info-text text-center">- OR USING EMAIL -</p>
-          <form class="login-login-form">
-            <fieldset class="login-input-container">
-              <div class="login-input-item">
+          <form className="login-login-form">
+            <fieldset className="login-input-container">
+              {switchToRegister ? (
+                <div className="login-input-item">
+                  <TextField
+                    type="username"
+                    name="username"
+                    className="input-item-textfield"
+                    error={err.type === "username"}
+                    helperText={err.type === "username" ? err.msg : null}
+                    placeholder="Username"
+                    onChange={this.handleChange}
+                    variant="outlined"
+                  />
+                </div>
+              ) : null}
+              <div className="login-input-item">
                 <TextField
                   type="email"
                   name="email"
                   className="input-item-textfield"
-                  error={errMsg ? true : false}
+                  error={err.type === "email"}
+                  helperText={err.type === "email" ? err.msg : null}
                   placeholder="Your Email Address"
                   onChange={this.handleChange}
                   variant="outlined"
                 />
               </div>
-              <div class="login-input-item">
+              <div className="login-input-item">
                 <TextField
                   type="password"
                   name="password"
                   className="input-item-textfield"
-                  error={errMsg ? true : false}
-                  helperText={errMsg ? errMsg : null}
-                  placeholder="Enter Password"
+                  error={err.type === "password"}
+                  helperText={err.type === "password" ? err.msg : null}
+                  placeholder="Password"
                   onChange={this.handleChange}
                   variant="outlined"
                 />
               </div>
+              {switchToRegister ? (
+                <div className="login-input-item">
+                  <TextField
+                    type="password"
+                    name="repeatPwd"
+                    className="input-item-textfield"
+                    error={err.type === "password"}
+                    helperText={err.type === "password" ? err.msg : null}
+                    placeholder="Repeat Password"
+                    onChange={this.handleChange}
+                    variant="outlined"
+                  />
+                </div>
+              ) : null}
             </fieldset>
-            <div class="remember-password-container">
-              <input type="checkbox" />
+            <div className="remember-password-container">
+              <input
+                type="checkbox"
+                onClick={() =>
+                  this.setState(state => ({ checkbox: !state.checkbox }))
+                }
+              />
               <label>
-                <span class="login-info-text">Remember password?</span>
+                <span className="login-info-text">
+                  {switchToRegister ? (
+                    <>
+                      I accept the
+                      <Link className="login-link"> Terms and Conditions </Link>
+                      and
+                      <Link className="login-link"> Privacy Policy </Link>
+                    </>
+                  ) : (
+                    "Keep me logged in"
+                  )}
+                </span>
               </label>
+              {err.type === "checkbox" ? (
+                <span className="err-msg">* {err.msg}</span>
+              ) : null}
             </div>
-            <fieldset class="login-login-button-container">
-              <Link className="login-login-button" onClick={this.handleLogin}>
-                Log in
-              </Link>
+            <fieldset className="login-login-button-container">
+              {switchToRegister ? (
+                <Link
+                  className="login-login-button"
+                  onClick={this.handleUserBehavior}
+                >
+                  {isLoading ? <LoadingSpinner /> : "Create your account"}
+                </Link>
+              ) : (
+                <Link
+                  className="login-login-button"
+                  onClick={this.handleUserBehavior}
+                >
+                  {isLoading ? <LoadingSpinner /> : "Log in"}
+                </Link>
+              )}
             </fieldset>
           </form>
-          <div class="login-link-container">
-            <a class="login-link" href="#">
-              Recover password
-            </a>
-          </div>
+          {switchToRegister ? null : (
+            <div className="login-link-container">
+              <Link className="login-link">Recover password</Link>
+            </div>
+          )}
+          <SocialLogin />
         </div>
       </Modal>
     );
   }
 }
-
 const mapStateToProps = state => ({
-  visible: state.login.visible
+  visible: state.login.visible,
+  redirectTo: state.login.redirectTo
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleVisible: isVisible => dispatch(handleVisibleAction(isVisible))
+  handleVisible: isVisible => dispatch(handleVisibleAction(isVisible)),
+  handleRedirect: redirectTo => dispatch(handleRedirectAction(redirectTo))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
