@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../css/account/dashboard.css";
 
 const Dashboard = props => {
@@ -112,7 +113,9 @@ const Dashboard = props => {
               </button>
             </div>
           </div>
-          <button className="post-button">Post a task</button>
+          <Link className="post-button" to="/find-cleaners">
+            Post a task
+          </Link>
         </div>
         <div className="dashboard-banner">
           <div className="banner-container">
