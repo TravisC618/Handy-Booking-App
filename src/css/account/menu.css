@@ -53,7 +53,7 @@
     overflow: hidden;
 } 
 
-.menu__list .showing a.button {
+.menu__list .showing .button {
     color: #545a77;
     height: 44px;
     border-bottom: 1px solid #f6f8fd;
@@ -62,7 +62,7 @@
     transition-timing-function: ease-out, ease-out, ease-out, ease-out, linear;
 }
 
-.menu__list a.button {
+.menu__list .button {
     border-bottom: 0 solid transparent;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -84,6 +84,28 @@
 .menu-folder-control {
     position: relative;
     overflow: hidden;
+}
+
+.menu-folder-control .button {
+    font-family: museo_sans,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-size: 14px;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    font-weight: 500;
+    line-height: 44px;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    height: 44px;
+    border-bottom: 1px solid #f6f8fd;
+    transition: color .1s ease-out,padding .3s ease-out,background .1s ease-out,height .3s ease-out,border-bottom .2s linear;
+    background: inherit;
+    color: #008fb4;
+    padding-left: 30px;
 }
 
 
