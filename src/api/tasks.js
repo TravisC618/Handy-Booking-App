@@ -1,5 +1,5 @@
 import querystring from "querystring";
-import { get } from "./axios";
+import { get, post } from "./axios";
 
 const API_TASK_URL = "/api/tasks";
 
@@ -32,4 +32,10 @@ export const reqGetTask = id => {
   const url = `${API_TASK_URL}/${id}`;
 
   return get(url);
+};
+
+export const reqPostTask = (taskDetails, userId) => {
+  const url = `${API_TASK_URL}/users/${userId}`;
+
+  return post(url, taskDetails);
 };

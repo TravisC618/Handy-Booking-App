@@ -1,14 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import {
   handleVisible as handleVisibleAction,
   handleRedirect as handleRedirectAction
 } from "../redux/actions/loginAction";
+import { storeToken, storeUserId } from "../utils/auth";
 import { login, register } from "../api/auth";
-import { storeToken } from "../utils/auth";
 import Modal from "react-animated-modal";
 import TextField from "@material-ui/core/TextField";
-import { connect } from "react-redux";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { errHandler } from "../utils/helper";
 import "../css/login.scss";
@@ -34,7 +34,6 @@ class Login extends Component {
     const value = event.target.value;
     this.setState({ [key]: value });
   };
-
   /**
    * switch between login and register
    */
@@ -95,8 +94,9 @@ class Login extends Component {
       userBehavior()
         .then(response => {
           this.setState({ isLoading: false }, () => {
-            const { token } = response.data.data;
+            const { token, userId } = response.data.data;
             storeToken(token);
+            storeUserId(userId);
             this.props.history.replace(redirectTo ? redirectTo : currentPath);
             redirectTo && handleRedirect(""); // reset redirectTo
             handleVisible(false);
@@ -105,9 +105,8 @@ class Login extends Component {
         .catch(error => {
           if (error.response) {
             const { message } = error.response.data;
-            this.setState({ err: errHandler(message) });
+            this.setState({ err: errHandler(message), isLoading: false });
           }
-          this.setState({ isLoading: false });
         });
     });
   };

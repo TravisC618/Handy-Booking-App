@@ -15,6 +15,7 @@ import {
   ACCOUNT_DASHBOARD_URL,
   LOGIN_URL
 } from "./URLMAP";
+import PostSide from "../components/find_cleaners/PostSide";
 
 const Routes = () => {
   return (
@@ -23,7 +24,7 @@ const Routes = () => {
       <Route path={LOGIN_URL} exact component={Index} />
       <Route path={CLEANER_DETAILS_URL} component={Details} />
       <Route path={TASK_URL} component={BrowseTasks} />
-      <ProtectedRoute path={FIND_CLEANERS_URL} component={FindCleaners} />
+      <ProtectedRoute path={FIND_CLEANERS_URL} component={PostSide} />
       <ProtectedRoute path={ACCOUNT_BASE_URL} component={Account} />
       <Redirect to="/" /> {/* NOT MATCH => REDIRECT TO HOMEPAGE */}
     </Switch>

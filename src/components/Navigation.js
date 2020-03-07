@@ -8,7 +8,7 @@ import logo from "../img/logo.png";
 import { isIncluded } from "../utils/helper";
 import Login from "./Login";
 import { isLoggedIn } from "../utils/auth";
-import { removeToken } from "../utils/auth";
+import { removeToken, removeUserId } from "../utils/auth";
 import {
   HOME_URL,
   CLEANER_DETAILS_URL,
@@ -19,6 +19,12 @@ import "../css/navigation.css";
 import "../css/login.scss";
 
 class Navigation extends Component {
+  logout = history => {
+    removeToken();
+    removeUserId();
+    history.push(HOME_URL);
+  };
+
   componentDidMount() {
     window.addEventListener("scroll", this.resizeHeaderOnScroll);
     // if it doesn't contain "/login", return -1
@@ -58,11 +64,6 @@ class Navigation extends Component {
       headerEl.classList.remove("colored");
     }
   }
-
-  logout = history => {
-    removeToken();
-    history.push(HOME_URL);
-  };
 
   render() {
     const { history, visible, handleVisible } = this.props;
