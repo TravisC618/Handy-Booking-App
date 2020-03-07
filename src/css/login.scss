@@ -1,7 +1,16 @@
 @import "./theme.scss";
 
+.react-modal {
+  top: 0;
+  left: 0;
+}
+
 .react-modal-body {
-  width: 500px;
+  width: 650px;
+}
+
+.input-item-textfield {
+  width: 100%;
 }
 
 .login-container {
@@ -21,28 +30,50 @@
   position: relative;
   padding-bottom: 40px;
 }
-.login-title {
-  img {
-    width: 50%;
-    padding-bottom: 4.5px;
-  }
-  font-size: 32px;
-  margin-top: 15px;
-  color: #535766;
-}
+
+// header
 .login-box {
   background-color: #fff;
-  padding: 20px 10px;
+  padding: 60px 50px 50px;
   width: 100%;
 }
 
+.login-box-header {
+  display: flex;
+  justify-content: space-around;
+
+  .login-box-header__left {
+    .login-info-text {
+      font-weight: 500;
+      font-size: 17px;
+    }
+  }
+
+  .login-box-header__right {
+    display: flex;
+
+    .login-info-text,
+    .login-link {
+      font-size: 17px;
+    }
+
+    .login-link {
+      padding: 0 !important;
+      margin-left: 5px;
+    }
+  }
+}
+
 .social-login-button {
+  margin: 0 auto;
   background: #fff;
-  padding: 20px;
+  padding: 10px 20px;
   max-width: 480px;
   text-align: center;
   letter-spacing: 1px;
   position: relative;
+  display: flex;
+  justify-content: space-around;
 }
 
 .social-button {
@@ -60,14 +91,23 @@
   width: 100%;
   border-radius: 3px;
   margin: 10px auto;
+  margin-right: 10px;
   outline: rgb(255, 255, 255) none 0px;
-  padding-left: 20%;
+  padding: 0 20px 0 45px;
   transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  span {
+    padding-left: 10px;
+  }
 }
 
 #facebook-connect {
@@ -200,12 +240,13 @@
 }
 
 .login-info-text {
-  color: #94969f;
+  color: #202121;
   font-size: 12px;
 }
 .login-button-info-text {
-  margin-top: 0;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  font-weight: 500;
+  padding: 0 60px;
 }
 .login-button-container {
   margin-top: 10px;
@@ -261,15 +302,12 @@
 
 .login-login-form {
   margin: 0;
+  padding: 0 20px;
 }
 .login-input-container {
-  margin: 20px;
-  border: 1px solid #bfc0c6;
+  margin: 20px 20px 0;
   border-radius: 5px;
   padding: 0;
-  &:hover {
-    box-shadow: 0 2px 5px #eaeaec;
-  }
 }
 .login-input-container-pink {
   border: 1px solid $primary-color;
@@ -277,6 +315,7 @@
 }
 .login-input-item {
   position: relative;
+  margin-bottom: 20px;
 }
 .login-user-input {
   display: block;
@@ -337,6 +376,7 @@
   padding: 10px 20px;
   margin: 0;
   border: 0;
+  position: relative;
 }
 .login-login-button {
   background-color: $primary-color;
@@ -347,29 +387,47 @@
   padding: 15px;
   display: block;
   width: 100%;
+  text-align: center;
   border: 0;
   text-transform: uppercase;
   border-radius: 3px;
   font-family: Whitney;
   transition: $link-transition;
   &:hover {
-    background: $link-hover;
-    color: $font-hover;
+    background-color: #e99739;
+    color: $link-hover;
+    // color: $font-hover;
+    text-decoration: none;
   }
   &:focus {
     outline: 0;
     box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.2);
     background-color: #ff3f6c;
+    text-decoration: none;
   }
 }
 .login-link-container {
   text-align: left;
-  padding: 20px;
+  padding: 5px;
+  text-align: center;
+}
+.login-third-party-login {
+  .login-info-text {
+    margin: 10px 0 0;
+  }
 }
 .remember-password-container {
   text-align: left;
   padding: 0px 0px 0px 20px;
   line-height: 10pt;
+
+  .login-info-text {
+    color: #a6abab;
+    margin-bottom: 0;
+  }
+  input {
+    margin-right: 10px;
+  }
 }
 .login-right-links {
   float: right;
@@ -382,8 +440,8 @@
   padding: 10px 0;
   transition: $link-transition;
   &:hover {
-    text-decoration: none;
-    color: $font-hover;
+    text-decoration: underline;
+    color: #49c5b6;
   }
 }
 .login-create-account-link {
@@ -759,6 +817,12 @@
   font-weight: 500;
   margin: 20px 0;
 }
+
+.err-msg {
+  display: block;
+  color: #f44336;
+}
+
 @media (min-width: 360px) {
   .login-button {
     width: 100%;

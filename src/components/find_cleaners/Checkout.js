@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Check from "@material-ui/icons/Check";
@@ -8,13 +9,20 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import TaskDescription from "./TaskDescription";
 import LocationNTime from "./LocationNTime";
 import StepConnector from "@material-ui/core/StepConnector";
+import Alert from "@material-ui/lab/Alert";
 import Budget from "./Budget";
 import { lengthCheck } from "../../utils/helper";
+import TaskBreadcrumbs from "./BreadCrumbs";
+import { getUserId } from "../../utils/auth";
+import { reqPostTask } from "../../api/tasks";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 import "../../css/theme.scss";
 
 function Copyright() {
@@ -39,18 +47,17 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
       marginLeft: "auto",
       marginRight: "auto"
     }
   },
   paper: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6),
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(10),
       padding: theme.spacing(3)
     }
   },
@@ -63,11 +70,23 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
+    color: "#fff",
+    background: "#f50057",
+    "&:hover, &:focus": {
+      background: "#f50057"
+    }
   },
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1)
+  },
+  breadcrumbs: {
+    marginBottom: theme.spacing(4)
+  },
+  alert: {
+    width: "100%",
+    marginTop: theme.spacing(8)
   }
 }));
 
@@ -79,12 +98,12 @@ const QontoConnector = withStyles({
   },
   active: {
     "& $line": {
-      borderColor: "#ffa640"
+      borderColor: "#ff3366"
     }
   },
   completed: {
     "& $line": {
-      borderColor: "#ffa640"
+      borderColor: "#ff3366"
     }
   },
   line: {
@@ -108,10 +127,10 @@ const useQontoStepIconStyles = makeStyles({
     width: 8,
     height: 8,
     borderRadius: "50%",
-    backgroundColor: "#ffa640"
+    backgroundColor: "#ff3366"
   },
   completed: {
-    color: "#ffa640",
+    color: "#ff3366",
     zIndex: 1,
     fontSize: 18
   }
@@ -156,22 +175,25 @@ function getStepContent(step, handleChange, values) {
   }
 }
 
-export default function Checkout() {
+function Checkout(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [values, setValues] = useState({
     title: "",
     details: "",
     location: "",
-    date: new Date(),
+    dueDate: new Date(),
     radio: "Total",
     amount: "",
-    hour: "",
+    hour: "1",
+    taskId: "",
     err: {
       name: "",
       msg: ""
-    }
+    },
+    isPosting: false
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const isPositiveNum = (key, value) => {
     if (key === "amount" || key === "hour") {
@@ -194,6 +216,36 @@ export default function Checkout() {
       return;
     }
     setValues({ ...values, [key]: value });
+  };
+
+  const handleSubmit = () => {
+    const { title, details, location, dueDate, amount, hour, radio } = values;
+
+    // total budget
+    const budget = radio === "Total" ? amount : amount * hour;
+    const taskDetails = { title, details, location, dueDate, budget };
+    setIsLoading(true);
+    reqPostTask(taskDetails, getUserId())
+      .then(response => {
+        const taskId = response.data.data._id;
+        setValues({ ...values, taskId });
+        setIsLoading(false);
+
+        // redirect to homepage in 5 sec
+        setTimeout(() => {
+          props.history.replace("/");
+        }, 5000);
+      })
+      .catch(err => {
+        if (err.response) {
+          const { message } = err.response.data;
+          setValues({
+            ...values,
+            err: { name: "post", msg: message }
+          });
+          setIsLoading(false);
+        }
+      });
   };
 
   const handleNext = () => {
@@ -232,20 +284,25 @@ export default function Checkout() {
           return;
         }
         break;
-      // case 2:
-      //   if() {
-
-      //     return;
-      //   }
-      //   break;
+      case 2:
+        if (!values.amount) {
+          setValues({
+            ...values,
+            err: {
+              name: "budget",
+              msg: "* You should give a budget before posting"
+            }
+          });
+          return;
+        }
+        handleSubmit();
+        break;
       default:
         return;
     }
     // Once pass validation, set err empty
     setValues({ ...values, err: { name: "", msg: "" } });
-    console.log(`activeStep: ${activeStep}`);
     setActiveStep(activeStep + 1);
-    console.log(`activeStep: ${activeStep}`);
   };
 
   const handleBack = () => {
@@ -256,7 +313,10 @@ export default function Checkout() {
     <React.Fragment>
       {/* <CssBaseline /> */}
       <main className={classes.layout}>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={0}>
+          <Grid className={classes.breadcrumbs}>
+            <TaskBreadcrumbs />
+          </Grid>
           <Typography component="h1" variant="h4" align="center">
             Post a task
           </Typography>
@@ -273,16 +333,37 @@ export default function Checkout() {
           </Stepper>
           <React.Fragment>
             {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  You've successfully posted!
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your task id is #2001539. We have emailed your task
-                  confirmation, and will send you an update when your task has
-                  any offer or comment.
-                </Typography>
-              </React.Fragment>
+              isLoading ? (
+                <LoadingSpinner />
+              ) : (
+                <React.Fragment>
+                  {values.err.name === "post" ? (
+                    <Alert variant="filled" severity="error">
+                      {values.err.msg}
+                    </Alert>
+                  ) : (
+                    <>
+                      <Typography variant="h5" gutterBottom>
+                        You've successfully posted!
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        `Your task id is ${values.taskId}. We have emailed your
+                        task confirmation, and will send you an update when your
+                        task has any offer or comment.`
+                      </Typography>
+                      <Box
+                        display="flex"
+                        justifyContent="center"
+                        className={classes.alert}
+                      >
+                        <Alert variant="filled" severity="success">
+                          Back to homepage in 5 seconds
+                        </Alert>
+                      </Box>
+                    </>
+                  )}
+                </React.Fragment>
+              )
             ) : (
               <React.Fragment>
                 {getStepContent(activeStep, handleChange, values)}
@@ -310,3 +391,5 @@ export default function Checkout() {
     </React.Fragment>
   );
 }
+
+export default withRouter(Checkout);

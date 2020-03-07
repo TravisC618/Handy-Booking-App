@@ -1,30 +1,20 @@
-body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    background: black;
-    font-family: Montserrat, sans-serif;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  header {
+
+  .hometasks-container {
+    background-color: #f6f8fd;
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
     padding: 0 60px;
   }
-  
-  .logo {
-    font-size: 34px;
-    line-height: 50px;
+
+  .hometasks-nav {
     text-align: center;
-    text-decoration: none;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+
   
   .underline-menu {
     display: flex;
@@ -53,6 +43,14 @@ body {
   .underline-menu li:hover::after, .underline-menu li.active::after {
     transform: scaleX(1);
   }
+
+  .underline-menu .active {
+    color: #3498db;
+    font-size: larger;
+    font-weight: bolder;
+  }
+
+
   .underline-menu li a {
     position: relative;
     display: flex;
@@ -61,3 +59,16 @@ body {
     color: black;
     transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
+
+  .task_container {
+    background: #fff;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+      height: 500px;
+      width:100%;
+  }
+
+  
