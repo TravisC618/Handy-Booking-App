@@ -32,12 +32,12 @@
     "npm": "^6.13.7",
     "office-ui-fabric-react": "^7.87.0",
     "querystring": "^0.2.0",
-    "react": "^16.12.0",
+    "react": "^16.13.0",
     "react-animated-modal": "^1.1.1",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-breakpoints": "^3.0.3",
     "react-clamp-lines": "^3.0.2",
-    "react-dom": "^16.12.0",
+    "react-dom": "^16.13.0",
     "react-id-swiper": "^2.4.0",
     "react-items-carousel": "^2.8.0",
     "react-lightbox-component": "^1.2.1",
@@ -59,7 +59,8 @@
     "simple-react-lightbox": "^2.2.0",
     "styled-components": "^5.0.1",
     "swiper": "^5.3.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "video-react": "^0.14.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -83,6 +84,7 @@
     ]
   },
   "devDependencies": {
+    "@types/faker": "^4.1.10",
     "@types/styled-components": "^5.0.1"
   }
 }

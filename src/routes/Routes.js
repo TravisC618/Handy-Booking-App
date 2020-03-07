@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import Login from "../components/Login";
 import Index from "../components/homepage/Home";
 import FindCleaners from "../FindCleaners";
 import Details from "../Details";
@@ -23,8 +24,7 @@ const Routes = () => {
       <Route path={LOGIN_URL} exact component={Index} />
       <Route path={CLEANER_DETAILS_URL} component={Details} />
       <Route path={TASK_URL} component={BrowseTasks} />
-      <Route path="/test" component={PostSide} />
-      <ProtectedRoute path={FIND_CLEANERS_URL} component={FindCleaners} />
+      <ProtectedRoute path={FIND_CLEANERS_URL} component={PostSide} />
       <ProtectedRoute path={ACCOUNT_BASE_URL} component={Account} />
       <Redirect to="/" /> {/* NOT MATCH => REDIRECT TO HOMEPAGE */}
     </Switch>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Check from "@material-ui/icons/Check";
@@ -8,17 +9,20 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import TaskDescription from "./TaskDescription";
 import LocationNTime from "./LocationNTime";
 import StepConnector from "@material-ui/core/StepConnector";
+import Alert from "@material-ui/lab/Alert";
 import Budget from "./Budget";
 import { lengthCheck } from "../../utils/helper";
 import TaskBreadcrumbs from "./BreadCrumbs";
 import { getUserId } from "../../utils/auth";
 import { reqPostTask } from "../../api/tasks";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 import "../../css/theme.scss";
 
 function Copyright() {
@@ -79,6 +83,10 @@ const useStyles = makeStyles(theme => ({
   },
   breadcrumbs: {
     marginBottom: theme.spacing(4)
+  },
+  alert: {
+    width: "100%",
+    marginTop: theme.spacing(8)
   }
 }));
 
@@ -167,7 +175,7 @@ function getStepContent(step, handleChange, values) {
   }
 }
 
-export default function Checkout() {
+function Checkout(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [values, setValues] = useState({
@@ -178,12 +186,14 @@ export default function Checkout() {
     radio: "Total",
     amount: "",
     hour: "1",
+    taskId: "",
     err: {
       name: "",
       msg: ""
     },
-    taskId: ""
+    isPosting: false
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const isPositiveNum = (key, value) => {
     if (key === "amount" || key === "hour") {
@@ -214,14 +224,26 @@ export default function Checkout() {
     // total budget
     const budget = radio === "Total" ? amount : amount * hour;
     const taskDetails = { title, details, location, dueDate, budget };
-    console.log(taskDetails);
+    setIsLoading(true);
     reqPostTask(taskDetails, getUserId())
-      .then(response => console.log(response))
+      .then(response => {
+        const taskId = response.data.data._id;
+        setValues({ ...values, taskId });
+        setIsLoading(false);
+
+        // redirect to homepage in 5 sec
+        setTimeout(() => {
+          props.history.replace("/");
+        }, 5000);
+      })
       .catch(err => {
         if (err.response) {
-          console.log(err.response);
           const { message } = err.response.data;
-          setValues({ ...values, err: { name: "post", msg: message } });
+          setValues({
+            ...values,
+            err: { name: "post", msg: message }
+          });
+          setIsLoading(false);
         }
       });
   };
@@ -311,18 +333,37 @@ export default function Checkout() {
           </Stepper>
           <React.Fragment>
             {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  You've successfully posted!
-                </Typography>
-                <Typography variant="subtitle1">
-                  {values.err.name === "post"
-                    ? values.err.msg
-                    : `Your task id is ${values.taskId}. We have emailed your task
-                  confirmation, and will send you an update when your task has
-                  any offer or comment.`}
-                </Typography>
-              </React.Fragment>
+              isLoading ? (
+                <LoadingSpinner />
+              ) : (
+                <React.Fragment>
+                  {values.err.name === "post" ? (
+                    <Alert variant="filled" severity="error">
+                      {values.err.msg}
+                    </Alert>
+                  ) : (
+                    <>
+                      <Typography variant="h5" gutterBottom>
+                        You've successfully posted!
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        `Your task id is ${values.taskId}. We have emailed your
+                        task confirmation, and will send you an update when your
+                        task has any offer or comment.`
+                      </Typography>
+                      <Box
+                        display="flex"
+                        justifyContent="center"
+                        className={classes.alert}
+                      >
+                        <Alert variant="filled" severity="success">
+                          Back to homepage in 5 seconds
+                        </Alert>
+                      </Box>
+                    </>
+                  )}
+                </React.Fragment>
+              )
             ) : (
               <React.Fragment>
                 {getStepContent(activeStep, handleChange, values)}
@@ -350,3 +391,5 @@ export default function Checkout() {
     </React.Fragment>
   );
 }
+
+export default withRouter(Checkout);
