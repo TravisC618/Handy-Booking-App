@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
 // import { updateModelStatus as updateModelStatusAction } from "../redux/actions/loginAction";
 // import { isIncluded } from "../utils/helper";
-import logo from "../img/logo.png";
 import { isIncluded } from "../utils/helper";
 import Login from "./Login";
 import { isLoggedIn } from "../utils/auth";
@@ -15,7 +14,7 @@ import {
   TASK_URL,
   ACCOUNT_DASHBOARD_URL
 } from "../routes/URLMAP";
-import "../css/navigation.css";
+import "../css/navigation.scss";
 import "../css/login.scss";
 
 class Navigation extends Component {
@@ -26,6 +25,8 @@ class Navigation extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.location.pathname);
+
     window.addEventListener("scroll", this.resizeHeaderOnScroll);
     // if it doesn't contain "/login", return -1
     if (isIncluded(this.props.location.pathname, "/login")) {
@@ -66,14 +67,17 @@ class Navigation extends Component {
   }
 
   render() {
-    const { history, visible, handleVisible } = this.props;
+    const { location, history, visible, handleVisible } = this.props;
+    const currentPath = location.pathname;
 
     return (
       <>
         {visible ? <Login /> : null}
         <nav
           id="header"
-          className={`navbar fixed-top navbar-expand-md navbar-light `}
+          className={`navbar ${currentPath !== "/" ? "other " : ""} ${
+            currentPath === "/find-cleaners" ? "post " : ""
+          }fixed-top navbar-expand-md navbar-light `}
         >
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
