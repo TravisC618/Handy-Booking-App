@@ -1,37 +1,25 @@
-import React, { Component, useContext }from "react";
-import Slide from '@material-ui/core/Slide';
-import TaskCardContentDetails from './TaskCardContentDetails';
-import {
-  TaskContext
-} from "../../hooks/taskReducer";
-
+import React from "react";
+import { useSelector } from "react-redux";
+import Slide from "@material-ui/core/Slide";
+import TaskCardContentDetails from "./TaskCardContentDetails";
 
 const ContentDisplay = () => {
+  const isDetailOn = useSelector(state => state.task.isDetailOn);
 
-    const taskContext = useContext(TaskContext);
-
-    const {
-
-      isDetailOn,
-
-    } = taskContext.taskState;
-
-    return(
-
-      <Slide 
+  return (
+    <Slide
       in={isDetailOn}
       direction="left"
-      mountOnEnter unmountOnExit
-      style={{ transformOrigin: '0 0 0' }}
-      {...( isDetailOn? { timeout: 1000 } : {})}
+      mountOnEnter
+      unmountOnExit
+      style={{ transformOrigin: "0 0 0" }}
+      {...(isDetailOn ? { timeout: 1000 } : {})}
     >
       <div>
         <TaskCardContentDetails />
       </div>
     </Slide>
-
-    )
-  }
+  );
+};
 
 export default ContentDisplay;
-

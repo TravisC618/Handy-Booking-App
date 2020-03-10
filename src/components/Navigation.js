@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import classnames from "classnames";
 import { handleVisible as handleVisibleAction } from "../redux/actions/loginAction";
-// import { updateModelStatus as updateModelStatusAction } from "../redux/actions/loginAction";
-// import { isIncluded } from "../utils/helper";
 import { isIncluded } from "../utils/helper";
 import Login from "./Login";
 import { isLoggedIn } from "../utils/auth";
@@ -25,26 +24,13 @@ class Navigation extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.location.pathname);
-
     window.addEventListener("scroll", this.resizeHeaderOnScroll);
-    // if it doesn't contain "/login", return -1
-    if (isIncluded(this.props.location.pathname, "/login")) {
-      this.props.handleVisible(true);
-    }
 
     const headerEl = document.getElementById("header");
     if (isIncluded(this.props.location.pathname, `${HOME_URL}`)) {
       headerEl.classList.add("fixed");
     } else {
       headerEl.classList.remove("stickied");
-    }
-  }
-
-  componentDidUpdate() {
-    // if it doesn't contain "/login", return -1
-    if (isIncluded(this.props.location.pathname, "/login")) {
-      this.props.handleVisible(true);
     }
   }
 
@@ -66,19 +52,53 @@ class Navigation extends Component {
     }
   }
 
+  renderLogin() {
+    const { history, handleVisible } = this.props;
+
+    if (isLoggedIn()) {
+      return (
+        <>
+          <li className="nav-item">
+            <Link className="nav-link" to={ACCOUNT_DASHBOARD_URL}>
+              Account
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" onClick={() => this.logout(history)}>
+              Log out
+            </Link>
+          </li>
+        </>
+      );
+    }
+
+    return (
+      <li className="nav-item">
+        <Link className="nav-link" onClick={() => handleVisible(true)}>
+          Log in/Register
+        </Link>
+      </li>
+    );
+  }
+
   render() {
-    const { location, history, visible, handleVisible } = this.props;
+    const { location, visible } = this.props;
     const currentPath = location.pathname;
+    const navClasses = classnames(
+      "navbar",
+      "fixed-top",
+      "navbar-expand-md",
+      "navbar-light",
+      {
+        other: currentPath !== "/",
+        post: currentPath === "/find-cleaners"
+      }
+    );
 
     return (
       <>
         {visible ? <Login /> : null}
-        <nav
-          id="header"
-          className={`navbar ${currentPath !== "/" ? "other " : ""} ${
-            currentPath === "/find-cleaners" ? "post " : ""
-          }fixed-top navbar-expand-md navbar-light `}
-        >
+        <nav id="header" className={navClasses}>
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
               <h1 className="logo">BYEDUST</h1>
@@ -103,32 +123,7 @@ class Navigation extends Component {
                     Browse Tasks
                   </Link>
                 </li>
-                {!isLoggedIn() ? (
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      onClick={() => handleVisible(true)}
-                    >
-                      Log in/Register
-                    </Link>
-                  </li>
-                ) : (
-                  <>
-                    <li className="nav-item">
-                      <Link className="nav-link" to={ACCOUNT_DASHBOARD_URL}>
-                        Account
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link
-                        className="nav-link"
-                        onClick={() => this.logout(history)}
-                      >
-                        Log out
-                      </Link>
-                    </li>
-                  </>
-                )}
+                {this.renderLogin()}
               </ul>
             </div>
           </div>

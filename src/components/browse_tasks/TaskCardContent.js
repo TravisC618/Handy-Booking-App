@@ -1,17 +1,18 @@
-import React, { useContext } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import "../../css/browse_tasks/TaskCardContent.css";
 import { Location, Calendar } from "../../utils/Icons";
-import { DetailContext } from "../../hooks/detailReducer";
 import { TASK_URL } from "../../routes/URLMAP";
 import { reqGetTask } from "../../api/tasks";
-import { UPDATE_DETAIL_STATE, UPDATE_LOADDED_STATE, UPDATE_LOADING_STATE } from "../../hooks/detailReducer";
+import {
+  UPDATE_DETAIL_STATE,
+  UPDATE_LOADING_STATE
+} from "../../redux/actions/taskAction";
 
 const TaskCardContent = props => {
-  
-  const detailContext = useContext(DetailContext);
-  const dispatch = detailContext.detailDispatch;
+  const dispatch = useDispatch();
 
   const toUpperCaseFilter = d => {
     return d.toUpperCase();
@@ -27,23 +28,17 @@ const TaskCardContent = props => {
     offerNum
   } = props.tasks;
 
-  // console.log(_id)
-
-
-  // {`${TASK_URL}/${title}`}
   return (
     <Link
       to={`${TASK_URL}/${_id}`}
       class="new-task-list-item new-task-list-item--open"
       onClick={async () => {
         try {
-          
-          // console.log(_id);
-          dispatch({ type: UPDATE_LOADING_STATE});
+          //TODO combine these two dispatch
+          dispatch({ type: UPDATE_LOADING_STATE });
           const response = await reqGetTask(_id);
-          dispatch({ type: UPDATE_LOADDED_STATE});
+          dispatch({ type: UPDATE_LOADING_STATE });
           const taskDetails = response.data.data;
-          console.log(taskDetails);
           dispatch({ type: UPDATE_DETAIL_STATE, taskDetails });
         } catch (error) {
           console.log(error); //TODO error handling
