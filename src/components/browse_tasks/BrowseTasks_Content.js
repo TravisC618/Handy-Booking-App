@@ -10,6 +10,7 @@ import {
 import { withRouter } from "react-router";
 import { Route } from "react-router-dom";
 import { TASK_URL } from "../../routes/URLMAP";
+import GoogleMapDisplay from "./map/GoogleMapDisplay";
 
 const Content = props => {
   const {
@@ -23,13 +24,23 @@ const Content = props => {
       value={{ detailState: detail, detailDispatch: dispatch }}
     >
       <div class="row">
-        <div class="col-4">
+        <div class="col-4 scroll-bar">
           <div className="infinite-scroll-list">
             <VirtualizedList />
           </div>
         </div>
-        <div class="col-8">
-          {currentPath === `${TASK_URL}` ? <TaskMapDisplay /> : null}
+        <div class="col-8 map-display">
+          {currentPath === `${TASK_URL}` ? (
+            <GoogleMapDisplay
+              loadingElement={<div style={{ height: "100%" }} />}
+              containerElement={<div style={{ height: "100%" }} />}
+              mapElement={<div style={{ height: "100%" }} />}
+              googleMapURL={
+                "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCuBhdFf7s-ipOzlY28rYbDMg2LeMqNsks"
+              }
+            />
+          ) : null}
+          {/* {currentPath === `${TASK_URL}` ? <TaskMapDisplay /> : null} */}
           <Route path={`${TASK_URL}/:titleId`} component={ContentDisplay} />
         </div>
       </div>

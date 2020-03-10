@@ -100,7 +100,7 @@ const Table = () => {
 
   return (
     <Virtuoso
-      style={{ width: "350px", height: "780px" }}
+      style={{ width: "350px", height: "calc(100vh - 134px)" }}
       overscan={pageSize}
       totalCount={total}
       item={GenerateItem}
