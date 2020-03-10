@@ -1,4 +1,5 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Virtuoso } from "react-virtuoso";
 import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,11 +8,10 @@ import LoadingSpinner from "../img/icons/LoadingSpinner.svg";
 import { reqGetAllTasks } from "../api/tasks";
 import {
   UPDATE_TOTAL,
-  TaskContext,
   INCREMENT_PAGE,
   UPDATE_ITEM_STATE,
   ERROR_MSG
-} from "../hooks/taskReducer";
+} from "../redux/actions/taskAction";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,17 +25,9 @@ const useStyles = makeStyles(theme => ({
 const Table = () => {
   const items = useRef([]);
   const loading = useRef(false);
-
-  const taskContext = useContext(TaskContext);
-  const {
-    total,
-    page,
-    pageSize,
-    priceRange,
-    hasMoreItem,
-    errMsg
-  } = taskContext.taskState;
-  const dispatch = taskContext.taskDispatch;
+  const taskState = useSelector(state => state.task);
+  const dispatch = useDispatch();
+  const { total, page, pageSize, priceRange, hasMoreItem, errMsg } = taskState;
 
   const classes = useStyles();
 
