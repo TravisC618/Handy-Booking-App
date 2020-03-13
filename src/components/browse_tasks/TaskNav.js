@@ -4,33 +4,29 @@ import PriceButton from "./PriceButton";
 import TypeButton from "./TypeButton";
 import SearchButton from "./SearchButton";
 import ShowMapButton from "./ShowMapButton";
-import "../../css/browse_tasks/task-nav.css";
-import "../../css/browse_tasks/searchbar.css";
 
 class TaskNav extends Component {
   render() {
     return (
- 
-      <ul class="nav nav-tabs justify-content-center">
-        <div className="TaskNav">
-        <li class="nav-item">
-          <RangeButton />
-        </li>
-        <li class="nav-item">
-          <PriceButton />
-        </li>
-        <li class="nav-item">
-          <TypeButton />
-        </li>
-        <li class="nav-item">
-        <ShowMapButton />
-        </li>
-        <li class="nav-item">
-        <SearchButton />
-        </li>
+      <>
+        <ul className="secondary-menu">
+          <li className="menu-item">
+            <RangeButton />
+          </li>
+          <li className="menu-item">
+            <PriceButton />
+          </li>
+          <li className="menu-item">
+            <TypeButton />
+          </li>
+          <li className="menu-item">
+            <ShowMapButton />
+          </li>
+        </ul>
+        <div className="search-bar">
+          <SearchButton />
         </div>
-      </ul>    
-
+      </>
     );
   }
 }

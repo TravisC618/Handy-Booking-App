@@ -111,6 +111,42 @@ class Login extends Component {
     });
   };
 
+  renderInput(name, type = name) {
+    let placeholder;
+    switch (name) {
+      case "username":
+        placeholder = "Username";
+        break;
+      case "email":
+        placeholder = "Your Email Address";
+        break;
+      case "password":
+        placeholder = "Password";
+        break;
+      case "repeatPwd":
+        placeholder = "Repeat Password";
+        break;
+      default:
+        placeholder = "";
+    }
+
+    // FIXME find out why the error does not pop up
+    return (
+      <div className="login-input-item">
+        <TextField
+          type={type}
+          name={name}
+          className="input-item-textfield"
+          error={this.state.err.type === { type }}
+          helperText={this.state.err.type === { type } && this.state.err.msg}
+          placeholder={placeholder}
+          onChange={this.handleChange}
+          variant="outlined"
+        />
+      </div>
+    );
+  }
+
   render() {
     const { visible, handleVisible } = this.props;
     const { err, isLoading, switchToRegister } = this.state;
@@ -139,6 +175,11 @@ class Login extends Component {
           </div>
           <form className="login-login-form">
             <fieldset className="login-input-container">
+              {/* {switchToRegister && this.renderInput("username")}
+              {this.renderInput("email")}
+              {this.renderInput("password")}
+              {switchToRegister && this.renderInput("repeatPwd", "password")} */}
+
               {switchToRegister ? (
                 <div className="login-input-item">
                   <TextField

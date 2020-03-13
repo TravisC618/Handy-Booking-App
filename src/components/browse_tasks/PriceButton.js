@@ -1,15 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
-import {
-  UPDATE_PRICE_RANGE,
-  RESET_ITEM,
-  TaskContext
-} from "../../hooks/taskReducer";
+import { UPDATE_PRICE_RANGE, RESET_ITEM } from "../../redux/actions/taskAction";
 import PriceButtonContent from "./PriceButtonContent";
 import "../../css/browse_tasks/PriceButton.css";
 
@@ -46,10 +43,7 @@ const StyledMenu = withStyles({
 export default function PriceButton() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [priceRange, setPriceRange] = React.useState([5, 9999]);
-
-  const taskContext = useContext(TaskContext);
-  const dispatch = taskContext.taskDispatch;
-
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const updatePriceRange = priceRange => {

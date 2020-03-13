@@ -1,8 +1,5 @@
-import React, { Component } from "react";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import AvatarUpload from "./AvatarUpload";
 import DetailContent from "./MoreDetails_Content";
 

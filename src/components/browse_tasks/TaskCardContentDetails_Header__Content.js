@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
-import { DetailContext } from "../../hooks/detailReducer";
+import React from "react";
+import { useSelector } from "react-redux";
 import AlignItemsList from "../../utils/AlignItemsList";
 import "../../css/browse_tasks/TaskCardContentDetails_Header__Content.css";
 
-const HeaderContent = props => {
-  const detailContext = useContext(DetailContext);
-  const { taskDetails } = detailContext.detailState;
+const HeaderContent = () => {
+  const taskDetails = useSelector(state => state.task.taskDetails);
   const title = taskDetails.title;
 
   return (
