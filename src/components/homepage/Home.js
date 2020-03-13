@@ -1,5 +1,4 @@
 import withRoot from "./modules/withRoot";
-
 import React, { useReducer } from "react";
 import ProductCategories from "./modules/views/ProductCategories";
 import ProductSmokingHero from "./modules/views/ProductSmokingHero";

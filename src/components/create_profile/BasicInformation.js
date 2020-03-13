@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,17 +12,14 @@ const useStyles = makeStyles(theme => ({
       marginBottom: theme.spacing(4),
       width: 200
     }
-  },
+  }
 }));
 
 export default function BasicInformation(props) {
   const { handleChange, values } = props;
-
-  const classes = useStyles();
-
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom >
+      <Typography variant="h6" gutterBottom>
         Tell us about yourself to set up your profile
       </Typography>
       <div className="basic-information-container">
