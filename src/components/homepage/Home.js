@@ -1,12 +1,6 @@
 import withRoot from './modules/withRoot';
 // --- Post bootstrap -----
-import React, { Component, useReducer } from "react";
-import {
-  HomeContext,
-  homeReducer,
-  initialState
-} from "../../hooks/homeReducer";
-
+import React from "react";
 import ProductCategories from './modules/views/ProductCategories';
 import ProductSmokingHero from './modules/views/ProductSmokingHero';
 import AppFooter from './modules/views/AppFooter';
@@ -18,14 +12,9 @@ import ProductTasks from './modules/views/ProductTasks';
 import MeetTasker from './modules/views/MeetTasker';
 
 function Index() {
-  const [home, dispatch] = useReducer(homeReducer, initialState);
-
   return (
 
     <React.Fragment>
-      <HomeContext.Provider
-        value={{ homeState: home, homeDispatch: dispatch }}
-      >
         <ProductHero />
         <ProductCategories />
         <ProductValues />
@@ -35,7 +24,6 @@ function Index() {
         <ProductCTA />
         <ProductSmokingHero />
         <AppFooter />
-      </HomeContext.Provider>
     </React.Fragment>
 
   );

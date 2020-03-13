@@ -1,0 +1,8 @@
+.basic-information-container {
+  width: 87%;
+  display: -webkit-inline-box;
+  margin: 40px;
+}
+.MuiTypography-gutterBottom {
+  text-transform: capitalize;
+}
