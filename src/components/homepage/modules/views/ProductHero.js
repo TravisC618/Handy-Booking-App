@@ -82,7 +82,7 @@ h1:hover span: nth-child(1) hide{
 h1:hover span: nth-child(2) hide{
   padding-left:40px;
 }
-`
+`;
 
 const styles = theme => ({
   background: {
@@ -91,7 +91,25 @@ const styles = theme => ({
     backgroundPosition: "center"
   },
   button: {
-    minWidth: 200
+    minWidth: 200,
+    "&:hover": {
+      textDecoration: "none",
+      color: "#fff"
+    },
+    "&:focus": {
+      textDecoration: "none",
+      color: "#fff"
+    }
+  },
+  link: {
+    "&:hover": {
+      textDecoration: "none",
+      color: "#fff"
+    },
+    "&:focus": {
+      textDecoration: "none",
+      color: "#fff"
+    }
   },
   h5: {
     marginBottom: theme.spacing(4),
@@ -118,8 +136,12 @@ function ProductHero(props) {
       />
       <Headline>
         <h1>
-          <span>Do<hide>n't</hide></span>
-          <span><hide>qu</hide>it</span>
+          <span>
+            Do<hide>n't</hide>
+          </span>
+          <span>
+            <hide>qu</hide>it
+          </span>
         </h1>
       </Headline>
       <Typography
@@ -127,10 +149,11 @@ function ProductHero(props) {
         align="center"
         variant="h5"
         className={classes.h5}
-      >The best person for the job isn't always who you think.
-        Find the people with the skills you need on BYEDUST.
+      >
+        The best person for the job isn't always who you think. Find the people
+        with the skills you need on BYEDUST.
       </Typography>
-      <Link to="/find-cleaners">
+      <Link className={classes.link} to="/find-cleaners">
         <Button
           color="secondary"
           variant="contained"

@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
-import carouselReducer from "./carouselReducer";
-import bookingReducer from "./bookingReducer";
 import loginReducer from "./loginReducer";
+import taskReducer from "./taskReducer";
 
 const reduers = combineReducers({
-  carousel: carouselReducer,
-  booking: bookingReducer,
-  login: loginReducer
+  login: loginReducer,
+  task: taskReducer
 });
 
 export default reduers;

@@ -1,17 +1,15 @@
-import { createContext } from "react";
+import {
+  UPDATE_TOTAL,
+  UPDATE_PRICE_RANGE,
+  INCREMENT_PAGE,
+  UPDATE_ITEM_STATE,
+  ERROR_MSG,
+  RESET_ITEM,
+  UPDATE_DETAIL_STATE,
+  UPDATE_LOADING_STATE
+} from "../actions/taskAction";
 
-// React Hooks
-export const UPDATE_TOTAL = "UPDATE_TOTAL";
-export const INCREMENT_PAGE = "UPDATE_PAGE";
-export const UPDATE_PRICE_RANGE = "UPDATE_PRICE_RANGE";
-export const UPDATE_ITEM_STATE = "UPDATE_ITEM_STATE";
-export const ERROR_MSG = "ERROR_MSG";
-export const RESET_ITEM = "RESET_ITEM";
-export const SHOW_Map_State = "SHOW_Map_State";
-
-export const TaskContext = createContext();
-
-export const initialState = {
+const initialState = {
   total: 0,
   page: 1,
   pageSize: 10,
@@ -20,9 +18,11 @@ export const initialState = {
   errMsg: "",
   isToggleOn: true,
   isDetailOn: true,
+  isLoading: false,
+  taskDetails: {}
 };
 
-export const taskReducer = (state, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_TOTAL:
       return {
@@ -50,7 +50,17 @@ export const taskReducer = (state, action) => {
         errMsg: action.errMsg
       };
     case RESET_ITEM:
-      return initialState;      
+      return initialState;
+    case UPDATE_DETAIL_STATE:
+      return {
+        ...state,
+        taskDetails: action.taskDetails
+      };
+    case UPDATE_LOADING_STATE:
+      return {
+        ...state,
+        isLoading: !state.isLoading
+      };
     default:
       return state;
   }
