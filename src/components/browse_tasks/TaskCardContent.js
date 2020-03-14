@@ -34,7 +34,6 @@ const TaskCardContent = props => {
       class="new-task-list-item new-task-list-item--open"
       onClick={async () => {
         try {
-          //TODO combine these two dispatch
           dispatch({ type: UPDATE_LOADING_STATE });
           const response = await reqGetTask(_id);
           dispatch({ type: UPDATE_LOADING_STATE });
