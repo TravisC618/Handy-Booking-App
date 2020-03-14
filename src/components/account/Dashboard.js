@@ -190,7 +190,7 @@ const Dashboard = props => {
                   </div>
                   <div className="marketing-message">
                     <div className="message-symbol">
-                      <i class="fas fa-bullhorn"></i>
+                      <i className="fas fa-bullhorn"></i>
                     </div>
                     <div className="message-text">
                       <a href="/">Increase the task price</a>
@@ -198,7 +198,7 @@ const Dashboard = props => {
                   </div>
                   <div className="marketing-message">
                     <div className="message-symbol">
-                      <i class="fas fa-bullhorn"></i>
+                      <i className="fas fa-bullhorn"></i>
                     </div>
                     <div className="message-text">
                       Just launched: Gasfitting & Plumbing Badges -
@@ -207,7 +207,7 @@ const Dashboard = props => {
                   </div>
                   <div className="marketing-message">
                     <div className="message-symbol">
-                      <i class="fas fa-bullhorn"></i>
+                      <i className="fas fa-bullhorn"></i>
                     </div>
                     <div className="message-text">
                       Just launched: Working with Children Badge -

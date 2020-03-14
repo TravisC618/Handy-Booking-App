@@ -57,16 +57,21 @@
     transition: border-bottom .5s ease-in-out,background-color .5s ease-in-out;
 }
 
-.tab.half {
+.tabs .tab.half {
     width: 50%;
 }
 
-.tab.half.active {
+.tabs .tab.active {
+    color: #008fb4;
     border-bottom: 2px solid #008fb4;
-    border-radius: 0 8px 0 0;
 }
 
-.tab.half.active:last-child {
+.tabs .tab.active:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+.tabs .tab.active:last-child {
+    border-radius: 0 8px 0 0;
     color: #008fb4;
 }
 
