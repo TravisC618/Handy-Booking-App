@@ -13,13 +13,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function MoreDetails(props) {
-  const { handleChange, values } = props;
+  const { handleChange, handleAvatar, values } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.field}>
       <div className="title">
-        <AvatarUpload values={values} handleChange={handleChange}/>
+        <AvatarUpload values={values} handleChange={handleChange} handleAvatar={handleAvatar}/>
         <DetailContent />
 
       </div>

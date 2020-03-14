@@ -26,12 +26,12 @@ function getSteps() {
   return ["Set your basic personal information", "More Details", "Finish!"];
 }
 
-function getStepContent(step, handleChange, values) {
+function getStepContent(step, handleChange, handleAvatar, values) {
   switch (step) {
     case 0:
-      return <BasicInformation values={values} handleChange={handleChange}/>;
+      return <BasicInformation values={values} handleChange={handleChange} />;
     case 1:
-      return <MoreDetails values={values} handleChange={handleChange}/>;
+      return <MoreDetails values={values} handleChange={handleChange} handleAvatar={handleAvatar} />;
     case 2:
       return "This is the bit I really care about!";
     default:
@@ -59,7 +59,7 @@ export default function ProfileStepper(props) {
     username: "",
     email:"",
     location: "",
-    srcimage:"",
+    srcimage:"https://upload.wikimedia.org/wikipedia/commons/0/09/Man_Silhouette.png",
     err: {
       name: "",
       msg: ""
@@ -76,6 +76,10 @@ export default function ProfileStepper(props) {
     
     setValues({ ...values, [key]: value });
   };
+
+  const handleAvatar = (value) => {
+    setValues({ ...values, srcimage: value });
+  }
 
 
   const handleNext = () => {
@@ -202,7 +206,7 @@ export default function ProfileStepper(props) {
           <div>
             <div className="profile-content">
               <Typography className={classes.instructions} component={"span"}>
-              {getStepContent(activeStep, handleChange, values)}
+              {getStepContent(activeStep, handleChange, handleAvatar, values)}
               </Typography>
             </div>
             <div className="profile-content-button">     

@@ -34,30 +34,29 @@ export default class AvatarUpload extends React.Component {
     };
     this.firstname = props.values.firstname;
     this.lastname = props.values.lastname;
-
   }
 
   handleZoomSlider(event, value) {
-    this.setState({zoom: value})
+    this.setState({ zoom: value });
   }
 
   handleFileChange(e) {
     let url = window.URL.createObjectURL(e.target.files[0]);
     ReactDom.findDOMNode(this.refs.in).value = "";
-    this.setState({img: url})
-    this.setState({cropperOpen: true});
+    this.setState({ img: url });
+    this.setState({ cropperOpen: true });
   }
 
   handleSave(e) {
     if (this.editor) {
       const canvasScaled = this.editor.getImageScaledToCanvas();
       const croppedImg = canvasScaled.toDataURL();
-      this.setState({img: null, cropperOpen: false, croppedImg, rotate: 0});
-
+      this.setState({ img: null, cropperOpen: false, croppedImg, rotate: 0 });
+      this.props.handleAvatar(croppedImg);
     }
   }
   handleCancel() {
-    this.setState({cropperOpen: false});
+    this.setState({ cropperOpen: false });
   }
   setEditorRef(editor) {
     this.editor = editor;
@@ -77,7 +76,7 @@ export default class AvatarUpload extends React.Component {
 
   render() {
     console.log(this.props.values.srcimage);
-    const {handleChange} = this.props;
+    const { handleChange, handleAvatar } = this.props;
     const srcimage = this.props.values.srcimage;
 
     return (
@@ -86,7 +85,7 @@ export default class AvatarUpload extends React.Component {
           <div className="avatar-container">
             <div className="avatar-img">
               <Avatar
-                src={this.state.croppedImg}
+                src={srcimage}
                 style={{ height: 80, width: 80 }}
               />
               <label
@@ -189,8 +188,7 @@ export default class AvatarUpload extends React.Component {
                         name="srcimage"
                         value={srcimage}
                         onClick={event => {
-                          this.handleSave(event)
-                          handleChange(event);
+                          this.handleSave(event);
                         }}
                         startIcon={<SaveIcon />}
                         style={{ marginLeft: 30 }}

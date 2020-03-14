@@ -15,7 +15,7 @@ import {
 } from "../routes/URLMAP";
 import "../css/navigation.scss";
 import "../css/login.scss";
-import CreateProfile from "../components/create_profile/CreateProfile"
+import CreateProfile from "../components/create_profile/CreateProfile";
 
 class Navigation extends Component {
   state = {
@@ -133,7 +133,8 @@ class Navigation extends Component {
                   >
                     Create Profile
                   </Link>
-
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to={CLEANER_DETAILS_URL}>
                     Browse Handy
                   </Link>
