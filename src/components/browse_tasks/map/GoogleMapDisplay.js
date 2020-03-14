@@ -14,22 +14,16 @@ import markerIcon from "../../../img/icons/marker.svg";
 import LoadingSpinner from "../../../UI/LoadingSpinner.js";
 
 const Map = () => {
-  // const [position, setPosition] = useState([]);
   const [markers, setMarkers] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const currTasks = useSelector(state => state.task.currTasks);
-  const testArray = [
-    "7 Landsborough Terrace, Toowong QLD",
-    "71 Birley St, Spring Hill QLD"
-  ];
 
   const isScrollBarLoading = useSelector(
     state => state.task.isScrollBarLoading
   );
 
   const renderMarker = currTasks => {
-    if (isScrollBarLoading || currTasks.length === 0) return;
-    console.log("rendering async");
+    // if (isScrollBarLoading || currTasks.length === 0) return;
     try {
       currTasks.map(async task => {
         const position = await getCoordinates(task.location);
@@ -38,10 +32,13 @@ const Map = () => {
             <Marker
               key={task._id}
               position={position}
-              onClick={() => setSelectedTask(task)}
+              onClick={() => {
+                setSelectedTask(task);
+                console.log(selectedTask);
+              }}
               icon={{
                 url: markerIcon,
-                scaledSize: new window.google.maps.Size(30, 30)
+                scaledSize: new window.google.maps.Size(40, 40)
               }}
             />
           )
@@ -54,33 +51,38 @@ const Map = () => {
     }
   };
 
+  const renderInfoWindow = () => {
+    return (
+      <InfoWindow
+        position={{
+          lat: getCoordinates(selectedTask.location).lat,
+          lng: getCoordinates(selectedTask.location).lng
+        }}
+        onCloseClick={() => setSelectedTask(null)}
+      >
+        <div>
+          <h2>{selectedTask.title}</h2>
+          <p>{selectedTask.details}</p>
+        </div>
+      </InfoWindow>
+    );
+  };
+
   useEffect(() => {
+    if (isScrollBarLoading || currTasks.length === 0) return;
     renderMarker(currTasks);
-  }, [currTasks, isScrollBarLoading]);
+    console.log(selectedTask);
+  }, [isScrollBarLoading]);
 
   return (
     <GoogleMap
-      defaultZoom={11}
+      defaultZoom={12}
       // TODO fetch user current location
       defaultCenter={{ lat: -27.469512, lng: 153.024665 }}
       defaultOptions={{ styles: mapStyle }}
     >
       <>{!isScrollBarLoading && currTasks.length !== 0 && markers}</>
-
-      {selectedTask && (
-        <InfoWindow
-          position={{
-            lat: getCoordinates(selectedTask.location).lat,
-            lng: getCoordinates(selectedTask.location).lng
-          }}
-          onCloseClick={() => setSelectedTask(null)}
-        >
-          <div>
-            <h2>{selectedTask.title}</h2>
-            <p>{selectedTask.details}</p>
-          </div>
-        </InfoWindow>
-      )}
+      {/* {selectedTask && renderInfoWindow()} */}
     </GoogleMap>
   );
 };

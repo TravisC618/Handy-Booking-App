@@ -6,7 +6,6 @@ export default address =>
   Geocode.fromAddress(address).then(
     response => {
       const { lat, lng } = response.results[0].geometry.location;
-      console.log(`rendering geocode: ${lat}, ${lng}`);
       return { lat, lng };
     },
     error => {
