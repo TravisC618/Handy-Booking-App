@@ -11,37 +11,40 @@ import {
 import Dashboard from "./Dashboard";
 import PaymentHistory from "./PaymentHistory";
 import Notifications from "./Notifications";
-import Profile from "./Profile";
-import Password from "./Password";
+import Profile from "./profile/Profile";
+import Password from "./settings/Settings";
 
 import "../../css/account/menu.css";
 
-import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
+import { makeStyles } from "@material-ui/core/styles";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
+    width: "100%",
+    boxShadow: 'none',
+    backgroundColor: "#f2f7f9",
+    margin: 0,
+    padding: 0
   },
+
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
-  },
-  
+    boxShadow: 'none',
+    backgroundColor: "#f2f7f9",
+    margin: 0,
+    padding: 0
+  }
 }));
-
-
-
-
 
 const Menu = props => {
   const classes = useStyles();
+  
   const { match } = props;
   return (
     <div className="menu">
@@ -67,30 +70,67 @@ const Menu = props => {
         </div>
 
 
-        <div className={classes.root} className="menu-folder">
-
-          <ExpansionPanel>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-              className="menu-folder-control showing"
-            >
-              <Typography className={classes.heading} className="button">Settings</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails className="menu-folder-items">
-              <Typography>
-                <Link className="button"  to={`${ACCOUNT_BASE_URL}/profile`}>
+        <ul>
+          <li className="dropdown">
+            <input type="checkbox" />
+            <a href="#" data-toggle="dropdown">Settings</a>
+            <ul className="dropdown-menu">
+              <li>
+                <Link className="dropdown-link" to={`${ACCOUNT_BASE_URL}/profile`}>
                   Account
                 </Link>
-                <Link className="button"to={`${ACCOUNT_BASE_URL}/password`}>
+              </li>
+              <li>
+                <Link className="dropdown-link" to={`${ACCOUNT_BASE_URL}/password`}>
                   Password
                 </Link>
-              </Typography>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          
-        </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* <div className="menu-folder">
+          <div className={classes.root} >
+            <ExpansionPanel>
+              <div className="menu-folder-control showing">
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
+                >
+                  <div className="button">
+                    <Typography className={classes.heading}>
+                      Settings
+                    </Typography>
+                  </div>
+                </ExpansionPanelSummary>
+              </div>
+              <div className="menu-folder-items">
+                <ExpansionPanelDetails>
+                  <Typography>
+                    <Link className="button" to={`${ACCOUNT_BASE_URL}/profile`}>
+                      Account
+                    </Link>
+                    <Link className="button" to={`${ACCOUNT_BASE_URL}/password`}>
+                      Password
+                    </Link>
+                  </Typography>
+                </ExpansionPanelDetails>
+              </div>
+            </ExpansionPanel>
+          </div>
+        </div> */}
 
         {/* <div className="menu-folder">
           <div className="menu-folder-control showing">
@@ -100,7 +140,7 @@ const Menu = props => {
             <Link className="button"  to={`${ACCOUNT_BASE_URL}/profile`}>
               Account
             </Link> */}
-            {/* <a className="button" href="/account/skills">
+        {/* <a className="button" href="/account/skills">
               Skills
             </a>
             <a className="button" href="/account/badges">
@@ -118,39 +158,21 @@ const Menu = props => {
             <a className="button" href="/account/portfolio">
               Portfolio
             </a> */}
-            {/* <Link className="button"to={`${ACCOUNT_BASE_URL}/password`}>
+        {/* <Link className="button"to={`${ACCOUNT_BASE_URL}/password`}>
               Password
             </Link>
           </div>
         </div> */}
-
-
       </div>
 
-
-
-
-      <Route 
-        path={`${match.path}/dashboard`} 
-        component={Dashboard}
-      />
+      <Route path={`${match.path}/dashboard`} component={Dashboard} />
       <Route
         path={`${match.path}/payment-history`}
         component={PaymentHistory}
       />
-      <Route
-        path={`${match.path}/notifications`}
-        component={Notifications}
-      />
-      <Route
-        path={`${match.path}/profile`}
-        component={Profile}
-      />
-      <Route
-        path={`${match.path}/password`}
-        component={Password}
-      />
-
+      <Route path={`${match.path}/notifications`} component={Notifications} />
+      <Route path={`${match.path}/profile`} component={Profile} />
+      <Route path={`${match.path}/password`} component={Password} />
     </div>
   );
 };
