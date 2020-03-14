@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDom from "react-dom";
 import AvatarEditor from "react-avatar-editor";
-import Avatar from "material-ui/Avatar";
+import { Avatar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Slider from "material-ui/Slider";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { Slider } from "@material-ui/core";
 import "../../css/avatar-upload.css";
 import Zoom from "@material-ui/core/Zoom";
 import Paper from "@material-ui/core/Paper";
@@ -95,10 +95,7 @@ export default class AvatarUpload extends React.Component {
         <div className="upload-container">
           <div className="avatar-container">
             <div className="avatar-img">
-              <Avatar
-                src={this.state.croppedImg}
-                size={100}
-              />
+              <Avatar src={this.state.croppedImg} size={100} />
               <label
                 htmlFor="contained-button-file"
                 className="avatar-upload-button"
