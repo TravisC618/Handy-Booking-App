@@ -14,8 +14,9 @@ import markerIcon from "../../../img/icons/marker.svg";
 import LoadingSpinner from "../../../UI/LoadingSpinner.js";
 
 const Map = () => {
+  // const [position, setPosition] = useState([]);
+  const [markers, setMarkers] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [position, setPosition] = useState([]);
   const currTasks = useSelector(state => state.task.currTasks);
   const testArray = [
     "7 Landsborough Terrace, Toowong QLD",
@@ -26,57 +27,36 @@ const Map = () => {
     state => state.task.isScrollBarLoading
   );
 
-  const loadPosition = task => {
-    // if (isScrollBarLoading || currTasks.length === 0) return;
-    // currTasks.map(task => {
+  const renderMarker = currTasks => {
+    if (isScrollBarLoading || currTasks.length === 0) return;
     console.log("rendering async");
-    // setPosition(position => position.concat({ lat, lng }));
-    getCoordinates(task.location).then(response => {
-      // debugger;
-      const { lat, lng } = response;
-      return (
-        <Marker
-          key={task._id}
-          position={{ lat, lng }}
-          onClick={() => setSelectedTask(task)}
-          icon={{
-            url: markerIcon,
-            scaledSize: new window.google.maps.Size(30, 30)
-          }}
-        />
-      );
-    });
-    // });
+    try {
+      currTasks.map(async task => {
+        const position = await getCoordinates(task.location);
+        setMarkers(markers =>
+          markers.concat(
+            <Marker
+              key={task._id}
+              position={position}
+              onClick={() => setSelectedTask(task)}
+              icon={{
+                url: markerIcon,
+                scaledSize: new window.google.maps.Size(30, 30)
+              }}
+            />
+          )
+        );
+      });
+    } catch (error) {
+      // TODO error handling
+      console.error(error);
+      return;
+    }
   };
 
-  // useEffect(() => {
-  //   loadPosition(currTasks);
-  // }, [currTasks]);
-
-  const renderMarker = () => {
-    return (
-      <>
-        <Marker
-          key={1} //TODO 调整为task._id
-          position={{ lat: -27.467328, lng: 153.022769 }}
-          // onClick={() => setSelectedTask(task)}
-          icon={{
-            url: markerIcon,
-            scaledSize: new window.google.maps.Size(30, 30)
-          }}
-        />
-        <Marker
-          key={2} //TODO 调整为task._id
-          position={{ lat: -27.466428, lng: 153.029569 }}
-          // onClick={() => setSelectedTask(task)}
-          icon={{
-            url: markerIcon,
-            scaledSize: new window.google.maps.Size(30, 30)
-          }}
-        />
-      </>
-    );
-  };
+  useEffect(() => {
+    renderMarker(currTasks);
+  }, [currTasks, isScrollBarLoading]);
 
   return (
     <GoogleMap
@@ -85,13 +65,7 @@ const Map = () => {
       defaultCenter={{ lat: -27.469512, lng: 153.024665 }}
       defaultOptions={{ styles: mapStyle }}
     >
-      {/* {loadPosition(currTasks)} */}
-      {/* {renderMarker()} */}
-      <>
-        {!isScrollBarLoading &&
-          currTasks.length !== 0 &&
-          currTasks.map(task => loadPosition(task))}
-      </>
+      <>{!isScrollBarLoading && currTasks.length !== 0 && markers}</>
 
       {selectedTask && (
         <InfoWindow

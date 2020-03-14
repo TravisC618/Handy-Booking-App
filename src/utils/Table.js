@@ -88,8 +88,8 @@ const Table = () => {
     for (let index = 0; index < tasks.length; index++) {
       items.current = [...items.current, tasks[index]];
     }
-    dispatch({ type: UPDATE_SCROLLBAR_LOADING });
     dispatch({ type: UPDATE_CURRENT_TASKS, newTasks: items.current });
+    dispatch({ type: UPDATE_SCROLLBAR_LOADING });
 
     dispatch({ type: UPDATE_TOTAL, total: items.current.length });
     dispatch({ type: INCREMENT_PAGE });
