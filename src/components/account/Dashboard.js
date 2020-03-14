@@ -1,6 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMusic,
+  faVideo,
+  faLaptop,
+  faBusinessTime,
+  faBroom,
+  faTruckMoving,
+  faBoxOpen,
+  faCouch,
+  faTools,
+  faCrop,
+  faSeedling,
+  faFootballBall
+} from "@fortawesome/free-solid-svg-icons";
+
 import "../../css/account/dashboard.css";
+import "../../css/home/buttongroup.css";
 
 const Dashboard = props => {
   return (
@@ -16,107 +33,108 @@ const Dashboard = props => {
             help you need on Airtasker.
           </p>
           <div className="task-item">
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Home Cleaning</span>
+            {/* <div className="item-bubble"> */}
+            {/* <button className="bubble-container"> */}
+            {/* <div className="bubble-circle">
+                      <div className="bubble-text"> */}
+            <div className="BG-container">
+              <div className="middle">
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faBroom} />
+                  </a>
+                  <p>Home Cleaning</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Full House Removals</span>
+                {/* </div> */}
+                {/* </div> */}
+                {/* </button> */}
+                {/* </div> */}
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faTruckMoving} />
+                  </a>
+                  <p>Full House Removal</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Few Items Removals</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faBoxOpen} />
+                  </a>
+                  <p>Few Items Removal</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Business & Admin</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faBusinessTime} />
+                  </a>
+                  <p>Business & Admin</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Computers & IT</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faLaptop} />
+                  </a>
+                  <p>Computers & IT</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Furniture Assembly</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faCouch} />
+                  </a>
+                  <p>Furniture Assembly</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Handyman</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faTools} />
+                  </a>
+                  <p>Handyman</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Marketing & Design</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faCrop} />
+                  </a>
+                  <p>Marketing & Design</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Event & Photography</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faVideo} />
+                  </a>
+                  <p>Event & Photography</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Fun & Quirky</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faMusic} />
+                  </a>
+                  <p>Fun & Quirky</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Home & Gardening</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faSeedling} />
+                  </a>
+                  <p>Home & Gardening</p>
                 </div>
-              </button>
-            </div>
-            <div className="item-bubble">
-              <button className="bubble-container">
-                <div className="bubble-circle"></div>
-                <div className="bubble-text">
-                  <span>Anything</span>
+
+                <div className="bg-btn-container">
+                  <a className="bg-btn" href="#">
+                    <FontAwesomeIcon className="icon" icon={faFootballBall} />
+                  </a>
+                  <p>Anything</p>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
+
           <Link className="post-button" to="/find-cleaners">
             Post a task
           </Link>
         </div>
+
         <div className="dashboard-banner">
           <div className="banner-container">
             <div className="banner-logo">
