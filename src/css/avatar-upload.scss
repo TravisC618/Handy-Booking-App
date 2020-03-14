@@ -1,6 +1,8 @@
 .upload-container {
   .avatar-container {
 
+    height: 100px;
+
 
     .avatar-img {
 
@@ -8,7 +10,7 @@
         position: absolute;
         transition: 0.5s;
         opacity: 0;
-        transform: translate(-103%, 3%);
+        transform: translate(-50%, -100%);
 
       }
     }
@@ -45,7 +47,7 @@
       .cropper-wrapper-content-label {
         font-size: 12px;
         margin-right: 10px;
-        padding-bottom: 16px;
+        padding-top: 9px;
       }
     }
   }

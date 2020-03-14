@@ -59,7 +59,7 @@ export default function ProfileStepper(props) {
     username: "",
     email:"",
     location: "",
-    src:"",
+    srcimage:"",
     err: {
       name: "",
       msg: ""

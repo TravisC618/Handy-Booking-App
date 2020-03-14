@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Slider } from "@material-ui/core";
-import "../../css/avatar-upload.css";
+import "../../css/avatar-upload.scss";
 import Zoom from "@material-ui/core/Zoom";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -34,42 +34,30 @@ export default class AvatarUpload extends React.Component {
     };
     this.firstname = props.values.firstname;
     this.lastname = props.values.lastname;
-    this.src = props.values.src;
-    this.handleChange = props.handleChange;
+
   }
 
   handleZoomSlider(event, value) {
-    let state = this.state;
-    state.zoom = value;
-    this.setState(state);
+    this.setState({zoom: value})
   }
 
   handleFileChange(e) {
     let url = window.URL.createObjectURL(e.target.files[0]);
     ReactDom.findDOMNode(this.refs.in).value = "";
-    let state = this.state;
-    state.img = url;
-    state.cropperOpen = true;
-    this.setState(state);
+    this.setState({img: url})
+    this.setState({cropperOpen: true});
   }
 
   handleSave(e) {
     if (this.editor) {
       const canvasScaled = this.editor.getImageScaledToCanvas();
       const croppedImg = canvasScaled.toDataURL();
+      this.setState({img: null, cropperOpen: false, croppedImg, rotate: 0});
 
-      let state = this.state;
-      state.img = null;
-      state.cropperOpen = false;
-      state.croppedImg = croppedImg;
-      state.rotate = 0;
-      this.setState(state);
     }
   }
   handleCancel() {
-    let state = this.state;
-    state.cropperOpen = false;
-    this.setState(state);
+    this.setState({cropperOpen: false});
   }
   setEditorRef(editor) {
     this.editor = editor;
@@ -88,14 +76,19 @@ export default class AvatarUpload extends React.Component {
   }
 
   render() {
-    console.log(this.src);
+    console.log(this.props.values.srcimage);
+    const {handleChange} = this.props;
+    const srcimage = this.props.values.srcimage;
 
     return (
       <MuiThemeProvider>
         <div className="upload-container">
           <div className="avatar-container">
             <div className="avatar-img">
-              <Avatar src={this.state.croppedImg} size={100} />
+              <Avatar
+                src={this.state.croppedImg}
+                style={{ height: 80, width: 80 }}
+              />
               <label
                 htmlFor="contained-button-file"
                 className="avatar-upload-button"
@@ -103,12 +96,16 @@ export default class AvatarUpload extends React.Component {
                 <IconButton aria-label="upload picture" component="span">
                   <PhotoCamera
                     color="primary"
-                    style={{ height: 70, width: 70 }}
+                    style={{ height: 50, width: 50 }}
                   />
                 </IconButton>
               </label>
             </div>
+            <Typography variant="caption" display="block" gutterBottom>
+              Click To Set An Avatar
+            </Typography>
           </div>
+
           <div className="username-container">
             <Typography variant="h5" gutterBottom>
               Hi, {this.firstname} {this.lastname}
@@ -189,9 +186,12 @@ export default class AvatarUpload extends React.Component {
                       <Button
                         variant="contained"
                         color="primary"
-                        // value={this.src}
-                        // onClick={event => this.handleChange(event)}
-                        onClick={event => this.handleSave(event)}
+                        name="srcimage"
+                        value={srcimage}
+                        onClick={event => {
+                          this.handleSave(event)
+                          handleChange(event);
+                        }}
                         startIcon={<SaveIcon />}
                         style={{ marginLeft: 30 }}
                       >
