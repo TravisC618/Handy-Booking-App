@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
   GoogleMap,
   withScriptjs,
@@ -8,43 +9,101 @@ import {
 } from "react-google-maps";
 import * as parksData from "./skateboard-parks.json";
 import mapStyle from "./mapStyle";
-import icon from "../../../img/icons/broom.svg";
+import getCoordinates from "../../../utils/getCoordinates";
+import markerIcon from "../../../img/icons/marker.svg";
+import LoadingSpinner from "../../../UI/LoadingSpinner.js";
 
 const Map = () => {
-  const [selectedPark, setSelectedPark] = useState(null);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [position, setPosition] = useState([]);
+  const currTasks = useSelector(state => state.task.currTasks);
+  const testArray = [
+    "7 Landsborough Terrace, Toowong QLD",
+    "71 Birley St, Spring Hill QLD"
+  ];
 
-  return (
-    <GoogleMap
-      defaultZoom={10}
-      defaultCenter={{ lat: 45.421532, lng: -75.697189 }}
-      defaultOptions={{ styles: mapStyle }}
-    >
-      {parksData.features.map(park => (
+  const isScrollBarLoading = useSelector(
+    state => state.task.isScrollBarLoading
+  );
+
+  const loadPosition = task => {
+    // if (isScrollBarLoading || currTasks.length === 0) return;
+    // currTasks.map(task => {
+    console.log("rendering async");
+    // setPosition(position => position.concat({ lat, lng }));
+    getCoordinates(task.location).then(response => {
+      // debugger;
+      const { lat, lng } = response;
+      return (
         <Marker
-          key={park.properties.PARK_ID}
-          position={{
-            lat: park.geometry.coordinates[1],
-            lng: park.geometry.coordinates[0]
-          }}
-          onClick={() => setSelectedPark(park)}
+          key={task._id}
+          position={{ lat, lng }}
+          onClick={() => setSelectedTask(task)}
           icon={{
-            url: icon,
+            url: markerIcon,
             scaledSize: new window.google.maps.Size(30, 30)
           }}
         />
-      ))}
+      );
+    });
+    // });
+  };
 
-      {selectedPark && (
+  // useEffect(() => {
+  //   loadPosition(currTasks);
+  // }, [currTasks]);
+
+  const renderMarker = () => {
+    return (
+      <>
+        <Marker
+          key={1} //TODO 调整为task._id
+          position={{ lat: -27.467328, lng: 153.022769 }}
+          // onClick={() => setSelectedTask(task)}
+          icon={{
+            url: markerIcon,
+            scaledSize: new window.google.maps.Size(30, 30)
+          }}
+        />
+        <Marker
+          key={2} //TODO 调整为task._id
+          position={{ lat: -27.466428, lng: 153.029569 }}
+          // onClick={() => setSelectedTask(task)}
+          icon={{
+            url: markerIcon,
+            scaledSize: new window.google.maps.Size(30, 30)
+          }}
+        />
+      </>
+    );
+  };
+
+  return (
+    <GoogleMap
+      defaultZoom={11}
+      // TODO fetch user current location
+      defaultCenter={{ lat: -27.469512, lng: 153.024665 }}
+      defaultOptions={{ styles: mapStyle }}
+    >
+      {/* {loadPosition(currTasks)} */}
+      {/* {renderMarker()} */}
+      <>
+        {!isScrollBarLoading &&
+          currTasks.length !== 0 &&
+          currTasks.map(task => loadPosition(task))}
+      </>
+
+      {selectedTask && (
         <InfoWindow
           position={{
-            lat: selectedPark.geometry.coordinates[1],
-            lng: selectedPark.geometry.coordinates[0]
+            lat: getCoordinates(selectedTask.location).lat,
+            lng: getCoordinates(selectedTask.location).lng
           }}
-          onCloseClick={() => setSelectedPark(null)}
+          onCloseClick={() => setSelectedTask(null)}
         >
           <div>
-            <h2>{selectedPark.properties.NAME}</h2>
-            <p>{selectedPark.properties.DESCRIPTIO}</p>
+            <h2>{selectedTask.title}</h2>
+            <p>{selectedTask.details}</p>
           </div>
         </InfoWindow>
       )}

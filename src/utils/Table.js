@@ -7,6 +7,8 @@ import TaskCard from "../components/browse_tasks/TaskCards";
 import LoadingSpinner from "../img/icons/LoadingSpinner.svg";
 import { reqGetAllTasks } from "../api/tasks";
 import {
+  UPDATE_CURRENT_TASKS,
+  UPDATE_SCROLLBAR_LOADING,
   UPDATE_TOTAL,
   INCREMENT_PAGE,
   UPDATE_ITEM_STATE,
@@ -23,16 +25,26 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Table = () => {
+  // TODO 用currTasks取代items
   const items = useRef([]);
-  const loading = useRef(false);
+  // const loading = useRef(false);
   const taskState = useSelector(state => state.task);
   const dispatch = useDispatch();
-  const { total, page, pageSize, priceRange, hasMoreItem, errMsg } = taskState;
+  const {
+    currTasks,
+    total,
+    page,
+    pageSize,
+    priceRange,
+    hasMoreItem,
+    errMsg,
+    isScrollBarLoading
+  } = taskState;
 
   const classes = useStyles();
 
   const GenerateItem = index => {
-    return loading.current ? (
+    return isScrollBarLoading ? (
       <div />
     ) : (
       <TaskCard tasks={items.current[index]} />
@@ -47,7 +59,7 @@ const Table = () => {
   }, [priceRange]);
 
   const loadMore = async priceRange => {
-    if (loading.current) return;
+    if (isScrollBarLoading) return;
 
     let response;
     try {
@@ -71,24 +83,24 @@ const Table = () => {
       dispatch({ type: UPDATE_ITEM_STATE }); // => false
     }
 
-    loading.current = true;
-
+    // TODO 调整 UPDATE_SCROLLBAR_LOADING 的顺序， 尝试callback
+    dispatch({ type: UPDATE_SCROLLBAR_LOADING });
     for (let index = 0; index < tasks.length; index++) {
       items.current = [...items.current, tasks[index]];
     }
-    loading.current = false;
+    dispatch({ type: UPDATE_SCROLLBAR_LOADING });
+    dispatch({ type: UPDATE_CURRENT_TASKS, newTasks: items.current });
 
     dispatch({ type: UPDATE_TOTAL, total: items.current.length });
     dispatch({ type: INCREMENT_PAGE });
   };
 
-  if (errMsg) {
+  if (errMsg)
     return (
       <div className={classes.root}>
         <Alert severity="error">{errMsg}!</Alert>
       </div>
     );
-  }
 
   return (
     <Virtuoso
@@ -96,9 +108,9 @@ const Table = () => {
       overscan={pageSize}
       totalCount={total}
       item={GenerateItem}
-      endReached={hasMoreItem === true ? () => loadMore(priceRange) : null}
+      endReached={!!hasMoreItem ? () => loadMore(priceRange) : null}
       footer={
-        hasMoreItem === true
+        !!hasMoreItem
           ? () => {
               return (
                 <div style={{ textAlign: "center" }}>

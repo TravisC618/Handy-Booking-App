@@ -1,8 +1,10 @@
+export const UPDATE_CURRENT_TASKS = "UPDATE_CURRENT_TASKS";
 export const UPDATE_TOTAL = "UPDATE_TOTAL";
 export const INCREMENT_PAGE = "UPDATE_PAGE";
 export const UPDATE_PRICE_RANGE = "UPDATE_PRICE_RANGE";
 export const UPDATE_ITEM_STATE = "UPDATE_ITEM_STATE";
 export const ERROR_MSG = "ERROR_MSG";
+export const UPDATE_SCROLLBAR_LOADING = "UPDATE_SCROLLBAR_LOADING";
 export const RESET_ITEM = "RESET_ITEM";
 export const SHOW_Map_State = "SHOW_Map_State";
 
