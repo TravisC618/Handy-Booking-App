@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Slider } from "@material-ui/core";
-import "../../css/avatar-upload.scss";
+import "../../css/create_profile/avatar-upload.scss";
 import Zoom from "@material-ui/core/Zoom";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -75,10 +75,7 @@ export default class AvatarUpload extends React.Component {
   }
 
   render() {
-    console.log(this.props.values.srcimage);
-    const { handleChange, handleAvatar } = this.props;
     const srcimage = this.props.values.srcimage;
-
     return (
       <MuiThemeProvider>
         <div className="upload-container">
@@ -106,7 +103,7 @@ export default class AvatarUpload extends React.Component {
           </div>
 
           <div className="username-container">
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h5" gutterBottom style={{ marginBottom: "1.35em"}}>
               Hi, {this.firstname} {this.lastname}
             </Typography>
           </div>

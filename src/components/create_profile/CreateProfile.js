@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-animated-modal";
 import logo from "../../img/logo.png";
 import Divider from "@material-ui/core/Divider";
-import "../../css/create-profile.css";
+import "../../css/create_profile/create-profile.css";
 import ProfileStepper from "./ProfileStepper";
 
 export default function CreateProfile(props) {
@@ -19,7 +19,7 @@ export default function CreateProfile(props) {
           Welcome to <img src={logo} alt="logo" />
         </div>
         <Divider />
-        <ProfileStepper />
+        <ProfileStepper showModal={showModal} handleShowModal={handleShowModal}/>
       </div>
     </Modal>
   );

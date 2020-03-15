@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import MenuItem from "@material-ui/core/MenuItem";
+import "../../css/create_profile/basic-information.css";
+import LanguageSelector from "./LanguageSelector";
 
 const genders = [
   {
@@ -16,52 +17,82 @@ const genders = [
 ];
 
 export default function DetailContent(props) {
-  const { handleChange, values } = props;
+  const { handleChange, handleLanguageSelector, values } = props;
   const [gender, setGender] = React.useState("");
 
   const handleChangeGender = event => {
     setGender(event.target.value);
+    handleChange(event);
   };
 
   return (
-    <Grid item xs={6} component="span">
-
-      {/* <div className="basic-information-container">
-        <div className="profile-item-name">
-          <h2>Name</h2>
-          <TextField
-            onChange={event => handleChange(event)}
-            required
-            name="username"
-            value={values.username}
-            label={
-              values.err.name === "username" ? "Error" : "What is your name?"
-            }
-            error={values.err.name === "username" ? true : false}
-            helperText={values.err.name === "username" ? values.err.msg : null}
-            variant="outlined"
-          />
-        </div>
-      </div> */}
-
-      {/* <div className="profile-item">
-        <Typography variant="h7">Gender</Typography>
+    <React.Fragment>
+      <div className="details-container">
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              select
+              onChange={handleChangeGender}
+              fullWidth
+              name="gender"
+              value={values.gender}
+              label={
+                values.err.name === "gender" ? "Error" : "Choose your gender"
+              }
+              error={values.err.name === "gender" ? true : false}
+              helperText={values.err.name === "gender" ? values.err.msg : null}
+            >
+              {genders.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              onChange={event => handleChange(event)}
+              required
+              name="mobile"
+              placeholder="Mobile Number"
+              value={values.mobile}
+              label={
+                values.err.name === "mobile"
+                  ? "Error"
+                  : "What is your mobile number?"
+              }
+              error={values.err.name === "mobile" ? true : false}
+              helperText={values.err.name === "mobile" ? values.err.msg : null}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <LanguageSelector values={values} handleLanguageSelector={handleLanguageSelector}/>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              multiline
+              rows="4"
+              variant="outlined"
+              fullWidth
+              onChange={event => handleChange(event)}
+              required
+              name="introduction"
+              placeholder="Introduction"
+              value={values.introduction}
+              label={
+                values.err.name === "introduction"
+                  ? "Error"
+                  : "Tell us something about yourself?"
+              }
+              error={values.err.name === "introduction" ? true : false}
+              helperText={
+                values.err.name === "introduction" ? values.err.msg : null
+              }
+            />
+          </Grid>
+        </Grid>
       </div>
-
-      <TextField
-        select
-        onChange={handleChangeGender}
-        SelectProps={{
-          native: true
-        }}
-        variant="outlined"
-      >
-        {genders.map(option => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </TextField> */}
-    </Grid>
+    </React.Fragment>
   );
 }
