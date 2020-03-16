@@ -1,15 +1,19 @@
 import {
+  UPDATE_CURRENT_TASKS,
   UPDATE_TOTAL,
   UPDATE_PRICE_RANGE,
   INCREMENT_PAGE,
   UPDATE_ITEM_STATE,
   ERROR_MSG,
+  UPDATE_SCROLLBAR_LOADING,
   RESET_ITEM,
   UPDATE_DETAIL_STATE,
   UPDATE_LOADING_STATE
 } from "../actions/taskAction";
 
 const initialState = {
+  currTasks: [],
+  taskDetails: {},
   total: 0,
   page: 1,
   pageSize: 10,
@@ -18,12 +22,18 @@ const initialState = {
   errMsg: "",
   isToggleOn: true,
   isDetailOn: true,
-  isLoading: false,
-  taskDetails: {}
+  isScrollBarLoading: false,
+  isLoading: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case UPDATE_CURRENT_TASKS:
+      return {
+        ...state,
+        // currTasks: [...state.currTasks, action.newTasks]，
+        currTasks: action.newTasks
+      };
     case UPDATE_TOTAL:
       return {
         ...state,
@@ -48,6 +58,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         errMsg: action.errMsg
+      };
+    case UPDATE_SCROLLBAR_LOADING:
+      return {
+        ...state,
+        isScrollBarLoading: !state.isScrollBarLoading
       };
     case RESET_ITEM:
       return initialState;

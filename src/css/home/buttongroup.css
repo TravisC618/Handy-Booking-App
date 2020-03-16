@@ -2,26 +2,28 @@
     margin: 0;
     padding:0;
     text-align: center;
+    position: relative;
 }
 
 .middle {
-    margin-top: 100px;
-    margin-bottom: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
-    align-items: baseline;
     justify-content: center;
-    transform: translateY(-50%);
     width: 100%;
-    text-align: center;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    align-content: flex-end;
+    
 }
 
 .bg-btn {
     display: inline-block;
-    width: 90px;
-    height: 90px;
+    width: 64px;
+    height: 64px;
     background-color: #f1f1f1;
-    margin: 10px;
+    margin: 24px 20px 0;
     border-radius: 90%;
     box-shadow: 0 5px 15px -5px #00000070;
     color: #3498db;
@@ -29,10 +31,12 @@
     position: relative;
 }
 
+
 .bg-btn-container p {
-    font-size: small;
-    width: 120px;
-    padding:10px;
+    font-size: 12px;
+    text-align: center;
+    width: 100px;
+    padding: 10px 20px; 
 }
 
 .icon{

@@ -1,7 +1,8 @@
 import Geocode from "react-geocode";
 
 Geocode.setApiKey("AIzaSyCuBhdFf7s-ipOzlY28rYbDMg2LeMqNsks");
-export const getCoordinates = address =>
+
+export default address =>
   Geocode.fromAddress(address).then(
     response => {
       const { lat, lng } = response.results[0].geometry.location;
