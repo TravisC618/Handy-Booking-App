@@ -15,8 +15,16 @@ import {
 } from "../routes/URLMAP";
 import "../css/navigation.scss";
 import "../css/login.scss";
+import CreateProfile from "../components/create_profile/CreateProfile";
 
 class Navigation extends Component {
+  state = {
+    showModal: false
+  };
+  handleShowModal = () => {
+    this.setState({ showModal: false });
+  };
+
   logout = history => {
     removeToken();
     removeUserId();
@@ -97,6 +105,10 @@ class Navigation extends Component {
 
     return (
       <>
+        <CreateProfile
+          showModal={this.state.showModal}
+          handleShowModal={this.handleShowModal}
+        />
         {visible ? <Login /> : null}
         <nav id="header" className={navClasses}>
           <div className="container-fluid">
@@ -113,6 +125,15 @@ class Navigation extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarToggler">
               <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  {/* Create Profile */}
+                  <Link
+                    className="nav-link"
+                    onClick={() => this.setState({ showModal: true })}
+                  >
+                    Create Profile
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={CLEANER_DETAILS_URL}>
                     Browse Handy
