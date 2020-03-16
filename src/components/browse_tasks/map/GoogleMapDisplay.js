@@ -7,9 +7,9 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
-import * as parksData from "./skateboard-parks.json";
 import mapStyle from "./mapStyle";
 import getCoordinates from "../../../utils/getCoordinates";
+import InfoCard from "./InfoCard";
 import markerIcon from "../../../img/icons/marker.svg";
 import LoadingSpinner from "../../../UI/LoadingSpinner.js";
 
@@ -33,8 +33,7 @@ const Map = () => {
               key={task._id}
               position={position}
               onClick={() => {
-                setSelectedTask(task);
-                console.log(selectedTask);
+                setSelectedTask({ ...task, position }); // selectedTask: specified task
               }}
               icon={{
                 url: markerIcon,
@@ -52,18 +51,21 @@ const Map = () => {
   };
 
   const renderInfoWindow = () => {
+    console.log({ selectedTask });
     return (
       <InfoWindow
         position={{
-          lat: getCoordinates(selectedTask.location).lat,
-          lng: getCoordinates(selectedTask.location).lng
+          lat: selectedTask.position.lat,
+          lng: selectedTask.position.lng
         }}
         onCloseClick={() => setSelectedTask(null)}
       >
-        <div>
-          <h2>{selectedTask.title}</h2>
-          <p>{selectedTask.details}</p>
-        </div>
+        <InfoCard
+          title={selectedTask.title}
+          details={selectedTask.details}
+          budget={selectedTask.budget}
+          name={selectedTask.name}
+        />
       </InfoWindow>
     );
   };
@@ -82,7 +84,7 @@ const Map = () => {
       defaultOptions={{ styles: mapStyle }}
     >
       <>{!isScrollBarLoading && currTasks.length !== 0 && markers}</>
-      {/* {selectedTask && renderInfoWindow()} */}
+      {selectedTask && renderInfoWindow()}
     </GoogleMap>
   );
 };
