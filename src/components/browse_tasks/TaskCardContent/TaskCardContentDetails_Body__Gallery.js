@@ -4,8 +4,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { SRLWrapper } from "simple-react-lightbox";
 import { makeStyles } from "@material-ui/core/styles";
-import img01 from "../../img/cleaner.jpg";
-import "../../css/browse_tasks/TaskCardContentDetails_Body__Gallery.css";
+import img01 from "../../../img/cleaner.jpg";
+import "../../../css/browse_tasks/TaskCardContentDetails_Body__Gallery.css";
 
 const useStyles = makeStyles(theme => ({
   root: {

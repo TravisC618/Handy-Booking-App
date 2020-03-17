@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "../../css/browse_tasks/TaskCardContentDetails_Header__SidePanel.css";
+import "../../../css/browse_tasks/TaskCardContentDetails_Header__SidePanel.css";
 
 const SidePanel = () => {
   const taskDetails = useSelector(state => state.task.taskDetails);

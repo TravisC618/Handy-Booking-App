@@ -20,10 +20,9 @@ const initialState = {
   priceRange: [5, 9999],
   hasMoreItem: false,
   errMsg: "",
-  isToggleOn: true,
   isDetailOn: true,
   isScrollBarLoading: false,
-  isLoading: false
+  isFetchingDetails: false
 };
 
 export default (state = initialState, action) => {
@@ -74,7 +73,7 @@ export default (state = initialState, action) => {
     case UPDATE_LOADING_STATE:
       return {
         ...state,
-        isLoading: !state.isLoading
+        isFetchingDetails: !state.isFetchingDetails
       };
     default:
       return state;

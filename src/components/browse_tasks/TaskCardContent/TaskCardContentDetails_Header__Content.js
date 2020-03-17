@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import AlignItemsList from "../../utils/AlignItemsList";
-import "../../css/browse_tasks/TaskCardContentDetails_Header__Content.css";
+import AlignItemsList from "../../../utils/AlignItemsList";
+import "../../../css/browse_tasks/TaskCardContentDetails_Header__Content.css";
 
 const HeaderContent = () => {
   const taskDetails = useSelector(state => state.task.taskDetails);

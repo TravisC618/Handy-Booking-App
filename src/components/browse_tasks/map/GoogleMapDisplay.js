@@ -73,7 +73,6 @@ const Map = () => {
   useEffect(() => {
     if (isScrollBarLoading || currTasks.length === 0) return;
     renderMarker(currTasks);
-    console.log(selectedTask);
   }, [isScrollBarLoading]);
 
   return (

@@ -3,17 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { Virtuoso } from "react-virtuoso";
 import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
-import TaskCard from "../components/browse_tasks/TaskCards";
-import LoadingSpinner from "../img/icons/LoadingSpinner.svg";
-import { reqGetAllTasks } from "../api/tasks";
+import TaskCard from "./TaskCards";
+import LoadingSpinner from "../../UI/LoadingSpinner";
+import LinearIndeterminate from "../../UI/LinearIndeterminate";
+import { reqGetAllTasks } from "../../api/tasks";
 import {
   UPDATE_CURRENT_TASKS,
   UPDATE_SCROLLBAR_LOADING,
   UPDATE_TOTAL,
   INCREMENT_PAGE,
   UPDATE_ITEM_STATE,
-  ERROR_MSG
-} from "../redux/actions/taskAction";
+  ERROR_MSG,
+  RESET_ITEM
+} from "../../redux/actions/taskAction";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,14 +26,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Table = () => {
-  // TODO 用currTasks取代items
+const TaskTable = () => {
   const items = useRef([]);
-  // const loading = useRef(false);
   const taskState = useSelector(state => state.task);
   const dispatch = useDispatch();
   const {
-    currTasks,
     total,
     page,
     pageSize,
@@ -44,12 +43,15 @@ const Table = () => {
   const classes = useStyles();
 
   const GenerateItem = index => {
-    return isScrollBarLoading ? (
-      <div />
-    ) : (
-      <TaskCard tasks={items.current[index]} />
-    );
+    return <TaskCard tasks={items.current[index]} />;
   };
+
+  useEffect(() => {
+    dispatch({ type: RESET_ITEM });
+    return () => {
+      dispatch({ type: RESET_ITEM });
+    };
+  }, []);
 
   useEffect(() => {
     // reset task items, due to search, priceRange, sort...
@@ -60,15 +62,12 @@ const Table = () => {
 
   const loadMore = async priceRange => {
     if (isScrollBarLoading) return;
+    const minPrice = priceRange[0];
+    const maxPrice = priceRange[1];
 
     let response;
     try {
-      response = await reqGetAllTasks(
-        page,
-        pageSize,
-        priceRange[0], // minPrice
-        priceRange[1] // maxPrice
-      );
+      response = await reqGetAllTasks(page, pageSize, minPrice, maxPrice);
     } catch (err) {
       dispatch({ type: ERROR_MSG, errMsg: err.message });
       return;
@@ -95,6 +94,23 @@ const Table = () => {
     dispatch({ type: INCREMENT_PAGE });
   };
 
+  const renderFooter = () => {
+    if (!!hasMoreItem)
+      return (
+        <div style={{ textAlign: "center" }}>
+          <LoadingSpinner />
+        </div>
+      );
+  };
+
+  if (items.current.length === 0) {
+    return (
+      <div style={{ width: "350px", height: "calc(100vh - 134px)" }}>
+        <LinearIndeterminate />
+      </div>
+    );
+  }
+
   if (errMsg)
     return (
       <div className={classes.root}>
@@ -107,21 +123,16 @@ const Table = () => {
       style={{ width: "350px", height: "calc(100vh - 134px)" }}
       overscan={pageSize}
       totalCount={total}
-      item={GenerateItem}
-      endReached={!!hasMoreItem ? () => loadMore(priceRange) : null}
-      footer={
-        !!hasMoreItem
-          ? () => {
-              return (
-                <div style={{ textAlign: "center" }}>
-                  <img src={LoadingSpinner} alt="LoadingSpinner" />
-                </div>
-              );
-            }
-          : null
+      item={items.current.length === 0 ? <LinearIndeterminate /> : GenerateItem}
+      endReached={
+        !!hasMoreItem &&
+        (() => {
+          loadMore(priceRange);
+        })
       }
+      footer={renderFooter}
     />
   );
 };
 
-export default Table;
+export default TaskTable;
