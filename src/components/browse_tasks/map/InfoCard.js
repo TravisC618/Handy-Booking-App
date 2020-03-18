@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -9,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
+import { TASK_URL } from "../../../routes/URLMAP";
 
 const useStyles = makeStyles({
   root: {
@@ -24,15 +26,14 @@ const useStyles = makeStyles({
 
 export default function InfoCard(props) {
   const classes = useStyles();
-  const { title, details, budget, name } = props;
-  const firstLetterOfName = name[0];
+  const { taskId, title, details, budget, name } = props;
 
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            {firstLetterOfName}
+            B
           </Avatar>
         }
         title={name}
@@ -49,9 +50,11 @@ export default function InfoCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          View task
-        </Button>
+        <Link to={`${TASK_URL}/${taskId}`}>
+          <Button size="small" color="primary">
+            View task
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
