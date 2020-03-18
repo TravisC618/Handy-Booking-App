@@ -69,7 +69,7 @@ function ProfileStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-  const { handleShowModal, showModal } = props;
+  const { handleShowModal, handleCloseModal, showModal } = props;
 
   const steps = getSteps();
 
@@ -129,14 +129,14 @@ function ProfileStepper(props) {
   const handleSubmit = () => {
     // redirect to homepage in 5 sec
     setTimeout(() => {
-      handleShowModal();
+      handleCloseModal();
       props.history.replace("/tasks");
     }, 5000);
   };
 
   const handleSubmitNow = () => {
-    // redirect to homepage in 5 sec
-    handleShowModal();
+    // redirect to homepage now
+    handleCloseModal();
     props.history.replace("/tasks");
   };
 
