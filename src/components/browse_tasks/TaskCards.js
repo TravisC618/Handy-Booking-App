@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
-import TaskCardContent from "./TaskCardContent";
+import TaskCardContentMain from "./taskCardContent/TaskCardContentMain";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ImgMediaCard = props => {
+const TaskCards = props => {
   const classes = useStyles();
   const { tasks } = props;
 
@@ -29,7 +29,7 @@ const ImgMediaCard = props => {
         <div className={classes.bgcolor} />
         <CardActionArea>
           <CardContent>
-            <TaskCardContent tasks={tasks} />
+            <TaskCardContentMain tasks={tasks} />
           </CardContent>
         </CardActionArea>
       </Card>
@@ -37,4 +37,4 @@ const ImgMediaCard = props => {
   );
 };
 
-export default ImgMediaCard;
+export default TaskCards;

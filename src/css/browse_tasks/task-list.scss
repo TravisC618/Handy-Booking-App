@@ -1,3 +1,5 @@
+@import "../theme.scss";
+
 .infinite-scroll-list {
   position: relative;
   margin: 0;
@@ -23,10 +25,14 @@
     .col-12 {
       padding: 0;
       .task-nav {
+        background: #f2f7f9;
         padding: 0;
         display: flex;
         justify-content: space-between;
-        margin: 64px 80px 0;
+        margin-top: 64px;
+        padding: 14px 150px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
         .secondary-menu {
           margin: 0;
@@ -44,7 +50,7 @@
 
         .map-display {
           padding: 0;
-          height: calc(100vh - 134px);
+          height: $browse-task-component-height;
         }
 
         .scroll-bar {

@@ -7,25 +7,32 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
-import * as parksData from "./skateboard-parks.json";
 import mapStyle from "./mapStyle";
 import getCoordinates from "../../../utils/getCoordinates";
+import InfoCard from "./InfoCard";
 import markerIcon from "../../../img/icons/marker.svg";
 import LoadingSpinner from "../../../UI/LoadingSpinner.js";
 
 const Map = () => {
   const [markers, setMarkers] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
-  const currTasks = useSelector(state => state.task.currTasks);
+  const taskState = useSelector(state => state.task);
+  const {
+    newTasks,
+    searchKey,
+    priceRange,
+    sortOrder,
+    isScrollBarLoading
+  } = taskState;
 
-  const isScrollBarLoading = useSelector(
-    state => state.task.isScrollBarLoading
-  );
+  useEffect(() => {
+    // reset markers array
+    setMarkers([]);
+  }, [searchKey, priceRange, sortOrder]);
 
-  const renderMarker = currTasks => {
-    // if (isScrollBarLoading || currTasks.length === 0) return;
+  const renderMarker = newTasks => {
     try {
-      currTasks.map(async task => {
+      newTasks.map(async task => {
         const position = await getCoordinates(task.location);
         setMarkers(markers =>
           markers.concat(
@@ -33,8 +40,7 @@ const Map = () => {
               key={task._id}
               position={position}
               onClick={() => {
-                setSelectedTask(task);
-                console.log(selectedTask);
+                setSelectedTask({ ...task, position });
               }}
               icon={{
                 url: markerIcon,
@@ -55,23 +61,25 @@ const Map = () => {
     return (
       <InfoWindow
         position={{
-          lat: getCoordinates(selectedTask.location).lat,
-          lng: getCoordinates(selectedTask.location).lng
+          lat: selectedTask.position.lat,
+          lng: selectedTask.position.lng
         }}
         onCloseClick={() => setSelectedTask(null)}
       >
-        <div>
-          <h2>{selectedTask.title}</h2>
-          <p>{selectedTask.details}</p>
-        </div>
+        <InfoCard
+          taskId={selectedTask._id}
+          title={selectedTask.title}
+          details={selectedTask.details}
+          budget={selectedTask.budget}
+          name={selectedTask.name}
+        />
       </InfoWindow>
     );
   };
 
   useEffect(() => {
-    if (isScrollBarLoading || currTasks.length === 0) return;
-    renderMarker(currTasks);
-    console.log(selectedTask);
+    if (isScrollBarLoading || newTasks.length === 0) return;
+    renderMarker(newTasks);
   }, [isScrollBarLoading]);
 
   return (
@@ -81,8 +89,8 @@ const Map = () => {
       defaultCenter={{ lat: -27.469512, lng: 153.024665 }}
       defaultOptions={{ styles: mapStyle }}
     >
-      <>{!isScrollBarLoading && currTasks.length !== 0 && markers}</>
-      {/* {selectedTask && renderInfoWindow()} */}
+      <>{!isScrollBarLoading && newTasks.length !== 0 && markers}</>
+      {selectedTask && renderInfoWindow()}
     </GoogleMap>
   );
 };

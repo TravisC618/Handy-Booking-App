@@ -1,6 +1,7 @@
 import {
   UPDATE_CURRENT_TASKS,
   UPDATE_TOTAL,
+  UPDATE_SEARCH_KEY,
   UPDATE_PRICE_RANGE,
   INCREMENT_PAGE,
   UPDATE_ITEM_STATE,
@@ -8,22 +9,25 @@ import {
   UPDATE_SCROLLBAR_LOADING,
   RESET_ITEM,
   UPDATE_DETAIL_STATE,
-  UPDATE_LOADING_STATE
+  UPDATE_LOADING_STATE,
+  UPDATE_SORT_ORDER
 } from "../actions/taskAction";
 
 const initialState = {
   currTasks: [],
+  newTasks: [], // for map marker
   taskDetails: {},
   total: 0,
   page: 1,
   pageSize: 10,
+  searchKey: "",
   priceRange: [5, 9999],
-  hasMoreItem: false,
+  sortOrder: "",
+  hasMoreItem: true,
   errMsg: "",
-  isToggleOn: true,
   isDetailOn: true,
   isScrollBarLoading: false,
-  isLoading: false
+  isFetchingDetails: false
 };
 
 export default (state = initialState, action) => {
@@ -31,18 +35,29 @@ export default (state = initialState, action) => {
     case UPDATE_CURRENT_TASKS:
       return {
         ...state,
-        // currTasks: [...state.currTasks, action.newTasks]，
-        currTasks: action.newTasks
+        currTasks: state.currTasks.concat(action.newTasks),
+        newTasks: action.newTasks
       };
     case UPDATE_TOTAL:
       return {
         ...state,
         total: action.total
       };
+    case UPDATE_SEARCH_KEY: {
+      return {
+        ...state,
+        searchKey: action.searchKey
+      };
+    }
     case UPDATE_PRICE_RANGE:
       return {
         ...state,
         priceRange: action.priceRange
+      };
+    case UPDATE_SORT_ORDER:
+      return {
+        ...state,
+        sortOrder: action.sortOrder
       };
     case INCREMENT_PAGE:
       return {
@@ -52,7 +67,7 @@ export default (state = initialState, action) => {
     case UPDATE_ITEM_STATE:
       return {
         ...state,
-        hasMoreItem: !state.hasMoreItem
+        hasMoreItem: action.hasMoreItem
       };
     case ERROR_MSG:
       return {
@@ -74,7 +89,7 @@ export default (state = initialState, action) => {
     case UPDATE_LOADING_STATE:
       return {
         ...state,
-        isLoading: !state.isLoading
+        isFetchingDetails: !state.isFetchingDetails
       };
     default:
       return state;
