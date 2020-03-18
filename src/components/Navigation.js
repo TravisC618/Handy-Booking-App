@@ -19,11 +19,24 @@ import CreateProfile from "../components/create_profile/CreateProfile";
 
 class Navigation extends Component {
   state = {
-    showModal: false
+    showModal: false,
+    showModalExitWarning: false,
   };
   handleShowModal = () => {
-    this.setState({ showModal: false });
+    this.setState({ showModal: true });
   };
+
+  handleCloseModal = () => {
+    this.setState({ showModalExitWarning: true });
+  };
+
+  handleCloseModalExitWarning = () => {
+      this.setState({ showModalExitWarning: false });
+  };
+
+  handleExitEditing = () => {
+    this.setState({ showModal: false, showModalExitWarning: false });
+  }
 
   logout = history => {
     removeToken();
@@ -107,9 +120,19 @@ class Navigation extends Component {
       <>
         <CreateProfile
           showModal={this.state.showModal}
+          showModalExitWarning={this.state.showModalExitWarning}
           handleShowModal={this.handleShowModal}
+          handleCloseModal={this.handleCloseModal}
+          handleCloseModalExitWarning={this.handleCloseModalExitWarning}
+          handleExitEditing={this.handleExitEditing}
         />
-        {visible ? <Login /> : null}
+        {visible ? (
+          <Login
+            showModal={this.state.showModal}
+            handleCloseModal={this.handleCloseModal}
+            handleShowModal={this.handleShowModal}
+          />
+        ) : null}
         <nav id="header" className={navClasses}>
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
