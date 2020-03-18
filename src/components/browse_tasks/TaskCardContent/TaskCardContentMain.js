@@ -1,14 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import "../../../css/browse_tasks/TaskCardContent.css";
 import { Location, Calendar } from "../../../utils/Icons";
 import { TASK_URL } from "../../../routes/URLMAP";
 
-const TaskCardContent = props => {
-  const dispatch = useDispatch();
-
+const TaskCardContentMain = props => {
   const toUpperCaseFilter = d => {
     return d.toUpperCase();
   };
@@ -66,4 +63,4 @@ const TaskCardContent = props => {
   );
 };
 
-export default TaskCardContent;
+export default TaskCardContentMain;
