@@ -1,6 +1,6 @@
 import React from "react";
 import TaskTable from "./TaskTable";
-import TaskCardContentDetails from "./TaskCardContent/TaskCardContentDetails";
+import TaskCardContentDetails from "./taskCardContent/TaskCardContentDetails";
 import { withRouter } from "react-router";
 import { Route } from "react-router-dom";
 import { TASK_URL } from "../../routes/URLMAP";
@@ -30,7 +30,7 @@ const Content = props => {
           />
         )}
         <Route
-          path={`${TASK_URL}/:titleId`}
+          path={`${TASK_URL}/:taskId`}
           component={TaskCardContentDetails}
         />
       </div>

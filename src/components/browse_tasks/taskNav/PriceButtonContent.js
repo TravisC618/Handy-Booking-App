@@ -1,6 +1,6 @@
 import React from "react";
-import { PriceSlider } from "../../utils/Slider";
-import "../../css/browse_tasks/PriceButton.css";
+import { PriceSlider } from "../../../utils/Slider";
+import "../../../css/browse_tasks/PriceButton.css";
 
 const PriceButtonContent = props => {
   const { priceRange, setPriceRange } = props;

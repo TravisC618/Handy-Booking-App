@@ -16,16 +16,23 @@ import LoadingSpinner from "../../../UI/LoadingSpinner.js";
 const Map = () => {
   const [markers, setMarkers] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
-  const currTasks = useSelector(state => state.task.currTasks);
+  const taskState = useSelector(state => state.task);
+  const {
+    newTasks,
+    searchKey,
+    priceRange,
+    sortOrder,
+    isScrollBarLoading
+  } = taskState;
 
-  const isScrollBarLoading = useSelector(
-    state => state.task.isScrollBarLoading
-  );
+  useEffect(() => {
+    // reset markers array
+    setMarkers([]);
+  }, [searchKey, priceRange, sortOrder]);
 
-  const renderMarker = currTasks => {
-    // if (isScrollBarLoading || currTasks.length === 0) return;
+  const renderMarker = newTasks => {
     try {
-      currTasks.map(async task => {
+      newTasks.map(async task => {
         const position = await getCoordinates(task.location);
         setMarkers(markers =>
           markers.concat(
@@ -33,7 +40,7 @@ const Map = () => {
               key={task._id}
               position={position}
               onClick={() => {
-                setSelectedTask({ ...task, position }); // selectedTask: specified task
+                setSelectedTask({ ...task, position });
               }}
               icon={{
                 url: markerIcon,
@@ -51,7 +58,6 @@ const Map = () => {
   };
 
   const renderInfoWindow = () => {
-    console.log({ selectedTask });
     return (
       <InfoWindow
         position={{
@@ -61,6 +67,7 @@ const Map = () => {
         onCloseClick={() => setSelectedTask(null)}
       >
         <InfoCard
+          taskId={selectedTask._id}
           title={selectedTask.title}
           details={selectedTask.details}
           budget={selectedTask.budget}
@@ -71,8 +78,8 @@ const Map = () => {
   };
 
   useEffect(() => {
-    if (isScrollBarLoading || currTasks.length === 0) return;
-    renderMarker(currTasks);
+    if (isScrollBarLoading || newTasks.length === 0) return;
+    renderMarker(newTasks);
   }, [isScrollBarLoading]);
 
   return (
@@ -82,7 +89,7 @@ const Map = () => {
       defaultCenter={{ lat: -27.469512, lng: 153.024665 }}
       defaultOptions={{ styles: mapStyle }}
     >
-      <>{!isScrollBarLoading && currTasks.length !== 0 && markers}</>
+      <>{!isScrollBarLoading && newTasks.length !== 0 && markers}</>
       {selectedTask && renderInfoWindow()}
     </GoogleMap>
   );

@@ -1,6 +1,6 @@
 import React from "react";
-import Menu from "./components/account/Menu";
-import "./css/account/account.css";
+import Menu from "../components/account/Menu";
+import "../css/account/account.css";
 // import Dashboard from "./components/account/Dashboard";
 // import Notifications from '../components/account/Notifications';
 // import Profile from '../components/account/Profile';
@@ -17,7 +17,6 @@ const Account = props => {
     <div className="account">
       <div className="account__page">
         <div className="account__content">
-
           <Menu />
           {/* </div> */}
           {/* <div className="col-8"> */}
@@ -26,7 +25,6 @@ const Account = props => {
           {currentPath === "/account/payment-history" ? (
             <PaymentHistory />
           ) : null} */}
-
         </div>
       </div>
     </div>

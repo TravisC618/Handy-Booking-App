@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import RangeButton from "./RangeButton";
 import PriceButton from "./PriceButton";
 import TypeButton from "./TypeButton";
-import SearchButton from "./SearchButton";
+import SearchBar from "./SearchBar";
 import ShowMapButton from "./ShowMapButton";
 
 class TaskNav extends Component {
@@ -24,7 +24,7 @@ class TaskNav extends Component {
           </li>
         </ul>
         <div className="search-bar">
-          <SearchButton />
+          <SearchBar />
         </div>
       </>
     );

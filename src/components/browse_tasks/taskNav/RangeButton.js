@@ -1,12 +1,11 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
-import Grid from '@material-ui/core/Grid';
+import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import RangeButtonContent from "./RangeButtonContent";
-import "../../css/browse_tasks/RangeButton.css";
-
+import "../../../css/browse_tasks/RangeButton.css";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,7 +18,8 @@ const useStyles = makeStyles(theme => ({
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
-    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
   }
 })(props => (
   <Menu

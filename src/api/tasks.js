@@ -14,13 +14,17 @@ export const reqGetAllTasks = (
   page = 1,
   pageSize = 10,
   minPrice = 5,
-  maxPrice = 9999
+  maxPrice = 9999,
+  sort = "",
+  q = "" // search key
 ) => {
   const stringField = querystring.stringify({
     page,
     pageSize,
     minPrice,
-    maxPrice
+    maxPrice,
+    sort,
+    q
   });
   const url = `${API_TASK_URL}?${stringField}`;
 

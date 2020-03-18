@@ -5,7 +5,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Button from "@material-ui/core/Button";
+import { Button } from "@material-ui/core";
 import PostAddOutlinedIcon from "@material-ui/icons/PostAddOutlined";
 import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
 import "../../../css/browse_tasks/PriceButton.css";

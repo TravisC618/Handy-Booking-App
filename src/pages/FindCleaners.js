@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./components/find_cleaners/Header";
-import "./css/find_cleaners/find-cleaners.css";
-import Checkout from "./components/find_cleaners/Checkout";
+import Header from "../components/find_cleaners/Header";
+import "../css/find_cleaners/find-cleaners.css";
+import Checkout from "../components/find_cleaners/Checkout";
 
 const FindCleaners = props => {
   return (

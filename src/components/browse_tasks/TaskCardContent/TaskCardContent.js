@@ -5,11 +5,6 @@ import Moment from "react-moment";
 import "../../../css/browse_tasks/TaskCardContent.css";
 import { Location, Calendar } from "../../../utils/Icons";
 import { TASK_URL } from "../../../routes/URLMAP";
-import { reqGetTask } from "../../../api/tasks";
-import {
-  UPDATE_DETAIL_STATE,
-  UPDATE_LOADING_STATE
-} from "../../../redux/actions/taskAction";
 
 const TaskCardContent = props => {
   const dispatch = useDispatch();
@@ -28,23 +23,10 @@ const TaskCardContent = props => {
     offerNum
   } = props.tasks;
 
-  const handleOnClick = async () => {
-    try {
-      dispatch({ type: UPDATE_LOADING_STATE });
-      const response = await reqGetTask(_id);
-      const taskDetails = response.data.data;
-      dispatch({ type: UPDATE_DETAIL_STATE, taskDetails });
-      dispatch({ type: UPDATE_LOADING_STATE });
-    } catch (error) {
-      console.log(error); //TODO error handling
-    }
-  };
-
   return (
     <Link
       to={`${TASK_URL}/${_id}`}
       class="new-task-list-item new-task-list-item--open"
-      onClick={handleOnClick}
     >
       <div class="new-task-list-item__header">
         <span class="new-task-list-item__title">{title}</span>

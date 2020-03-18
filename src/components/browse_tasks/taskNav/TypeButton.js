@@ -1,14 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-
-import { UPDATE_PRICE_RANGE, RESET_ITEM } from "../../redux/actions/taskAction";
-import PriceButtonContent from "./PriceButtonContent";
-import "../../css/browse_tasks/PriceButton.css";
+import TypeButtonContent from "./TypeButtonContent";
+import "../../../css/browse_tasks/TypeButton.css";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,16 +37,9 @@ const StyledMenu = withStyles({
   />
 ));
 
-export default function PriceButton() {
+export default function TypeButton() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [priceRange, setPriceRange] = React.useState([5, 9999]);
-  const dispatch = useDispatch();
   const classes = useStyles();
-
-  const updatePriceRange = priceRange => {
-    dispatch({ type: RESET_ITEM });
-    dispatch({ type: UPDATE_PRICE_RANGE, priceRange });
-  };
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -68,7 +58,7 @@ export default function PriceButton() {
         color="primary"
         onClick={handleClick}
       >
-        Any price
+        Task type
       </Button>
 
       <StyledMenu
@@ -79,11 +69,8 @@ export default function PriceButton() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <div className="dropdown-menu-content-price">
-          <PriceButtonContent
-            priceRange={priceRange}
-            setPriceRange={setPriceRange}
-          />
+        <div className="dropdown-menu-content-type">
+          <TypeButtonContent />
           <hr />
           <div className="NavButtonContentFooter">
             <div style={{ margin: 10 }}>
@@ -93,16 +80,11 @@ export default function PriceButton() {
                     <Button onClick={handleClose}>Cancel</Button>
                   </div>
                 </Grid>
-                <Grid item xs={4}>
-                  <div></div>
-                </Grid>
+                <Grid item xs={4}></Grid>
                 <Grid xs>
                   <div className={classes.root}>
                     <Button
-                      onClick={() => {
-                        updatePriceRange(priceRange);
-                        handleClose();
-                      }}
+                      onClick={handleClose}
                       variant="contained"
                       color="primary"
                     >
