@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
-import TaskCardContent from "./taskCardContent/TaskCardContent";
+import TaskCardContentMain from "./taskCardContent/TaskCardContentMain";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +29,7 @@ const TaskCards = props => {
         <div className={classes.bgcolor} />
         <CardActionArea>
           <CardContent>
-            <TaskCardContent tasks={tasks} />
+            <TaskCardContentMain tasks={tasks} />
           </CardContent>
         </CardActionArea>
       </Card>
