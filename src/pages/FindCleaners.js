@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/find_cleaners/Header";
 import "../css/find_cleaners/find-cleaners.css";
-import Checkout from "../components/find_cleaners/Checkout";
+import PostTaskMain from "../components/find_cleaners/PostTaskMain";
 
 const FindCleaners = props => {
   return (
@@ -9,7 +9,7 @@ const FindCleaners = props => {
       <Header />
       <div className="container-fluid padding">
         <div className="row padding">
-          <Checkout />
+          <PostTaskMain />
         </div>
       </div>
     </section>

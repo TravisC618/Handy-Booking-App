@@ -6,7 +6,7 @@ import { handleVisible as handleVisibleAction } from "../redux/actions/loginActi
 import { isIncluded } from "../utils/helper";
 import Login from "./Login";
 import { isLoggedIn } from "../utils/auth";
-import { removeToken, removeUserId } from "../utils/auth";
+import { removeToken, removeUserId, removeRoleId } from "../utils/auth";
 import {
   HOME_URL,
   CLEANER_DETAILS_URL,
@@ -19,11 +19,16 @@ import CreateProfile from "../components/create_profile/CreateProfile";
 
 class Navigation extends Component {
   state = {
+    isRegister: false,
     showModal: false,
-    showModalExitWarning: false,
+    showModalExitWarning: false
   };
-  handleShowModal = () => {
-    this.setState({ showModal: true });
+  updateRegisterStatus = isRegister => {
+    this.setState({ isRegister });
+  };
+
+  handleShowModal = isShow => {
+    this.setState({ showModal: isShow });
   };
 
   handleCloseModal = () => {
@@ -31,16 +36,17 @@ class Navigation extends Component {
   };
 
   handleCloseModalExitWarning = () => {
-      this.setState({ showModalExitWarning: false });
+    this.setState({ showModalExitWarning: false });
   };
 
   handleExitEditing = () => {
     this.setState({ showModal: false, showModalExitWarning: false });
-  }
+  };
 
   logout = history => {
     removeToken();
     removeUserId();
+    removeRoleId();
     history.push(HOME_URL);
   };
 
@@ -104,6 +110,7 @@ class Navigation extends Component {
 
   render() {
     const { location, visible } = this.props;
+    const { isRegister, showModal, showModalExitWarning } = this.state;
     const currentPath = location.pathname;
     const navClasses = classnames(
       "navbar",
@@ -118,21 +125,25 @@ class Navigation extends Component {
 
     return (
       <>
-        <CreateProfile
-          showModal={this.state.showModal}
-          showModalExitWarning={this.state.showModalExitWarning}
-          handleShowModal={this.handleShowModal}
-          handleCloseModal={this.handleCloseModal}
-          handleCloseModalExitWarning={this.handleCloseModalExitWarning}
-          handleExitEditing={this.handleExitEditing}
-        />
-        {visible ? (
+        {isRegister && (
+          <CreateProfile
+            showModal={showModal}
+            showModalExitWarning={showModalExitWarning}
+            handleShowModal={this.handleShowModal}
+            handleCloseModal={this.handleCloseModal}
+            handleCloseModalExitWarning={this.handleCloseModalExitWarning}
+            handleExitEditing={this.handleExitEditing}
+            updateRegisterStatus={this.updateRegisterStatus}
+          />
+        )}
+        {visible && (
           <Login
-            showModal={this.state.showModal}
+            showModal={showModal}
             handleCloseModal={this.handleCloseModal}
             handleShowModal={this.handleShowModal}
+            updateRegisterStatus={this.updateRegisterStatus}
           />
-        ) : null}
+        )}
         <nav id="header" className={navClasses}>
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
@@ -148,15 +159,14 @@ class Navigation extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarToggler">
               <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  {/* Create Profile */}
+                {/* <li className="nav-item">
                   <Link
                     className="nav-link"
                     onClick={() => this.setState({ showModal: true })}
                   >
                     Create Profile
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link className="nav-link" to={CLEANER_DETAILS_URL}>
                     Browse Handy

@@ -23,56 +23,18 @@ export default function BasicInformation(props) {
       </Typography>
       <div className="basic-information-container">
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               onChange={event => handleChange(event)}
               required
-              name="firstname"
-              placeholder="FirstName"
-              value={values.firstname}
+              name="fullname"
+              placeholder="Fullname"
+              value={values.fullname}
               label={
-                values.err.name === "firstname"
-                  ? "Error"
-                  : "What is your first name?"
+                values.err.name === "fullname" ? "Error" : "What's your name?"
               }
-              error={values.err.name === "firstname" ? true : false}
-              helperText={
-                values.err.name === "firstname" ? values.err.msg : null
-              }
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              onChange={event => handleChange(event)}
-              required
-              name="lastname"
-              placeholder="LastName"
-              value={values.lastname}
-              label={
-                values.err.name === "lastname"
-                  ? "Error"
-                  : "What is your last name?"
-              }
-              error={values.err.name === "lastname" ? true : false}
-              helperText={
-                values.err.name === "lastname" ? values.err.msg : null
-              }
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              onChange={event => handleChange(event)}
-              required
-              name="email"
-              placeholder="Email Address"
-              value={values.email}
-              label={
-                values.err.name === "email" ? "Error" : "What is your email?"
-              }
-              error={values.err.name === "email" ? true : false}
-              helperText={values.err.name === "email" ? values.err.msg : null}
+              error={values.err.name === "fullname" ? true : false}
+              helperText={values.err.name === "fullname" && values.err.msg}
               fullWidth
             />
           </Grid>

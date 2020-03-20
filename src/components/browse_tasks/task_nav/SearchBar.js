@@ -1,5 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
@@ -7,6 +8,7 @@ import {
   RESET_ITEM,
   UPDATE_SEARCH_KEY
 } from "../../../redux/actions/taskAction";
+import { TASK_URL } from "../../../routes/URLMAP";
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -48,17 +50,25 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const handleSearch = (event, dispatch) => {
-  const searchKey = event.target.value;
-  if (event.key === "Enter") {
-    dispatch({ type: RESET_ITEM });
-    dispatch({ type: UPDATE_SEARCH_KEY, searchKey });
-  }
-};
-
-export default function SearchBar() {
+function SearchBar(props) {
   const classes = useStyles();
+  const searchKeyInState = useSelector(state => state.task.searchKey);
   const dispatch = useDispatch();
+  const {
+    location: { pathname: currentPath },
+    history
+  } = props;
+
+  const handleSearch = (event, dispatch) => {
+    const searchKey = event.target.value;
+    if (searchKey === searchKeyInState) return;
+
+    if (event.key === "Enter") {
+      dispatch({ type: RESET_ITEM });
+      dispatch({ type: UPDATE_SEARCH_KEY, searchKey });
+      currentPath !== TASK_URL && history.push(TASK_URL);
+    }
+  };
 
   return (
     <div className={classes.search}>
@@ -77,3 +87,5 @@ export default function SearchBar() {
     </div>
   );
 }
+
+export default withRouter(SearchBar);

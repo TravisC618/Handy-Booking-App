@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PriceSortedButton(props) {
+export default function PriceSorted(props) {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const { sortOrder, setSortOrder } = props;

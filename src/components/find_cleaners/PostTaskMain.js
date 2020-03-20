@@ -23,6 +23,7 @@ import TaskBreadcrumbs from "./BreadCrumbs";
 import { getUserId } from "../../utils/auth";
 import { reqPostTask } from "../../api/tasks";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import CountDown from "../../utils/CountDown";
 import "../../css/theme.scss";
 
 function Copyright() {
@@ -175,7 +176,7 @@ function getStepContent(step, handleChange, values) {
   }
 }
 
-function Checkout(props) {
+function PostTaskMain(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [values, setValues] = useState({
@@ -351,15 +352,19 @@ function Checkout(props) {
                         task confirmation, and will send you an update when your
                         task has any offer or comment.`
                       </Typography>
-                      <Box
-                        display="flex"
-                        justifyContent="center"
-                        className={classes.alert}
-                      >
-                        <Alert variant="filled" severity="success">
-                          Back to homepage in 5 seconds
-                        </Alert>
-                      </Box>
+                      <CountDown startCount={5}>
+                        {count => (
+                          <Box
+                            display="flex"
+                            justifyContent="center"
+                            className={classes.alert}
+                          >
+                            <Alert variant="filled" severity="success">
+                              Back to homepage in {count} seconds
+                            </Alert>
+                          </Box>
+                        )}
+                      </CountDown>
                     </>
                   )}
                 </React.Fragment>
@@ -392,4 +397,4 @@ function Checkout(props) {
   );
 }
 
-export default withRouter(Checkout);
+export default withRouter(PostTaskMain);
