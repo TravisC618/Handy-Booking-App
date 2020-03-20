@@ -22,6 +22,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Sidebar from "./siderbar/Sidebar";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,6 +49,7 @@ const Menu = props => {
   const { match } = props;
   return (
     <div className="menu">
+      <Sidebar />
       <div className="menu__user">
         <div className="menu__user-avatar"></div>
         <div className="menu__user-name">User Name</div>
