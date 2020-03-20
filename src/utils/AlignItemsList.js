@@ -32,10 +32,7 @@ export default function AlignItemsList() {
   };
 
   const taskDetails = useSelector(state => state.task.taskDetails);
-  const location = taskDetails.location;
-  const postDate = taskDetails.postDate;
-  const dueDate = taskDetails.dueDate;
-  const name = taskDetails.name;
+  const { location, postDate, dueDate, customer } = taskDetails;
 
   return (
     <List className={classes.root}>
@@ -57,7 +54,7 @@ export default function AlignItemsList() {
                 color="textPrimary"
                 fontSize="1px"
               >
-                {name}
+                {customer && customer.username}
               </Typography>
               <Typography className={classes.inline} style={{ float: "right" }}>
                 <Moment format="ddd, D MMM" filter={toUpperCaseFilter}>

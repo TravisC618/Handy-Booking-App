@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import Checkout from "../../components/find_cleaners/Checkout";
+import PostTaskMain from "./PostTaskMain";
 import cleanerVideo from "../../assets/videos/cleaner.mp4";
 import "../../css/find_cleaners/postside.scss";
 
@@ -72,7 +72,7 @@ export default function PostSide() {
         square
         className={classes.task}
       >
-        <Checkout />
+        <PostTaskMain />
       </Grid>
     </Grid>
   );

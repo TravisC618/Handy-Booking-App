@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 const JWT_TOKEN_NAME = "jwt-token";
 const USER_ID_NAME = "userId";
+const CUSTOMER_ID_NAME = "customerId";
+const TRADIE_ID_NAME = "tradieId";
 
 export const isLoggedIn = () => {
   const token = localStorage.getItem(JWT_TOKEN_NAME); // !! => boolean
@@ -38,4 +40,30 @@ export const getUserId = () => {
 
 export const removeUserId = () => {
   return localStorage.removeItem(USER_ID_NAME);
+};
+
+// Role id
+export const storeRoleId = (role, roleId) => {
+  switch (role) {
+    case "customer":
+      localStorage.setItem(CUSTOMER_ID_NAME, roleId);
+      break;
+    case "tradie":
+      localStorage.setItem(TRADIE_ID_NAME, roleId);
+      break;
+    default:
+      return;
+  }
+};
+
+export const getRoleId = () => {
+  const result =
+    localStorage.getItem(CUSTOMER_ID_NAME) ||
+    localStorage.getItem(TRADIE_ID_NAME);
+  return result;
+};
+
+export const removeRoleId = () => {
+  localStorage.removeItem(TRADIE_ID_NAME);
+  localStorage.removeItem(CUSTOMER_ID_NAME);
 };

@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Select, { components } from "react-select";
 
 const Placeholder = props => {
-  return (
-  <components.Placeholder {...props} />
-  );
+  return <components.Placeholder {...props} />;
 };
 
 const colourStyles = {
@@ -26,33 +24,37 @@ const colourStyles = {
 const useStyles = makeStyles(theme => ({
   root: {
     fontSize: 16,
-    marginBottom:20,
+    marginBottom: 20
   }
 }));
 
 const options = [
-    { value: 'English', label: 'English' },
-    { value: 'Mandarin', label: 'Mandarin Chinese' },
-    { value: 'French', label: 'French' },
-    { value: 'Spanish', label: 'Spanish' },
-    { value: 'Arabic', label: 'Arabic' },
-    { value: 'Malay', label: 'Malay' },
-    { value: 'Russian', label: 'Russian' },
-    { value: 'Vanilla', label: 'Vanilla' },
-  ];
-  
+  { value: "English", label: "English" },
+  { value: "Mandarin", label: "Mandarin" },
+  { value: "Cantonese", label: "Cantonese" },
+  { value: "French", label: "French" },
+  { value: "Spanish", label: "Spanish" },
+  { value: "Arabic", label: "Arabic" },
+  { value: "Malay", label: "Malay" },
+  { value: "Russian", label: "Russian" },
+  { value: "Vanilla", label: "Vanilla" }
+];
 
 export default function LanguageSelector(props) {
   const classes = useStyles();
-  const { handleLanguageSelector, values } = props;
+  // const [languageLabel, setLanguageLabel] = useState([]);
+  const { handleLanguageSelector, languageLabel, setLanguageLabel } = props;
 
   return (
     <div className={classes.root}>
       <Select
-        value={values.language}
-        onChange={event => handleLanguageSelector(event)}
+        value={languageLabel}
+        onChange={event => {
+          setLanguageLabel(event);
+          handleLanguageSelector(event);
+        }}
         placeholder={"Select the language you can speak..."}
-        components={({ Placeholder })}
+        components={{ Placeholder }}
         closeMenuOnSelect={false}
         isMulti
         options={options}
