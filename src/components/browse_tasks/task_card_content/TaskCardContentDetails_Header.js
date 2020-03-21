@@ -26,6 +26,7 @@ export default function TaskCardContentDetailsHeader() {
         </Grid>
         <Grid item xs={4} zeroMinWidth>
           <SidePanel />
+          {/* SidePanel - model */}
           <TaskCardContentDetailsDropDown />
           <ShareContainer />
           <TaskReport />

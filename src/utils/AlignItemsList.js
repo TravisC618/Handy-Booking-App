@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -11,7 +12,6 @@ import Typography from "@material-ui/core/Typography";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
 import RoomRoundedIcon from "@material-ui/icons/RoomRounded";
 import TodayRoundedIcon from "@material-ui/icons/TodayRounded";
-import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,13 +26,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function AlignItemsList() {
   const classes = useStyles();
-  const preventDefault = event => event.preventDefault();
   const toUpperCaseFilter = d => {
     return d.toUpperCase();
   };
 
   const taskDetails = useSelector(state => state.task.taskDetails);
   const { location, postDate, dueDate, customer } = taskDetails;
+  let username = "Peter Ham";
+  if (customer) {
+    username = customer.name || customer.username;
+  }
 
   return (
     <List className={classes.root}>
@@ -54,7 +57,7 @@ export default function AlignItemsList() {
                 color="textPrimary"
                 fontSize="1px"
               >
-                {customer && customer.username}
+                {username}
               </Typography>
               <Typography className={classes.inline} style={{ float: "right" }}>
                 <Moment format="ddd, D MMM" filter={toUpperCaseFilter}>
@@ -86,9 +89,7 @@ export default function AlignItemsList() {
                 {location}
               </Typography>
               <Typography className={classes.inline} style={{ float: "right" }}>
-                <Link href="#" onClick={preventDefault}>
-                  View map
-                </Link>
+                <Link to="/tasks">View map</Link>
               </Typography>
             </React.Fragment>
           }

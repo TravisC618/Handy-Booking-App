@@ -1,0 +1,22 @@
+.dialog-wrapper {
+  height: 530px;
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .payment-selection {
+      margin-top: 10px;
+    }
+
+    .dialog-button-group {
+      margin: 20px;
+      justify-self: flex-end;
+      align-self: flex-end;
+    }
+  }
+}

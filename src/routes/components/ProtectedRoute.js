@@ -21,9 +21,6 @@ const ProtectedRoute = ({
       {...rest} // e.g. path, exact, etc
       render={routeProps => {
         if (!isLoggedIn()) {
-          // console.log(location);
-          // console.log(routeProps.location.pathname);
-          // history.goBack(); //TODO: 改成histo.push
           handleRedirect(routeProps.location.pathname);
           handleVisible(true);
           return (
