@@ -56,11 +56,15 @@ export const storeRoleId = (role, roleId) => {
   }
 };
 
-export const getRoleId = () => {
-  const result =
-    localStorage.getItem(CUSTOMER_ID_NAME) ||
-    localStorage.getItem(TRADIE_ID_NAME);
-  return result;
+export const getRoleId = role => {
+  switch (role) {
+    case "customer":
+      return localStorage.getItem(CUSTOMER_ID_NAME);
+    case "tradie":
+      return localStorage.getItem(TRADIE_ID_NAME);
+    default:
+      return null;
+  }
 };
 
 export const removeRoleId = () => {
