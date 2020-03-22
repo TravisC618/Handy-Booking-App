@@ -1,20 +1,20 @@
-import React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
-import { Divider } from '@material-ui/core';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
-import ImageIcon from '@material-ui/icons/Image';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+import React from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/styles";
+import { Divider } from "@material-ui/core";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import PeopleIcon from "@material-ui/icons/People";
+import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import SettingsIcon from "@material-ui/icons/Settings";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import { connect } from "react-redux";
 
-import Profile from './Profile';
-import SidebarNav from './SidebarNav';
+import Profile from "./Profile";
+import SidebarNav from "./SidebarNav";
 
+import { ACCOUNT_BASE_URL } from "../../../routes/URLMAP";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     padding: 20,
     height: "100%",
     fontSize: "40px",
-    minWidth: 180,
+    minWidth: 180
   },
   divider: {
     margin: 10
@@ -33,67 +33,52 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Sidebar = props => {
-  const { open, variant, onClose, className, ...rest } = props;
+  const { userRoleId, open, variant, onClose, className, ...rest } = props;
 
   const classes = useStyles();
 
   const pages = [
     {
-      title: 'Dashboard',
-      href: '/dashboard',
+      title: "Dashboard",
+      href: `${ACCOUNT_BASE_URL}/${userRoleId}/dashboard`,
       icon: <DashboardIcon />
     },
     {
-      title: 'Users',
-      href: '/users',
-      icon: <PeopleIcon />
-    },
-    {
-      title: 'Products',
-      href: '/products',
+      title: "Payment History",
+      href: `${ACCOUNT_BASE_URL}/${userRoleId}/payment-history`,
       icon: <ShoppingBasketIcon />
     },
     {
-      title: 'Authentication',
-      href: '/sign-in',
+      title: "Notifications",
+      href: `${ACCOUNT_BASE_URL}/${userRoleId}/notifications`,
+      icon: <PeopleIcon />
+    },
+
+    {
+      title: "Authentication",
+      href: `${ACCOUNT_BASE_URL}/${userRoleId}/password`,
       icon: <LockOpenIcon />
     },
     {
-      title: 'Typography',
-      href: '/typography',
-      icon: <TextFieldsIcon />
-    },
-    {
-      title: 'Icons',
-      href: '/icons',
-      icon: <ImageIcon />
-    },
-    {
-      title: 'Account',
-      href: '/account',
+      title: "Profile",
+      href: `${ACCOUNT_BASE_URL}/${userRoleId}/profile`,
       icon: <AccountBoxIcon />
     },
     {
-      title: 'Settings',
-      href: '/settings',
+      title: "View Tasks",
+      href: `${ACCOUNT_BASE_URL}/${userRoleId}/view-tasks`,
       icon: <SettingsIcon />
     }
   ];
 
   return (
-
-      <div
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+    <React.Fragment>
+      <div {...rest} className={clsx(classes.root, className)}>
         <Profile />
         <Divider className={classes.divider} />
-        <SidebarNav
-          className={classes.nav}
-          pages={pages}
-        />
+        <SidebarNav className={classes.nav} pages={pages} />
       </div>
-
+    </React.Fragment>
   );
 };
 
@@ -104,4 +89,11 @@ Sidebar.propTypes = {
   variant: PropTypes.string.isRequired
 };
 
-export default Sidebar;
+const mapStateToProps = state => ({
+  userRoleId:state.account.userRoleId,
+});
+
+
+export default connect(
+  mapStateToProps,
+)(Sidebar);

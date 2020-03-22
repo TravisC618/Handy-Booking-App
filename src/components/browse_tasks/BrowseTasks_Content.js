@@ -12,13 +12,13 @@ const Content = props => {
   } = props;
 
   return (
-    <div class="row">
-      <div class="col-4 scroll-bar">
+    <div className="row">
+      <div className="col-4 scroll-bar">
         <div className="infinite-scroll-list">
           <TaskTable />
         </div>
       </div>
-      <div class="col-8 map-display">
+      <div className="col-8 map-display">
         {currentPath === `${TASK_URL}` && (
           <GoogleMapDisplay
             loadingElement={<div style={{ height: "100%" }} />}

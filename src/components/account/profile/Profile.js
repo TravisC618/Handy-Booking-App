@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Profile = () => {
+const SettingProfile = () => {
   const classes = useStyles();
 
   return (
@@ -46,4 +46,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default SettingProfile;

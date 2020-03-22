@@ -60,6 +60,7 @@ export const getRoleId = () => {
   const result =
     localStorage.getItem(CUSTOMER_ID_NAME) ||
     localStorage.getItem(TRADIE_ID_NAME);
+    console.log(result)
   return result;
 };
 

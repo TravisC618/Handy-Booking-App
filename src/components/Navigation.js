@@ -11,6 +11,7 @@ import {
   HOME_URL,
   CLEANER_DETAILS_URL,
   TASK_URL,
+  ACCOUNT_BASE_URL,
   ACCOUNT_DASHBOARD_URL
 } from "../routes/URLMAP";
 import "../css/navigation.scss";
@@ -61,6 +62,8 @@ class Navigation extends Component {
     }
   }
 
+
+
   resizeHeaderOnScroll() {
     const distanceY = window.pageYOffset || document.documentElement.scrollTop,
       shrinkOn = 200,
@@ -80,13 +83,12 @@ class Navigation extends Component {
   }
 
   renderLogin() {
-    const { history, handleVisible } = this.props;
-
+    const { history, handleVisible, userRoleId } = this.props;
     if (isLoggedIn()) {
       return (
         <>
           <li className="nav-item">
-            <Link className="nav-link" to={ACCOUNT_DASHBOARD_URL}>
+            <Link className="nav-link" to={`${ACCOUNT_BASE_URL}/${userRoleId}/dashboard`}>
               Account
             </Link>
           </li>
@@ -188,12 +190,17 @@ class Navigation extends Component {
 }
 
 const mapStateToProps = state => ({
-  visible: state.login.visible
+  visible: state.login.visible,
+  userRoleId:state.account.userRoleId,
 });
+
+
+
 
 const mapDistachToProps = dispatch => ({
   handleVisible: isVisible => dispatch(handleVisibleAction(isVisible))
 });
+
 
 export default connect(
   mapStateToProps,

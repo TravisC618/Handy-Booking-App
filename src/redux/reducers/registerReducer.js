@@ -1,9 +1,12 @@
-import { UPDATE_REGISTER_FORM, RESET_FORM } from "../actions/registerAction";
+import {
+  UPDATE_REGISTER_FORM,
+  RESET_FORM
+} from "../actions/registerAction";
 
 const initialState = {
   email: "",
   password: "",
-  username: ""
+  username: "",
 };
 
 const registerReducer = (state = initialState, action) => {

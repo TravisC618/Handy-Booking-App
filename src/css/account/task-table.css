@@ -1,0 +1,35 @@
+.loading {
+  height: 130px;
+  position: relative;
+}
+.empty {
+  height: 130px;
+  position: relative;
+}
+.empty .empty-span {
+  position: absolute;
+  right: -220%;
+  top: 53%;
+}
+.m-sm-30 {
+  text-align: center;
+}
+.m-sm-30 .pl-sm-24 {
+  width: 170px;
+  max-width: 170px;
+}
+.m-sm-30 .task-status {
+  text-align: center;
+  width: 130px;
+}
+.m-sm-30 .budget {
+  text-align: center;
+}
+.m-sm-30 .offers {
+  text-align: center;
+  width: 100px;
+}
+.m-sm-30 .task-status-chip {
+  text-align: center;
+  width: 130px;
+}

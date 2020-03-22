@@ -1,67 +1,54 @@
-/* eslint-disable react/no-multi-comp */
-/* eslint-disable react/display-name */
-import React, { forwardRef } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
-import { List, ListItem, Button, colors } from '@material-ui/core';
+import React, { forwardRef } from "react";
+import { NavLink as RouterLink } from "react-router-dom";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/styles";
+import { List, ListItem, Button } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {},
   item: {
-    display: 'flex',
+    display: "flex",
     paddingTop: 0,
     paddingBottom: 0
   },
   button: {
     color: "gray",
-    padding: '10px 8px',
-    justifyContent: 'flex-start',
-    textTransform: 'none',
+    padding: "10px 8px",
+    justifyContent: "flex-start",
+    textTransform: "none",
     letterSpacing: 0,
-    width: '100%',
+    width: "100%"
   },
   icon: {
     width: 24,
     height: 24,
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     marginRight: 10
   },
   active: {
     color: "primary",
-    '& $icon': {
+    "& $icon": {
       color: "primary"
     }
   }
 }));
 
 const CustomRouterLink = forwardRef((props, ref) => (
-  <div
-    ref={ref}
-    style={{ flexGrow: 1 }}
-  >
+  <div ref={ref} style={{ flexGrow: 1 }}>
     <RouterLink {...props} />
   </div>
 ));
 
 const SidebarNav = props => {
   const { pages, className, ...rest } = props;
-
   const classes = useStyles();
 
   return (
-    <List
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <List {...rest} className={clsx(classes.root, className)}>
       {pages.map(page => (
-        <ListItem
-          className={classes.item}
-          disableGutters
-          key={page.title}
-        >
+        <ListItem className={classes.item} disableGutters key={page.title}>
           <Button
             activeClassName={classes.active}
             className={classes.button}
