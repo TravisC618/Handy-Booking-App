@@ -6,7 +6,7 @@ import { Route } from "react-router-dom";
 import { TASK_URL } from "../../routes/URLMAP";
 import GoogleMapDisplay from "./map/GoogleMapDisplay";
 
-const Content = props => {
+const BrowseTasksContent = props => {
   const {
     location: { pathname: currentPath }
   } = props;
@@ -38,4 +38,4 @@ const Content = props => {
   );
 };
 
-export const BrowseTasksContent = withRouter(Content);
+export default withRouter(BrowseTasksContent);

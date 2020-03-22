@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import "../../../css/browse_tasks/TaskCardContentDetails_Header__NavBar.scss";
 import "../../../css/browse_tasks/following-button.css";
 
-const TaskDetailHeader = props => {
+const TaskDetailHeader = () => {
   const status = useSelector(state => state.task.taskDetails.status);
   return (
     <div class="step-bar-holder">

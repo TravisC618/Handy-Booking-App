@@ -10,15 +10,20 @@ const TaskCardContentMain = props => {
     return d.toUpperCase();
   };
 
-  const {
-    _id,
-    title,
-    budget,
-    location,
-    dueDate,
-    status,
-    offerNum
-  } = props.tasks;
+  const { _id, title, budget, location, dueDate, status, offers } = props.tasks;
+
+  const offerNum = offers.length;
+
+  const offerString = () => {
+    switch (offerNum) {
+      case 0:
+        return;
+      case 1:
+        return offerNum + " offer";
+      default:
+        return offerNum + " offers";
+    }
+  };
 
   return (
     <Link
@@ -55,8 +60,10 @@ const TaskCardContentMain = props => {
       </div>
       <div class="new-task-list-item__footer">
         <div class="row">
-          <span class="new-task-list-item__status col-6">{status}</span>
-          <span class="new-task-list-item__bids col-6">{offerNum} offer</span>
+          <span class="new-task-list-item__status col-6">
+            {status.toUpperCase()}
+          </span>
+          <span class="new-task-list-item__bids col-6">{offerString()}</span>
         </div>
       </div>
     </Link>

@@ -9,16 +9,22 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
 import { getRoleId } from "../../../utils/auth";
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    maxWidth: "36ch",
     backgroundColor: theme.palette.background.paper
   },
   container: {
+    width: "100%",
     marginBottom: "15px"
+  },
+  listWrapper: {
+    display: "flex"
   },
   inline: {
     display: "inline"
@@ -30,6 +36,22 @@ const useStyles = makeStyles(theme => ({
   reply: {
     fontSize: "16px",
     marginLeft: "10px"
+  },
+  button: {
+    backgroundColor: "#7db343",
+    borderRadius: "160px",
+    fontSize: "14px",
+    padding: "4px 25px",
+    margin: "15px",
+    "&:hover": {
+      backgroundColor: "rgb(146, 201, 88)"
+    }
+  },
+  paper: {
+    backgroundColor: "rgb(246, 248, 253)",
+    padding: "8px",
+    borderRadius: "4px",
+    marginBottom: "10px"
   }
 }));
 
@@ -44,27 +66,39 @@ export default function OfferLists(props) {
         return (
           <>
             <div className={classes.container}>
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src={avatar} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={name}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}
-                        color="textPrimary"
-                      >
-                        ${offer.price}
-                      </Typography>
-                      {` — ${offer.comment}`}
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
+              <div className={classes.listWrapper}>
+                <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={avatar} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={name}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
+                          ${offer.price}
+                        </Typography>
+                        {/* {` — ${offer.comment}`} */}
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  className={classes.button}
+                  startIcon={<AssignmentTurnedInOutlinedIcon />}
+                >
+                  Accept
+                </Button>
+              </div>
+              <Paper className={classes.paper}>{offer.comment}</Paper>
               <Timestamp
                 className={classes.timestamp}
                 relative
