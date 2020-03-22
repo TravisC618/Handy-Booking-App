@@ -7,6 +7,7 @@ import {
   handleRedirect as handleRedirectAction
 } from "../redux/actions/loginAction";
 import { updateRegisterForm as updateRegisterFormAction } from "../redux/actions/registerAction";
+import { updateUserID as updateUserIDAction } from "../redux/actions/accountAction";
 import { storeToken, storeUserId, storeRoleId } from "../utils/auth";
 import { login, register, checkEmailExisted } from "../api/auth";
 import Modal from "react-animated-modal";
@@ -135,7 +136,8 @@ class Login extends Component {
       redirectTo,
       handleRedirect,
       handleVisible,
-      location: { pathname: currentPath }
+      location: { pathname: currentPath },
+      updateUserID
     } = this.props;
 
     this.setState({ err: {}, isLoading: true }, () => {
@@ -146,6 +148,9 @@ class Login extends Component {
             storeToken(token);
             storeUserId(userId);
             storeRoleId(role, roleId);
+            const userRoleId = roleId;
+            updateUserID({ userRoleId });
+
 
             this.handleRedirect(redirectTo, role, currentPath);
             redirectTo && handleRedirect(""); // reset redirectTo
@@ -167,9 +172,10 @@ class Login extends Component {
       updateRegisterStatus,
       handleShowModal,
       handleVisible,
-      updateRegisterForm
+      updateRegisterForm,
     } = this.props;
     const { email, password, username } = this.state;
+
     if (this.registerValidator()) return;
 
     this.setState({ err: {}, isLoading: true }, () => {
@@ -298,14 +304,16 @@ class Login extends Component {
 }
 const mapStateToProps = state => ({
   visible: state.login.visible,
-  redirectTo: state.login.redirectTo
+  redirectTo: state.login.redirectTo,
+  userRoleId: state.account.userRoleId,
 });
 
 const mapDispatchToProps = dispatch => ({
   handleVisible: isVisible => dispatch(handleVisibleAction(isVisible)),
   handleRedirect: redirectTo => dispatch(handleRedirectAction(redirectTo)),
   updateRegisterForm: registerForm =>
-    dispatch(updateRegisterFormAction(registerForm))
+    dispatch(updateRegisterFormAction(registerForm)),
+    updateUserID: userID => dispatch(updateUserIDAction(userID))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

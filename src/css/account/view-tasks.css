@@ -1,0 +1,20 @@
+.view-tasks {
+  top: 0;
+  left: 210px;
+  border-left: 1px solid #bbc2dc;
+  box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.1);
+  width: 813px;
+  height: 919px;
+}
+.vertical-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.view-tasks-container {
+  height: 100%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
