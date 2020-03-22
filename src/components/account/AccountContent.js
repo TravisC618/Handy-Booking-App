@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "./siderbar/Sidebar";
 import "../../css/account/account.scss";
 import { Route, withRouter } from "react-router-dom";
@@ -8,17 +8,15 @@ import Notifications from "./Notifications";
 import SettingProfile from "./profile/Profile";
 import Password from "./settings/Settings";
 import ViewTasks from "./ViewTasks";
-import TaskCardContentDetails from "../browse_tasks/task_card_content/TaskCardContentDetails";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { UPDATE_USER_DETAIL_STATE } from "../../redux/actions/accountAction";
-import { connect } from "react-redux";
 import { reqGetCustomer } from "../../api/customer";
-import { ACCOUNT_DASHBOARD_URL } from "../../routes/URLMAP";
 import { getRoleId } from "../../utils/auth";
 import "../../css/account/account-content.scss";
 
 const AccountContent = props => {
   const { match } = props;
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const customerId = getRoleId("customer");
   const tradieId = getRoleId("tradieId");
@@ -26,20 +24,17 @@ const AccountContent = props => {
 
   const dispatch = useDispatch();
 
-  async function fetchTaskDetail() {
-    try {
-      const response = await reqGetCustomer(userRoleId);
-      const userDetails = response.data.data;
-      dispatch({ type: UPDATE_USER_DETAIL_STATE, userDetails });
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    async function fetchTaskDetail() {
+      if (isLoading) {
+        const response = await reqGetCustomer(userRoleId);
+        const userDetails = response.data.data;
+        dispatch({ type: UPDATE_USER_DETAIL_STATE, userDetails });
+        setIsLoading(false);
+      }
     }
-  }
-
-  fetchTaskDetail();
-
-  console.log(userRoleId)
-
+    fetchTaskDetail();
+  }, []);
 
   return (
     <div className="row">
@@ -77,6 +72,5 @@ const AccountContent = props => {
     </div>
   );
 };
-
 
 export default withRouter(AccountContent);
