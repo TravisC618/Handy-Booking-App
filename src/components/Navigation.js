@@ -44,11 +44,10 @@ class Navigation extends Component {
     this.setState({ showModal: false, showModalExitWarning: false });
   };
 
-  logout = history => {
+  logout = () => {
     removeToken();
     removeUserId();
     removeRoleId();
-    history.push(HOME_URL);
   };
 
   componentDidMount() {
@@ -83,7 +82,12 @@ class Navigation extends Component {
   }
 
   renderLogin() {
-    const { history, handleVisible, userRoleId } = this.props;
+    const {
+      location: { pathname: currentPath },
+      handleVisible,
+      userRoleId
+    } = this.props;
+
     if (isLoggedIn()) {
       return (
         <>
@@ -93,7 +97,11 @@ class Navigation extends Component {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" onClick={() => this.logout(history)}>
+            <Link
+              to={currentPath}
+              className="nav-link"
+              onClick={() => this.logout()}
+            >
               Log out
             </Link>
           </li>

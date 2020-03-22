@@ -1,6 +1,6 @@
 import React from "react";
 import TaskNav from "../components/browse_tasks/task_nav/TaskNav";
-import { BrowseTasksContent } from "../components/browse_tasks/BrowseTasks_Content";
+import BrowseTasksContent from "../components/browse_tasks/BrowseTasksContent";
 import "../css/browse_tasks/task-list.scss";
 
 const BrowseTasks = () => {

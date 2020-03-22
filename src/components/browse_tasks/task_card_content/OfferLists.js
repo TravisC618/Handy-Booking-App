@@ -1,0 +1,119 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import Timestamp from "react-timestamp";
+import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Divider from "@material-ui/core/Divider";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
+import { getRoleId } from "../../../utils/auth";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: "100%",
+    backgroundColor: theme.palette.background.paper
+  },
+  container: {
+    width: "100%",
+    marginBottom: "15px"
+  },
+  listWrapper: {
+    display: "flex"
+  },
+  inline: {
+    display: "inline"
+  },
+  timestamp: {
+    color: "#545a77",
+    fontSize: "16px"
+  },
+  reply: {
+    fontSize: "16px",
+    marginLeft: "10px"
+  },
+  button: {
+    backgroundColor: "#7db343",
+    borderRadius: "160px",
+    fontSize: "14px",
+    padding: "4px 25px",
+    margin: "15px",
+    "&:hover": {
+      backgroundColor: "rgb(146, 201, 88)"
+    }
+  },
+  paper: {
+    backgroundColor: "rgb(246, 248, 253)",
+    padding: "8px",
+    borderRadius: "4px",
+    marginBottom: "10px"
+  }
+}));
+
+export default function OfferLists(props) {
+  const classes = useStyles();
+  const { offers } = props;
+
+  return (
+    <List className={classes.root}>
+      {offers.map(offer => {
+        const { _id: tradieId, avatar, name } = offer.tradie;
+        return (
+          <>
+            <div className={classes.container}>
+              <div className={classes.listWrapper}>
+                <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={avatar} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={name}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
+                          ${offer.price}
+                        </Typography>
+                        {/* {` — ${offer.comment}`} */}
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  className={classes.button}
+                  startIcon={<AssignmentTurnedInOutlinedIcon />}
+                >
+                  Accept
+                </Button>
+              </div>
+              <Paper className={classes.paper}>{offer.comment}</Paper>
+              <Timestamp
+                className={classes.timestamp}
+                relative
+                date={offer.createdAt}
+              />
+              {getRoleId("tradie") !== tradieId && (
+                <Link className={classes.reply} to="#">
+                  reply
+                </Link>
+              )}
+            </div>
+            <Divider variant="inset" component="li" />
+          </>
+        );
+      })}
+    </List>
+  );
+}
