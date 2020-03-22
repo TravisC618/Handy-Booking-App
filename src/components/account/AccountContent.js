@@ -13,11 +13,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { UPDATE_USER_DETAIL_STATE } from "../../redux/actions/accountAction";
 import { connect } from "react-redux";
 import { reqGetCustomer } from "../../api/customer";
-import {ACCOUNT_DASHBOARD_URL} from "../../routes/URLMAP";
+import { ACCOUNT_DASHBOARD_URL } from "../../routes/URLMAP";
+import { getRoleId } from "../../utils/auth";
 import "../../css/account/account-content.scss";
 
 const AccountContent = props => {
-  const { match, userRoleId } = props;
+  const { match } = props;
+
+  const customerId = getRoleId("customer");
+  const tradieId = getRoleId("tradieId");
+  const userRoleId = customerId || tradieId;
+
   const dispatch = useDispatch();
 
   async function fetchTaskDetail() {
@@ -31,6 +37,9 @@ const AccountContent = props => {
   }
 
   fetchTaskDetail();
+
+  console.log(userRoleId)
+
 
   return (
     <div className="row">
@@ -64,14 +73,10 @@ const AccountContent = props => {
           path={`${match.path}/${userRoleId}/view-tasks`}
           component={ViewTasks}
         />
-
       </div>
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  userRoleId: state.account.userRoleId
-});
 
-export default connect(mapStateToProps)(withRouter(AccountContent));
+export default withRouter(AccountContent);

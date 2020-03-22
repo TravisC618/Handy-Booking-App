@@ -17,13 +17,19 @@ import {
 import "../css/navigation.scss";
 import "../css/login.scss";
 import CreateProfile from "../components/create_profile/CreateProfile";
+import { getRoleId } from "../utils/auth";
 
 class Navigation extends Component {
-  state = {
-    isRegister: false,
-    showModal: false,
-    showModalExitWarning: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isRegister: false,
+      showModal: false,
+      showModalExitWarning: false,
+      userRoleId: ""
+    };
+  }
+
   updateRegisterStatus = isRegister => {
     this.setState({ isRegister });
   };
@@ -61,8 +67,6 @@ class Navigation extends Component {
     }
   }
 
-
-
   resizeHeaderOnScroll() {
     const distanceY = window.pageYOffset || document.documentElement.scrollTop,
       shrinkOn = 200,
@@ -81,18 +85,26 @@ class Navigation extends Component {
     }
   }
 
-  renderLogin() {
+  renderLogin = () => {
     const {
       location: { pathname: currentPath },
-      handleVisible,
-      userRoleId
+      handleVisible
     } = this.props;
+
+    const customerId = getRoleId("customer")
+    const tradieId = getRoleId("tradieId")
+    const userRoleId= customerId || tradieId
+
+    console.log(userRoleId)
 
     if (isLoggedIn()) {
       return (
         <>
           <li className="nav-item">
-            <Link className="nav-link" to={`${ACCOUNT_BASE_URL}/${userRoleId}/dashboard`}>
+            <Link
+              className="nav-link"
+              to={`${ACCOUNT_BASE_URL}/${userRoleId}/dashboard`}
+            >
               Account
             </Link>
           </li>
@@ -116,7 +128,7 @@ class Navigation extends Component {
         </Link>
       </li>
     );
-  }
+  };
 
   render() {
     const { location, visible } = this.props;
@@ -199,16 +211,11 @@ class Navigation extends Component {
 
 const mapStateToProps = state => ({
   visible: state.login.visible,
-  userRoleId:state.account.userRoleId,
 });
-
-
-
 
 const mapDistachToProps = dispatch => ({
   handleVisible: isVisible => dispatch(handleVisibleAction(isVisible))
 });
-
 
 export default connect(
   mapStateToProps,

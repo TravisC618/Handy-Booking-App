@@ -25,6 +25,7 @@ import PostAddIcon from "@material-ui/icons/PostAdd";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import DeleteIcon from "@material-ui/icons/Delete";
 import TaskCardContentDetails from "./TaskCardContentDetails";
+import { getRoleId } from "../../../utils/auth";
 import "../../../css/account/task-table.scss";
 
 class TaskList extends Component {
@@ -92,9 +93,7 @@ class TaskList extends Component {
   };
 
   handleConfirmationResponse = () => {
-
     //delete action
-
   };
 
   handleDialogClose = () => {
@@ -103,13 +102,13 @@ class TaskList extends Component {
 
   render() {
     let { rowsPerPage, page, taskList, isLoading, isEmpty } = this.state;
-    const { userRoleId } = this.props;
+    const customerId = getRoleId("customer");
+    const tradieId = getRoleId("tradieId");
+    const userRoleId = customerId || tradieId;
 
     const toUpperCaseFilter = d => {
       return d.toUpperCase();
     };
-
-    console.log();
 
     return (
       <div className="m-sm-30">
@@ -229,8 +228,7 @@ class TaskList extends Component {
 }
 
 const mapStateToProps = state => ({
-  userDetails: state.account.userDetails,
-  userRoleId: state.account.userRoleId
+  userDetails: state.account.userDetails
 });
 
 export default connect(mapStateToProps)(TaskList);

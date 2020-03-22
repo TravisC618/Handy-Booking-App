@@ -9,8 +9,7 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import SettingsIcon from "@material-ui/icons/Settings";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import { connect } from "react-redux";
-
+import { getRoleId } from "../../../utils/auth";
 import Profile from "./Profile";
 import SidebarNav from "./SidebarNav";
 
@@ -33,7 +32,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Sidebar = props => {
-  const { userRoleId, open, variant, onClose, className, ...rest } = props;
+  const { open, variant, onClose, className, ...rest } = props;
+  const customerId = getRoleId("customer");
+  const tradieId = getRoleId("tradieId");
+  const userRoleId = customerId || tradieId;
 
   const classes = useStyles();
 
@@ -89,11 +91,4 @@ Sidebar.propTypes = {
   variant: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => ({
-  userRoleId:state.account.userRoleId,
-});
-
-
-export default connect(
-  mapStateToProps,
-)(Sidebar);
+export default Sidebar;
