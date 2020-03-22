@@ -18,7 +18,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import RoleSelected from "./RoleSelected";
-import CountDown from "../../utils/CountDown";
 import { storeToken, storeUserId, storeRoleId } from "../../utils/auth";
 import { TASK_URL } from "../../routes/URLMAP";
 import { register } from "../../api/auth";
@@ -173,6 +172,8 @@ function ProfileStepper(props) {
     }
   };
 
+  
+
   const handleRegister = async () => {
     // add customer/tradie
     const {
@@ -214,6 +215,7 @@ function ProfileStepper(props) {
       }
     }
   };
+
 
   const handleNext = async () => {
     switch (activeStep) {
