@@ -1,16 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import PriceSortedButton from "./PriceSortedButton";
+import PriceSorted from "./PriceSorted";
 import {
   UPDATE_PRICE_RANGE,
   UPDATE_SORT_ORDER,
   RESET_ITEM
 } from "../../../redux/actions/taskAction";
+import { TASK_URL } from "../../../routes/URLMAP";
 import PriceButtonContent from "./PriceButtonContent";
 import "../../../css/browse_tasks/PriceButton.scss";
 
@@ -91,10 +93,7 @@ export default function PriceButton() {
             setPriceRange={setPriceRange}
           />
           <hr />
-          <PriceSortedButton
-            sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
-          />
+          <PriceSorted sortOrder={sortOrder} setSortOrder={setSortOrder} />
           <div className="NavButtonContentFooter">
             <div style={{ margin: 10 }}>
               <Grid container spacing={3}>
@@ -108,16 +107,18 @@ export default function PriceButton() {
                 </Grid>
                 <Grid xs>
                   <div className={classes.root}>
-                    <Button
-                      onClick={() => {
-                        updatePriceConfigs(priceRange, sortOrder);
-                        handleClose();
-                      }}
-                      variant="contained"
-                      color="primary"
-                    >
-                      Apply
-                    </Button>
+                    <Link to={`${TASK_URL}`}>
+                      <Button
+                        onClick={() => {
+                          updatePriceConfigs(priceRange, sortOrder);
+                          handleClose();
+                        }}
+                        variant="contained"
+                        color="primary"
+                      >
+                        Apply
+                      </Button>
+                    </Link>
                   </div>
                 </Grid>
               </Grid>

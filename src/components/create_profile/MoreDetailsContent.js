@@ -16,8 +16,14 @@ const genders = [
   }
 ];
 
-export default function DetailContent(props) {
-  const { handleChange, handleLanguageSelector, values } = props;
+export default function MoreDetailContent(props) {
+  const {
+    handleChange,
+    handleLanguageSelector,
+    values,
+    languageLabel,
+    setLanguageLabel
+  } = props;
   const [gender, setGender] = React.useState("");
 
   const handleChangeGender = event => {
@@ -56,18 +62,18 @@ export default function DetailContent(props) {
               name="mobile"
               placeholder="Mobile Number"
               value={values.mobile}
-              label={
-                values.err.name === "mobile"
-                  ? "Error"
-                  : "What is your mobile number?"
-              }
+              label={values.err.name === "mobile" ? "Error" : "Mobile number?"}
               error={values.err.name === "mobile" ? true : false}
               helperText={values.err.name === "mobile" ? values.err.msg : null}
               fullWidth
             />
           </Grid>
           <Grid item xs={12}>
-            <LanguageSelector values={values} handleLanguageSelector={handleLanguageSelector}/>
+            <LanguageSelector
+              handleLanguageSelector={handleLanguageSelector}
+              languageLabel={languageLabel}
+              setLanguageLabel={setLanguageLabel}
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField

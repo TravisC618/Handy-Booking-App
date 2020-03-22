@@ -1,6 +1,6 @@
 import React from "react";
 import TaskTable from "./TaskTable";
-import TaskCardContentDetails from "./taskCardContent/TaskCardContentDetails";
+import TaskCardContentDetails from "./task_card_content/TaskCardContentDetails";
 import { withRouter } from "react-router";
 import { Route } from "react-router-dom";
 import { TASK_URL } from "../../routes/URLMAP";

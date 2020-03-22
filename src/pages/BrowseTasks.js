@@ -1,5 +1,5 @@
 import React from "react";
-import TaskNav from "../components/browse_tasks/taskNav/TaskNav";
+import TaskNav from "../components/browse_tasks/task_nav/TaskNav";
 import { BrowseTasksContent } from "../components/browse_tasks/BrowseTasks_Content";
 import "../css/browse_tasks/task-list.scss";
 
