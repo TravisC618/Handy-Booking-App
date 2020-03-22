@@ -5,6 +5,10 @@ import Typography from "../components/Typography";
 import { TaskerCardOne, TaskerCardTwo, TaskerCardThree } from "./TaskerCard";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import { getRoleId, isLoggedIn } from "../../../../utils/auth";
+import { FIND_CLEANERS_URL } from "../../../../routes/URLMAP";
 
 const TaskerContainer = Styled.div`
 background-color: #f6f8fd;
@@ -128,8 +132,71 @@ const styles = theme => ({
   }
 });
 
+const LightTooltip = withStyles(theme => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 15
+  }
+}))(Tooltip);
+
 function MeetTasker(props) {
   const { classes } = props;
+  const [open, setOpen] = React.useState(false);
+
+  const handleTooltipClose = () => {
+    if (getRoleId("customer")) return;
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    if (getRoleId("customer")) return;
+    setOpen(true);
+  };
+
+  const renderButton = () => {
+    if (!getRoleId("customer")) {
+      console.log(`not yet a customer`);
+    }
+
+    const linkTo = () => {
+      if (isLoggedIn() && !getRoleId("customer")) return "#";
+
+      return FIND_CLEANERS_URL;
+    };
+
+    return (
+      <Link className={classes.link} to={linkTo()}>
+        <ClickAwayListener onClickAway={handleTooltipClose}>
+          <div>
+            <LightTooltip
+              PopperProps={{
+                disablePortal: true
+              }}
+              onClose={handleTooltipClose}
+              open={open}
+              disableFocusListener
+              disableHoverListener
+              disableTouchListener
+              title="Not yet a customer? Join us by registering a new customer account now!"
+            >
+              <Button
+                color="secondary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+                component="a"
+                onClick={handleTooltipOpen}
+              >
+                GET STARTED
+              </Button>
+            </LightTooltip>
+          </div>
+        </ClickAwayListener>
+      </Link>
+    );
+  };
 
   return (
     <section className={classes.root}>
@@ -226,17 +293,7 @@ function MeetTasker(props) {
               </div>
             </div>
           </div>
-          <Link to="/find-cleaners">
-            <Button
-              color="secondary"
-              variant="contained"
-              size="large"
-              className={classes.button}
-              component="a"
-            >
-              GET STARTED
-            </Button>
-          </Link>
+          {renderButton()}
         </nav>
       </TaskerContainer>
     </section>

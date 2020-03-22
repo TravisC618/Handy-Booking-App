@@ -20,7 +20,7 @@ import Alert from "@material-ui/lab/Alert";
 import Budget from "./Budget";
 import { lengthCheck } from "../../utils/helper";
 import TaskBreadcrumbs from "./BreadCrumbs";
-import { getUserId } from "../../utils/auth";
+import { getRoleId } from "../../utils/auth";
 import { reqPostTask } from "../../api/tasks";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import CountDown from "../../utils/CountDown";
@@ -221,12 +221,13 @@ function PostTaskMain(props) {
 
   const handleSubmit = () => {
     const { title, details, location, dueDate, amount, hour, radio } = values;
+    const customerId = getRoleId("customer");
 
     // total budget
     const budget = radio === "Total" ? amount : amount * hour;
     const taskDetails = { title, details, location, dueDate, budget };
     setIsLoading(true);
-    reqPostTask(taskDetails, getUserId())
+    reqPostTask(taskDetails, customerId)
       .then(response => {
         const taskId = response.data.data._id;
         setValues({ ...values, taskId });
