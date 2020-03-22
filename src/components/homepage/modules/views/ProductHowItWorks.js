@@ -8,9 +8,11 @@ import { FIND_CLEANERS_URL } from "../../../../routes/URLMAP";
 import Button from "../components/Button";
 import Typography from "../components/Typography";
 import ClImg from "../../../../img/homepage/productCurvyLines.png";
+import { Player, BigPlayButton, ControlBar, PlayToggle } from "video-react";
+import Tooltip from "@material-ui/core/Tooltip";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import { getRoleId, isLoggedIn } from "../../../../utils/auth";
 import "../../../../css/home/player.css";
-import { Player, BigPlayButton, ControlBar, PlayToggle } from 'video-react';
-
 
 const styles = theme => ({
   root: {
@@ -57,8 +59,71 @@ const styles = theme => ({
   }
 });
 
+const LightTooltip = withStyles(theme => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 15
+  }
+}))(Tooltip);
+
 function ProductHowItWorks(props) {
   const { classes } = props;
+  const [open, setOpen] = React.useState(false);
+
+  const handleTooltipClose = () => {
+    if (getRoleId("customer")) return;
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    if (getRoleId("customer")) return;
+    setOpen(true);
+  };
+
+  const renderButton = () => {
+    if (!getRoleId("customer")) {
+      console.log(`not yet a customer`);
+    }
+
+    const linkTo = () => {
+      if (isLoggedIn() && !getRoleId("customer")) return "#";
+
+      return FIND_CLEANERS_URL;
+    };
+
+    return (
+      <Link className={classes.link} to={linkTo()}>
+        <ClickAwayListener onClickAway={handleTooltipClose}>
+          <div>
+            <LightTooltip
+              PopperProps={{
+                disablePortal: true
+              }}
+              onClose={handleTooltipClose}
+              open={open}
+              disableFocusListener
+              disableHoverListener
+              disableTouchListener
+              title="Not yet a customer? Join us by registering a new customer account now!"
+            >
+              <Button
+                color="secondary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+                component="a"
+                onClick={handleTooltipOpen}
+              >
+                GET STARTED
+              </Button>
+            </LightTooltip>
+          </div>
+        </ClickAwayListener>
+      </Link>
+    );
+  };
 
   return (
     <section className={classes.root}>
@@ -74,73 +139,91 @@ function ProductHowItWorks(props) {
         </Typography>
         <div>
           <Grid container spacing={5}>
-          <Grid item xs={12} md={12}>
+            <Grid item xs={12} md={12}>
               <div className={classes.item}>
-                <Typography variant="h5" align="center" style={{paddingBottom:40}}>
-                Check out the video below to see exactly how BYEDUST can help you get those to-dos done once and for all.
-                </Typography>
-                <Player 
-                fluid={true}
-                poster="https://www.airtasker.com/images/homepage/home-video-player.jpg"
-                src="https://s3-ap-southeast-2.amazonaws.com/assets-airtasker-com/uploads/home/how-it-works.mp4"
+                <Typography
+                  variant="h5"
+                  align="center"
+                  style={{ paddingBottom: 40 }}
                 >
-              <BigPlayButton position="center" />
-              <ControlBar autoHide={true} disableDefaultControls={true}>
-                <PlayToggle />
-              </ControlBar>
-            </Player>
-
+                  Check out the video below to see exactly how BYEDUST can help
+                  you get those to-dos done once and for all.
+                </Typography>
+                <Player
+                  fluid={true}
+                  poster="https://www.airtasker.com/images/homepage/home-video-player.jpg"
+                  src="https://s3-ap-southeast-2.amazonaws.com/assets-airtasker-com/uploads/home/how-it-works.mp4"
+                >
+                  <BigPlayButton position="center" />
+                  <ControlBar autoHide={true} disableDefaultControls={true}>
+                    <PlayToggle />
+                  </ControlBar>
+                </Player>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
-                <img src="https://www.airtasker.com/images/homepage/home-how-it-works-step-image-1.png" alt="suitcase" className={classes.image} />
-                <Typography variant="h5" align="center" style={{fontWeight: 'bold', paddingBottom:10}}>
-                Post your Task
+                <img
+                  src="https://www.airtasker.com/images/homepage/home-how-it-works-step-image-1.png"
+                  alt="suitcase"
+                  className={classes.image}
+                />
+                <Typography
+                  variant="h5"
+                  align="center"
+                  style={{ fontWeight: "bold", paddingBottom: 10 }}
+                >
+                  Post your Task
                 </Typography>
                 <Typography variant="h5" align="center">
-                Tell us what you need. It's FREE to post.
+                  Tell us what you need. It's FREE to post.
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
-                <img src='https://www.airtasker.com/images/homepage/home-how-it-works-step-image-2.png' alt="graph" className={classes.image} />
-                <Typography variant="h5" align="center" style={{fontWeight: 'bold', paddingBottom:10}}>
-                Review offers
+                <img
+                  src="https://www.airtasker.com/images/homepage/home-how-it-works-step-image-2.png"
+                  alt="graph"
+                  className={classes.image}
+                />
+                <Typography
+                  variant="h5"
+                  align="center"
+                  style={{ fontWeight: "bold", paddingBottom: 10 }}
+                >
+                  Review offers
                 </Typography>
                 <Typography variant="h5" align="center">
-                Get offers from trusted Taskers and view profiles.
+                  Get offers from trusted Taskers and view profiles.
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
-                <img src='https://www.airtasker.com/images/homepage/home-how-it-works-step-image-3.png' alt="clock" className={classes.image} />
-                <Typography variant="h5" align="center" style={{fontWeight: 'bold', paddingBottom:10}}>
-                Get it done
+                <img
+                  src="https://www.airtasker.com/images/homepage/home-how-it-works-step-image-3.png"
+                  alt="clock"
+                  className={classes.image}
+                />
+                <Typography
+                  variant="h5"
+                  align="center"
+                  style={{ fontWeight: "bold", paddingBottom: 10 }}
+                >
+                  Get it done
                 </Typography>
                 <Typography variant="h5" align="center">
-                Choose the right person for your task and get it done.
+                  Choose the right person for your task and get it done.
                 </Typography>
               </div>
             </Grid>
           </Grid>
         </div>
-        <Link to={FIND_CLEANERS_URL}>
-          <Button
-            color="secondary"
-            size="large"
-            variant="contained"
-            className={classes.button}
-            component="a"
-          >
-            Get started
-          </Button>
-        </Link>
+        {renderButton()}
       </Container>
     </section>
   );

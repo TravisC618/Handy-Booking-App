@@ -18,7 +18,6 @@ class Comment extends React.Component {
   }
 
   save() {
-    console.log(this.newText.value);
     var newText = this.newText.value;
     this.props.updateCommentFromBoard(newText, this.props.index);
     this.setState({ editing: false });

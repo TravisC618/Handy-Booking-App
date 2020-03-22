@@ -11,9 +11,9 @@ import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import MultilineInput from "./MultilineInput";
-import AskPrice from "./AskPrice";
-import SuccessPage from "./SuccessPage";
+import MultilineInput from "../offer/MultilineInput";
+import AskPrice from "../offer/AskPrice";
+import SuccessPage from "../offer/SuccessPage";
 import LinearIndeterminate from "../../../../UI/LinearIndeterminate";
 import { TASK_URL } from "../../../../routes/URLMAP";
 import { getRoleId } from "../../../../utils/auth";
@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function OfferModel(props) {
+function AcceptOfferModel(props) {
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -252,4 +252,4 @@ function OfferModel(props) {
   );
 }
 
-export default withRouter(OfferModel);
+export default withRouter(AcceptOfferModel);

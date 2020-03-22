@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
+import { ASSIGN_TASK_URL } from "../../../routes/URLMAP";
 import { getRoleId } from "../../../utils/auth";
 
 const useStyles = makeStyles(theme => ({
@@ -55,9 +56,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function OfferLists(props) {
+function OfferLists(props) {
   const classes = useStyles();
-  const { offers } = props;
+  const {
+    offers,
+    match: { url: currentUrl }
+  } = props;
+
+  const customerId = getRoleId("customer");
+
+  console.log(currentUrl);
 
   return (
     <List className={classes.root}>
@@ -83,20 +91,23 @@ export default function OfferLists(props) {
                         >
                           ${offer.price}
                         </Typography>
-                        {/* {` — ${offer.comment}`} */}
                       </React.Fragment>
                     }
                   />
                 </ListItem>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  className={classes.button}
-                  startIcon={<AssignmentTurnedInOutlinedIcon />}
+                <Link
+                  to={`${currentUrl}/${customerId}${ASSIGN_TASK_URL}/${tradieId}`}
                 >
-                  Accept
-                </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    className={classes.button}
+                    startIcon={<AssignmentTurnedInOutlinedIcon />}
+                  >
+                    Accept
+                  </Button>
+                </Link>
               </div>
               <Paper className={classes.paper}>{offer.comment}</Paper>
               <Timestamp
@@ -117,3 +128,5 @@ export default function OfferLists(props) {
     </List>
   );
 }
+
+export default withRouter(OfferLists);

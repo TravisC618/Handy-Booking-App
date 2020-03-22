@@ -3,6 +3,7 @@ import { get, post } from "./axios";
 
 const API_TASK_URL = "/api/tasks";
 const USER_URL = "users";
+const CUSTOMER_URL = "customers";
 const TRADIE_URL = "tradies";
 
 /**
@@ -39,8 +40,8 @@ export const reqGetTask = id => {
   return get(url);
 };
 
-export const reqPostTask = (taskDetails, userId) => {
-  const url = `${API_TASK_URL}/${USER_URL}/${userId}`;
+export const reqPostTask = (taskDetails, customerId) => {
+  const url = `${API_TASK_URL}/${CUSTOMER_URL}/${customerId}`;
 
   return post(url, taskDetails);
 };
