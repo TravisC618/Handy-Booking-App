@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, withRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 import {
   Table,
   TableHead,
   TableRow,
   TableCell,
   TableBody,
-  Button,
   Card,
-  Icon,
   IconButton,
   TablePagination
 } from "@material-ui/core";
@@ -27,6 +25,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import TaskCardContentDetails from "./TaskCardContentDetails";
 import { getRoleId } from "../../../utils/auth";
 import "../../../css/account/task-table.scss";
+import { reqGetCustomer } from "../../../api/customer";
 
 class TaskList extends Component {
   constructor(props) {
@@ -53,40 +52,43 @@ class TaskList extends Component {
     this.setPage(newPage);
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.updatePageData();
-    if (this.state.taskList.length === 0) {
-      this.setState({ isLoading: true });
-      setTimeout(
-        () => this.setState({ isLoading: false, isEmpty: true }),
-        5000
-      );
-    }
   }
 
-  updatePageData = () => {
-    const { userDetails } = this.props;
+  async updatePageData() {
+    const customerId = getRoleId("customer");
+    const tradieId = getRoleId("tradieId");
+    const userRoleId = customerId || tradieId;
+    const response = await reqGetCustomer(userRoleId);
+    const userDetails = response.data.data;
+
     this.setState({ isLoading: true }, () => {
-      userDetails.tasks.map((tasks, index) =>
-        reqGetTask(tasks).then(res => {
-          this.setState(prevState => ({
-            taskList: [
-              ...prevState.taskList,
-              {
-                Id: res.data.data._id,
-                title: res.data.data.title,
-                budget: res.data.data.budget,
-                postDate: res.data.data.postDate,
-                status: res.data.data.status,
-                offers: res.data.data.offers
-              }
-            ]
-          }));
-          this.setState({ isLoading: false, isEmpty: false });
-        })
-      );
+      if (userDetails.tasks.length === 0) {
+        this.setState({ isLoading: false, isEmpty: true });
+      } else {
+        userDetails.tasks.map((tasks, index) =>
+          reqGetTask(tasks).then(res => {
+            this.setState(prevState => ({
+              taskList: [
+                ...prevState.taskList,
+                {
+                  Id: res.data.data._id,
+                  title: res.data.data.title,
+                  budget: res.data.data.budget,
+                  postDate: res.data.data.postDate,
+                  status: res.data.data.status,
+                  offers: res.data.data.offers
+                }
+              ]
+            }));
+
+            this.setState({ isLoading: false, isEmpty: false });
+          })
+        );
+      }
     });
-  };
+  }
 
   handeDeleteClick = invoice => {
     this.setState({ shouldShowConfirmationDialog: true, invoice });

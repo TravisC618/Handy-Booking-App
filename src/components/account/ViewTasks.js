@@ -4,12 +4,12 @@ import "../../css/account/view-tasks.scss";
 import { connect } from "react-redux";
 
 const ViewTasks = props => {
-    const { userRoleId } = props;
+  const { userRoleId } = props;
   return (
     <div className="view-tasks vertical-scroll">
       <div className="view-tasks-container">
         <div className="view-tasks__page">
-          <TaskList userRoleId={userRoleId}/>
+          <TaskList userRoleId={userRoleId} />
         </div>
       </div>
     </div>
@@ -17,9 +17,7 @@ const ViewTasks = props => {
 };
 
 const mapStateToProps = state => ({
-    userRoleId:state.account.userRoleId,
-  });
-  
-export default connect(
-    mapStateToProps,
-  )(ViewTasks);
+  userRoleId: state.account.userRoleId
+});
+
+export default connect(mapStateToProps)(ViewTasks);

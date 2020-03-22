@@ -94,9 +94,6 @@ class Navigation extends Component {
     const customerId = getRoleId("customer")
     const tradieId = getRoleId("tradieId")
     const userRoleId= customerId || tradieId
-
-    console.log(userRoleId)
-
     if (isLoggedIn()) {
       return (
         <>
