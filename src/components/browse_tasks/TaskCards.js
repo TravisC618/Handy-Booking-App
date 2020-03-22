@@ -22,8 +22,6 @@ const TaskCards = props => {
   const { tasks } = props;
   const classes = useStyles(tasks.status);
 
-  console.log(`status`, tasks.status);
-
   return (
     <div>
       <Card

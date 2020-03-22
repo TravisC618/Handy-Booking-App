@@ -118,6 +118,15 @@ class Login extends Component {
     return isError;
   };
 
+  handleRedirect = (redirectTo, role, currentPath) => {
+    if (redirectTo === "/find-cleaners" && role !== "customer") {
+      this.props.history.replace("/");
+      return;
+    }
+
+    this.props.history.replace(redirectTo ? redirectTo : currentPath);
+  };
+
   /**
    * userBehavior - login/register
    */
@@ -143,7 +152,7 @@ class Login extends Component {
             updateUserID({ userRoleId });
 
 
-            this.props.history.replace(redirectTo ? redirectTo : currentPath);
+            this.handleRedirect(redirectTo, role, currentPath);
             redirectTo && handleRedirect(""); // reset redirectTo
 
             handleVisible(false);
