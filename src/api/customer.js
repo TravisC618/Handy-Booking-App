@@ -1,11 +1,18 @@
 import { get, post } from "./axios";
 
 const API_CUSTOMERS_URL = "/api/customers";
+const API_Tradie_URL = "/api/tradies";
 const TASKS_URL = "/tasks";
 const TRADIES_URL = "/tradies";
 
 export const reqGetCustomer = id => {
   const url = `${API_CUSTOMERS_URL}/${id}`;
+
+  return get(url);
+};
+
+export const reqGetTradie = id => {
+  const url = `${API_Tradie_URL}/${id}`;
 
   return get(url);
 };
