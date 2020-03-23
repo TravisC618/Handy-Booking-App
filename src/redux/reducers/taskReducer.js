@@ -22,7 +22,7 @@ const initialState = {
   pageSize: 10,
   searchKey: "",
   priceRange: [5, 9999],
-  sortOrder: "",
+  sortOrder: "-postDate",
   hasMoreItem: true,
   errMsg: "",
   isDetailOn: true,

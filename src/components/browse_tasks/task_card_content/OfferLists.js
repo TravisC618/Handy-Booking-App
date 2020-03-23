@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import { makeStyles } from "@material-ui/core/styles";
@@ -38,11 +39,16 @@ const useStyles = makeStyles(theme => ({
     fontSize: "16px",
     marginLeft: "10px"
   },
+  link: {
+    textDecoration: "none !important",
+    ":&hover, :&active": {
+      textDecoration: "none !important"
+    }
+  },
   button: {
     backgroundColor: "#7db343",
     borderRadius: "160px",
     fontSize: "14px",
-    padding: "4px 25px",
     margin: "15px",
     "&:hover": {
       backgroundColor: "rgb(146, 201, 88)"
@@ -53,6 +59,9 @@ const useStyles = makeStyles(theme => ({
     padding: "8px",
     borderRadius: "4px",
     marginBottom: "10px"
+  },
+  divider: {
+    marginRight: "72px"
   }
 }));
 
@@ -63,9 +72,14 @@ function OfferLists(props) {
     match: { url: currentUrl }
   } = props;
 
-  const customerId = getRoleId("customer");
+  const currTaskCustomerId = useSelector(
+    state => state.task.taskDetails.customer._id
+  );
 
-  console.log(currentUrl);
+  const taskStatus = useSelector(state => state.task.taskDetails.status);
+  console.log(taskStatus);
+
+  const customerId = getRoleId("customer");
 
   return (
     <List className={classes.root}>
@@ -77,7 +91,7 @@ function OfferLists(props) {
               <div className={classes.listWrapper}>
                 <ListItem alignItems="flex-start">
                   <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src={avatar} />
+                    <Avatar src={avatar} alt="Remy Sharp" />
                   </ListItemAvatar>
                   <ListItemText
                     primary={name}
@@ -95,19 +109,25 @@ function OfferLists(props) {
                     }
                   />
                 </ListItem>
-                <Link
-                  to={`${currentUrl}/${customerId}${ASSIGN_TASK_URL}/${tradieId}`}
-                >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    className={classes.button}
-                    startIcon={<AssignmentTurnedInOutlinedIcon />}
+                {taskStatus === "open" && customerId === currTaskCustomerId && (
+                  <Link
+                    to={{
+                      pathname: `${currentUrl}/${customerId}${ASSIGN_TASK_URL}/${tradieId}`,
+                      state: { name, avatar, price: offer.price }
+                    }}
+                    className={classes.link}
                   >
-                    Accept
-                  </Button>
-                </Link>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      className={classes.button}
+                      startIcon={<AssignmentTurnedInOutlinedIcon />}
+                    >
+                      Accept
+                    </Button>
+                  </Link>
+                )}
               </div>
               <Paper className={classes.paper}>{offer.comment}</Paper>
               <Timestamp
@@ -121,7 +141,11 @@ function OfferLists(props) {
                 </Link>
               )}
             </div>
-            <Divider variant="inset" component="li" />
+            <Divider
+              className={classes.divider}
+              variant="inset"
+              component="li"
+            />
           </>
         );
       })}

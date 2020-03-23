@@ -13,9 +13,13 @@ import {
 import { reqGetTask } from "../../../api/tasks";
 import "../../../css/browse_tasks/TaskCardContentDetails.scss";
 import OfferModel from "./offer/OfferModel";
-import { TASK_URL, ADD_TASK_OFFER_URL } from "../../../routes/URLMAP";
+import {
+  TASK_URL,
+  ADD_TASK_OFFER_URL,
+  ASSIGN_TASK_URL
+} from "../../../routes/URLMAP";
 import { getRoleId, isLoggedIn } from "../../../utils/auth";
-import { HANDLE_VISIBLE } from "../../../redux/actions/loginAction";
+import AcceptOfferModel from "./accept_offer/AcceptOfferModel";
 
 const renderContent = (isFetchingDetails, dispatch) => {
   const renderRoute = () => {
@@ -23,9 +27,13 @@ const renderContent = (isFetchingDetails, dispatch) => {
       console.log("you are not login");
       return;
     }
-    if (!getRoleId("tradie")) {
-      console.log(`you are not tradie yet`);
-      return;
+    if (getRoleId("customer")) {
+      return (
+        <Route
+          path={`${TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`}
+          component={AcceptOfferModel}
+        />
+      );
     }
     return (
       <Route

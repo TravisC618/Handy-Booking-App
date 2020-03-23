@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
+import Timestamp from "react-timestamp";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -60,9 +61,7 @@ export default function AlignItemsList() {
                 {username}
               </Typography>
               <Typography className={classes.inline} style={{ float: "right" }}>
-                <Moment format="ddd, D MMM" filter={toUpperCaseFilter}>
-                  {postDate}
-                </Moment>
+                <Timestamp relative date={postDate} />
               </Typography>
             </React.Fragment>
           }

@@ -58,11 +58,7 @@ const DialogTitle = withStyles(styles)(props => {
 });
 
 function getSteps() {
-  return [
-    "Select master blaster campaign settings",
-    "Create an ad group",
-    "Create an ad"
-  ];
+  return ["AskPrice", "MultilineInput", "SuccessPage"];
 }
 
 function getStepContent(stepIndex, values, setValues, err) {

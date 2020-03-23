@@ -13,10 +13,14 @@ const SidePanel = props => {
     location: { pathname: currentPath }
   } = props;
   const tradieId = getRoleId("tradie");
+  const customerId = getRoleId("customer");
   const offerLink =
     !!tradieId && `${currentPath}${ADD_TASK_OFFER_URL}/${tradieId}`;
+
+  const isFetchingDetails = useSelector(state => state.task.isFetchingDetails);
   const taskDetails = useSelector(state => state.task.taskDetails);
   const budget = taskDetails.budget;
+
   const dispatch = useDispatch();
 
   const [open, setOpen] = React.useState(false);
@@ -25,7 +29,8 @@ const SidePanel = props => {
     setOpen(false);
   };
 
-  const handleTooltipOpen = () => {
+  const handleTooltipOpen = currTaskCustomerId => {
+    if (customerId === currTaskCustomerId) return;
     setOpen(true);
   };
 
@@ -36,6 +41,9 @@ const SidePanel = props => {
   };
 
   const renderButton = () => {
+    if (isFetchingDetails || !taskDetails.customer) return;
+    const currTaskCustomerId = taskDetails.customer._id;
+
     if (isLoggedIn() && !getRoleId("tradie")) {
       return (
         <Tooltip
@@ -52,9 +60,11 @@ const SidePanel = props => {
           <button
             type="button"
             className="button-med full-width action-type button-cta button-make-offer"
-            onClick={handleTooltipOpen}
+            onClick={event => handleTooltipOpen(currTaskCustomerId)}
           >
-            Make an offer
+            {customerId === currTaskCustomerId
+              ? "Review offers"
+              : "Make an offer"}
           </button>
         </Tooltip>
       );
