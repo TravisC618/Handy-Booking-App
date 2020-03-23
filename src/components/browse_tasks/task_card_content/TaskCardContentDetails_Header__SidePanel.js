@@ -6,7 +6,7 @@ import { getRoleId } from "../../../utils/auth";
 import { ADD_TASK_OFFER_URL } from "../../../routes/URLMAP";
 import { isLoggedIn } from "../../../utils/auth";
 import { HANDLE_VISIBLE } from "../../../redux/actions/loginAction";
-import "../../../css/browse_tasks/TaskCardContentDetails_Header__SidePanel.css";
+import "../../../css/browse_tasks/TaskCardContentDetails_Header__SidePanel.scss";
 
 const SidePanel = props => {
   const {
@@ -44,39 +44,68 @@ const SidePanel = props => {
     if (isFetchingDetails || !taskDetails.customer) return;
     const currTaskCustomerId = taskDetails.customer._id;
 
+    if (taskDetails.status !== "open") {
+      if (customerId === currTaskCustomerId) {
+        return (
+          <Link to={offerLink} onClick={handleOnClick}>
+            <button
+              type="button"
+              className="button-med full-width action-type button-cta button-make-offer"
+              onClick={handleTooltipOpen}
+            >
+              Private message
+            </button>
+          </Link>
+        );
+      }
+
+      return (
+        <button
+          type="button"
+          className="button-med full-width action-type button-cta not-open"
+        >
+          {taskDetails.status}
+        </button>
+      );
+    }
+
     if (isLoggedIn() && !getRoleId("tradie")) {
       return (
-        <Tooltip
-          PopperProps={{
-            disablePortal: true
-          }}
-          onClose={handleTooltipClose}
-          open={open}
-          disableFocusListener
-          disableHoverListener
-          disableTouchListener
-          title="Not yet a tradie? Join us by registering a new tradie account now!"
-        >
-          <button
-            type="button"
-            className="button-med full-width action-type button-cta button-make-offer"
-            onClick={event => handleTooltipOpen(currTaskCustomerId)}
+        <Link to={offerLink} onClick={handleOnClick}>
+          <Tooltip
+            PopperProps={{
+              disablePortal: true
+            }}
+            onClose={handleTooltipClose}
+            open={open}
+            disableFocusListener
+            disableHoverListener
+            disableTouchListener
+            title="Not yet a tradie? Join us by registering a new tradie account now!"
           >
-            {customerId === currTaskCustomerId
-              ? "Review offers"
-              : "Make an offer"}
-          </button>
-        </Tooltip>
+            <button
+              type="button"
+              className="button-med full-width action-type button-cta button-make-offer"
+              onClick={event => handleTooltipOpen(currTaskCustomerId)}
+            >
+              {customerId === currTaskCustomerId
+                ? "Review offers"
+                : "Make an offer"}
+            </button>
+          </Tooltip>
+        </Link>
       );
     }
     return (
-      <button
-        type="button"
-        className="button-med full-width action-type button-cta button-make-offer"
-        onClick={handleTooltipOpen}
-      >
-        Make an offer
-      </button>
+      <Link to={offerLink} onClick={handleOnClick}>
+        <button
+          type="button"
+          className="button-med full-width action-type button-cta button-make-offer"
+          onClick={handleTooltipOpen}
+        >
+          Make an offer
+        </button>
+      </Link>
     );
   };
 
@@ -96,11 +125,7 @@ const SidePanel = props => {
       </div>
       <div class="payment_panel__AddFundsWrapper-ots126-3 knxrjg"></div>
       <div class="payment_panel__CtaWrapper-ots126-4 dUABLd">
-        <div data-ui-test="task-details-payment-panel">
-          <Link to={offerLink} onClick={handleOnClick}>
-            {renderButton()}
-          </Link>
-        </div>
+        <div data-ui-test="task-details-payment-panel">{renderButton()}</div>
       </div>
     </div>
   );
