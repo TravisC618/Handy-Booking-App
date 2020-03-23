@@ -92,7 +92,7 @@ class Navigation extends Component {
     } = this.props;
 
     const customerId = getRoleId("customer")
-    const tradieId = getRoleId("tradieId")
+    const tradieId = getRoleId("tradie")
     const userRoleId= customerId || tradieId
     if (isLoggedIn()) {
       return (

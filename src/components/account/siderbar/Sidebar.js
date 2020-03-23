@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 const Sidebar = props => {
   const { open, variant, onClose, className, ...rest } = props;
   const customerId = getRoleId("customer");
-  const tradieId = getRoleId("tradieId");
+  const tradieId = getRoleId("tradie");
   const userRoleId = customerId || tradieId;
 
   const classes = useStyles();

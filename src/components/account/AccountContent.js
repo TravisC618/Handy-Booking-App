@@ -19,8 +19,12 @@ const AccountContent = props => {
   const [isLoading, setIsLoading] = React.useState(true);
 
   const customerId = getRoleId("customer");
-  const tradieId = getRoleId("tradieId");
+  const tradieId = getRoleId("tradie");
   const userRoleId = customerId || tradieId;
+
+  console.log(userRoleId)
+
+
 
   const dispatch = useDispatch();
 
