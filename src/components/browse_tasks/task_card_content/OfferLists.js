@@ -12,6 +12,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
+import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
 import { ASSIGN_TASK_URL } from "../../../routes/URLMAP";
 import { getRoleId } from "../../../utils/auth";
@@ -71,15 +73,58 @@ function OfferLists(props) {
     offers,
     match: { url: currentUrl }
   } = props;
-
-  const currTaskCustomerId = useSelector(
-    state => state.task.taskDetails.customer._id
-  );
-
-  const taskStatus = useSelector(state => state.task.taskDetails.status);
-  console.log(taskStatus);
-
   const customerId = getRoleId("customer");
+
+  const taskState = useSelector(state => state.task);
+
+  const { isFetchingDetails, taskDetails } = taskState;
+
+  const renderChip = tradieId => {
+    if (isFetchingDetails || !taskDetails.customer || !taskDetails.tradie)
+      return;
+
+    const currAssignedTradie = taskDetails.tradie._id;
+
+    if (tradieId === currAssignedTradie) {
+      return (
+        <Chip
+          icon={<AssignmentTurnedInIcon />}
+          label="Assigned tradie"
+          color="secondary"
+          variant="outlined"
+        />
+      );
+    }
+  };
+
+  const renderAcceptButton = (tradieId, name, avatar, offer) => {
+    if (isFetchingDetails || !taskDetails.customer || !taskDetails.tradie)
+      return;
+
+    const currTaskCustomerId = taskDetails.customer._id;
+
+    if (taskDetails.status === "open" && customerId === currTaskCustomerId) {
+      return (
+        <Link
+          to={{
+            pathname: `${currentUrl}/${customerId}${ASSIGN_TASK_URL}/${tradieId}`,
+            state: { name, avatar, price: offer.price }
+          }}
+          className={classes.link}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            className={classes.button}
+            startIcon={<AssignmentTurnedInOutlinedIcon />}
+          >
+            Accept
+          </Button>
+        </Link>
+      );
+    }
+  };
 
   return (
     <List className={classes.root}>
@@ -108,26 +153,9 @@ function OfferLists(props) {
                       </React.Fragment>
                     }
                   />
+                  {renderChip(tradieId)}
                 </ListItem>
-                {taskStatus === "open" && customerId === currTaskCustomerId && (
-                  <Link
-                    to={{
-                      pathname: `${currentUrl}/${customerId}${ASSIGN_TASK_URL}/${tradieId}`,
-                      state: { name, avatar, price: offer.price }
-                    }}
-                    className={classes.link}
-                  >
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="large"
-                      className={classes.button}
-                      startIcon={<AssignmentTurnedInOutlinedIcon />}
-                    >
-                      Accept
-                    </Button>
-                  </Link>
-                )}
+                {renderAcceptButton(tradieId, name, avatar, offer)}
               </div>
               <Paper className={classes.paper}>{offer.comment}</Paper>
               <Timestamp

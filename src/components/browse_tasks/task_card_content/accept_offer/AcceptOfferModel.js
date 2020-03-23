@@ -116,7 +116,8 @@ function AcceptOfferModel(props) {
   const handleClose = () => {
     activeStep === 1 && fetchTaskDetail();
 
-    history.replace(`${TASK_URL}/${taskId}`);
+    history.goBack();
+    // history.replace(`${TASK_URL}/${taskId}`);
   };
 
   const handleAccept = async () => {

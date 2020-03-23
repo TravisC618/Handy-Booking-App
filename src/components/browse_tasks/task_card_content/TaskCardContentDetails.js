@@ -16,33 +16,45 @@ import OfferModel from "./offer/OfferModel";
 import {
   TASK_URL,
   ADD_TASK_OFFER_URL,
-  ASSIGN_TASK_URL
+  ASSIGN_TASK_URL,
+  ACCOUNT_BASE_URL,
+  VIEW_TASK_URL
 } from "../../../routes/URLMAP";
 import { getRoleId, isLoggedIn } from "../../../utils/auth";
 import AcceptOfferModel from "./accept_offer/AcceptOfferModel";
+import { isIncluded } from "../../../utils/helper";
 
-const renderContent = (isFetchingDetails, dispatch) => {
-  const renderRoute = () => {
-    if (!isLoggedIn()) {
-      console.log("you are not login");
-      return;
-    }
-    if (getRoleId("customer")) {
-      return (
-        <Route
-          path={`${TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`}
-          component={AcceptOfferModel}
-        />
-      );
+const renderRoute = currentPath => {
+  if (!isLoggedIn()) {
+    console.log("you are not login");
+    return;
+  }
+  // for customer
+  if (getRoleId("customer")) {
+    let path;
+    if (isIncluded(currentPath, ACCOUNT_BASE_URL)) {
+      path = `${ACCOUNT_BASE_URL}/:customerId${VIEW_TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`;
+    } else {
+      path = `${TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`;
     }
     return (
       <Route
-        path={`${TASK_URL}/:taskId${ADD_TASK_OFFER_URL}/:tradieId`}
-        component={OfferModel}
+        // path={`/account/:customerId/view-tasks/:taskId/:customerId/assign-task/:tradieId`}
+        path={path}
+        component={AcceptOfferModel}
       />
     );
-  };
+  }
+  // for tradie
+  return (
+    <Route
+      path={`${TASK_URL}/:taskId${ADD_TASK_OFFER_URL}/:tradieId`}
+      component={OfferModel}
+    />
+  );
+};
 
+const renderContent = (isFetchingDetails, currentPath) => {
   return (
     <div className="task-details-scroll">
       <div className="container-fluid">
@@ -55,7 +67,7 @@ const renderContent = (isFetchingDetails, dispatch) => {
             <TaskCardContentDetailsHeader />
             <TaskCardContentDetailsBody />
             <TaskCardContentDetailsFooter />
-            {renderRoute()}
+            {renderRoute(currentPath)}
           </div>
         )}
       </div>
@@ -69,6 +81,7 @@ const TaskCardContentDetails = props => {
   const dispatch = useDispatch();
   const {
     match: {
+      path: currentPath,
       params: { taskId }
     },
     history
@@ -100,7 +113,7 @@ const TaskCardContentDetails = props => {
       style={{ transformOrigin: "0 0 0" }}
       {...(isDetailOn && { timeout: 1000 })}
     >
-      <div>{renderContent(isFetchingDetails, dispatch)}</div>
+      <div>{renderContent(isFetchingDetails, currentPath)}</div>
     </Slide>
   );
 };
