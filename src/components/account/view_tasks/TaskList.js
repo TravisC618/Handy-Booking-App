@@ -25,7 +25,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ViewTaskDetails from "./ViewTaskDetails";
 import { getRoleId } from "../../../utils/auth";
 import "../../../css/account/task-table.scss";
-import { reqGetCustomer } from "../../../api/customer";
+import { reqGetCustomer, reqGetTradie } from "../../../api/customer";
 
 class TaskList extends Component {
   constructor(props) {
@@ -57,37 +57,65 @@ class TaskList extends Component {
   }
 
   async updatePageData() {
-    const customerId = getRoleId("customer");
-    const tradieId = getRoleId("tradieId");
-    const userRoleId = customerId || tradieId;
-    const response = await reqGetCustomer(userRoleId);
-    const userDetails = response.data.data;
+    try {
+      const response = await reqGetCustomer(getRoleId("customer"));
+      const userDetails = response.data.data;
 
-    this.setState({ isLoading: true }, () => {
-      if (userDetails.tasks.length === 0) {
-        this.setState({ isLoading: false, isEmpty: true });
-      } else {
-        userDetails.tasks.map((tasks, index) =>
-          reqGetTask(tasks).then(res => {
-            this.setState(prevState => ({
-              taskList: [
-                ...prevState.taskList,
-                {
-                  Id: res.data.data._id,
-                  title: res.data.data.title,
-                  budget: res.data.data.budget,
-                  postDate: res.data.data.postDate,
-                  status: res.data.data.status,
-                  offers: res.data.data.offers
-                }
-              ]
-            }));
+      this.setState({ isLoading: true }, () => {
+        if (userDetails.tasks.length === 0) {
+          this.setState({ isLoading: false, isEmpty: true });
+        } else {
+          userDetails.tasks.map((tasks, index) =>
+            reqGetTask(tasks).then(res => {
+              this.setState(prevState => ({
+                taskList: [
+                  ...prevState.taskList,
+                  {
+                    Id: res.data.data._id,
+                    title: res.data.data.title,
+                    budget: res.data.data.budget,
+                    postDate: res.data.data.postDate,
+                    status: res.data.data.status,
+                    offers: res.data.data.offers
+                  }
+                ]
+              }));
 
-            this.setState({ isLoading: false, isEmpty: false });
-          })
-        );
-      }
-    });
+              this.setState({ isLoading: false, isEmpty: false });
+            })
+          );
+        }
+      });
+    } catch (e) {
+      const response = await reqGetTradie(getRoleId("tradie"));
+      const userDetails = response.data.data;
+
+      this.setState({ isLoading: true }, () => {
+        if (userDetails.tasks.length === 0) {
+          this.setState({ isLoading: false, isEmpty: true });
+        } else {
+          userDetails.tasks.map((tasks, index) =>
+            reqGetTask(tasks).then(res => {
+              this.setState(prevState => ({
+                taskList: [
+                  ...prevState.taskList,
+                  {
+                    Id: res.data.data._id,
+                    title: res.data.data.title,
+                    budget: res.data.data.budget,
+                    postDate: res.data.data.postDate,
+                    status: res.data.data.status,
+                    offers: res.data.data.offers
+                  }
+                ]
+              }));
+
+              this.setState({ isLoading: false, isEmpty: false });
+            })
+          );
+        }
+      });
+    }
   }
 
   handeDeleteClick = invoice => {
@@ -105,7 +133,7 @@ class TaskList extends Component {
   render() {
     let { rowsPerPage, page, taskList, isLoading, isEmpty } = this.state;
     const customerId = getRoleId("customer");
-    const tradieId = getRoleId("tradieId");
+    const tradieId = getRoleId("tradie");
     const userRoleId = customerId || tradieId;
 
     const toUpperCaseFilter = d => {
