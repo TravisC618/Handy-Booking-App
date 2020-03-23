@@ -22,7 +22,7 @@ import Badge from "@material-ui/core/Badge";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import DeleteIcon from "@material-ui/icons/Delete";
-import TaskCardContentDetails from "./TaskCardContentDetails";
+import ViewTaskDetails from "./ViewTaskDetails";
 import { getRoleId } from "../../../utils/auth";
 import "../../../css/account/task-table.scss";
 import { reqGetCustomer } from "../../../api/customer";
@@ -222,7 +222,7 @@ class TaskList extends Component {
         />
         <Route
           path={`/account/:userId/view-tasks/:taskId`}
-          component={TaskCardContentDetails}
+          component={ViewTaskDetails}
         />
       </div>
     );
