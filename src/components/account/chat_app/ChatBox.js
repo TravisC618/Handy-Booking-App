@@ -35,18 +35,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 let socket;
 
-function ChatBox({
-  history,
-  location: {
-    state: { name: username, taskTitle }
-  }
-}) {
+function ChatBox(props) {
   const classes = useStyles();
+  const { history, location } = props;
+
+  const username = location.state && location.state.name;
+  const taskTitle = location.state && location.state.taskTitle;
+
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  //TODO need to changed ENDPOINT expression
   const ENDPOINT = `https://byedust-api-server.herokuapp.com/`;
 
   const handleClose = () => {
@@ -58,9 +57,6 @@ function ChatBox({
 
     setName(username);
     setRoom(taskTitle);
-
-    console.log(`username`, username);
-    console.log(`taskTitle`, taskTitle);
 
     socket.emit("join", { name: username, room: taskTitle }, error => {
       if (error) {
@@ -90,8 +86,6 @@ function ChatBox({
       });
     }
   };
-
-  console.log(message, messages);
 
   return (
     <div>
