@@ -4,13 +4,13 @@ import "../../../css/browse_tasks/RangeButton.css";
 
 const RangeButtonContent = props => {
   return (
-    <div class="container-fluid py-6">
+    <div className="container-fluid py-6">
       <h4>TO BE DONE</h4>
-      <ul class="nav nav-tabs nav-justified mb-6" role="tablist">
-        <li class="nav-item">
+      <ul className="nav nav-tabs nav-justified mb-6" role="tablist">
+        <li className="nav-item">
           <a
             href="#create-group-InPerson"
-            class="nav-link active"
+            className="nav-link active"
             data-toggle="tab"
             role="tab"
             aria-selected="true"
@@ -18,10 +18,10 @@ const RangeButtonContent = props => {
             In person
           </a>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <a
             href="#create-group-remotely"
-            class="nav-link"
+            className="nav-link"
             data-toggle="tab"
             role="tab"
             aria-selected="false"
@@ -29,10 +29,10 @@ const RangeButtonContent = props => {
             Remotely
           </a>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <a
             href="#create-group-all"
-            class="nav-link"
+            className="nav-link"
             data-toggle="tab"
             role="tab"
             aria-selected="false"
@@ -41,17 +41,17 @@ const RangeButtonContent = props => {
           </a>
         </li>
       </ul>
-      <div class="tab-content" role="tablist">
+      <div className="tab-content" role="tablist">
         <div
           id="create-group-InPerson"
-          class="tab-pane fade active show"
+          className="tab-pane fade active show"
           role="tabpanel"
         >
-          <div class="form-group">
+          <div className="form-group">
             <h4>SUBURB</h4>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="formGroupExampleInput2"
               placeholder="Enter a suburb"
             />
@@ -64,19 +64,19 @@ const RangeButtonContent = props => {
           </div>
         </div>
 
-        <div id="create-group-remotely" class="tab-pane fade" role="tabpanel">
-          <div class="tab-content" role="tablist">
+        <div id="create-group-remotely" className="tab-pane fade" role="tabpanel">
+          <div className="tab-content" role="tablist">
             <div
               id="create-group-InPerson"
-              class="tab-pane fade active show"
+              className="tab-pane fade active show"
               role="tabpanel"
             >
-              <div class="form-group">
+              <div className="form-group">
                 <h4 className="DisabledFontColor">SUBURB</h4>
                 <fieldset disabled>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="disabledTextInput"
                     placeholder="Enter a suburb"
                   />
@@ -91,18 +91,18 @@ const RangeButtonContent = props => {
             </div>
           </div>
         </div>
-        <div id="create-group-all" class="tab-pane fade" role="tabpanel">
-          <div class="tab-content" role="tablist">
+        <div id="create-group-all" className="tab-pane fade" role="tabpanel">
+          <div className="tab-content" role="tablist">
             <div
               id="create-group-InPerson"
-              class="tab-pane fade active show"
+              className="tab-pane fade active show"
               role="tabpanel"
             >
-              <div class="form-group">
+              <div className="form-group">
                 <h4>SUBURB</h4>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="formGroupExampleInput2"
                   placeholder="Enter a suburb"
                 />

@@ -53,12 +53,10 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img className={classes.image} src={Pv1Img} alt="suitcase" />
               <Typography variant="h6" className={classes.title}>
-              Top rated insurance
+                Top rated insurance
               </Typography>
               <Typography variant="h5">
-                {
-                  "Insurance is there to ease any worries "
-                }
+                {"Insurance is there to ease any worries "}
                 {
                   "- making sure the Tasker has liability insurance from CGU while performing most task activities. T&C's apply."
                 }
@@ -69,25 +67,29 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img className={classes.image} src={Pv2Img} alt="graph" />
               <Typography variant="h6" className={classes.title}>
-              Verified badges
+                Verified badges
               </Typography>
               <Typography variant="h5">
-                {"Badges give members a bit more verified info when deciding who to work with on a task. Each badge has certain requirements that must be met and verified before they’re shown on the member's profile. "}
+                {
+                  "Badges give members a bit more verified info when deciding who to work with on a task. Each badge has certain requirements that must be met and verified before they’re shown on the member's profile. "
+                }
               </Typography>
             </div>
           </Grid>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
               <img className={classes.image} src={Pv3Img} alt="clock" />
-              
+
               <Typography variant="h6" className={classes.title}>
-              Secure Payments
+                Secure Payments
               </Typography>
               <Typography variant="h5">
                 {
                   "We hold task payments secure with our PCI-DSS compliant Airtasker Pay "
                 }
-                {"– so tasks can be completed knowing payment is there when you're done."}
+                {
+                  "– so tasks can be completed knowing payment is there when you're done."
+                }
               </Typography>
             </div>
           </Grid>

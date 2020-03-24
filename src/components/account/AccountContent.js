@@ -22,9 +22,7 @@ const AccountContent = props => {
   const tradieId = getRoleId("tradie");
   const userRoleId = customerId || tradieId;
 
-  console.log(userRoleId)
-
-
+  console.log(userRoleId);
 
   const dispatch = useDispatch();
 
