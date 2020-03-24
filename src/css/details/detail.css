@@ -1,0 +1,22 @@
+.detail {
+    background: inherit;
+    max-width: 1024px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+   }
+
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+ 
+
