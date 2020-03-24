@@ -1,94 +1,94 @@
 @import "https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800";
 
 #sidebar {
-	margin: 0 0 0 20px;
-	width: auto;
-	padding-left: 0px;
-	padding-right: 0px;
+  margin: 0 0 0 20px;
+  width: auto;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 #sidebar-font {
-	h4 {
-		padding: 10px 0px 10px;
-		font-size: 12px;
-	}
-	h5 {
-		font-size: 14px;
-	}
-	em {
-		font-size: 11px;
-	}
+  h4 {
+    padding: 10px 0px 10px;
+    font-size: 12px;
+  }
+  h5 {
+    font-size: 14px;
+  }
+  em {
+    font-size: 11px;
+  }
 }
 .sidebar-img {
-	display: flex;
-	align-items: center;
-	img {
-		padding: 15px 10px 15px;
-		width: 40px;
-	}
+  display: flex;
+  align-items: center;
+  img {
+    padding: 15px 10px 15px;
+    width: 40px;
+  }
 }
 .sidebar-bottom {
-	padding: 20px 0px 20px;
+  padding: 20px 0px 20px;
 }
 #sidebar-bottom-texts {
-	h5 {
-		line-height: 10pt;
-		font-size: 14px;
-	}
+  h5 {
+    line-height: 10pt;
+    font-size: 14px;
+  }
 }
 .sidebar-button {
-	padding: 15px 0px 15px;
-	#button {
-		outline: none;
-		height: 40px;
-		text-align: center;
-		width: 130px;
-		border-radius: 40px;
-		background: #f2f7f9;
-		border: 1px solid gray;
-		color: rgb(13, 87, 156);
-		letter-spacing: 1px;
-		text-shadow: 0;
-		font-size: 14px;
-		font-weight: bold;
-		cursor: pointer;
-		-webkit-transition: all 0.25s ease;
-		transition: all 0.25s ease;
-	}
+  padding: 15px 0px 15px;
+  #button {
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 130px;
+    border-radius: 40px;
+    background: #f2f7f9;
+    border: 1px solid gray;
+    color: rgb(13, 87, 156);
+    letter-spacing: 1px;
+    text-shadow: 0;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+  }
 }
 #button {
-	&:hover {
-		color: white;
-		background: gray;
-	}
-	&:active {
-		letter-spacing: 2px;
-	}
-	&:after {
-		content: "Learn more";
-	}
+  &:hover {
+    color: white;
+    background: gray;
+  }
+  &:active {
+    letter-spacing: 2px;
+  }
+  &:after {
+    content: "Learn more";
+  }
 }
 .onclic {
-	width: 40px;
-	border-color: #bbbbbb;
-	border-width: 3px;
-	font-size: 0;
-	border-left-color: #1ECD97;
-	-webkit-animation: rotating 2s 0.25s linear infinite;
-	animation: rotating 2s 0.25s linear infinite;
-	&:after {
-		content: "";
-	}
-	&:hover {
-		color: #1ECD97;
-		background: white;
-	}
+  width: 40px;
+  border-color: #bbbbbb;
+  border-width: 3px;
+  font-size: 0;
+  border-left-color: #1ecd97;
+  -webkit-animation: rotating 2s 0.25s linear infinite;
+  animation: rotating 2s 0.25s linear infinite;
+  &:after {
+    content: "";
+  }
+  &:hover {
+    color: #1ecd97;
+    background: white;
+  }
 }
 .validate {
-	font-size: 13px;
-	color: white;
-	background: #1ECD97;
-	&:after {
-		font-family: 'FontAwesome';
-		content: "\f00c";
-	}
+  font-size: 13px;
+  color: white;
+  background: #1ecd97;
+  &:after {
+    font-family: "FontAwesome";
+    content: "\f00c";
+  }
 }

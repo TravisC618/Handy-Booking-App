@@ -1,57 +1,48 @@
-$social:
-    twitter #00acee "\e800",
-    facebook #3b5998 "\e801",
-    instagram #3f729b "\e802",
-    foursquare #25a0ca "\e803",
-    soundcloud #ff7700 "\e804",
-    youtube #c4302b "\e805",
-    vimeo #43baff "\e806",
-    dribbble #ea4c89 "\e807",
-    rss #ee802f "\e808",
-    github #171515 "\e809",
-    tumblr #34526f "\e80a",
-    linkedin #007fb1 "\e80b",
-    gplus #dd4b39 "\e80c",
-    stackexchange #f47920 "\e80d";
-   
-  div.social {
-    width : 100%;
+$social: twitter #00acee "\e800", facebook #3b5998 "\e801",
+  instagram #3f729b "\e802", foursquare #25a0ca "\e803",
+  soundcloud #ff7700 "\e804", youtube #c4302b "\e805", vimeo #43baff "\e806",
+  dribbble #ea4c89 "\e807", rss #ee802f "\e808", github #171515 "\e809",
+  tumblr #34526f "\e80a", linkedin #007fb1 "\e80b", gplus #dd4b39 "\e80c",
+  stackexchange #f47920 "\e80d";
+
+div.social {
+  width: 100%;
+  text-align: center;
+}
+
+div.social a {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 5px;
+  font-family: "scicons";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 0.2s linear, color 0.2s linear;
+  margin: 10px;
+
+  &:before {
+    width: inherit;
+    height: inherit;
+    display: table-cell;
     text-align: center;
+    vertical-align: middle;
   }
-   
-  div.social a {
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    border-radius: 5px;
-    font-family: "scicons";
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: none;
-    color: #fff;
-    transition: background-color .2s linear, color .2s linear;
-    margin: 10px;
-    
-    &:before {
-      width: inherit;
-      height: inherit;
-      display: table-cell;
-      text-align: center;
-      vertical-align: middle;
-    }
-    
-    @each $type in $social {
-      &.icon-#{nth($type, 1)} {
-        background-color: nth($type, 2);
-   
-        &:before {
-          content: nth($type, 3);
-        }
-   
-        &:hover {
-          background-color: #fff;
-          color: nth($type, 2);
-        }
+
+  @each $type in $social {
+    &.icon-#{nth($type, 1)} {
+      background-color: nth($type, 2);
+
+      &:before {
+        content: nth($type, 3);
+      }
+
+      &:hover {
+        background-color: #fff;
+        color: nth($type, 2);
       }
     }
   }
+}

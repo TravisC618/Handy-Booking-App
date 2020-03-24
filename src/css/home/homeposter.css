@@ -1,137 +1,134 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500, 600,800&display=swap');
-    
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500, 600,800&display=swap");
 
 .grid-container {
-    margin: -5px;
-    padding: 0;
-    width: 200000px;
-    height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-family: 'Montserrat', sans-serif;
-    color: #fff;
-	transform: scale(0.75);
-	overflow: hidden;
-	background-image: url('../../img/home_1.jpg');
-    background-size: cover;
-    background-position: center;
-	background-repeat: no-repeat;
-	
+  margin: -5px;
+  padding: 0;
+  width: 200000px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  transform: scale(0.75);
+  overflow: hidden;
+  background-image: url("../../img/home_1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .banner-text {
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 h1 {
-	font-size: 3.5rem;
-	font-weight: 900;
+  font-size: 3.5rem;
+  font-weight: 900;
 }
 .blurred-container {
-	display: flex;
-	justify-content: flex-end;
-    align-items: center;
-    pointer-events: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  pointer-events: none;
 }
 .blurred-banner {
-	background: #00000040;
-	width: 66.666%;
-	height: 90%;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	border: 20px solid #ffffff40;
-	animation: blurredBanner 1s 2.8s ease-in-out forwards;
-	box-sizing: border-box;
-	filter: blur(10px);
-	opacity: 0;
+  background: #00000040;
+  width: 66.666%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 20px solid #ffffff40;
+  animation: blurredBanner 1s 2.8s ease-in-out forwards;
+  box-sizing: border-box;
+  filter: blur(10px);
+  opacity: 0;
 }
 h2 {
-	font-weight: 500;
+  font-weight: 500;
 }
 h4 {
-	font-weight: 500;
-	letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
 }
 .blurred-banner {
-	position: relative;
+  position: relative;
 }
 
-.blurred-banner > *{
-	margin-left: 60px;
-	width: 22ch;
-	letter-spacing: 0.01rem;
+.blurred-banner > * {
+  margin-left: 60px;
+  width: 22ch;
+  letter-spacing: 0.01rem;
 }
 .orange-text {
-	color: orange;
-	font-weight: 600;
+  color: orange;
+  font-weight: 600;
 }
 .blurred-banner > p:not(.orange-text) {
-	line-height: 1.618;
+  line-height: 1.618;
 }
 
-@supports(backdrop-filter: blur(10px)) {
-	.blurred-banner {
-		backdrop-filter: blur(0px)
-	}
+@supports (backdrop-filter: blur(10px)) {
+  .blurred-banner {
+    backdrop-filter: blur(0px);
+  }
 }
 
 .slide-down {
-	opacity: 0;
-		animation: slide-down 1s 1s ease-in-out forwards;
+  opacity: 0;
+  animation: slide-down 1s 1s ease-in-out forwards;
 }
 
-.reveal, .reveal-2 {
-	animation-name: text;
-	animation-delay: 1.8s;
-	animation-iteration-count: 1;
-	animation-duration: 800ms;
-	animation-fill-mode: both;
-	animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+.reveal,
+.reveal-2 {
+  animation-name: text;
+  animation-delay: 1.8s;
+  animation-iteration-count: 1;
+  animation-duration: 800ms;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
-.reveal-2 { 
-	animation-delay: 2.2s;
+.reveal-2 {
+  animation-delay: 2.2s;
 }
 
 @keyframes slide-down {
-	to {
-		opacity: 1;
-		margin-top: 0px;
-	}
+  to {
+    opacity: 1;
+    margin-top: 0px;
+  }
 }
 
- @keyframes text {
-	from {
-		clip-path: inset(0 100% 0 0);
-	}
-	to {
-		clip-path: inset(0 0 0 0);
-	}
+@keyframes text {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
-
 
 @keyframes blurredBanner {
-	0% {
-/* 		opacity: 0; */
-/* 		backdrop-filter: blur(0); */
-	}
-	60% {
-		opacity: 1;
-		filter: blur(10px);
-	}
-	100% {
-		backdrop-filter: blur(10px);
-		filter: blur(0px);
-		opacity: 1;
-	}
+  0% {
+    /* 		opacity: 0; */
+    /* 		backdrop-filter: blur(0); */
+  }
+  60% {
+    opacity: 1;
+    filter: blur(10px);
+  }
+  100% {
+    backdrop-filter: blur(10px);
+    filter: blur(0px);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-down-search {
-	to {
-		top: 0px;
-	}
+  to {
+    top: 0px;
+  }
 }
-

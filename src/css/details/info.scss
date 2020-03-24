@@ -1,34 +1,32 @@
 @import "https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800";
-#info  {
+#info {
+  background-color: inherit;
+  margin: 0 0 0 0;
+  padding: 0;
 
-	background-color: inherit;
-	margin:0 0 0 0;
-	padding: 0;
-
-	.jumbotron {
-		background-color: inherit;
-		padding: 0 0;
-		width: auto;
-		font-family: 'Open Sans', sans-serif;
-		.container {
-			h4 {
-				padding: 10px 0px 10px;
-				font-size: 12px;
-			}
-			h5 {
-				margin-right: 20px;
-				line-height: 20pt;
-				font-size: 11px;
-			}
-			.row {
-				em {
-					font-size: 11px;
-				}
-
-			}
-		}
-	}
+  .jumbotron {
+    background-color: inherit;
+    padding: 0 0;
+    width: auto;
+    font-family: "Open Sans", sans-serif;
+    .container {
+      h4 {
+        padding: 10px 0px 10px;
+        font-size: 12px;
+      }
+      h5 {
+        margin-right: 20px;
+        line-height: 20pt;
+        font-size: 11px;
+      }
+      .row {
+        em {
+          font-size: 11px;
+        }
+      }
+    }
+  }
 }
 th {
-	padding: 5px 5px;	
+  padding: 5px 5px;
 }
