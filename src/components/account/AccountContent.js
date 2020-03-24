@@ -22,8 +22,6 @@ const AccountContent = props => {
   const tradieId = getRoleId("tradie");
   const userRoleId = customerId || tradieId;
 
-  console.log(userRoleId);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

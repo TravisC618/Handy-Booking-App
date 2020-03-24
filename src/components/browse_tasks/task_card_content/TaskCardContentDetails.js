@@ -26,9 +26,8 @@ import AcceptOfferModel from "./accept_offer/AcceptOfferModel";
 import ChatBox from "../../account/chat_app/ChatBox";
 import { isIncluded } from "../../../utils/helper";
 
-const renderRoute = (currentPath, isJoining) => {
+const renderRoute = currentPath => {
   if (!isLoggedIn()) {
-    console.log("you are not login");
     return;
   }
   let acceptPath;
@@ -38,18 +37,14 @@ const renderRoute = (currentPath, isJoining) => {
     chatPath = `${ACCOUNT_BASE_URL}/:customerId${VIEW_TASK_URL}/:taskId${CHAT_URL}/:userId`;
   } else {
     acceptPath = `${TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`;
+    chatPath = `${TASK_URL}/:taskId${CHAT_URL}/:userId`;
   }
 
   // for customer
   if (getRoleId("customer")) {
     return (
       <>
-        <Route
-          // path={`/account/:customerId/view-tasks/:taskId/:customerId/assign-task/:tradieId`}
-          path={acceptPath}
-          component={AcceptOfferModel}
-        />
-        {/* {!isJoining && <Route path={chatPath} component={ChatBox} />} */}
+        <Route path={acceptPath} component={AcceptOfferModel} />
         <Route path={chatPath} component={ChatBox} />
       </>
     );
@@ -61,7 +56,6 @@ const renderRoute = (currentPath, isJoining) => {
         path={`${TASK_URL}/:taskId${ADD_TASK_OFFER_URL}/:tradieId`}
         component={OfferModel}
       />
-      {/* {!isJoining && } */}
       <Route path={chatPath} component={ChatBox} />
     </>
   );
@@ -80,7 +74,7 @@ const renderContent = (isFetchingDetails, currentPath, isJoining) => {
             <TaskCardContentDetailsHeader />
             <TaskCardContentDetailsBody />
             <TaskCardContentDetailsFooter />
-            {renderRoute(currentPath, isJoining)}
+            {renderRoute(currentPath)}
           </div>
         )}
       </div>
