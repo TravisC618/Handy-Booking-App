@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Login from "../components/Login";
 import Index from "../components/homepage/Home";
-import FindCleaners from "../pages/FindCleaners";
+import Chat from "../components/account/chat_app/Chat";
+import Join from "../components/account/chat_app/Join";
 import Details from "../pages/Details";
 import BrowseTasks from "../pages/BrowseTasks";
 import Account from "../pages/Account";
@@ -26,6 +26,8 @@ const Routes = () => {
       <Route path={TASK_URL} component={BrowseTasks} />
       <ProtectedRoute path={FIND_CLEANERS_URL} component={PostSide} />
       <ProtectedRoute path={ACCOUNT_BASE_URL} component={Account} />
+      <Route path="/join" component={Join} />
+      <Route path="/chat" component={Chat} />
       <Redirect to="/" /> {/* NOT MATCH => REDIRECT TO HOMEPAGE */}
     </Switch>
   );
