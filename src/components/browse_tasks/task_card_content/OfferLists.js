@@ -98,8 +98,7 @@ function OfferLists(props) {
   };
 
   const renderAcceptButton = (tradieId, name, avatar, offer) => {
-    if (isFetchingDetails || !taskDetails.customer || !taskDetails.tradie)
-      return;
+    if (isFetchingDetails || !taskDetails.customer) return;
 
     const currTaskCustomerId = taskDetails.customer._id;
 
