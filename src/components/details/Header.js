@@ -1,46 +1,81 @@
 import React from "react";
-import cleaner from "../../img/cleaner.jpg";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFlag, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { makeStyles } from "@material-ui/styles";
+import { Avatar } from "@material-ui/core";
+
 import "../../css/details/header.css";
 
+const useStyles = makeStyles(() => ({
+  root: {
+    marginBottom: 20,
+    boxShadow: "none",
+    backgroundColor: "inherit"
+  },
+  avatar: {
+    height: 125,
+    width: 125,
+    flexShrink: 0,
+    flexGrow: 0,
+    border: "4px solid white",
+    maxWidth: "100%",
+    maxHeight: "100%",
+    borderRadius: "50%",
+    margin: "0 auto"
+  }
+}));
+
 const Header = props => {
+  const classes = useStyles();
+
+  const user = {
+    name: "Adrienne D.",
+    city: "Newcastle West",
+    state: "NSW",
+    postcode: "2302",
+    country: "Australia",
+    timezone: "GMT+11",
+    avatar: "../../img/cleaner.jpg"
+  };
+
   return (
     <div className="header">
       <div className="header__head">
         <div className="header__head-bg"></div>
 
-        <button className="header__head-btn"></button>
+        <Link to="/find-cleaners">
+          <button className="header__head-btn"></button>
+        </Link>
 
         <div className="header__head-avatar">
-          <img
-            src={cleaner}
-            alt="cleaner's avatar" width="125px" height="125px"
-            className="header__head-photo"
+          <Avatar
+            src={ user.avater }
+            alt="cleaner's avatar"
+            className={ classes.avatar }
           />
           <div className="clearFix"></div>
         </div>
-
       </div>
 
       <div className="header__body">
-      
         <div className="header__body-info">
-          <h4 className="header__body-info-username">Allen M.</h4>
+          <h4 className="header__body-info-username">{user.name}</h4>
           <ul className="header__body-info-userinfo">
             <li>Last online 1 hour ago</li>
             <li>
-              <i className="fas fa-map-marker-alt" />
-              Butler WA 6036, Australia
+              <FontAwesomeIcon icon={faMapMarkerAlt} />
+              {user.city} {user.state} {user.postcode}, {user.country}
             </li>
             <li>Member since 25th Apr 2016</li>
           </ul>
-          <a>
-            <i className="far fa-flag" />
-            Report this member
-          </a>
+          <div className="header__body-info-report">
+            <FontAwesomeIcon icon={faFlag} />
+            <Link to="/#">Report this member</Link>
+          </div>
         </div>
 
         <div className="header__body-reviews">
-          
           <div className="nav nav-tabs" id="nav-tab" role="tablist">
             <div
               className="nav-item nav-link active"
@@ -66,11 +101,15 @@ const Header = props => {
             </div>
           </div>
           <div className="clearFix"></div>
-          
 
           <div className="tab-content" id="nav-tabContent">
-            <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-              <div className="review-container">  
+            <div
+              className="tab-pane fade show active"
+              id="nav-home"
+              role="tabpanel"
+              aria-labelledby="nav-home-tab"
+            >
+              <div className="review-container">
                 <div className="col-auto">
                   <div className="star-header">
                     <i className="fas fa-star fa-2x"></i>
@@ -88,8 +127,13 @@ const Header = props => {
               </div>
             </div>
 
-            <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-              <div className="review-container">  
+            <div
+              className="tab-pane fade"
+              id="nav-profile"
+              role="tabpanel"
+              aria-labelledby="nav-profile-tab"
+            >
+              <div className="review-container">
                 <div className="col-auto">
                   <div className="star-header">
                     <i className="fas fa-star fa-2x"></i>

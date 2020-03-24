@@ -5,7 +5,7 @@ const Reviews = props => {
     return (
       <div className="card text-center">
           <div className="card-header">
-              <div className="row">
+              <div className="row no-gutters">
                   <div className="col">
                       <h4><strong>Reviews</strong></h4>
 
@@ -20,46 +20,46 @@ const Reviews = props => {
                           <i className="fas fa-star fa-2x"></i>
                       </div>
                       <div className="content-header">
-                          <h5>4.9 stars from 96 reviews</h5>
+                          <h4>4.9 stars from 96 reviews</h4>
                           <h5>98% Completion rate</h5>
-                          <h5>106 Completion tasks</h5>
+                          <h6>106 Completion tasks</h6>
                       </div>
                   </div>
                   <div className="col col-3">
                       <div className="star-rank">
                           <div className="five-star">
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
                               <i className="total-star">88</i>
 
                           </div>
 
                           <div className="four-star">
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
                               <i className="total-star">6</i>
 
                           </div>
                           <div className="three-star">
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
                               <i className="total-star">2</i>
 
                           </div>
                           <div className="two-star">
-                              <i className="fas fa-star fa-2x"></i>
-                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-1x"></i>
+                              <i className="fas fa-star fa-1x"></i>
                               <i className="total-star">0</i>
 
                           </div>
                           <div className="one-star">
-                              <i className="fas fa-star fa-2x"></i>
+                              <i className="fas fa-star fa-1x"></i>
                               <i className="total-star">0</i>
 
                           </div>
