@@ -1,56 +1,54 @@
-  
-  @-webkit-keyframes scroll {
-    0% {
-      -webkit-transform: translateX(0);
-              transform: translateX(0);
-    }
-    100% {
-      -webkit-transform: translateX(calc(250px * 7));
-              transform: translateX(calc(250px * 7));
-    }
+@-webkit-keyframes scroll {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
   }
-  
-  @keyframes scroll {
-    0% {
-      -webkit-transform: translateX(0);
-              transform: translateX(0);
-    }
-    100% {
-      -webkit-transform: translateX(calc(250px * 7));
-              transform: translateX(calc(250px * 7));
-    }
+  100% {
+    -webkit-transform: translateX(calc(250px * 7));
+    transform: translateX(calc(250px * 7));
   }
+}
 
-  .client-slide {
-    padding: 10px;
-    border-radius: 10px;
+@keyframes scroll {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
   }
+  100% {
+    -webkit-transform: translateX(calc(250px * 7));
+    transform: translateX(calc(250px * 7));
+  }
+}
 
-  .slider {
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-  }
+.client-slide {
+  padding: 10px;
+  border-radius: 10px;
+}
 
-  .fa-2x{
-    color: rgb(238, 202, 0);
-    font-size: 15px;
-    margin-right: 10px;
-  }
+.slider {
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
 
-  .slider::before {
-    left: 0;
-    top: 0;
-  }
-  .slider .slide-track {
-    -webkit-animation: scroll 60s linear infinite;
-            animation: scroll 60s linear infinite;
-    display: flex;
-    width: calc(345px * 50);
-    float: right;
-  }
-  
-  .slider .slide-track:hover {
-      animation-play-state: paused;
-  }
-  
+.fa-2x {
+  color: rgb(238, 202, 0);
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.slider::before {
+  left: 0;
+  top: 0;
+}
+.slider .slide-track {
+  -webkit-animation: scroll 60s linear infinite;
+  animation: scroll 60s linear infinite;
+  display: flex;
+  width: calc(345px * 50);
+  float: right;
+}
+
+.slider .slide-track:hover {
+  animation-play-state: paused;
+}

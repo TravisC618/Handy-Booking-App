@@ -1,15 +1,13 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
+import React from "react";
+import { makeStyles } from "@material-ui/styles";
+import { Grid } from "@material-ui/core";
 
-import { AccountProfile, AccountDetails } from './components';
+import { AccountProfile, AccountDetails } from "./components";
 
-import '../../../css/account/profile.css';
+import "../../../css/account/profile.css";
 
 const useStyles = makeStyles(() => ({
-  root: {
-    
-  }
+  root: {}
 }));
 
 const SettingProfile = () => {
@@ -29,13 +27,7 @@ const SettingProfile = () => {
             justify="center"
             alignItems="center"
           >
-            <Grid
-              item
-              lg={8}
-              md={6}
-              xl={8}
-              xs={12}
-            >
+            <Grid item lg={8} md={6} xl={8} xs={12}>
               <AccountProfile />
               <AccountDetails />
             </Grid>

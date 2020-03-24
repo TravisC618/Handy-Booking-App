@@ -6,9 +6,9 @@ import "../css/browse_tasks/task-list.scss";
 const BrowseTasks = () => {
   return (
     <div className="browseContent">
-      <div class="row">
-        <div class="col-12">
-          <div class="task-nav">
+      <div className="row">
+        <div className="col-12">
+          <div className="task-nav">
             <TaskNav />
           </div>
           <BrowseTasksContent />

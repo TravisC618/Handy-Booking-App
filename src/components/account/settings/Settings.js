@@ -1,8 +1,8 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
+import React from "react";
+import { makeStyles } from "@material-ui/styles";
+import { Grid } from "@material-ui/core";
 
-import { Notifications, Password } from './components';
+import { Notifications, Password } from "./components";
 
 import "../../../css/account/password.css";
 
@@ -16,37 +16,32 @@ const Settings = () => {
   const classes = useStyles();
 
   return (
-
     <div className="password vertical-scroll">
-    <div className="password__page">
-      <div className="password__page-header">
-        <h4>Settings</h4>
-      </div>
-    <div className={classes.root}>
-      <Grid
-        container
-        spacing={4}
-        direction="column"
-        justify="center"
-        alignItems="center"
-      >
-        <Grid
-          item
-          md={7}
-          xs={12}
-        >
-          <Notifications />
-        {/* </Grid>
+      <div className="password__page">
+        <div className="password__page-header">
+          <h4>Settings</h4>
+        </div>
+        <div className={classes.root}>
+          <Grid
+            container
+            spacing={4}
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item md={7} xs={12}>
+              <Notifications />
+              {/* </Grid>
         <Grid
           item
           md={5}
           xs={12}
         > */}
-          <Password />
-        </Grid>
-      </Grid>
-    </div>
-    </div>
+              <Password />
+            </Grid>
+          </Grid>
+        </div>
+      </div>
     </div>
   );
 };

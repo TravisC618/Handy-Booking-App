@@ -151,7 +151,6 @@ class Login extends Component {
             const userRoleId = roleId;
             updateUserID({ userRoleId });
 
-
             this.handleRedirect(redirectTo, role, currentPath);
             redirectTo && handleRedirect(""); // reset redirectTo
 
@@ -172,7 +171,7 @@ class Login extends Component {
       updateRegisterStatus,
       handleShowModal,
       handleVisible,
-      updateRegisterForm,
+      updateRegisterForm
     } = this.props;
     const { email, password, username } = this.state;
 
@@ -305,7 +304,7 @@ class Login extends Component {
 const mapStateToProps = state => ({
   visible: state.login.visible,
   redirectTo: state.login.redirectTo,
-  userRoleId: state.account.userRoleId,
+  userRoleId: state.account.userRoleId
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -313,7 +312,7 @@ const mapDispatchToProps = dispatch => ({
   handleRedirect: redirectTo => dispatch(handleRedirectAction(redirectTo)),
   updateRegisterForm: registerForm =>
     dispatch(updateRegisterFormAction(registerForm)),
-    updateUserID: userID => dispatch(updateUserIDAction(userID))
+  updateUserID: userID => dispatch(updateUserIDAction(userID))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
