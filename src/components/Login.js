@@ -1,19 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import classnames from "classnames";
 import {
   handleVisible as handleVisibleAction,
   handleRedirect as handleRedirectAction
 } from "../redux/actions/loginAction";
-import { storeToken, storeUserId } from "../utils/auth";
-import { login, register } from "../api/auth";
+import { updateRegisterForm as updateRegisterFormAction } from "../redux/actions/registerAction";
+import { updateUserID as updateUserIDAction } from "../redux/actions/accountAction";
+import { storeToken, storeUserId, storeRoleId } from "../utils/auth";
+import { login, register, checkEmailExisted } from "../api/auth";
 import Modal from "react-animated-modal";
-import TextField from "@material-ui/core/TextField";
+import validator from "validator";
 import LoadingSpinner from "../UI/LoadingSpinner";
+import LinearIndeterminate from "../UI/LinearIndeterminate";
+import Button from "@material-ui/core/Button";
 import { errHandler } from "../utils/helper";
 import "../css/login.scss";
 import SocialLogin from "./SocialLogin";
 import CreateProfile from "../components/create_profile/CreateProfile";
+import LoginInput from "./LoginInput";
 
 class Login extends Component {
   constructor(props) {
@@ -41,6 +47,7 @@ class Login extends Component {
   handleToggle = () => {
     //TODO clear form
     this.setState(state => ({
+      switchToRegister: !state.switchToRegister,
       email: "",
       password: "",
       repeatPwd: "",
@@ -50,58 +57,104 @@ class Login extends Component {
       err: {
         type: "",
         msg: ""
-      },
-      switchToRegister: !state.switchToRegister
+      }
     }));
   };
 
-  /**
-   * userBehavior - login/register
-   */
-  handleUserBehavior = async () => {
-    const {
-      email,
-      password,
-      repeatPwd,
-      username,
-      checkbox,
-      switchToRegister
-    } = this.state;
-    const { redirectTo, handleVisible, handleRedirect, location } = this.props;
-    const currentPath = location.pathname;
-    const userBehavior = () =>
-      switchToRegister
-        ? register(email, password, username)
-        : login(email, password);
+  registerValidator = () => {
+    const { email, username, password, repeatPwd, checkbox } = this.state;
+    let isError = false;
+    this.setState({ err: {} });
 
-    if (switchToRegister && password !== repeatPwd) {
+    if (!validator.isLength(username, { min: 3 })) {
       this.setState({
-        err: { type: "password", msg: '"Passwords" do not match' }
+        err: {
+          type: "username",
+          msg: "Username should be at least 3 characters"
+        }
       });
-      return;
+      isError = true;
+      return isError;
     }
 
-    if (switchToRegister && !checkbox) {
+    if (!validator.isEmail(email)) {
+      this.setState({
+        err: { type: "email", msg: "Invalid email format" }
+      });
+      isError = true;
+      return isError;
+    }
+
+    if (!validator.isLength(password, { min: 6 })) {
+      this.setState({
+        err: {
+          type: "password",
+          msg: "Password is too simple, try another one"
+        }
+      });
+      isError = true;
+      return isError;
+    }
+
+    if (password !== repeatPwd) {
+      this.setState({
+        err: { type: "password", msg: "Passwords do not match" }
+      });
+      isError = true;
+      return isError;
+    }
+
+    if (!checkbox) {
       this.setState({
         err: {
           type: "checkbox",
           msg: "You should accept the terms above"
         }
       });
+      isError = true;
+      return isError;
+    }
+
+    return isError;
+  };
+
+  handleRedirect = (redirectTo, role, currentPath) => {
+    if (redirectTo === "/find-cleaners" && role !== "customer") {
+      this.props.history.replace("/");
       return;
     }
 
+    this.props.history.replace(redirectTo ? redirectTo : currentPath);
+  };
+
+  /**
+   * userBehavior - login/register
+   */
+  handleLogin = async () => {
+    const { email, password } = this.state;
+    const {
+      redirectTo,
+      handleRedirect,
+      handleVisible,
+      location: { pathname: currentPath },
+      updateUserID
+    } = this.props;
+
     this.setState({ err: {}, isLoading: true }, () => {
-      userBehavior()
+      login(email, password)
         .then(response => {
           this.setState({ isLoading: false }, () => {
-            const { token, userId } = response.data.data;
+            const { token, userId, role, roleId } = response.data.data;
             storeToken(token);
             storeUserId(userId);
-            // this.props.history.replace(redirectTo ? redirectTo : currentPath);
-            // redirectTo && handleRedirect(""); // reset redirectTo
-            this.props.handleShowModal();
-            
+            storeRoleId(role, roleId);
+            const userRoleId = roleId;
+            updateUserID({ userRoleId });
+
+
+            this.handleRedirect(redirectTo, role, currentPath);
+            redirectTo && handleRedirect(""); // reset redirectTo
+
             handleVisible(false);
           });
         })
@@ -114,54 +167,85 @@ class Login extends Component {
     });
   };
 
-  renderInput(name, type = name) {
-    let placeholder;
-    switch (name) {
-      case "username":
-        placeholder = "Username";
-        break;
-      case "email":
-        placeholder = "Your Email Address";
-        break;
-      case "password":
-        placeholder = "Password";
-        break;
-      case "repeatPwd":
-        placeholder = "Repeat Password";
-        break;
-      default:
-        placeholder = "";
+  handleRegister = () => {
+    const {
+      updateRegisterStatus,
+      handleShowModal,
+      handleVisible,
+      updateRegisterForm,
+    } = this.props;
+    const { email, password, username } = this.state;
+
+    if (this.registerValidator()) return;
+
+    this.setState({ err: {}, isLoading: true }, () => {
+      checkEmailExisted(email)
+        .then(response => {
+          this.setState({ isLoading: false }, () => {
+            updateRegisterForm({ email, password, username });
+            updateRegisterStatus(true);
+            handleShowModal(true);
+            handleVisible(false);
+          });
+        })
+        .catch(error => {
+          if (error.response) {
+            const { message } = error.response.data;
+            this.setState({ err: errHandler(message), isLoading: false });
+          }
+        });
+    });
+  };
+
+  renderInput = () => {
+    const inputTypes = this.state.switchToRegister
+      ? ["username", "email", "password", "repeatPwd"]
+      : ["email", "password"];
+    return inputTypes.map(type => (
+      <LoginInput
+        name={type}
+        err={this.state.err}
+        handleChange={this.handleChange}
+      />
+    ));
+  };
+
+  renderInfoText = () => {
+    const loginInfo = "Keep me logged in";
+
+    if (this.state.switchToRegister) {
+      return (
+        <>
+          I accept the
+          <Link className="login-link"> Terms and Conditions </Link>
+          and
+          <Link className="login-link"> Privacy Policy </Link>
+        </>
+      );
     }
 
-    // FIXME find out why the error does not pop up
-    return (
-      <div className="login-input-item">
-        <TextField
-          type={type}
-          name={name}
-          className="input-item-textfield"
-          error={this.state.err.type === { type }}
-          helperText={this.state.err.type === { type } && this.state.err.msg}
-          placeholder={placeholder}
-          onChange={this.handleChange}
-          variant="outlined"
-        />
-      </div>
-    );
-  }
+    return loginInfo;
+  };
+
+  handleCheckBox = () => {
+    this.setState(state => ({ checkbox: !state.checkbox }));
+  };
 
   render() {
     const { visible, handleVisible } = this.props;
-    const { err, isLoading, switchToRegister } = this.state;
-    console.log(this.props.handleShowModal, this.props.showModal)
+    const { err, switchToRegister, isLoading } = this.state;
+    const linkClasses = classnames("login-login-button", {
+      disabled: isLoading
+    });
 
     return (
       <React.Fragment>
         <Modal
           visible={visible}
           closemodal={() => handleVisible(false)}
-          type="zoomInDown"
+          type="pulse"
         >
+          {isLoading && <LinearIndeterminate />}
           <div className="login-box">
             <div className="login-box-header">
               <div className="login-box-header__left">
@@ -180,111 +264,33 @@ class Login extends Component {
             </div>
             <form className="login-login-form">
               <fieldset className="login-input-container">
-                {/* {switchToRegister && this.renderInput("username")}
-              {this.renderInput("email")}
-              {this.renderInput("password")}
-              {switchToRegister && this.renderInput("repeatPwd", "password")} */}
-
-                {switchToRegister ? (
-                  <div className="login-input-item">
-                    <TextField
-                      type="username"
-                      name="username"
-                      className="input-item-textfield"
-                      error={err.type === "username"}
-                      helperText={err.type === "username" ? err.msg : null}
-                      placeholder="Username"
-                      onChange={this.handleChange}
-                      variant="outlined"
-                    />
-                  </div>
-                ) : null}
-                <div className="login-input-item">
-                  <TextField
-                    type="email"
-                    name="email"
-                    className="input-item-textfield"
-                    error={err.type === "email"}
-                    helperText={err.type === "email" ? err.msg : null}
-                    placeholder="Your Email Address"
-                    onChange={this.handleChange}
-                    variant="outlined"
-                  />
-                </div>
-                <div className="login-input-item">
-                  <TextField
-                    type="password"
-                    name="password"
-                    className="input-item-textfield"
-                    error={err.type === "password"}
-                    helperText={err.type === "password" ? err.msg : null}
-                    placeholder="Password"
-                    onChange={this.handleChange}
-                    variant="outlined"
-                  />
-                </div>
-                {switchToRegister ? (
-                  <div className="login-input-item">
-                    <TextField
-                      type="password"
-                      name="repeatPwd"
-                      className="input-item-textfield"
-                      error={err.type === "password"}
-                      helperText={err.type === "password" ? err.msg : null}
-                      placeholder="Repeat Password"
-                      onChange={this.handleChange}
-                      variant="outlined"
-                    />
-                  </div>
-                ) : null}
+                {this.renderInput()}
               </fieldset>
               <div className="remember-password-container">
-                <input
-                  type="checkbox"
-                  onClick={() =>
-                    this.setState(state => ({ checkbox: !state.checkbox }))
-                  }
-                />
+                <input type="checkbox" onClick={this.handleCheckBox} />
                 <label>
                   <span className="login-info-text">
-                    {switchToRegister ? (
-                      <>
-                        I accept the
-                        <Link className="login-link">
-                          {" "}
-                          Terms and Conditions{" "}
-                        </Link>
-                        and
-                        <Link className="login-link"> Privacy Policy </Link>
-                      </>
-                    ) : (
-                      "Keep me logged in"
-                    )}
+                    {this.renderInfoText()}
                   </span>
                 </label>
-                {err.type === "checkbox" ? (
+                {err.type === "checkbox" && (
                   <span className="err-msg">* {err.msg}</span>
-                ) : null}
+                )}
               </div>
               <fieldset className="login-login-button-container">
-                {switchToRegister ? (
-                  <Link
-                    className="login-login-button"
-                    onClick={this.handleUserBehavior}
-                  >
-                    {isLoading ? <LoadingSpinner /> : "Create your account"}
-                  </Link>
-                ) : (
-                  <Link
-                    className="login-login-button"
-                    onClick={this.handleUserBehavior}
-                  >
-                    {isLoading ? <LoadingSpinner /> : "Log in"}
-                  </Link>
-                )}
+                <Link
+                  className={linkClasses}
+                  onClick={() => {
+                    switchToRegister
+                      ? this.handleRegister()
+                      : this.handleLogin();
+                  }}
+                >
+                  {switchToRegister ? "Create your account" : "Log in"}
+                </Link>
               </fieldset>
             </form>
-            {switchToRegister ? null : (
+            {!switchToRegister && (
               <div className="login-link-container">
                 <Link className="login-link">Recover password</Link>
               </div>
@@ -298,12 +304,16 @@ class Login extends Component {
 }
 const mapStateToProps = state => ({
   visible: state.login.visible,
-  redirectTo: state.login.redirectTo
+  redirectTo: state.login.redirectTo,
+  userRoleId: state.account.userRoleId,
 });
 
 const mapDispatchToProps = dispatch => ({
   handleVisible: isVisible => dispatch(handleVisibleAction(isVisible)),
-  handleRedirect: redirectTo => dispatch(handleRedirectAction(redirectTo))
+  handleRedirect: redirectTo => dispatch(handleRedirectAction(redirectTo)),
+  updateRegisterForm: registerForm =>
+    dispatch(updateRegisterFormAction(registerForm)),
+    updateUserID: userID => dispatch(updateUserIDAction(userID))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

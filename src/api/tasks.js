@@ -2,6 +2,9 @@ import querystring from "querystring";
 import { get, post } from "./axios";
 
 const API_TASK_URL = "/api/tasks";
+const USER_URL = "users";
+const CUSTOMER_URL = "customers";
+const TRADIE_URL = "tradies";
 
 /**
  * [Params]
@@ -37,8 +40,14 @@ export const reqGetTask = id => {
   return get(url);
 };
 
-export const reqPostTask = (taskDetails, userId) => {
-  const url = `${API_TASK_URL}/users/${userId}`;
+export const reqPostTask = (taskDetails, customerId) => {
+  const url = `${API_TASK_URL}/${CUSTOMER_URL}/${customerId}`;
 
   return post(url, taskDetails);
+};
+
+export const reqAddOffer = (data, taskId, tradieId) => {
+  const url = `${API_TASK_URL}/${taskId}/${TRADIE_URL}/${tradieId}`;
+
+  return post(url, data);
 };

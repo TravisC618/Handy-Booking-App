@@ -10,7 +10,8 @@ const useStyles = makeStyles(theme => ({
 
 const ColorCircularProgress = withStyles({
   root: {
-    color: "#50B9D7"
+    color: "#50B9D7",
+    height: 10
   }
 })(CircularProgress);
 

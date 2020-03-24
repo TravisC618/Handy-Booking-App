@@ -36,18 +36,6 @@ export default function GoogleMapsInput(props) {
   const [options, setOptions] = React.useState([]);
   const loaded = React.useRef(false);
 
-  if (typeof window !== "undefined" && !loaded.current) {
-    if (!document.querySelector("#google-maps")) {
-      loadScript(
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyCuBhdFf7s-ipOzlY28rYbDMg2LeMqNsks&libraries=places",
-        document.querySelector("head"),
-        "google-maps"
-      );
-    }
-
-    loaded.current = true;
-  }
-
   const handleChange = event => {
     setInputValue(event.target.value);
   };

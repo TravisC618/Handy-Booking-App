@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router";
+import React, { useState, useEffect } from "react";
+import { withRouter, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { RESET_FORM } from "../../redux/actions/registerAction";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -8,14 +10,20 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import BasicInformation from "./BasicInformation";
 import MoreDetails from "./MoreDetails";
-import { lengthCheck, isIncluded } from "../../utils/helper";
+import { lengthCheck } from "../../utils/helper";
 import Dialog from "@material-ui/core/Dialog";
+import Alert from "@material-ui/lab/Alert";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import RoleSelected from "./RoleSelected";
+import { storeToken, storeUserId, storeRoleId } from "../../utils/auth";
+import { TASK_URL } from "../../routes/URLMAP";
+import { register } from "../../api/auth";
+import { addRole } from "../../api/register";
 import "../../css/create_profile/basic-information.css";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,8 +51,10 @@ function getStepContent(
   handleChange,
   handleAvatar,
   handleLanguageSelector,
-  handleSlect,
-  values
+  handleRole,
+  values,
+  languageLabel,
+  setLanguageLabel
 ) {
   switch (step) {
     case 0:
@@ -56,10 +66,12 @@ function getStepContent(
           handleChange={handleChange}
           handleAvatar={handleAvatar}
           handleLanguageSelector={handleLanguageSelector}
+          languageLabel={languageLabel}
+          setLanguageLabel={setLanguageLabel}
         />
       );
     case 2:
-      return <RoleSelected values={values} handleSlect={handleSlect} />;
+      return <RoleSelected values={values} handleRole={handleRole} />;
     default:
       return "Unknown step";
   }
@@ -67,9 +79,41 @@ function getStepContent(
 
 function ProfileStepper(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
-  const { handleShowModal, handleCloseModal, showModal } = props;
+  const [activeStep, setActiveStep] = useState(0);
+  const [languageLabel, setLanguageLabel] = useState([]);
+  const [skipped, setSkipped] = useState(new Set());
+  const {
+    handleShowModal,
+    setIsFinish,
+    isLoading,
+    setIsLoading,
+    updateRegisterStatus
+  } = props;
+  const [values, setValues] = useState({
+    fullname: "",
+    location: "",
+    language: [],
+    gender: "",
+    mobile: "",
+    introduction: "",
+    role: "customer",
+    srcimage:
+      "https://upload.wikimedia.org/wikipedia/commons/0/09/Man_Silhouette.png",
+    err: {
+      name: "",
+      msg: "",
+      warning: false
+    }
+  });
+  const registerForm = useSelector(state => state.register);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      updateRegisterStatus(false);
+      dispatch({ type: RESET_FORM });
+    };
+  }, []);
 
   const steps = getSteps();
 
@@ -81,27 +125,7 @@ function ProfileStepper(props) {
     return skipped.has(step);
   };
 
-  const [values, setValues] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    location: "",
-    language: [],
-    gender: "",
-    mobile: "",
-    introduction: "",
-    role: "",
-    srcimage:
-      "https://upload.wikimedia.org/wikipedia/commons/0/09/Man_Silhouette.png",
-    err: {
-      name: "",
-      msg: "",
-      warning: false
-    }
-  });
-
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleChange = event => {
     if (event.name) {
@@ -118,78 +142,100 @@ function ProfileStepper(props) {
     setValues({ ...values, srcimage: value });
   };
 
-  const handleLanguageSelector = value => {
-    setValues({ ...values, language: value });
+  const handleLanguageSelector = event => {
+    const { value } = event[event.length - 1];
+    setValues({ ...values, language: values.language.concat(value) });
   };
 
-  const handleSlect = event => {
-    setValues({ ...values, role: event.target.value });
+  const handleRole = role => {
+    setValues({ ...values, role });
   };
 
-  const handleSubmit = () => {
-    // redirect to homepage in 5 sec
-    setTimeout(() => {
-      handleCloseModal();
-      props.history.replace("/tasks");
-    }, 5000);
+  const closeModel = () => {
+    handleShowModal(false);
   };
 
-  const handleSubmitNow = () => {
-    // redirect to homepage now
-    handleCloseModal();
-    props.history.replace("/tasks");
+  const addUser = async roleId => {
+    const formWithRole = { ...registerForm, role: values.role, roleId };
+
+    try {
+      const response = await register(formWithRole);
+      const { token, userId } = response.data.data;
+      storeToken(token);
+      storeUserId(userId);
+      storeRoleId(values.role, roleId);
+      setIsLoading(false);
+    } catch (error) {
+      const { message } = error.response.data;
+      setValues({ err: { name: "request", msg: message } });
+      setIsLoading(false);
+    }
   };
 
-  const handleNext = () => {
+  
+
+  const handleRegister = async () => {
+    // add customer/tradie
+    const {
+      fullname,
+      location,
+      language,
+      gender,
+      mobile,
+      introduction,
+      role,
+      srcimage
+    } = values;
+    let roleId;
+
+    setIsLoading(true);
+    try {
+      const response = await addRole(
+        role,
+        fullname,
+        gender,
+        location,
+        mobile,
+        introduction,
+        srcimage,
+        language
+      );
+      const { _id } = response.data.data;
+      roleId = _id;
+
+      // pass the new customer/tradie id in register form
+      // user - register
+      if (!roleId) return new Error("role id is not defined");
+      await addUser(roleId);
+    } catch (error) {
+      if (error.response) {
+        const { message } = error.response.data;
+        setValues({ err: { name: "request", msg: message } });
+        setIsLoading(false);
+      }
+    }
+  };
+
+
+  const handleNext = async () => {
     switch (activeStep) {
       case 0:
-        if (!lengthCheck(values.firstname.length, 1, 20)) {
+        if (!lengthCheck(values.fullname.length, 3, 20)) {
           setValues({
             ...values,
             err: {
-              name: "firstname",
-              msg: "Your first name must be provided"
+              name: "fullname",
+              msg: "Your name should be provided"
             }
           });
           return;
         }
-        if (!lengthCheck(values.lastname.length, 1, 20)) {
-          setValues({
-            ...values,
-            err: {
-              name: "lastname",
-              msg: "Your last name must be provided"
-            }
-          });
-          return;
-        }
-
-        if (!lengthCheck(values.email.length, 1, 40)) {
-          setValues({
-            ...values,
-            err: {
-              name: "email",
-              msg: "Your email must be provided"
-            }
-          });
-          return;
-        }
-        if (!isIncluded(values.email, "@")) {
-          setValues({
-            ...values,
-            err: {
-              name: "email",
-              msg: "Please provide a valid email"
-            }
-          });
-          return;
-        }
-        if (!lengthCheck(values.location.length, 1, 50)) {
+        if (values.location.length === 0) {
           setValues({
             ...values,
             err: {
               name: "location",
-              msg: "Your location must be provided"
+              msg: "Your location should be provided"
             }
           });
           return;
@@ -206,22 +252,12 @@ function ProfileStepper(props) {
           });
           return;
         }
-        if (!lengthCheck(values.mobile.length, 1, 20)) {
+        if (!lengthCheck(values.mobile.length, 9, 15)) {
           setValues({
             ...values,
             err: {
               name: "mobile",
-              msg: "Please set your mobile number"
-            }
-          });
-          return;
-        }
-        if (!lengthCheck(values.introduction.length, 1, 100)) {
-          setValues({
-            ...values,
-            err: {
-              name: "introduction",
-              msg: "Tell us something about yourself?"
+              msg: "Please set a valid mobile number"
             }
           });
           return;
@@ -237,14 +273,14 @@ function ProfileStepper(props) {
           });
           return;
         }
-        handleSubmit();
+        await handleRegister();
+        setIsFinish(true);
         break;
-
       default:
         return;
     }
     // Once pass validation, set err empty
-    setValues({ ...values, err: { name: "", msg: "" } });
+    activeStep !== 2 && setValues({ ...values, err: { name: "", msg: "" } });
     setActiveStep(activeStep + 1);
   };
 
@@ -284,6 +320,36 @@ function ProfileStepper(props) {
     });
   };
 
+  const renderFinishPage = () => {
+    if (values.err.name === "request")
+      return (
+        <Alert variant="filled" severity="error">
+          {values.err.msg}
+        </Alert>
+      );
+
+    return (
+      <div className="all-finish">
+        <Typography variant="h6" gutterBottom className={classes.font}>
+          All steps completed - Congrats!
+        </Typography>
+        <div className="redirect-container">
+          <Link to={TASK_URL}>
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary"
+              onClick={closeModel}
+              style={{ marginTop: 60, width: "50%" }}
+            >
+              Get Start Now
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep}>
@@ -309,32 +375,7 @@ function ProfileStepper(props) {
       </Stepper>
       <div>
         {activeStep === steps.length ? (
-          <div className="all-finish">
-            <Typography variant="h6" gutterBottom className={classes.font}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <CountDown startCount={5}>
-              {count => (
-                <div className="redirect-container">
-                  <Typography
-                    className={classes.instructions}
-                    component={"span"}
-                  >
-                    The Page will automatically redirect after {count} seconds
-                  </Typography>
-                  <Button
-                    className={classes.button}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmitNow}
-                    style={{ marginTop: 60, width:"50%" }}
-                  >
-                    Get Start Now
-                  </Button>
-                </div>
-              )}
-            </CountDown>
-          </div>
+          renderFinishPage()
         ) : (
           <div>
             <div className="profile-content">
@@ -344,8 +385,10 @@ function ProfileStepper(props) {
                   handleChange,
                   handleAvatar,
                   handleLanguageSelector,
-                  handleSlect,
-                  values
+                  handleRole,
+                  values,
+                  languageLabel,
+                  setLanguageLabel
                 )}
               </Typography>
             </div>
@@ -449,30 +492,6 @@ function ProfileStepper(props) {
       </div>
     </div>
   );
-}
-
-class CountDown extends React.Component {
-  constructor(props) {
-    super(...arguments);
-    this.state = {
-      count: this.props.startCount
-    };
-  }
-
-  componentDidMount() {
-    this.intervalHandle = setInterval(() => {
-      const newCount = this.state.count - 1;
-      if (newCount >= 0) {
-        this.setState({ count: newCount });
-      } else {
-        window.clearInterval(this.intervalHandle);
-      }
-    }, 1000);
-  }
-
-  render() {
-    return this.props.children(this.state.count);
-  }
 }
 
 export default withRouter(ProfileStepper);

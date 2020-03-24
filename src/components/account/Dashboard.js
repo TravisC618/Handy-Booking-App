@@ -195,7 +195,7 @@ const Dashboard = props => {
           <div className="account-inner">
             <div className="panel-titile">
               <div className="message-block">
-                <h5 className="center">Airtasker Announcements</h5>
+                <h5 className="center">Byedust Announcements</h5>
                 <div className="inner">
                   <div className="marketing-message">
                     <div className="message-symbol">

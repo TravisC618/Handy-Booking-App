@@ -1,0 +1,23 @@
+.accept-model-wrapper {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+
+  .accpet-offer-title {
+    border-bottom: none;
+    text-align: center;
+  }
+
+  .accept-model-content {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+
+    .accept-model-button-group {
+      margin: 20px;
+      justify-self: flex-end;
+      align-self: flex-end;
+    }
+  }
+}

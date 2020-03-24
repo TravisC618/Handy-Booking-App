@@ -7,6 +7,14 @@
   box-sizing: border-box;
   float: right;
   background-color: #f2f7f9;
+
+  .open-status {
+    border-left: 4px solid #7db343;
+  }
+
+  .other-status {
+    border-left: 4px solid #545a77;
+  }
 }
 
 .infinite-scroll-row {
