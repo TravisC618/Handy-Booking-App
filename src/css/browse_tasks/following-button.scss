@@ -2,66 +2,105 @@
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes follow-animation {
-    from {background: #f2f7f9; color: #3399FF; width: 85px; left: 50px;}
-    to {background: #3f51b5; border-color: #3f51b5; color: #ffffff; width: 120px; left: 35px;}
+  from {
+    background: #f2f7f9;
+    color: #3399ff;
+    width: 85px;
+    left: 50px;
   }
-  @-webkit-keyframes unfollow-animation {
-    from {background: #3f51b5; color: #ffffff; width: 120px; left: 35px;}
-    to {background: #f2f7f9; border-color: #3399FF; color: #3399FF; width: 85px; left: 50px;}
+  to {
+    background: #3f51b5;
+    border-color: #3f51b5;
+    color: #ffffff;
+    width: 120px;
+    left: 35px;
   }
-  /* Standard syntax */
-  @keyframes follow-animation {
-    from {background: #f2f7f9; color: #3399FF; width: 85px; left: 50px;}
-    to {background: #3f51b5; border-color: #3f51b5; color: #ffffff; width: 120px; left: 35px;}
+}
+@-webkit-keyframes unfollow-animation {
+  from {
+    background: #3f51b5;
+    color: #ffffff;
+    width: 120px;
+    left: 35px;
   }
-  @keyframes unfollow-animation {
-    from {background: #3f51b5; color: #ffffff; width: 120px; left: 35px;}
-    to {background: #f2f7f9; border-color: #3399FF; color: #3399FF; width: 85px; left: 50px;}
+  to {
+    background: #f2f7f9;
+    border-color: #3399ff;
+    color: #3399ff;
+    width: 85px;
+    left: 50px;
   }
-  
-.following-button{
-    float: right;
-    
+}
+/* Standard syntax */
+@keyframes follow-animation {
+  from {
+    background: #f2f7f9;
+    color: #3399ff;
+    width: 85px;
+    left: 50px;
+  }
+  to {
+    background: #3f51b5;
+    border-color: #3f51b5;
+    color: #ffffff;
+    width: 120px;
+    left: 35px;
+  }
+}
+@keyframes unfollow-animation {
+  from {
+    background: #3f51b5;
+    color: #ffffff;
+    width: 120px;
+    left: 35px;
+  }
+  to {
+    background: #f2f7f9;
+    border-color: #3399ff;
+    color: #3399ff;
+    width: 85px;
+    left: 50px;
+  }
+}
+
+.following-button {
+  float: right;
+
   input {
     -webkit-appearance: none;
   }
-  
-    input:after {
-        color: #3399FF;
 
+  input:after {
+    color: #3399ff;
 
-        font-family: "Open Sans", sans-serif;
-        font-size: 12px;
-        line-height: 16px;
-        letter-spacing: 0.25px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.25px;
 
+    display: inline-block;
+    text-align: center;
+    padding: 5px 15px;
 
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 
-        display: inline-block;
-        text-align: center;
-        padding: 5px 15px;
+    content: "+ Follow";
+    -webkit-animation: unfollow-animation 0.3s
+      cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-animation-fill-mode: forwards;
+    animation: unfollow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-fill-mode: forwards;
+  }
 
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-
-
-
-    
-    
-        content: '+ Follow';
-        -webkit-animation: unfollow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        -webkit-animation-fill-mode:forwards;
-        animation: unfollow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        animation-fill-mode:forwards;
-    }
-    
-    input:checked:after {
-        content: 'Following';
-        -webkit-animation: follow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        -webkit-animation-fill-mode:forwards;
-        animation: follow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        animation-fill-mode:forwards;
-    }	
+  input:checked:after {
+    content: "Following";
+    -webkit-animation: follow-animation 0.3s
+      cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-animation-fill-mode: forwards;
+    animation: follow-animation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-fill-mode: forwards;
+  }
 }

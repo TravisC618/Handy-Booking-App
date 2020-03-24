@@ -30,7 +30,7 @@ const Header = props => {
   const classes = useStyles();
 
   const user = {
-    name: "Adrienne D.",
+    name: "Shen Z.",
     city: "Newcastle West",
     state: "NSW",
     postcode: "2302",
@@ -50,9 +50,9 @@ const Header = props => {
 
         <div className="header__head-avatar">
           <Avatar
-            src={ user.avater }
+            src={user.avater}
             alt="cleaner's avatar"
-            className={ classes.avatar }
+            className={classes.avatar}
           />
           <div className="clearFix"></div>
         </div>

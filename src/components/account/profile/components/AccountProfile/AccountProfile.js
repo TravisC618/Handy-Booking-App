@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import moment from 'moment';
-import { makeStyles } from '@material-ui/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import moment from "moment";
+import { makeStyles } from "@material-ui/styles";
 import {
   Card,
   CardActions,
@@ -12,20 +12,20 @@ import {
   Divider,
   Button,
   LinearProgress
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   root: {
     marginBottom: 20,
-    boxShadow: 'none',
-    backgroundColor: 'inherit'
+    boxShadow: "none",
+    backgroundColor: "inherit"
   },
   details: {
-    display: 'flex'
+    display: "flex"
   },
   avatar: {
-    marginLeft: 'auto',
-    height: 110,
+    marginLeft: "auto",
+    height: 100,
     width: 100,
     flexShrink: 0,
     flexGrow: 0
@@ -44,26 +44,20 @@ const AccountProfile = props => {
   const classes = useStyles();
 
   const user = {
-    name: 'Shen Zhi',
-    city: 'Los Angeles',
-    country: 'USA',
-    timezone: 'GTM-7',
-    avatar: '/images/avatars/avatar_11.png'
+    name: "Shen Zhi",
+    city: "Newcastle West",
+    country: "Australia",
+    timezone: "GMT+11",
+    avatar: "/images/avatars/avatar_11.png"
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent>
         <div className={classes.details}>
           <div>
-            <Typography
-              gutterBottom
-              variant="h2"
-            >
-              John Doe
+            <Typography gutterBottom variant="h2">
+              { user.name }
             </Typography>
             <Typography
               className={classes.locationText}
@@ -77,20 +71,14 @@ const AccountProfile = props => {
               color="textSecondary"
               variant="body1"
             >
-              {moment().format('hh:mm A')} ({user.timezone})
+              {moment().format("hh:mm A")} ({user.timezone})
             </Typography>
           </div>
-          <Avatar
-            className={classes.avatar}
-            src={user.avatar}
-          />
+          <Avatar className={classes.avatar} src={user.avatar} />
         </div>
         <div className={classes.progress}>
           <Typography variant="body1">Profile Completeness: 70%</Typography>
-          <LinearProgress
-            value={70}
-            variant="determinate"
-          />
+          <LinearProgress value={70} variant="determinate" />
         </div>
       </CardContent>
       <Divider />
@@ -102,11 +90,7 @@ const AccountProfile = props => {
         >
           Upload picture
         </Button>
-        <Button 
-          variant="contained"
-        >
-          Remove picture
-        </Button>
+        <Button variant="contained">Remove picture</Button>
       </CardActions>
     </Card>
   );

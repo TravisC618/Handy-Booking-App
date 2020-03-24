@@ -1,17 +1,13 @@
 .upload-container {
   .avatar-container {
-
     height: 100px;
 
-
     .avatar-img {
-
       .avatar-upload-button {
         position: absolute;
         transition: 0.5s;
         opacity: 0;
         transform: translate(-50%, -100%);
-
       }
     }
 
@@ -19,7 +15,6 @@
       opacity: 1;
       position: absolute;
     }
-
   }
 
   .username-container {
