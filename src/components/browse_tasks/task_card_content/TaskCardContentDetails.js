@@ -18,43 +18,56 @@ import {
   ADD_TASK_OFFER_URL,
   ASSIGN_TASK_URL,
   ACCOUNT_BASE_URL,
-  VIEW_TASK_URL
+  VIEW_TASK_URL,
+  CHAT_URL
 } from "../../../routes/URLMAP";
 import { getRoleId, isLoggedIn } from "../../../utils/auth";
 import AcceptOfferModel from "./accept_offer/AcceptOfferModel";
+import ChatBox from "../../account/chat_app/ChatBox";
 import { isIncluded } from "../../../utils/helper";
 
-const renderRoute = currentPath => {
+const renderRoute = (currentPath, isJoining) => {
   if (!isLoggedIn()) {
     console.log("you are not login");
     return;
   }
+  let acceptPath;
+  let chatPath;
+  if (isIncluded(currentPath, ACCOUNT_BASE_URL)) {
+    acceptPath = `${ACCOUNT_BASE_URL}/:customerId${VIEW_TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`;
+    chatPath = `${ACCOUNT_BASE_URL}/:customerId${VIEW_TASK_URL}/:taskId${CHAT_URL}/:userId`;
+  } else {
+    acceptPath = `${TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`;
+  }
+
   // for customer
   if (getRoleId("customer")) {
-    let path;
-    if (isIncluded(currentPath, ACCOUNT_BASE_URL)) {
-      path = `${ACCOUNT_BASE_URL}/:customerId${VIEW_TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`;
-    } else {
-      path = `${TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`;
-    }
     return (
-      <Route
-        // path={`/account/:customerId/view-tasks/:taskId/:customerId/assign-task/:tradieId`}
-        path={path}
-        component={AcceptOfferModel}
-      />
+      <>
+        <Route
+          // path={`/account/:customerId/view-tasks/:taskId/:customerId/assign-task/:tradieId`}
+          path={acceptPath}
+          component={AcceptOfferModel}
+        />
+        {/* {!isJoining && <Route path={chatPath} component={ChatBox} />} */}
+        <Route path={chatPath} component={ChatBox} />
+      </>
     );
   }
   // for tradie
   return (
-    <Route
-      path={`${TASK_URL}/:taskId${ADD_TASK_OFFER_URL}/:tradieId`}
-      component={OfferModel}
-    />
+    <>
+      <Route
+        path={`${TASK_URL}/:taskId${ADD_TASK_OFFER_URL}/:tradieId`}
+        component={OfferModel}
+      />
+      {/* {!isJoining && } */}
+      <Route path={chatPath} component={ChatBox} />
+    </>
   );
 };
 
-const renderContent = (isFetchingDetails, currentPath) => {
+const renderContent = (isFetchingDetails, currentPath, isJoining) => {
   return (
     <div className="task-details-scroll">
       <div className="container-fluid">
@@ -67,7 +80,7 @@ const renderContent = (isFetchingDetails, currentPath) => {
             <TaskCardContentDetailsHeader />
             <TaskCardContentDetailsBody />
             <TaskCardContentDetailsFooter />
-            {renderRoute(currentPath)}
+            {renderRoute(currentPath, isJoining)}
           </div>
         )}
       </div>
@@ -78,6 +91,8 @@ const renderContent = (isFetchingDetails, currentPath) => {
 const TaskCardContentDetails = props => {
   const isFetchingDetails = useSelector(state => state.task.isFetchingDetails);
   const isDetailOn = useSelector(state => state.task.isDetailOn);
+  const isJoining = useSelector(state => state.chat.isJoining);
+
   const dispatch = useDispatch();
   const {
     match: {
@@ -113,7 +128,7 @@ const TaskCardContentDetails = props => {
       style={{ transformOrigin: "0 0 0" }}
       {...(isDetailOn && { timeout: 1000 })}
     >
-      <div>{renderContent(isFetchingDetails, currentPath)}</div>
+      <div>{renderContent(isFetchingDetails, currentPath, isJoining)}</div>
     </Slide>
   );
 };

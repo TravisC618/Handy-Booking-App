@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
+import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -12,6 +14,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
+import "../../../css/account/chat_app/chatbox.scss";
+import InfoBar from "./InfoBar";
+import InputChat from "./InputChat";
+import Messages from "./Messages";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -27,26 +33,71 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+let socket;
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+function ChatBox({
+  history,
+  location: {
+    state: { name: username, taskTitle }
+  }
+}) {
+  const classes = useStyles();
+  const [name, setName] = useState("");
+  const [room, setRoom] = useState("");
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  //TODO need to changed ENDPOINT expression
+  const ENDPOINT = `https://byedust-api-server.herokuapp.com/`;
 
   const handleClose = () => {
-    setOpen(false);
+    history.goBack();
   };
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+
+    setName(username);
+    setRoom(taskTitle);
+
+    console.log(`username`, username);
+    console.log(`taskTitle`, taskTitle);
+
+    socket.emit("join", { name: username, room: taskTitle }, error => {
+      if (error) {
+        alert(error);
+      }
+    });
+
+    return () => {
+      socket.emit("disconnect");
+
+      socket.off();
+    };
+  }, [ENDPOINT, taskTitle, username]);
+
+  useEffect(() => {
+    socket.on("message", message => {
+      setMessages([...messages, message]);
+    });
+  }, [messages]);
+
+  const sendMessage = event => {
+    event.preventDefault();
+
+    if (message) {
+      socket.emit("sendMessage", message, () => {
+        setMessage("");
+      });
+    }
+  };
+
+  console.log(message, messages);
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open full-screen dialog
-      </Button>
       <Dialog
         fullScreen
-        open={open}
+        open={true}
         onClose={handleClose}
         TransitionComponent={Transition}
       >
@@ -61,26 +112,24 @@ export default function FullScreenDialog() {
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Sound
+              Chat room
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
           </Toolbar>
         </AppBar>
-        <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
+        <div className="chatbox-outerContainer">
+          <div className="chatbox-container">
+            <InfoBar room={room} />
+            <Messages messages={messages} name={name} />
+            <InputChat
+              message={message}
+              setMessage={setMessage}
+              sendMessage={sendMessage}
             />
-          </ListItem>
-        </List>
+          </div>
+        </div>
       </Dialog>
     </div>
   );
 }
+
+export default withRouter(ChatBox);
