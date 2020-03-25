@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Slider } from "@material-ui/core";
-import "../../css/create_profile/avatar-upload.scss";
+import "../AccountDetails/slector.scss";
 import Zoom from "@material-ui/core/Zoom";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -34,7 +34,6 @@ export default class AvatarUpload extends React.Component {
     };
     this.fullname = props.values.fullname;
   }
-  
 
   handleZoomSlider(event, value) {
     this.setState({ zoom: value });
@@ -75,37 +74,28 @@ export default class AvatarUpload extends React.Component {
   }
 
   render() {
-    const srcimage = this.props.values.srcimage;
+    const srcimage = this.props.avatar;
+
     return (
       <MuiThemeProvider>
         <div className="upload-container">
           <div className="avatar-container">
             <div className="avatar-img">
-              <Avatar
-                src={srcimage}
-                style={{ height: 80, width: 80 }}
-              />
-              <label
-                htmlFor="contained-button-file"
-                className="avatar-upload-button"
-              >
-                <IconButton aria-label="upload picture" component="span">
-                  <PhotoCamera
-                    color="primary"
-                    style={{ height: 50, width: 50 }}
-                  />
-                </IconButton>
+              <Avatar src={srcimage} style={{ height: 80, width: 80 }} />
+              <label htmlFor="contained-button-file" className="upload-button">
+                <Button
+                  aria-label="upload picture"
+                  component="span"
+                  variant="contained"
+                  color="primary"
+                  startIcon={<PhotoCamera />}
+                  fullWidth
+                  style={{}}
+                >
+                  Upload picture
+                </Button>
               </label>
             </div>
-            <Typography variant="caption" display="block" gutterBottom>
-              Click To Set An Avatar
-            </Typography>
-          </div>
-
-          <div className="username-container">
-            <Typography variant="h5" gutterBottom style={{ marginBottom: "1.35em"}}>
-              Hi, {this.fullname} 
-            </Typography>
           </div>
 
           <input

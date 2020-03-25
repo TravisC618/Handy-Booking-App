@@ -1,4 +1,4 @@
-import { get, post } from "./axios";
+import { get, post, put } from "./axios";
 
 const API_CUSTOMERS_URL = "/api/customers";
 const API_Tradie_URL = "/api/tradies";
@@ -16,6 +16,13 @@ export const reqGetTradie = id => {
 
   return get(url);
 };
+
+export const reqUpdateTradieProfile = id => {
+  const url = `${API_Tradie_URL}/${id}`;
+
+  return put(url);
+};
+
 
 // /api/customers/5e746b6329401d002284b30e/tasks/5e771a4157eb3c0022d5ee02/tradies/5e74635629401d002284b30c
 export const reqAssignTask = (customerId, taskId, tradieId) => {

@@ -1,13 +1,66 @@
 .account {
   margin-top: 64px;
   display: block;
+  height: calc(100vh - 64px);
+  overflow: hidden;
 }
 .account__page {
   max-width: 1024px;
   margin: 0 auto;
-  position: relative;
-  box-sizing: border-box;
 }
 .sidebar {
   height: 100%;
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .vertical-scroll {
+    width: 650px;
+  }
+  .post-button {
+    margin: 24px 220px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .vertical-scroll {
+    width: 500px;
+  }
+  .post-button {
+    margin: 24px 154px;
+  }
+  .view-tasks-container {
+    display: initial;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .vertical-scroll {
+    width: 500px;
+  }
+  .post-button {
+    margin: 24px 154px;
+  }
+  .view-tasks-container {
+    display: initial;
+  }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+  .vertical-scroll {
+    width: 500px;
+  }
+  .post-button {
+    margin: 24px 194px;
+  }
+  .view-tasks-container {
+    display: initial;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .vertical-scroll {
+    width: 270px;
+    margin-left: 87px;
+  }
+  .post-button {
+    margin: 24px 154px;
+  }
+  .view-tasks-container {
+    display: initial;
+  }
 }

@@ -18,6 +18,7 @@ import {
 
 import "../../css/account/dashboard.css";
 import "../../css/home/buttongroup.css";
+import "../../css/account/account.scss";
 
 const Dashboard = props => {
   return (

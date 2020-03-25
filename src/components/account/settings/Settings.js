@@ -35,7 +35,7 @@ const Settings = () => {
           md={7}
           xs={12}
         >
-          <Notifications />
+
         {/* </Grid>
         <Grid
           item
