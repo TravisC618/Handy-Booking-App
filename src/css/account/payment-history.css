@@ -33,10 +33,10 @@
   padding: 0 20px 20px;
 }
 .payments-direction {
-  border-bottom: 1px solid #f6f8fd;
-  margin: 20px -20px;
+  /* border-bottom: 1px solid #f6f8fd;
+  margin: 20px -20px; */
 }
-.tabs {
+/* .tabs {
   margin: 0 20px;
   width: 200px;
 }
@@ -62,7 +62,7 @@
 .tabs .tab.active:last-child {
   border-radius: 0 8px 0 0;
   color: #008fb4;
-}
+} */
 .history__filters-date {
   display: flex;
   flex-direction: row;
