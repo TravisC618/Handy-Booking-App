@@ -91,9 +91,9 @@ class Navigation extends Component {
       handleVisible
     } = this.props;
 
-    const customerId = getRoleId("customer")
-    const tradieId = getRoleId("tradie")
-    const userRoleId= customerId || tradieId
+    const customerId = getRoleId("customer");
+    const tradieId = getRoleId("tradie");
+    const userRoleId = customerId || tradieId;
     if (isLoggedIn()) {
       return (
         <>
@@ -207,7 +207,7 @@ class Navigation extends Component {
 }
 
 const mapStateToProps = state => ({
-  visible: state.login.visible,
+  visible: state.login.visible
 });
 
 const mapDistachToProps = dispatch => ({

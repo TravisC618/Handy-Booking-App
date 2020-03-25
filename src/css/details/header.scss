@@ -44,13 +44,13 @@
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.137);
     -webkit-transition: all 0.25s ease;
     transition: all 0.25s ease;
-    
+
     &:hover {
       color: white;
       text-shadow: none;
       box-shadow: none;
     }
-   
+
     &:after {
       content: "Request a Quote";
     }
@@ -99,7 +99,7 @@
   &__body-info-username {
     letter-spacing: normal;
     word-spacing: normal;
-    font-size: 14px;
+    font-size: 16px;
     margin: 0;
     padding: 0;
     margin-top: 6px;
@@ -109,7 +109,7 @@
   }
 
   &__body-info-userinfo {
-    font-size: 12px;
+    font-size: 14px;
     margin: 0;
     padding: 0;
     margin-top: 4px;
@@ -120,7 +120,7 @@
   }
 
   &__body-reviews {
-    border-color: #d5dbe9;;
+    border-color: #d5dbe9;
     border-width: 1px;
     border-style: solid;
     border-radius: 8px;
@@ -128,29 +128,28 @@
     width: 200px;
     height: 145px;
     z-index: 2;
-    
+
     .nav-tabs {
       display: block;
       padding: 0;
       background: inherit;
-    
 
       .nav-item.active:first-child {
         border-radius: 8px 0 0 0;
       }
 
-      .nav-item { 
-        font-size:  12px;
+      .nav-item {
+        font-size: 12px;
         cursor: pointer;
         width: 50%;
         display: inline-block;
         padding: 10px 0;
         text-align: center;
         font-weight: 500;
-        -webkit-transition: border-bottom .5s ease-in-out, 
-        background-color .5s ease-in-out;
-        transition: border-bottom .5s ease-in-out,
-        background-color .5s ease-in-out;
+        -webkit-transition: border-bottom 0.5s ease-in-out,
+          background-color 0.5s ease-in-out;
+        transition: border-bottom 0.5s ease-in-out,
+          background-color 0.5s ease-in-out;
       }
 
       .nav-item.active {
@@ -165,14 +164,11 @@
       .nav-link {
         border: none;
       }
-
     }
-    
 
     #nav-tabContent {
-      background-color: #f2f7f9;
+      background-color: inherit;
     }
-
   }
 }
 
@@ -185,7 +181,7 @@
 .review-container {
   display: flex;
   flex-wrap: wrap;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
 
   .col-auto {
@@ -214,9 +210,5 @@
         font-size: 9px;
       }
     }
-
   }
-
 }
-
-

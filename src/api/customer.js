@@ -1,7 +1,7 @@
 import { get, post, put } from "./axios";
 
 const API_CUSTOMERS_URL = "/api/customers";
-const API_Tradie_URL = "/api/tradies";
+const API_TRADIE_URL = "/api/tradies";
 const TASKS_URL = "/tasks";
 const TRADIES_URL = "/tradies";
 
@@ -12,13 +12,13 @@ export const reqGetCustomer = id => {
 };
 
 export const reqGetTradie = id => {
-  const url = `${API_Tradie_URL}/${id}`;
+  const url = `${API_TRADIE_URL}/${id}`;
 
   return get(url);
 };
 
 export const reqUpdateTradieProfile = id => {
-  const url = `${API_Tradie_URL}/${id}`;
+  const url = `${API_TRADIE_URL}/${id}`;
 
   return put(url);
 };

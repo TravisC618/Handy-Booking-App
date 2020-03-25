@@ -77,7 +77,7 @@ const SettingProfile = () => {
           >
             <Grid item lg={8} md={6} xl={8} xs={12}>
               <AccountProfile values={values} />
-              <AccountDetails values={values}/>
+              <AccountDetails values={values} />
             </Grid>
           </Grid>
         </div>

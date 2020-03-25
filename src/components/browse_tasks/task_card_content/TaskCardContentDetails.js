@@ -16,33 +16,52 @@ import OfferModel from "./offer/OfferModel";
 import {
   TASK_URL,
   ADD_TASK_OFFER_URL,
-  ASSIGN_TASK_URL
+  ASSIGN_TASK_URL,
+  ACCOUNT_BASE_URL,
+  VIEW_TASK_URL,
+  CHAT_URL
 } from "../../../routes/URLMAP";
 import { getRoleId, isLoggedIn } from "../../../utils/auth";
 import AcceptOfferModel from "./accept_offer/AcceptOfferModel";
+import ChatBox from "../../account/chat_app/ChatBox";
+import { isIncluded } from "../../../utils/helper";
 
-const renderContent = (isFetchingDetails, dispatch) => {
-  const renderRoute = () => {
-    if (!isLoggedIn()) {
-      console.log("you are not login");
-      return;
-    }
-    if (getRoleId("customer")) {
-      return (
-        <Route
-          path={`${TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`}
-          component={AcceptOfferModel}
-        />
-      );
-    }
+const renderRoute = currentPath => {
+  if (!isLoggedIn()) {
+    return;
+  }
+  let acceptPath;
+  let chatPath;
+  if (isIncluded(currentPath, ACCOUNT_BASE_URL)) {
+    acceptPath = `${ACCOUNT_BASE_URL}/:customerId${VIEW_TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`;
+    chatPath = `${ACCOUNT_BASE_URL}/:customerId${VIEW_TASK_URL}/:taskId${CHAT_URL}/:userId`;
+  } else {
+    acceptPath = `${TASK_URL}/:taskId/:customerId${ASSIGN_TASK_URL}/:tradieId`;
+    chatPath = `${TASK_URL}/:taskId${CHAT_URL}/:userId`;
+  }
+
+  // for customer
+  if (getRoleId("customer")) {
     return (
+      <>
+        <Route path={acceptPath} component={AcceptOfferModel} />
+        <Route path={chatPath} component={ChatBox} />
+      </>
+    );
+  }
+  // for tradie
+  return (
+    <>
       <Route
         path={`${TASK_URL}/:taskId${ADD_TASK_OFFER_URL}/:tradieId`}
         component={OfferModel}
       />
-    );
-  };
+      <Route path={chatPath} component={ChatBox} />
+    </>
+  );
+};
 
+const renderContent = (isFetchingDetails, currentPath, isJoining) => {
   return (
     <div className="task-details-scroll">
       <div className="container-fluid">
@@ -55,7 +74,7 @@ const renderContent = (isFetchingDetails, dispatch) => {
             <TaskCardContentDetailsHeader />
             <TaskCardContentDetailsBody />
             <TaskCardContentDetailsFooter />
-            {renderRoute()}
+            {renderRoute(currentPath)}
           </div>
         )}
       </div>
@@ -66,9 +85,12 @@ const renderContent = (isFetchingDetails, dispatch) => {
 const TaskCardContentDetails = props => {
   const isFetchingDetails = useSelector(state => state.task.isFetchingDetails);
   const isDetailOn = useSelector(state => state.task.isDetailOn);
+  const isJoining = useSelector(state => state.chat.isJoining);
+
   const dispatch = useDispatch();
   const {
     match: {
+      path: currentPath,
       params: { taskId }
     },
     history
@@ -100,7 +122,7 @@ const TaskCardContentDetails = props => {
       style={{ transformOrigin: "0 0 0" }}
       {...(isDetailOn && { timeout: 1000 })}
     >
-      <div>{renderContent(isFetchingDetails, dispatch)}</div>
+      <div>{renderContent(isFetchingDetails, currentPath, isJoining)}</div>
     </Slide>
   );
 };

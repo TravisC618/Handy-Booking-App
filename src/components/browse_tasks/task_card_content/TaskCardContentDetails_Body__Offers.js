@@ -10,7 +10,8 @@ import { ADD_TASK_OFFER_URL } from "../../../routes/URLMAP";
 import OfferLists from "./OfferLists";
 import { isLoggedIn, getRoleId } from "../../../utils/auth";
 import { HANDLE_VISIBLE } from "../../../redux/actions/loginAction";
-import "../../../css/browse_tasks/TaskCardContentDetails_Body__Offers.css";
+import waitForOffer from "../../../img/waiting-for-offers.png";
+import "../../../css/browse_tasks/TaskCardContentDetails_Body__Offers.scss";
 
 const useStyles = makeStyles(theme => ({
   heading: {
@@ -30,6 +31,7 @@ function Offers(props) {
   const isFetchingDetails = useSelector(state => state.task.isFetchingDetails);
   const offers = taskDetails.offers;
 
+  const customerId = getRoleId("customer");
   const tradieId = getRoleId("tradie");
   const offerLink =
     !!tradieId && `${currentPath}${ADD_TASK_OFFER_URL}/${tradieId}`;
@@ -51,26 +53,87 @@ function Offers(props) {
   };
 
   const renderOffers = () => {
-    if (!isFetchingDetails && !!offers && offers.length !== 0) {
-      return (
-        <OfferLists offers={offers} isFetchingDetails={isFetchingDetails} />
-      );
+    if (!isFetchingDetails) {
+      if (!!offers && offers.length !== 0) {
+        return (
+          <OfferLists offers={offers} isFetchingDetails={isFetchingDetails} />
+        );
+      }
+
+      const currTaskCustomerId =
+        taskDetails.customer && taskDetails.customer._id;
+
+      if (customerId === currTaskCustomerId) {
+        return (
+          <div className="offers">
+            <p className="center margin-20-top">
+              <img src={waitForOffer} alt="offers" />
+            </p>
+            <p>Wait for offers...</p>
+          </div>
+        );
+      }
     }
 
     const renderButton = () => {
+      if (isFetchingDetails || !taskDetails.customer) return;
+      const currTaskCustomerId = taskDetails.customer._id;
+
+      if (taskDetails.status !== "open") {
+        if (customerId === currTaskCustomerId) {
+          return (
+            <Link to={offerLink} onClick={handleOnClick}>
+              <button
+                type="button"
+                className="button-med full-width action-type button-cta button-make-offer"
+                onClick={handleTooltipOpen}
+              >
+                Private message
+              </button>
+            </Link>
+          );
+        }
+
+        return (
+          <button
+            type="button"
+            className="button-med full-width action-type button-cta not-open"
+          >
+            {taskDetails.status}
+          </button>
+        );
+      }
+
       if (isLoggedIn() && !getRoleId("tradie")) {
         return (
-          <Tooltip
-            PopperProps={{
-              disablePortal: true
-            }}
-            onClose={handleTooltipClose}
-            open={open}
-            disableFocusListener
-            disableHoverListener
-            disableTouchListener
-            title="Not yet a tradie? Join us by registering a new tradie account now!"
-          >
+          <Link to={offerLink} onClick={handleOnClick}>
+            <ClickAwayListener onClickAway={handleTooltipClose}>
+              <Tooltip
+                PopperProps={{
+                  disablePortal: true
+                }}
+                onClose={handleTooltipClose}
+                open={open}
+                disableFocusListener
+                disableHoverListener
+                disableTouchListener
+                title="Not yet a tradie? Join us by registering a new tradie account now!"
+              >
+                <button
+                  type="button"
+                  className="button-sml button-cta offer-button center"
+                  onClick={handleTooltipOpen}
+                >
+                  Make an offer
+                </button>
+              </Tooltip>
+            </ClickAwayListener>
+          </Link>
+        );
+      }
+      return (
+        <Link to={offerLink} onClick={handleOnClick}>
+          <ClickAwayListener onClickAway={handleTooltipClose}>
             <button
               type="button"
               className="button-sml button-cta offer-button center"
@@ -78,33 +141,17 @@ function Offers(props) {
             >
               Make an offer
             </button>
-          </Tooltip>
-        );
-      }
-      return (
-        <button
-          type="button"
-          className="button-sml button-cta offer-button center"
-          onClick={handleTooltipOpen}
-        >
-          Make an offer
-        </button>
+          </ClickAwayListener>
+        </Link>
       );
     };
 
     return (
       <div className="offers">
         <p className="center margin-20-top">
-          <img
-            src="https://www.airtasker.com/images/waiting-for-offers.png"
-            alt="offers"
-          />
+          <img src={waitForOffer} alt="offers" />
         </p>
-        <Link to={offerLink} onClick={handleOnClick}>
-          <ClickAwayListener onClickAway={handleTooltipClose}>
-            <div>{renderButton()}</div>
-          </ClickAwayListener>
-        </Link>
+        <div>{renderButton()}</div>
       </div>
     );
   };

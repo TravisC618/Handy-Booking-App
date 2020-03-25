@@ -1,45 +1,40 @@
-.loading{
-    height: 130px;
-    position: relative;
+.loading {
+  height: 130px;
+  position: relative;
 }
 
-.empty{
-    height: 130px;
-    position: relative;   
-    .empty-span{
-        position: absolute;
-        right: -220%;
-        top: 53%;
-    }
+.empty {
+  height: 130px;
+  position: relative;
+  .empty-span {
+    position: absolute;
+    right: -220%;
+    top: 53%;
+  }
 }
 
 .m-sm-30 {
+  text-align: center;
+
+  .task-table-header {
+  }
+  .pl-sm-24 {
+    width: 170px;
+    max-width: 170px;
+  }
+  .task-status {
     text-align: center;
-
-
-    .task-table-header{
-        
-    }
-    .pl-sm-24 {
-        width: 170px;
-        max-width: 170px;
-    }
-    .task-status{
-        text-align: center;
-        width: 130px;
-    }
-    .budget{
-        text-align: center;
-
-    }
-    .offers{
-        text-align: center;
-        width: 100px;
-
-    }
-    .task-status-chip{
-        text-align: center;
-        width: 130px;
-    }
-
+    width: 130px;
+  }
+  .budget {
+    text-align: center;
+  }
+  .offers {
+    text-align: center;
+    width: 100px;
+  }
+  .task-status-chip {
+    text-align: center;
+    width: 130px;
+  }
 }

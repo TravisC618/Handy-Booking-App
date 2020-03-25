@@ -1,0 +1,67 @@
+.chatbox-messageContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5%;
+  margin-top: 3px;
+
+  &.justifyStart {
+    justify-content: flex-start;
+  }
+
+  &.justifyEnd {
+    justify-content: flex-end;
+  }
+
+  .chatbox-sentText {
+    display: flex;
+    align-items: center;
+    font-family: Helvetica;
+    color: #828282;
+    letter-spacing: 0.3px;
+
+    &.pr-10 {
+      padding-right: 10px;
+    }
+
+    &.pl-10 {
+      padding-left: 10px;
+    }
+  }
+
+  .chatbox-messageBox {
+    background: #f3f3f3;
+    border-radius: 20px;
+    padding: 5px 20px;
+    color: white;
+    display: inline-block;
+    max-width: 80%;
+
+    &.backgroundBlue {
+      background: #2979ff;
+    }
+
+    &.backgroundLight {
+      background: #f3f3f3;
+    }
+
+    .chatbox-messageText {
+      width: 100%;
+      letter-spacing: 0;
+      float: left;
+      font-size: 1.1em;
+      word-wrap: break-word;
+
+      &.colorWhite {
+        color: white;
+      }
+
+      &.colorDark {
+        color: #353535;
+      }
+
+      img {
+        vertical-align: middle;
+      }
+    }
+  }
+}

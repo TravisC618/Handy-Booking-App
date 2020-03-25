@@ -63,7 +63,7 @@ export default function TypeButton() {
 
       <StyledMenu
         id="customized-menu"
-        class="modal-content"
+        className="modal-content"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}

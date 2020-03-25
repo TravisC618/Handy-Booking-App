@@ -10,7 +10,7 @@ import { Avatar, Typography } from "@material-ui/core";
 import { reqGetCustomer, reqGetTradie } from "../../../api/customer";
 import { getRoleId } from "../../../utils/auth";
 import { classList } from "../view_tasks/utils";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,9 +56,7 @@ const Profile = props => {
       setLoading(false);
     };
     updatePageData();
-    
   }, []);
-
 
   const user = {
     name,
@@ -66,8 +64,7 @@ const Profile = props => {
     role
   };
 
-  return (
-    !loading ?
+  return !loading ? (
     <div {...rest} className={clsx(classes.root, className)}>
       <Avatar
         alt="Person"
@@ -89,9 +86,9 @@ const Profile = props => {
         style={{ margin: 20, width: "40%" }}
       />
     </div>
-    :
+  ) : (
     <div {...rest} className={clsx(classes.root, className)}>
-    <CircularProgress />
+      <CircularProgress />
     </div>
   );
 };

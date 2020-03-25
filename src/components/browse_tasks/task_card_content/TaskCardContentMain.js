@@ -28,16 +28,16 @@ const TaskCardContentMain = props => {
   return (
     <Link
       to={`${TASK_URL}/${_id}`}
-      class="new-task-list-item new-task-list-item--open"
+      className="new-task-list-item new-task-list-item--open"
     >
-      <div class="new-task-list-item__header">
-        <span class="new-task-list-item__title">{title}</span>
-        <div class="new-task-list-item__price">
+      <div className="new-task-list-item__header">
+        <span className="new-task-list-item__title">{title}</span>
+        <div className="new-task-list-item__price">
           <span data-ui-test="price">${budget}</span>
         </div>
       </div>
-      <div class="new-task-list-item__body">
-        <div class="avatar-img new-task-list-item__avatar">
+      <div className="new-task-list-item__body">
+        <div className="avatar-img new-task-list-item__avatar">
           <img
             src="https://eu7cmie.cloudimg.io/s/crop/64x64/https://assets-airtasker-com.s3.amazonaws.com/uploads/user/avatar/2635472/image-80689ff6486e097bcb8569ba6fae617d.jpg /"
             alt=""
@@ -45,25 +45,25 @@ const TaskCardContentMain = props => {
             height="32"
           />
         </div>
-        <div class="new-task-list-item__location">
+        <div className="new-task-list-item__location">
           <Location />
-          <div class="new-task-list-item__detail">{location}</div>
+          <div className="new-task-list-item__detail">{location}</div>
         </div>
-        <div class="new-task-list-item__date">
+        <div className="new-task-list-item__date">
           <Calendar />
-          <div class="new-task-list-item__detail">
+          <div className="new-task-list-item__detail">
             <Moment format="ddd, D MMM" filter={toUpperCaseFilter}>
               {dueDate}
             </Moment>
           </div>
         </div>
       </div>
-      <div class="new-task-list-item__footer">
-        <div class="row">
-          <span class="new-task-list-item__status col-6">
+      <div className="new-task-list-item__footer">
+        <div className="row">
+          <span className="new-task-list-item__status col-6">
             {status.toUpperCase()}
           </span>
-          <span class="new-task-list-item__bids col-6">{offerString()}</span>
+          <span className="new-task-list-item__bids col-6">{offerString()}</span>
         </div>
       </div>
     </Link>

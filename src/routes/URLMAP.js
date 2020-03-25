@@ -11,3 +11,5 @@ export const ACCOUNT_PROFILE_URL = `${ACCOUNT_BASE_URL}/profile`;
 export const ACCOUNT_PASSWORD_URL = `${ACCOUNT_BASE_URL}/password`;
 export const ADD_TASK_OFFER_URL = "/make-an-offer";
 export const ASSIGN_TASK_URL = "/assign-task";
+export const VIEW_TASK_URL = "/view-tasks";
+export const CHAT_URL = "/chat";

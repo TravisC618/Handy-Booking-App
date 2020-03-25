@@ -1,17 +1,17 @@
 @import "https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800";
 .card {
   position: relative;
-  width: 50%;
+  width: auto;
   font-family: "Open Sans", sans-serif;
   border: 0px;
 }
 .card .card-header {
-  background-color: #f2f7f9;
+  background-color: inherit;
   padding: 0px 0px 0px 0px;
 }
 .card .card-header h4 {
   text-align: left;
-  font-size: 18px;
+  font-size: 12px;
 }
 .card .card-header .star-header {
   color: gold;
@@ -19,15 +19,24 @@
   text-align: right;
   padding: 10px 0px 10px;
 }
+.card .card-header .content-header h4 {
+  text-align: right;
+  font-size: 12px;
+}
 .card .card-header .content-header h5 {
   text-align: right;
-  font-size: 14px;
+  font-size: 11px;
+}
+.card .card-header .content-header h6 {
+  text-align: right;
+  font-size: 9px;
 }
 .card .card-header .star-rank {
-  width: 95%;
-  font-size: 1px;
+  width: auto;
+  font-size: 10px;
   text-align: right;
   padding: 10px 0px 10px 0px;
+  margin: 0 20px 0 0;
 }
 .card .card-header .star-rank .total-star {
   padding: 0px 0px 0px 5px;
@@ -50,11 +59,11 @@
 }
 .card nav #nav-tab {
   font-size: 14px;
-  background-color: #f2f7f9;
+  background-color: inherit;
   border: 0px;
 }
 .card #nav-tabContent {
-  background-color: #f2f7f9;
+  background-color: inherit;
 }
 .fa-star:hover {
   transform: scale(1.1);
@@ -78,7 +87,7 @@
 .review-container .review .review-title,
 .review-container .review .review-text,
 .review-container .review .review-reviewer {
-  font-size: 13px;
+  font-size: 14px;
   padding: 0 0 20px;
 }
 .review-container .review .review-stars {
@@ -104,6 +113,7 @@
 .review-container .review .review-reviewer .avatar,
 .review-container .review .review-reviewer .reviewer {
   margin: 0 5px;
+  font-size: 14px;
 }
 .review-container .review .review-reviewer .avatar {
   width: 33px;
@@ -121,4 +131,17 @@
     flex: 0 1 95%;
     margin: auto;
   }
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
 }

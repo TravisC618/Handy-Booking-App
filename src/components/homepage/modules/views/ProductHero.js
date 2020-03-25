@@ -151,10 +151,6 @@ function ProductHero(props) {
   };
 
   const renderButton = () => {
-    if (!getRoleId("customer")) {
-      console.log(`not yet a customer`);
-    }
-
     const linkTo = () => {
       if (isLoggedIn() && !getRoleId("customer")) return "#";
 
