@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import moment from "moment";
@@ -13,6 +13,7 @@ import {
   Button,
   LinearProgress
 } from "@material-ui/core";
+import AvatarUpload from "./AvatarUpload";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -40,16 +41,25 @@ const useStyles = makeStyles(() => ({
 
 const AccountProfile = props => {
   const { className, ...rest } = props;
+  const {
+    name,
+    avatar,
+    gender,
+    address,
+    mobile,
+    language,
+    introduction
+  } = props.values;
 
   const classes = useStyles();
 
   const user = {
-    name: "Shen Zhi",
-    city: "Newcastle West",
-    country: "Australia",
-    timezone: "GMT+11",
-    avatar: "/images/avatars/avatar_11.png"
+    timezone: "GTM-10"
   };
+
+  const [values, setValues] = useState({
+    srcimage: avatar
+  });
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -57,14 +67,14 @@ const AccountProfile = props => {
         <div className={classes.details}>
           <div>
             <Typography gutterBottom variant="h2">
-              { user.name }
+              {name}
             </Typography>
             <Typography
               className={classes.locationText}
               color="textSecondary"
               variant="body1"
             >
-              {user.city}, {user.country}
+              {address}
             </Typography>
             <Typography
               className={classes.dateText}
@@ -74,24 +84,9 @@ const AccountProfile = props => {
               {moment().format("hh:mm A")} ({user.timezone})
             </Typography>
           </div>
-          <Avatar className={classes.avatar} src={user.avatar} />
-        </div>
-        <div className={classes.progress}>
-          <Typography variant="body1">Profile Completeness: 70%</Typography>
-          <LinearProgress value={70} variant="determinate" />
         </div>
       </CardContent>
       <Divider />
-      <CardActions>
-        <Button
-          className={classes.uploadButton}
-          color="primary"
-          variant="contained"
-        >
-          Upload picture
-        </Button>
-        <Button variant="contained">Remove picture</Button>
-      </CardActions>
     </Card>
   );
 };

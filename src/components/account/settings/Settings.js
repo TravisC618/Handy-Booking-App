@@ -30,13 +30,6 @@ const Settings = () => {
             alignItems="center"
           >
             <Grid item md={7} xs={12}>
-              <Notifications />
-              {/* </Grid>
-        <Grid
-          item
-          md={5}
-          xs={12}
-        > */}
               <Password />
             </Grid>
           </Grid>

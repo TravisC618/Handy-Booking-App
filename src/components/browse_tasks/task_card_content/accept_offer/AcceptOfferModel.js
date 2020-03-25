@@ -117,7 +117,6 @@ function AcceptOfferModel(props) {
     activeStep === 1 && fetchTaskDetail();
 
     history.goBack();
-    // history.replace(`${TASK_URL}/${taskId}`);
   };
 
   const handleAccept = async () => {

@@ -9,6 +9,7 @@ import TextField from "../components/TextField";
 import Snackbar from "../components/Snackbar";
 import Button from "../components/Button";
 import BgImg from "../../../../img/homepage/productCTAImageDots.png";
+import tidyHome from "../../../../img/tidy-home.jpeg";
 const styles = theme => ({
   root: {
     marginTop: theme.spacing(10),
@@ -81,7 +82,7 @@ function ProductCTA(props) {
                 Receive offers
               </Typography>
               <Typography variant="h5">
-                Taste the holidays of the everyday close to home.
+                Taste the holidays of the everyday just at home.
               </Typography>
               <TextField
                 noBorder
@@ -103,7 +104,7 @@ function ProductCTA(props) {
           <Hidden smDown>
             <div className={classes.imageDots} />
             <img
-              src="https://images.unsplash.com/photo-1527853787696-f7be74f2e39a?auto=format&fit=crop&w=750&q=80"
+              src={tidyHome}
               alt="call to action"
               className={classes.image}
             />

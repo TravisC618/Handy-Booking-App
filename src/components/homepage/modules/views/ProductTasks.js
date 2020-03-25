@@ -230,7 +230,7 @@ function ProductTasks(props) {
               >
                 Got a few boxes to shift, an apartment or entire house? Get your
                 home moved just the way you want, by whom you want, when you
-                want. Let Airtasker shoulder the load.
+                want. Let Byedust shoulder the load.
               </Typography>
             </div>
             <PlayingCarouselLeft />
@@ -254,7 +254,7 @@ function ProductTasks(props) {
                 }}
               >
                 Taking a big leap and need some expert advice or assistance?
-                Airtasker can help you get some cracking marketing collateral,
+                Byedust can help you get some cracking marketing collateral,
                 admin muscle or a few extra hands to help ease the burden.
               </Typography>
             </div>
@@ -304,7 +304,7 @@ function ProductTasks(props) {
                 }}
               >
                 Got something to celebrate and the guest list all ready, but
-                need everything else? Let Airtasker help you find the best
+                need everything else? Let Byedust help you find the best
                 bartenders, party planners, photographers and entertainment in
                 the land.
               </Typography>
@@ -331,7 +331,7 @@ function ProductTasks(props) {
               >
                 Want something done but feel like it’s too random? Whether it’s
                 getting rescued from a spider or help building a bobsled - you
-                can get nearly anything done through Airtasker.
+                can get nearly anything done through Byedust.
               </Typography>
             </div>
             <PlayingCarouselLeft />

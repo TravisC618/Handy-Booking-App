@@ -18,6 +18,7 @@ import {
 
 import "../../css/account/dashboard.css";
 import "../../css/home/buttongroup.css";
+import "../../css/account/account.scss";
 
 const Dashboard = props => {
   return (
@@ -30,7 +31,7 @@ const Dashboard = props => {
           <h3>Get it done today</h3>
           <p>
             To-do list never getting shorter? Take the burden off and find the
-            help you need on Airtasker.
+            help you need on Byedust.
           </p>
           <div className="task-item">
             {/* <div className="item-bubble"> */}

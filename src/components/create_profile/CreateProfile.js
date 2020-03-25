@@ -70,9 +70,7 @@ export default function CreateProfile(props) {
         <div className="profile-box">
           {isLoading && <LinearIndeterminate />}
           <div className="profile-box-container">
-            <div className="profile-title text-center">
-              Welcome to <img src={logo} alt="logo" />
-            </div>
+            <div className="profile-title text-center">Welcome</div>
             <Divider />
             <ProfileStepper
               isLoading={isLoading}

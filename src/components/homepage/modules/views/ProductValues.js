@@ -85,7 +85,7 @@ function ProductValues(props) {
               </Typography>
               <Typography variant="h5">
                 {
-                  "We hold task payments secure with our PCI-DSS compliant Airtasker Pay "
+                  "We hold task payments secure with our PCI-DSS compliant Byedust Pay "
                 }
                 {
                   "– so tasks can be completed knowing payment is there when you're done."

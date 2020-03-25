@@ -6,7 +6,7 @@ import MoreDetailContent from "./MoreDetailsContent";
 const useStyles = makeStyles(theme => ({
   field: {
     "& .MuiTextField-root": {
-      marginBottom: theme.spacing(4)
+      // marginBottom: theme.spacing(4)
     }
   }
 }));
