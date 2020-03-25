@@ -81,10 +81,7 @@ export default class AvatarUpload extends React.Component {
         <div className="upload-container">
           <div className="avatar-container">
             <div className="avatar-img">
-              <Avatar
-                src={srcimage}
-                style={{ height: 80, width: 80 }}
-              />
+              <Avatar src={srcimage} style={{ height: 80, width: 80 }} />
               <label
                 htmlFor="contained-button-file"
                 className="avatar-upload-button"
@@ -101,13 +98,6 @@ export default class AvatarUpload extends React.Component {
               Click To Set An Avatar
             </Typography>
           </div>
-
-          <div className="username-container">
-            <Typography variant="h5" gutterBottom style={{ marginBottom: "1.35em"}}>
-              Hi, {this.firstname} {this.lastname}
-            </Typography>
-          </div>
-
           <input
             onChange={this.handleFileChange}
             ref="in"
