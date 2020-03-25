@@ -145,16 +145,6 @@ function ProductHowItWorks(props) {
                   Check out the video below to see exactly how BYEDUST can help
                   you get those to-dos done once and for all.
                 </Typography>
-                <Player
-                  fluid={true}
-                  poster="https://www.airtasker.com/images/homepage/home-video-player.jpg"
-                  src="https://s3-ap-southeast-2.amazonaws.com/assets-airtasker-com/uploads/home/how-it-works.mp4"
-                >
-                  <BigPlayButton position="center" />
-                  <ControlBar autoHide={true} disableDefaultControls={true}>
-                    <PlayToggle />
-                  </ControlBar>
-                </Player>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
